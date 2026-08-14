@@ -294,19 +294,15 @@ export const sectionA: FaqSection = {
     {
       question: "Can I delete my account?",
       schemaText:
-        "Yes. You can request account deletion at any time through the Account Deletion page in the Studiely Help Center. Once confirmed, all personal data and AI-generated content associated with your account will be permanently deleted in accordance with our Privacy Policy and applicable data protection regulations. This cannot be undone. We recommend downloading any revision content you wish to keep before submitting a deletion request. If you are a Premium subscriber, we also recommend cancelling your subscription first through your app store or account settings to avoid any further billing.",
+        "Yes. You can request account deletion at any time through Contact support or your Profile settings. Once confirmed, all personal data and AI-generated content associated with your account will be permanently deleted in accordance with our Privacy Policy and applicable data protection regulations. This cannot be undone. We recommend downloading any revision content you wish to keep before submitting a deletion request. If you are a Premium subscriber, we also recommend cancelling your subscription first through your app store or account settings to avoid any further billing.",
       answer: (
         <>
           <p>
-            Yes. You can request account deletion at any time through the{" "}
-            <Link href={LEGAL_ROUTES.deleteAccount} className={complianceLinkClass}>
-              Account Deletion
+            Yes. You can request account deletion at any time through{" "}
+            <Link href="/help" className={complianceLinkClass}>
+              Contact support
             </Link>{" "}
-            page in the{" "}
-            <Link href={LEGAL_ROUTES.legalIndex} className={complianceLinkClass}>
-              Studiely Help Center
-            </Link>
-            .
+            or your Profile settings.
           </p>
           <p>
             Once confirmed, all personal data and AI-generated content associated with your account will be

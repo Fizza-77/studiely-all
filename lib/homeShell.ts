@@ -1,8 +1,12 @@
-/** Shared horizontal shell for homepage navbar + hero + tools row.
- * Expands with the viewport on large screens while keeping ≥10px side inset.
+/** Shared horizontal shell for navbar + marketing heroes.
+ * Grows with the viewport on large desktops (less empty side gutter).
  */
 export const HOME_SHELL =
-  "mx-auto w-full max-w-[min(100%,1680px)] px-2.5 sm:px-4 md:px-[clamp(1rem,2vw,1.75rem)] xl:px-[clamp(1.25rem,2.5vw,2.5rem)]";
+  "mx-auto w-full max-w-[min(100%,2400px)] px-2.5 sm:px-4 md:px-[clamp(1rem,2.2vw,2.5rem)] xl:px-[clamp(1.5rem,3vw,3.5rem)] 2xl:px-[clamp(2rem,3.5vw,4.5rem)]";
+
+/** Student page content width — keep in sync with AppShell. */
+export const STUDENT_CONTENT_SHELL =
+  "mx-auto w-full max-w-[min(100%,2400px)]";
 
 /** Grid for the 4 homepage tool cards — keep in sync with card width + band inset. */
 export const HOME_TOOLS_GRID =

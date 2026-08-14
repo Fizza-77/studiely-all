@@ -1,0 +1,353 @@
+@import "tailwindcss";
+
+/*
+  Student app tokens — aligned with marketing landing (globals.css):
+  indigo #4F35F2, lime #E8FF2F, cream #FFFBEF, navy #181926, teal #00b09b.
+  --color-vivid-cyan keeps its name for existing classNames but maps to brand indigo.
+*/
+
+:root {
+  /* Brand (landing parity) */
+  --brand-indigo: #4f35f2;
+  --brand-indigo-deep: #3b28c7;
+  --brand-indigo-soft: #eceaff;
+  --brand-lime: #e8ff2f;
+  --brand-lime-ink: #1e1b4b;
+  --brand-teal: #00b09b;
+  --brand-teal-soft: #dff6f2;
+  --brand-navy: #181926;
+  --brand-cream: #fffbef;
+  --brand-body: #2d2d35;
+  --brand-muted: #78788a;
+  --brand-border: #e2e2e8;
+  --brand-border-lt: #ededf2;
+  --brand-amber: #d97b2a;
+  --brand-rose: #c94a72;
+  --brand-error: #ba1a1a;
+  --brand-error-light: #ffebee;
+  --brand-soft-green: #4caf50;
+  --brand-soft-green-light: #e8f5e9;
+  --brand-soft-yellow: #ffc107;
+  --brand-soft-yellow-light: #fff9e6;
+
+  /* Legacy aliases → brand indigo (primary actions) */
+  --brand-vivid-cyan: var(--brand-indigo);
+  --brand-core-blue: #3b6bff;
+  --brand-dark-azure: var(--brand-navy);
+
+  --color-vivid-cyan: var(--brand-indigo);
+  --color-core-blue: var(--brand-core-blue);
+  --color-lime: var(--brand-lime);
+  --color-lime-ink: var(--brand-lime-ink);
+  --color-teal: var(--brand-teal);
+  --color-indigo-soft: var(--brand-indigo-soft);
+  --color-soft-yellow: var(--brand-soft-yellow);
+  --color-soft-green: var(--brand-soft-green);
+  --color-error: var(--brand-error);
+  --color-error-light: var(--brand-error-light);
+  --color-soft-green-light: var(--brand-soft-green-light);
+  --color-soft-yellow-light: var(--brand-soft-yellow-light);
+
+  --color-bg: var(--brand-cream);
+  --color-bg-accent: rgba(79, 53, 242, 0.1);
+  --color-bg-lime: rgba(232, 255, 47, 0.35);
+  --color-card: #ffffff;
+  --color-card-muted: #f7f6f1;
+  --color-border: var(--brand-border);
+  --color-text: var(--brand-navy);
+  --color-text-body: var(--brand-body);
+  --color-text-muted: var(--brand-muted);
+  --color-input-bg: #ffffff;
+  --color-input-text: var(--brand-navy);
+  --color-input-placeholder: #9a9aaa;
+  --color-overlay: rgba(24, 25, 38, 0.5);
+
+  --color-dark-azure: var(--color-text);
+  --color-gray-text: var(--color-text-muted);
+  --color-light-gray: var(--color-border);
+  --color-surface-gray: var(--color-card-muted);
+
+  --background: var(--color-bg);
+  --foreground: var(--color-text);
+
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-vivid-cyan: var(--brand-indigo);
+  --color-core-blue: var(--brand-core-blue);
+  --color-dark-azure: var(--color-text);
+  --color-soft-yellow: var(--brand-soft-yellow);
+  --color-soft-green: var(--brand-soft-green);
+  --color-gray-text: var(--color-text-muted);
+  --color-light-gray: var(--color-border);
+  --color-surface-gray: var(--color-card-muted);
+  --color-error: var(--brand-error);
+  --color-card: var(--color-card);
+  --color-input-bg: var(--color-input-bg);
+  --color-input-text: var(--color-input-text);
+  --color-lime: var(--brand-lime);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #12131c;
+    --color-bg-accent: rgba(79, 53, 242, 0.22);
+    --color-bg-lime: rgba(232, 255, 47, 0.12);
+    --color-card: #1c1d2a;
+    --color-card-muted: #161722;
+    --color-border: #2e3040;
+    --color-text: #f4f3ff;
+    --color-text-body: #d8d7e4;
+    --color-text-muted: #9b9aaf;
+    --color-input-bg: #161722;
+    --color-input-text: #f4f3ff;
+    --color-input-placeholder: #7a798e;
+    --color-overlay: rgba(0, 0, 0, 0.6);
+    --color-error-light: #3a1515;
+    --color-soft-green-light: #14301a;
+    --color-indigo-soft: rgba(79, 53, 242, 0.22);
+    --background: var(--color-bg);
+    --foreground: var(--color-text);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #12131c;
+  --color-bg-accent: rgba(79, 53, 242, 0.22);
+  --color-bg-lime: rgba(232, 255, 47, 0.12);
+  --color-card: #1c1d2a;
+  --color-card-muted: #161722;
+  --color-border: #2e3040;
+  --color-text: #f4f3ff;
+  --color-text-body: #d8d7e4;
+  --color-text-muted: #9b9aaf;
+  --color-input-bg: #161722;
+  --color-input-text: #f4f3ff;
+  --color-input-placeholder: #7a798e;
+  --color-overlay: rgba(0, 0, 0, 0.6);
+  --color-error-light: #3a1515;
+  --color-soft-green-light: #14301a;
+  --color-indigo-soft: rgba(79, 53, 242, 0.22);
+  --background: var(--color-bg);
+  --foreground: var(--color-text);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --color-bg: var(--brand-cream);
+  --color-bg-accent: rgba(79, 53, 242, 0.1);
+  --color-bg-lime: rgba(232, 255, 47, 0.35);
+  --color-card: #ffffff;
+  --color-card-muted: #f7f6f1;
+  --color-border: var(--brand-border);
+  --color-text: var(--brand-navy);
+  --color-text-body: var(--brand-body);
+  --color-text-muted: var(--brand-muted);
+  --color-input-bg: #ffffff;
+  --color-input-text: var(--brand-navy);
+  --color-input-placeholder: #9a9aaa;
+  --color-overlay: rgba(24, 25, 38, 0.5);
+  --color-error-light: #ffebee;
+  --color-soft-green-light: #e8f5e9;
+  --color-indigo-soft: var(--brand-indigo-soft);
+  --background: var(--color-bg);
+  --foreground: var(--color-text);
+  color-scheme: light;
+}
+
+body {
+  background:
+    radial-gradient(ellipse 70% 45% at 8% -8%, var(--color-bg-accent), transparent),
+    radial-gradient(ellipse 50% 35% at 100% 0%, var(--color-bg-lime), transparent),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+.student-app {
+  --font-body: var(--font-inter);
+  --font-display: var(--font-plus-jakarta-sans);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+.student-app .font-display,
+.student-app [class*="font-display"] {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Landing-style primary CTA (lime) */
+.student-lime-btn {
+  background-color: var(--brand-lime);
+  color: var(--brand-lime-ink);
+  font-weight: 700;
+  border-radius: 9999px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 8px 24px rgba(79, 53, 242, 0.12);
+}
+.student-lime-btn:hover {
+  filter: brightness(0.98);
+  box-shadow: 0 10px 28px rgba(79, 53, 242, 0.18);
+}
+
+.student-indigo-gradient {
+  background: linear-gradient(115deg, #4f35f2 0%, #4f35f2 40%, #3b6bff 100%);
+}
+
+input,
+textarea,
+select {
+  color: inherit;
+}
+
+/* Blue / indigo CTAs — always white label (don't inherit navy from lime navbar) */
+.student-app a.bg-\[\#4F35F2\],
+.student-app button.bg-\[\#4F35F2\],
+.student-app .funky-button.bg-\[\#4F35F2\],
+.student-app button.bg-\[var\(--color-vivid-cyan\)\],
+.student-app a.bg-\[var\(--color-vivid-cyan\)\] {
+  color: #ffffff !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-input-placeholder);
+  opacity: 1;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-input-text);
+  caret-color: var(--color-input-text);
+  box-shadow: 0 0 0 1000px var(--color-input-bg) inset;
+  transition: background-color 99999s ease-out;
+}
+
+.markdown-math .katex {
+  color: var(--color-text);
+  font-size: 1.05em;
+}
+
+/* Nyla chat — white bubbles always use black text (ignore dark theme tokens). */
+.nyla-bot-bubble,
+.nyla-bot-bubble .markdown-math,
+.nyla-bot-bubble .markdown-math p,
+.nyla-bot-bubble .markdown-math li,
+.nyla-bot-bubble .markdown-math h1,
+.nyla-bot-bubble .markdown-math h2,
+.nyla-bot-bubble .markdown-math h3,
+.nyla-bot-bubble .markdown-math strong,
+.nyla-bot-bubble .markdown-math .katex {
+  color: #000000 !important;
+}
+.markdown-math .katex-display {
+  margin: 0.75rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Library note reader — fixed rem type that still scales with root font-size. */
+.library-note-reading.markdown-math {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+@media (min-width: 1600px) {
+  .library-note-reading.markdown-math {
+    font-size: 1.2rem;
+  }
+  .library-note-reading.markdown-math h1 {
+    font-size: 1.65rem;
+  }
+  .library-note-reading.markdown-math h2 {
+    font-size: 1.5rem;
+  }
+  .library-note-reading.markdown-math h3 {
+    font-size: 1.35rem;
+  }
+}
+@media (min-width: 2000px) {
+  .library-note-reading.markdown-math {
+    font-size: 1.275rem;
+  }
+}
+.library-note-reading.markdown-math h1 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+.library-note-reading.markdown-math h2 {
+  font-size: 1.375rem;
+  line-height: 1.35;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.library-note-reading.markdown-math h3 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.library-note-reading.markdown-math p,
+.library-note-reading.markdown-math li {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+.library-note-reading.markdown-math table {
+  font-size: 1.125rem;
+}
+.library-note-reading.markdown-math pre,
+.library-note-reading.markdown-math pre code {
+  font-size: 1rem;
+}
+
+/* Flashcard 3D flip */
+.flashcard-scene {
+  perspective: 1400px;
+  -webkit-perspective: 1400px;
+}
+.flashcard-inner {
+  position: relative;
+  display: grid;
+  width: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0.15, 0.2, 1);
+}
+.flashcard-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+.flashcard-face {
+  grid-area: 1 / 1;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flashcard-face-front {
+  transform: rotateY(0deg);
+}
+.flashcard-face-back {
+  transform: rotateY(180deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .flashcard-inner {
+    transition: none;
+  }
+}

@@ -2,8 +2,8 @@ import { mkdirSync, writeFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 /**
- * Pulls root-level pages from production that Next does not emit: /legal/**, tawk, support, etc.
- * Does not touch /app (Flutter) or /_next.
+ * Pulls root-level extras from production that Next may not emit: tawk, support, etc.
+ * Does not touch /app (Flutter) or /_next. Legal pages are App Router routes now.
  */
 export async function syncRootPreservedFromLive(deployRoot) {
   const origin = (process.env.PRESERVE_SYNC_ORIGIN || "https://www.studiely.com").replace(/\/$/, "");
@@ -28,8 +28,6 @@ export async function syncRootPreservedFromLive(deployRoot) {
     if (rel.startsWith("_next/") || rel.startsWith("app/")) return true;
     if (rel === "index.html") return true;
     if (rel === "smartlink/index.html" || rel.startsWith("smartlink/")) return true;
-    /* Next static export now emits /legal/**; do not replace with fetched HTML. */
-    if (rel.startsWith("legal/")) return true;
     return false;
   }
 
@@ -52,23 +50,7 @@ export async function syncRootPreservedFromLive(deployRoot) {
     mkdirSync(dirname(out), { recursive: true });
     writeFileSync(out, buf);
     wrote++;
-
-    const ct = res.headers.get("content-type") || "";
-    if (!ct.includes("html")) return;
-
-    const html = buf.toString("utf8");
-    const re = /\bhref="(\/legal[^"'#?]*)"/gi;
-    let m;
-    while ((m = re.exec(html)) !== null) {
-      let next = m[1].replace(/\/$/, "") || "/legal";
-      if (!next.startsWith("/legal")) continue;
-      const withSlash = next === "/legal" ? "/legal/" : `${next}/`;
-      await fetchAndWrite(withSlash);
-      await fetchAndWrite(next);
-    }
   }
-
-  await fetchAndWrite("/legal/");
 
   const extras = ["/tawk.html", "/support.html", "/firebase-messaging-sw.js", "/favicon.png"];
   for (const p of extras) {

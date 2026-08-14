@@ -1,0 +1,2590 @@
+{
+  "primary": [
+    {
+      "name": "English Language"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Science"
+    },
+    {
+      "name": "History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Art & Design"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Physical Education (PE)"
+    },
+    {
+      "name": "Computing / ICT"
+    },
+    {
+      "name": "French - Modern Foreign Language"
+    },
+    {
+      "name": "German - Modern Foreign Language"
+    },
+    {
+      "name": "Spanish - Modern Foreign Language"
+    }
+  ],
+  "ks3": [
+    {
+      "name": "English Language"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "ICT / Computing"
+    },
+    {
+      "name": "Art & Design"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Physical Education (PE)"
+    },
+    {
+      "name": "French - Modern Foreign Language"
+    },
+    {
+      "name": "German - Modern Foreign Language"
+    },
+    {
+      "name": "Spanish - Modern Foreign Language"
+    }
+  ],
+  "gcse": [
+    {
+      "name": "First Language English",
+      "code": "0500"
+    },
+    {
+      "name": "English as a Second Language",
+      "code": "0510"
+    },
+    {
+      "name": "Mathematics",
+      "code": "0580"
+    },
+    {
+      "name": "Biology",
+      "code": "0610"
+    },
+    {
+      "name": "Chemistry",
+      "code": "0620"
+    },
+    {
+      "name": "Physics",
+      "code": "0625"
+    },
+    {
+      "name": "Business Studies",
+      "code": "0450"
+    },
+    {
+      "name": "Economics",
+      "code": "0455"
+    },
+    {
+      "name": "ICT",
+      "code": "0417"
+    },
+    {
+      "name": "Geography",
+      "code": "0460"
+    },
+    {
+      "name": "History",
+      "code": "0470"
+    }
+  ],
+  "igcse": [
+    {
+      "name": "First Language English",
+      "code": "0500"
+    },
+    {
+      "name": "English as a Second Language",
+      "code": "0510"
+    },
+    {
+      "name": "Mathematics",
+      "code": "0580"
+    },
+    {
+      "name": "Biology",
+      "code": "0610"
+    },
+    {
+      "name": "Chemistry",
+      "code": "0620"
+    },
+    {
+      "name": "Physics",
+      "code": "0625"
+    },
+    {
+      "name": "Business Studies",
+      "code": "0450"
+    },
+    {
+      "name": "Economics",
+      "code": "0455"
+    },
+    {
+      "name": "ICT",
+      "code": "0417"
+    },
+    {
+      "name": "Geography",
+      "code": "0460"
+    },
+    {
+      "name": "History",
+      "code": "0470"
+    },
+    {
+      "name": "Global Perspectives",
+      "code": "0457"
+    },
+    {
+      "name": "Accounting",
+      "code": "0452"
+    },
+    {
+      "name": "Art & Design",
+      "code": "0400"
+    },
+    {
+      "name": "Music",
+      "code": "0410"
+    },
+    {
+      "name": "French",
+      "code": "0520"
+    },
+    {
+      "name": "Spanish",
+      "code": "0530"
+    },
+    {
+      "name": "German",
+      "code": "0540"
+    }
+  ],
+  "asLevel": [
+    {
+      "name": "Accounting",
+      "code": "9706"
+    },
+    {
+      "name": "Biology",
+      "code": "9700"
+    },
+    {
+      "name": "Business",
+      "code": "9609"
+    },
+    {
+      "name": "Chemistry",
+      "code": "9701"
+    },
+    {
+      "name": "Computer Science",
+      "code": "9618"
+    },
+    {
+      "name": "Design & Technology",
+      "code": "9705"
+    },
+    {
+      "name": "Digital Media & Design",
+      "code": "9481"
+    },
+    {
+      "name": "Economics",
+      "code": "9708"
+    },
+    {
+      "name": "English General Paper",
+      "code": "8021"
+    },
+    {
+      "name": "English Language",
+      "code": "9093"
+    },
+    {
+      "name": "English Literature",
+      "code": "9695"
+    },
+    {
+      "name": "Environmental Management",
+      "code": "8291"
+    },
+    {
+      "name": "French Language",
+      "code": "8682"
+    },
+    {
+      "name": "Further Mathematics",
+      "code": "9231"
+    },
+    {
+      "name": "Geography",
+      "code": "9696"
+    },
+    {
+      "name": "German Language",
+      "code": "8683"
+    },
+    {
+      "name": "Global Perspectives & Research",
+      "code": "9239"
+    },
+    {
+      "name": "History",
+      "code": "9489"
+    },
+    {
+      "name": "Information Technology",
+      "code": "9626"
+    },
+    {
+      "name": "Law",
+      "code": "9084"
+    },
+    {
+      "name": "Marine Science",
+      "code": "9693"
+    },
+    {
+      "name": "Mathematics",
+      "code": "9709"
+    },
+    {
+      "name": "Media Studies",
+      "code": "9607"
+    },
+    {
+      "name": "Music",
+      "code": "9483"
+    },
+    {
+      "name": "Physics",
+      "code": "9702"
+    },
+    {
+      "name": "Psychology",
+      "code": "9990"
+    },
+    {
+      "name": "Sociology",
+      "code": "9699"
+    },
+    {
+      "name": "Spanish Language",
+      "code": "8684"
+    },
+    {
+      "name": "Sport & Physical Education",
+      "code": "8386"
+    },
+    {
+      "name": "Thinking Skills",
+      "code": "9694"
+    },
+    {
+      "name": "Travel & Tourism",
+      "code": "9395"
+    },
+    {
+      "name": "Urdu – Language",
+      "code": "8686"
+    }
+  ],
+  "aLevel": [
+    {
+      "name": "Accounting",
+      "code": "9706"
+    },
+    {
+      "name": "Biology",
+      "code": "9700"
+    },
+    {
+      "name": "Business",
+      "code": "9609"
+    },
+    {
+      "name": "Chemistry",
+      "code": "9701"
+    },
+    {
+      "name": "Computer Science",
+      "code": "9618"
+    },
+    {
+      "name": "Design & Technology",
+      "code": "9705"
+    },
+    {
+      "name": "Digital Media & Design",
+      "code": "9481"
+    },
+    {
+      "name": "Economics",
+      "code": "9708"
+    },
+    {
+      "name": "English Language",
+      "code": "9093"
+    },
+    {
+      "name": "English Literature",
+      "code": "9695"
+    },
+    {
+      "name": "French",
+      "code": "9716"
+    },
+    {
+      "name": "Further Mathematics",
+      "code": "9231"
+    },
+    {
+      "name": "Geography",
+      "code": "9696"
+    },
+    {
+      "name": "German",
+      "code": "9717"
+    },
+    {
+      "name": "Global Perspectives & Research",
+      "code": "9239"
+    },
+    {
+      "name": "History",
+      "code": "9489"
+    },
+    {
+      "name": "Information Technology",
+      "code": "9626"
+    },
+    {
+      "name": "Law",
+      "code": "9084"
+    },
+    {
+      "name": "Marine Science",
+      "code": "9693"
+    },
+    {
+      "name": "Mathematics",
+      "code": "9709"
+    },
+    {
+      "name": "Media Studies",
+      "code": "9607"
+    },
+    {
+      "name": "Music",
+      "code": "9483"
+    },
+    {
+      "name": "Physics",
+      "code": "9702"
+    },
+    {
+      "name": "Psychology",
+      "code": "9990"
+    },
+    {
+      "name": "Sociology",
+      "code": "9699"
+    },
+    {
+      "name": "Spanish",
+      "code": "9719"
+    },
+    {
+      "name": "Urdu – Pakistan only",
+      "code": "9686"
+    },
+    {
+      "name": "Urdu – Language & Literature",
+      "code": "9866"
+    }
+  ],
+  "usElementary": [
+    {
+      "name": "English Language Arts (ELA)"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Science"
+    },
+    {
+      "name": "Social Studies"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Physical Education (PE)"
+    },
+    {
+      "name": "Computer Science / Technology"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "French"
+    }
+  ],
+  "usMiddle": [
+    {
+      "name": "English Language Arts (ELA)"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Pre-Algebra"
+    },
+    {
+      "name": "Algebra I"
+    },
+    {
+      "name": "Science"
+    },
+    {
+      "name": "Life Science"
+    },
+    {
+      "name": "Earth Science"
+    },
+    {
+      "name": "Physical Science"
+    },
+    {
+      "name": "Social Studies"
+    },
+    {
+      "name": "World History"
+    },
+    {
+      "name": "US History"
+    },
+    {
+      "name": "Civics / Government"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Computer Science"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "French"
+    },
+    {
+      "name": "Physical Education (PE)"
+    }
+  ],
+  "usHigh": [
+    {
+      "name": "English Language Arts"
+    },
+    {
+      "name": "Algebra I"
+    },
+    {
+      "name": "Geometry"
+    },
+    {
+      "name": "Algebra II"
+    },
+    {
+      "name": "Precalculus"
+    },
+    {
+      "name": "Statistics"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Environmental Science"
+    },
+    {
+      "name": "US History"
+    },
+    {
+      "name": "World History"
+    },
+    {
+      "name": "Government / Civics"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Psychology"
+    },
+    {
+      "name": "Computer Science"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "French"
+    }
+  ],
+  "ap": [
+    {
+      "name": "AP English Language & Composition"
+    },
+    {
+      "name": "AP English Literature & Composition"
+    },
+    {
+      "name": "AP Calculus AB"
+    },
+    {
+      "name": "AP Calculus BC"
+    },
+    {
+      "name": "AP Statistics"
+    },
+    {
+      "name": "AP Biology"
+    },
+    {
+      "name": "AP Chemistry"
+    },
+    {
+      "name": "AP Physics 1"
+    },
+    {
+      "name": "AP Physics 2"
+    },
+    {
+      "name": "AP Physics C: Mechanics"
+    },
+    {
+      "name": "AP Physics C: Electricity & Magnetism"
+    },
+    {
+      "name": "AP US History"
+    },
+    {
+      "name": "AP World History"
+    },
+    {
+      "name": "AP US Government & Politics"
+    },
+    {
+      "name": "AP Macroeconomics"
+    },
+    {
+      "name": "AP Psychology"
+    },
+    {
+      "name": "AP Computer Science A"
+    },
+    {
+      "name": "AP Computer Science Principles"
+    },
+    {
+      "name": "AP Spanish Language"
+    },
+    {
+      "name": "AP French Language"
+    },
+    {
+      "name": "AP Art History"
+    },
+    {
+      "name": "AP Music Theory"
+    }
+  ],
+  "ibPyp": [
+    {
+      "name": "Language - English"
+    },
+    {
+      "name": "Language - Spanish"
+    },
+    {
+      "name": "Language - French"
+    },
+    {
+      "name": "Language - Mandarin"
+    },
+    {
+      "name": "Language - German"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Science and Technology"
+    },
+    {
+      "name": "Social Studies"
+    },
+    {
+      "name": "Arts - Visual Arts"
+    },
+    {
+      "name": "Arts - Music"
+    },
+    {
+      "name": "Arts - Drama"
+    },
+    {
+      "name": "Personal, Social, and Physical Education (PSPE)"
+    }
+  ],
+  "ibMyp": [
+    {
+      "name": "Language and Literature - English"
+    },
+    {
+      "name": "Language and Literature - Spanish"
+    },
+    {
+      "name": "Language and Literature - French"
+    },
+    {
+      "name": "Language and Literature - Mandarin"
+    },
+    {
+      "name": "Language and Literature - German"
+    },
+    {
+      "name": "Language Acquisition - English B"
+    },
+    {
+      "name": "Language Acquisition - Spanish B"
+    },
+    {
+      "name": "Language Acquisition - French B"
+    },
+    {
+      "name": "Language Acquisition - Mandarin B"
+    },
+    {
+      "name": "Language Acquisition - German B"
+    },
+    {
+      "name": "Individuals and Societies (e.g., History, Geography, Economics)"
+    },
+    {
+      "name": "Sciences (e.g., Biology, Chemistry, Physics)"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Arts - Visual Arts"
+    },
+    {
+      "name": "Arts - Music"
+    },
+    {
+      "name": "Arts - Drama"
+    },
+    {
+      "name": "Physical and Health Education"
+    },
+    {
+      "name": "Design (e.g., Digital Design, Product Design)"
+    }
+  ],
+  "ibDp": [
+    {
+      "name": "Group 1: Language and Literature - English A"
+    },
+    {
+      "name": "Group 1: Language and Literature - Spanish A"
+    },
+    {
+      "name": "Group 1: Language and Literature - French A"
+    },
+    {
+      "name": "Group 1: Language and Literature - Mandarin A"
+    },
+    {
+      "name": "Group 1: Language and Literature - German A"
+    },
+    {
+      "name": "Group 2: Language Acquisition - English B"
+    },
+    {
+      "name": "Group 2: Language Acquisition - Spanish B"
+    },
+    {
+      "name": "Group 2: Language Acquisition - French B"
+    },
+    {
+      "name": "Group 2: Language Acquisition - Mandarin B"
+    },
+    {
+      "name": "Group 2: Language Acquisition - German B"
+    },
+    {
+      "name": "Group 3: Individuals and Societies - History"
+    },
+    {
+      "name": "Group 3: Individuals and Societies - Economics"
+    },
+    {
+      "name": "Group 3: Individuals and Societies - Geography"
+    },
+    {
+      "name": "Group 3: Individuals and Societies - Psychology"
+    },
+    {
+      "name": "Group 3: Individuals and Societies - Business Management"
+    },
+    {
+      "name": "Group 3: Individuals and Societies - Global Politics"
+    },
+    {
+      "name": "Group 4: Sciences - Biology"
+    },
+    {
+      "name": "Group 4: Sciences - Chemistry"
+    },
+    {
+      "name": "Group 4: Sciences - Physics"
+    },
+    {
+      "name": "Group 4: Sciences - Computer Science"
+    },
+    {
+      "name": "Group 4: Sciences - Environmental Systems and Societies"
+    },
+    {
+      "name": "Group 5: Mathematics - Analysis and Approaches"
+    },
+    {
+      "name": "Group 5: Mathematics - Applications and Interpretation"
+    },
+    {
+      "name": "Group 6: The Arts - Visual Arts"
+    },
+    {
+      "name": "Group 6: The Arts - Music"
+    },
+    {
+      "name": "Group 6: The Arts - Theatre"
+    },
+    {
+      "name": "Group 6: The Arts - Film"
+    },
+    {
+      "name": "Group 6: The Arts - Dance"
+    },
+    {
+      "name": "Core/Special: Theory of Knowledge (TOK)"
+    },
+    {
+      "name": "Core/Special: Extended Essay (EE) Support"
+    },
+    {
+      "name": "Core/Special: Creativity, Activity, Service (CAS) Reflection Support"
+    }
+  ],
+  "pearsonGcse": [
+    {
+      "name": "English Language",
+      "code": "1EN0"
+    },
+    {
+      "name": "English Literature",
+      "code": "1ET0"
+    },
+    {
+      "name": "Mathematics",
+      "code": "1MA0"
+    },
+    {
+      "name": "Biology",
+      "code": "1BI0"
+    },
+    {
+      "name": "Chemistry",
+      "code": "1CH0"
+    },
+    {
+      "name": "Physics",
+      "code": "1PH0"
+    },
+    {
+      "name": "Business Studies",
+      "code": "1BS0"
+    },
+    {
+      "name": "Economics",
+      "code": "1EC0"
+    },
+    {
+      "name": "ICT",
+      "code": "1IT0"
+    },
+    {
+      "name": "Geography",
+      "code": "1GE0"
+    },
+    {
+      "name": "History",
+      "code": "1HI0"
+    },
+    {
+      "name": "Global Citizenship / Global Perspectives",
+      "code": "1GP0"
+    },
+    {
+      "name": "Accounting",
+      "code": "1AC0"
+    },
+    {
+      "name": "Art & Design",
+      "code": "1AD0"
+    },
+    {
+      "name": "Music",
+      "code": "1MU0"
+    },
+    {
+      "name": "French",
+      "code": "1FR0"
+    },
+    {
+      "name": "Spanish",
+      "code": "1SP0"
+    },
+    {
+      "name": "German",
+      "code": "1GN0"
+    }
+  ],
+  "pearsonALevel": [
+    {
+      "name": "Accounting",
+      "code": "9AC0"
+    },
+    {
+      "name": "Biology",
+      "code": "9BI0"
+    },
+    {
+      "name": "Business",
+      "code": "9BS0"
+    },
+    {
+      "name": "Chemistry",
+      "code": "9CH0"
+    },
+    {
+      "name": "Computer Science",
+      "code": "9CS0"
+    },
+    {
+      "name": "Design & Technology",
+      "code": "9DT0"
+    },
+    {
+      "name": "Digital Media & Design",
+      "code": "9DM0"
+    },
+    {
+      "name": "Economics",
+      "code": "9EC0"
+    },
+    {
+      "name": "English Language",
+      "code": "9EN0"
+    },
+    {
+      "name": "English Literature",
+      "code": "9EL0"
+    },
+    {
+      "name": "French",
+      "code": "9FR0"
+    },
+    {
+      "name": "Further Mathematics",
+      "code": "9FM0"
+    },
+    {
+      "name": "Geography",
+      "code": "9GE0"
+    },
+    {
+      "name": "German",
+      "code": "9GN0"
+    },
+    {
+      "name": "Global Perspectives & Research",
+      "code": "9GP0"
+    },
+    {
+      "name": "History",
+      "code": "9HI0"
+    },
+    {
+      "name": "Information Technology",
+      "code": "9IT0"
+    },
+    {
+      "name": "Law",
+      "code": "9LW0"
+    },
+    {
+      "name": "Marine Science",
+      "code": "9MS0"
+    },
+    {
+      "name": "Mathematics",
+      "code": "9MA0"
+    },
+    {
+      "name": "Media Studies",
+      "code": "9MD0"
+    },
+    {
+      "name": "Music",
+      "code": "9MU0"
+    },
+    {
+      "name": "Physics",
+      "code": "9PH0"
+    },
+    {
+      "name": "Psychology",
+      "code": "9PS0"
+    },
+    {
+      "name": "Sociology",
+      "code": "9SO0"
+    },
+    {
+      "name": "Spanish",
+      "code": "9SP0"
+    }
+  ],
+  "auPrimary": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Science"
+    },
+    {
+      "name": "Humanities & Social Sciences (HASS)"
+    },
+    {
+      "name": "History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Health & Physical Education (HPE)"
+    },
+    {
+      "name": "The Arts"
+    },
+    {
+      "name": "Digital Technologies"
+    },
+    {
+      "name": "Design & Technologies"
+    },
+    {
+      "name": "French"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "Mandarin"
+    }
+  ],
+  "auSecondary": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Science"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Civics & Citizenship"
+    },
+    {
+      "name": "Economics & Business"
+    },
+    {
+      "name": "Digital Technologies"
+    },
+    {
+      "name": "Design & Technologies"
+    },
+    {
+      "name": "Visual Arts"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Media Arts"
+    },
+    {
+      "name": "Dance"
+    },
+    {
+      "name": "Health & Physical Education (HPE)"
+    },
+    {
+      "name": "French"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "Mandarin"
+    }
+  ],
+  "auSeniorNsw": [
+    {
+      "name": "English Standard"
+    },
+    {
+      "name": "English Advanced"
+    },
+    {
+      "name": "English Extension 1"
+    },
+    {
+      "name": "English Extension 2"
+    },
+    {
+      "name": "Mathematics Standard"
+    },
+    {
+      "name": "Mathematics Advanced"
+    },
+    {
+      "name": "Mathematics Extension 1"
+    },
+    {
+      "name": "Mathematics Extension 2"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Earth & Environmental Science"
+    },
+    {
+      "name": "Modern History"
+    },
+    {
+      "name": "Ancient History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Legal Studies"
+    },
+    {
+      "name": "Society & Culture"
+    },
+    {
+      "name": "Software Design & Development"
+    },
+    {
+      "name": "Information Processes & Technology"
+    },
+    {
+      "name": "Visual Arts"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Dance"
+    },
+    {
+      "name": "PDHPE"
+    },
+    {
+      "name": "French"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "Mandarin"
+    }
+  ],
+  "auSeniorVic": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "English Language"
+    },
+    {
+      "name": "English Literature"
+    },
+    {
+      "name": "General Mathematics"
+    },
+    {
+      "name": "Mathematical Methods"
+    },
+    {
+      "name": "Specialist Mathematics"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Environmental Science"
+    },
+    {
+      "name": "History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Management"
+    },
+    {
+      "name": "Legal Studies"
+    },
+    {
+      "name": "Psychology"
+    },
+    {
+      "name": "Sociology"
+    },
+    {
+      "name": "Computing"
+    },
+    {
+      "name": "Software Development"
+    },
+    {
+      "name": "Visual Communication Design"
+    },
+    {
+      "name": "Media"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Dance"
+    },
+    {
+      "name": "Physical Education"
+    },
+    {
+      "name": "Health & Human Development"
+    },
+    {
+      "name": "French"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "Mandarin"
+    }
+  ],
+  "auSeniorQld": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "English Literature"
+    },
+    {
+      "name": "General Mathematics"
+    },
+    {
+      "name": "Mathematical Methods"
+    },
+    {
+      "name": "Specialist Mathematics"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Earth & Environmental Science"
+    },
+    {
+      "name": "Modern History"
+    },
+    {
+      "name": "Ancient History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business"
+    },
+    {
+      "name": "Legal Studies"
+    },
+    {
+      "name": "Psychology"
+    },
+    {
+      "name": "Sociology"
+    },
+    {
+      "name": "Digital Solutions"
+    },
+    {
+      "name": "Information & Communication Technology"
+    },
+    {
+      "name": "Visual Art"
+    },
+    {
+      "name": "Media Arts"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Dance"
+    },
+    {
+      "name": "Physical Education"
+    },
+    {
+      "name": "Health"
+    },
+    {
+      "name": "French"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "Mandarin"
+    }
+  ],
+  "caElementary": [
+    {
+      "name": "English Language Arts"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Science"
+    },
+    {
+      "name": "Social Studies"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "History"
+    },
+    {
+      "name": "Health & Physical Education"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Computer Studies / Technology"
+    },
+    {
+      "name": "French as a Second Language"
+    }
+  ],
+  "caSecondary": [
+    {
+      "name": "English Language Arts"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Science"
+    },
+    {
+      "name": "Social Studies"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "History"
+    },
+    {
+      "name": "Health & Physical Education"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Computer Studies / Technology"
+    },
+    {
+      "name": "French as a Second Language"
+    }
+  ],
+  "caSeniorOntario": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "English Literature"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Advanced Functions"
+    },
+    {
+      "name": "Calculus & Vectors"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Environmental Science"
+    },
+    {
+      "name": "Canadian History"
+    },
+    {
+      "name": "World History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Accounting"
+    },
+    {
+      "name": "Law"
+    },
+    {
+      "name": "Politics"
+    },
+    {
+      "name": "Psychology"
+    },
+    {
+      "name": "Sociology"
+    },
+    {
+      "name": "Computer Science"
+    },
+    {
+      "name": "Information Technology"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Media Studies"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Health & Physical Education"
+    },
+    {
+      "name": "French"
+    }
+  ],
+  "caSeniorBc": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "English Literature"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Advanced Functions"
+    },
+    {
+      "name": "Calculus & Vectors"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Environmental Science"
+    },
+    {
+      "name": "Canadian History"
+    },
+    {
+      "name": "World History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Accounting"
+    },
+    {
+      "name": "Law"
+    },
+    {
+      "name": "Politics"
+    },
+    {
+      "name": "Psychology"
+    },
+    {
+      "name": "Sociology"
+    },
+    {
+      "name": "Computer Science"
+    },
+    {
+      "name": "Information Technology"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Media Studies"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Health & Physical Education"
+    },
+    {
+      "name": "French"
+    }
+  ],
+  "auSeniorWa": [
+    {
+      "name": "English Standard"
+    },
+    {
+      "name": "English Advanced"
+    },
+    {
+      "name": "English Extension 1"
+    },
+    {
+      "name": "English Extension 2"
+    },
+    {
+      "name": "Mathematics Standard"
+    },
+    {
+      "name": "Mathematics Advanced"
+    },
+    {
+      "name": "Mathematics Extension 1"
+    },
+    {
+      "name": "Mathematics Extension 2"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Earth & Environmental Science"
+    },
+    {
+      "name": "Modern History"
+    },
+    {
+      "name": "Ancient History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Legal Studies"
+    },
+    {
+      "name": "Society & Culture"
+    },
+    {
+      "name": "Software Design & Development"
+    },
+    {
+      "name": "Information Processes & Technology"
+    },
+    {
+      "name": "Visual Arts"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Dance"
+    },
+    {
+      "name": "PDHPE"
+    },
+    {
+      "name": "French"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "Mandarin"
+    }
+  ],
+  "auSeniorSa": [
+    {
+      "name": "English Standard"
+    },
+    {
+      "name": "English Advanced"
+    },
+    {
+      "name": "English Extension 1"
+    },
+    {
+      "name": "English Extension 2"
+    },
+    {
+      "name": "Mathematics Standard"
+    },
+    {
+      "name": "Mathematics Advanced"
+    },
+    {
+      "name": "Mathematics Extension 1"
+    },
+    {
+      "name": "Mathematics Extension 2"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Earth & Environmental Science"
+    },
+    {
+      "name": "Modern History"
+    },
+    {
+      "name": "Ancient History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Legal Studies"
+    },
+    {
+      "name": "Society & Culture"
+    },
+    {
+      "name": "Software Design & Development"
+    },
+    {
+      "name": "Information Processes & Technology"
+    },
+    {
+      "name": "Visual Arts"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Dance"
+    },
+    {
+      "name": "PDHPE"
+    },
+    {
+      "name": "French"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "Mandarin"
+    }
+  ],
+  "auSeniorTas": [
+    {
+      "name": "English Standard"
+    },
+    {
+      "name": "English Advanced"
+    },
+    {
+      "name": "English Extension 1"
+    },
+    {
+      "name": "English Extension 2"
+    },
+    {
+      "name": "Mathematics Standard"
+    },
+    {
+      "name": "Mathematics Advanced"
+    },
+    {
+      "name": "Mathematics Extension 1"
+    },
+    {
+      "name": "Mathematics Extension 2"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Earth & Environmental Science"
+    },
+    {
+      "name": "Modern History"
+    },
+    {
+      "name": "Ancient History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Legal Studies"
+    },
+    {
+      "name": "Society & Culture"
+    },
+    {
+      "name": "Software Design & Development"
+    },
+    {
+      "name": "Information Processes & Technology"
+    },
+    {
+      "name": "Visual Arts"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Dance"
+    },
+    {
+      "name": "PDHPE"
+    },
+    {
+      "name": "French"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "Mandarin"
+    }
+  ],
+  "auSeniorAct": [
+    {
+      "name": "English Standard"
+    },
+    {
+      "name": "English Advanced"
+    },
+    {
+      "name": "English Extension 1"
+    },
+    {
+      "name": "English Extension 2"
+    },
+    {
+      "name": "Mathematics Standard"
+    },
+    {
+      "name": "Mathematics Advanced"
+    },
+    {
+      "name": "Mathematics Extension 1"
+    },
+    {
+      "name": "Mathematics Extension 2"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Earth & Environmental Science"
+    },
+    {
+      "name": "Modern History"
+    },
+    {
+      "name": "Ancient History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Legal Studies"
+    },
+    {
+      "name": "Society & Culture"
+    },
+    {
+      "name": "Software Design & Development"
+    },
+    {
+      "name": "Information Processes & Technology"
+    },
+    {
+      "name": "Visual Arts"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Dance"
+    },
+    {
+      "name": "PDHPE"
+    },
+    {
+      "name": "French"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "Mandarin"
+    }
+  ],
+  "auSeniorNt": [
+    {
+      "name": "English Standard"
+    },
+    {
+      "name": "English Advanced"
+    },
+    {
+      "name": "English Extension 1"
+    },
+    {
+      "name": "English Extension 2"
+    },
+    {
+      "name": "Mathematics Standard"
+    },
+    {
+      "name": "Mathematics Advanced"
+    },
+    {
+      "name": "Mathematics Extension 1"
+    },
+    {
+      "name": "Mathematics Extension 2"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Earth & Environmental Science"
+    },
+    {
+      "name": "Modern History"
+    },
+    {
+      "name": "Ancient History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Legal Studies"
+    },
+    {
+      "name": "Society & Culture"
+    },
+    {
+      "name": "Software Design & Development"
+    },
+    {
+      "name": "Information Processes & Technology"
+    },
+    {
+      "name": "Visual Arts"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Dance"
+    },
+    {
+      "name": "PDHPE"
+    },
+    {
+      "name": "French"
+    },
+    {
+      "name": "Spanish"
+    },
+    {
+      "name": "Mandarin"
+    }
+  ],
+  "caSeniorAlberta": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "English Literature"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Advanced Functions"
+    },
+    {
+      "name": "Calculus & Vectors"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Environmental Science"
+    },
+    {
+      "name": "Canadian History"
+    },
+    {
+      "name": "World History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Accounting"
+    },
+    {
+      "name": "Law"
+    },
+    {
+      "name": "Politics"
+    },
+    {
+      "name": "Psychology"
+    },
+    {
+      "name": "Sociology"
+    },
+    {
+      "name": "Computer Science"
+    },
+    {
+      "name": "Information Technology"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Media Studies"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Health & Physical Education"
+    },
+    {
+      "name": "French"
+    }
+  ],
+  "caSeniorQuebec": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "English Literature"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Advanced Functions"
+    },
+    {
+      "name": "Calculus & Vectors"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Environmental Science"
+    },
+    {
+      "name": "Canadian History"
+    },
+    {
+      "name": "World History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Accounting"
+    },
+    {
+      "name": "Law"
+    },
+    {
+      "name": "Politics"
+    },
+    {
+      "name": "Psychology"
+    },
+    {
+      "name": "Sociology"
+    },
+    {
+      "name": "Computer Science"
+    },
+    {
+      "name": "Information Technology"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Media Studies"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Health & Physical Education"
+    },
+    {
+      "name": "French"
+    }
+  ],
+  "caSeniorManitoba": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "English Literature"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Advanced Functions"
+    },
+    {
+      "name": "Calculus & Vectors"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Environmental Science"
+    },
+    {
+      "name": "Canadian History"
+    },
+    {
+      "name": "World History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Accounting"
+    },
+    {
+      "name": "Law"
+    },
+    {
+      "name": "Politics"
+    },
+    {
+      "name": "Psychology"
+    },
+    {
+      "name": "Sociology"
+    },
+    {
+      "name": "Computer Science"
+    },
+    {
+      "name": "Information Technology"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Media Studies"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Health & Physical Education"
+    },
+    {
+      "name": "French"
+    }
+  ],
+  "caSeniorSaskatchewan": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "English Literature"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Advanced Functions"
+    },
+    {
+      "name": "Calculus & Vectors"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Environmental Science"
+    },
+    {
+      "name": "Canadian History"
+    },
+    {
+      "name": "World History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Accounting"
+    },
+    {
+      "name": "Law"
+    },
+    {
+      "name": "Politics"
+    },
+    {
+      "name": "Psychology"
+    },
+    {
+      "name": "Sociology"
+    },
+    {
+      "name": "Computer Science"
+    },
+    {
+      "name": "Information Technology"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Media Studies"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Health & Physical Education"
+    },
+    {
+      "name": "French"
+    }
+  ],
+  "caSeniorMaritimes": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "English Literature"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Advanced Functions"
+    },
+    {
+      "name": "Calculus & Vectors"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Environmental Science"
+    },
+    {
+      "name": "Canadian History"
+    },
+    {
+      "name": "World History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Accounting"
+    },
+    {
+      "name": "Law"
+    },
+    {
+      "name": "Politics"
+    },
+    {
+      "name": "Psychology"
+    },
+    {
+      "name": "Sociology"
+    },
+    {
+      "name": "Computer Science"
+    },
+    {
+      "name": "Information Technology"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Media Studies"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Health & Physical Education"
+    },
+    {
+      "name": "French"
+    }
+  ],
+  "caSeniorTerritories": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "English Literature"
+    },
+    {
+      "name": "Mathematics"
+    },
+    {
+      "name": "Advanced Functions"
+    },
+    {
+      "name": "Calculus & Vectors"
+    },
+    {
+      "name": "Biology"
+    },
+    {
+      "name": "Chemistry"
+    },
+    {
+      "name": "Physics"
+    },
+    {
+      "name": "Environmental Science"
+    },
+    {
+      "name": "Canadian History"
+    },
+    {
+      "name": "World History"
+    },
+    {
+      "name": "Geography"
+    },
+    {
+      "name": "Economics"
+    },
+    {
+      "name": "Business Studies"
+    },
+    {
+      "name": "Accounting"
+    },
+    {
+      "name": "Law"
+    },
+    {
+      "name": "Politics"
+    },
+    {
+      "name": "Psychology"
+    },
+    {
+      "name": "Sociology"
+    },
+    {
+      "name": "Computer Science"
+    },
+    {
+      "name": "Information Technology"
+    },
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Media Studies"
+    },
+    {
+      "name": "Music"
+    },
+    {
+      "name": "Drama"
+    },
+    {
+      "name": "Health & Physical Education"
+    },
+    {
+      "name": "French"
+    }
+  ]
+}

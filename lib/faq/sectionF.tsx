@@ -203,11 +203,7 @@ export const sectionF: FaqSection = {
             </li>
             <li>
               <strong className="text-navy font-semibold">Web subscriptions:</strong> Assessed case by case in line
-              with Studiely&apos;s refund terms, available in our{" "}
-              <Link href={LEGAL_ROUTES.refundPolicyWeb} className={complianceLinkClass}>
-                Refund Policy
-              </Link>{" "}
-              and{" "}
+              with Studiely&apos;s refund terms in our{" "}
               <Link href={LEGAL_ROUTES.termsOfService} className={complianceLinkClass}>
                 Terms of Service
               </Link>{" "}

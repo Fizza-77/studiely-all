@@ -34,11 +34,7 @@ export const sectionH: FaqSection = {
             <Link href={LEGAL_ROUTES.privacyPolicy} className={complianceLinkClass}>
               Privacy Policy
             </Link>{" "}
-            is available in the{" "}
-            <Link href={LEGAL_ROUTES.legalIndex} className={complianceLinkClass}>
-              Help Center
-            </Link>{" "}
-            and the website footer at{" "}
+            is available on the website footer at{" "}
             <Link href="/" className={complianceLinkClass}>
               studiely.com
             </Link>
@@ -79,19 +75,15 @@ export const sectionH: FaqSection = {
     {
       question: "How do I request deletion of my data?",
       schemaText:
-        "You can request deletion of your personal data at any time through the Account Deletion page in the Studiely Help Center. Once confirmed, all personal data and AI-generated content associated with your account will be permanently and irreversibly deleted in accordance with our Privacy Policy and applicable data protection regulations. We recommend downloading any study materials you wish to keep before submitting the request. If you are a Premium subscriber, we recommend cancelling your subscription first to avoid further billing.",
+        "You can request deletion of your personal data at any time through Contact support or your Profile settings. Once confirmed, all personal data and AI-generated content associated with your account will be permanently and irreversibly deleted in accordance with our Privacy Policy and applicable data protection regulations. We recommend downloading any study materials you wish to keep before submitting the request. If you are a Premium subscriber, we recommend cancelling your subscription first to avoid further billing.",
       answer: (
         <>
           <p>
-            You can request deletion of your personal data at any time through the{" "}
-            <Link href={LEGAL_ROUTES.deleteAccount} className={complianceLinkClass}>
-              Account Deletion
+            You can request deletion of your personal data at any time through{" "}
+            <Link href="/help" className={complianceLinkClass}>
+              Contact support
             </Link>{" "}
-            page in the{" "}
-            <Link href={LEGAL_ROUTES.legalIndex} className={complianceLinkClass}>
-              Studiely Help Center
-            </Link>
-            .
+            or your Profile settings.
           </p>
           <p>
             Once confirmed, all personal data and AI-generated content associated with your account will be

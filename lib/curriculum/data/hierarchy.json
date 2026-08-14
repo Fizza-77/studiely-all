@@ -1,0 +1,1869 @@
+{
+  "boards": [
+    {
+      "id": "british",
+      "name": "British Curriculum",
+      "pathwayLabel": "Choose Pathway",
+      "pathways": [
+        {
+          "id": "uk_national",
+          "name": "UK National Curriculum",
+          "grades": [
+            {
+              "id": "nursery",
+              "name": "Nursery (Pre-K)",
+              "ageRange": "3-4",
+              "subjectsKey": null
+            },
+            {
+              "id": "reception",
+              "name": "Reception (KG)",
+              "ageRange": "4-5",
+              "subjectsKey": null
+            },
+            {
+              "id": "1",
+              "name": "Year 1 — KS1",
+              "ageRange": "5-6",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "2",
+              "name": "Year 2 — KS1",
+              "ageRange": "6-7",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "3",
+              "name": "Year 3 — KS2",
+              "ageRange": "7-8",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "4",
+              "name": "Year 4 — KS2",
+              "ageRange": "8-9",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "5",
+              "name": "Year 5 — KS2",
+              "ageRange": "9-10",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "6",
+              "name": "Year 6 — KS2",
+              "ageRange": "10-11",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "7",
+              "name": "Year 7 — KS3",
+              "ageRange": "11-12",
+              "subjectsKey": "ks3"
+            },
+            {
+              "id": "8",
+              "name": "Year 8 — KS3",
+              "ageRange": "12-13",
+              "subjectsKey": "ks3"
+            },
+            {
+              "id": "9",
+              "name": "Year 9 — KS3",
+              "ageRange": "13-14",
+              "subjectsKey": "ks3"
+            },
+            {
+              "id": "gcse",
+              "name": "GCSE — KS4",
+              "ageRange": "14-16",
+              "subjectsKey": "gcse"
+            },
+            {
+              "id": "as_level",
+              "name": "AS Level — KS5",
+              "ageRange": "16-17",
+              "subjectsKey": "asLevel"
+            },
+            {
+              "id": "a_level",
+              "name": "A Level — KS5",
+              "ageRange": "17-18",
+              "subjectsKey": "aLevel"
+            }
+          ]
+        },
+        {
+          "id": "cambridge_international",
+          "name": "Cambridge International",
+          "grades": [
+            {
+              "id": "nursery",
+              "name": "Nursery",
+              "ageRange": "3-4",
+              "subjectsKey": null
+            },
+            {
+              "id": "reception",
+              "name": "Reception",
+              "ageRange": "4-5",
+              "subjectsKey": null
+            },
+            {
+              "id": "1",
+              "name": "Year 1 — Primary",
+              "ageRange": "5-6",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "2",
+              "name": "Year 2 — Primary",
+              "ageRange": "6-7",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "3",
+              "name": "Year 3 — Primary",
+              "ageRange": "7-8",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "4",
+              "name": "Year 4 — Primary",
+              "ageRange": "8-9",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "5",
+              "name": "Year 5 — Primary",
+              "ageRange": "9-10",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "6",
+              "name": "Year 6 — Primary",
+              "ageRange": "10-11",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "primary_checkpoint",
+              "name": "Primary Checkpoint",
+              "ageRange": "10-11",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "7",
+              "name": "Year 7 — Lower Secondary",
+              "ageRange": "11-12",
+              "subjectsKey": "ks3"
+            },
+            {
+              "id": "8",
+              "name": "Year 8 — Lower Secondary",
+              "ageRange": "12-13",
+              "subjectsKey": "ks3"
+            },
+            {
+              "id": "9",
+              "name": "Year 9 — Lower Secondary",
+              "ageRange": "13-14",
+              "subjectsKey": "ks3"
+            },
+            {
+              "id": "lower_secondary_checkpoint",
+              "name": "Lower Secondary Checkpoint",
+              "ageRange": "13-14",
+              "subjectsKey": "ks3"
+            },
+            {
+              "id": "igcse",
+              "name": "IGCSE",
+              "ageRange": "14-16",
+              "subjectsKey": "igcse"
+            },
+            {
+              "id": "as_level",
+              "name": "AS Level",
+              "ageRange": "16-17",
+              "subjectsKey": "asLevel"
+            },
+            {
+              "id": "a_level",
+              "name": "A Level",
+              "ageRange": "17-18",
+              "subjectsKey": "aLevel"
+            }
+          ]
+        },
+        {
+          "id": "pearson_edexcel",
+          "name": "Pearson Edexcel",
+          "grades": [
+            {
+              "id": "nursery",
+              "name": "Nursery",
+              "ageRange": "3-4",
+              "subjectsKey": null
+            },
+            {
+              "id": "reception",
+              "name": "Reception",
+              "ageRange": "4-5",
+              "subjectsKey": null
+            },
+            {
+              "id": "1",
+              "name": "Year 1",
+              "ageRange": "5-6",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "2",
+              "name": "Year 2",
+              "ageRange": "6-7",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "3",
+              "name": "Year 3",
+              "ageRange": "7-8",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "4",
+              "name": "Year 4",
+              "ageRange": "8-9",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "5",
+              "name": "Year 5",
+              "ageRange": "9-10",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "6",
+              "name": "Year 6",
+              "ageRange": "10-11",
+              "subjectsKey": "primary"
+            },
+            {
+              "id": "7",
+              "name": "Year 7",
+              "ageRange": "11-12",
+              "subjectsKey": "ks3"
+            },
+            {
+              "id": "8",
+              "name": "Year 8",
+              "ageRange": "12-13",
+              "subjectsKey": "ks3"
+            },
+            {
+              "id": "9",
+              "name": "Year 9",
+              "ageRange": "13-14",
+              "subjectsKey": "ks3"
+            },
+            {
+              "id": "gcse_edexcel",
+              "name": "GCSE (Edexcel)",
+              "ageRange": "14-16",
+              "subjectsKey": "pearsonGcse"
+            },
+            {
+              "id": "as_level",
+              "name": "AS Level",
+              "ageRange": "16-17",
+              "subjectsKey": "pearsonALevel"
+            },
+            {
+              "id": "a_level",
+              "name": "A Level",
+              "ageRange": "17-18",
+              "subjectsKey": "pearsonALevel"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "us",
+      "name": "US Curriculum",
+      "pathwayLabel": "Choose Program",
+      "pathways": [
+        {
+          "id": "us_standards",
+          "name": "US Standards (Common Core / NGSS)",
+          "grades": [
+            {
+              "id": "k",
+              "name": "Kindergarten",
+              "ageRange": "5-6",
+              "subjectsKey": "usElementary"
+            },
+            {
+              "id": "1",
+              "name": "Grade 1",
+              "ageRange": "6-7",
+              "subjectsKey": "usElementary"
+            },
+            {
+              "id": "2",
+              "name": "Grade 2",
+              "ageRange": "7-8",
+              "subjectsKey": "usElementary"
+            },
+            {
+              "id": "3",
+              "name": "Grade 3",
+              "ageRange": "8-9",
+              "subjectsKey": "usElementary"
+            },
+            {
+              "id": "4",
+              "name": "Grade 4",
+              "ageRange": "9-10",
+              "subjectsKey": "usElementary"
+            },
+            {
+              "id": "5",
+              "name": "Grade 5",
+              "ageRange": "10-11",
+              "subjectsKey": "usElementary"
+            },
+            {
+              "id": "6",
+              "name": "Grade 6",
+              "ageRange": "11-12",
+              "subjectsKey": "usMiddle"
+            },
+            {
+              "id": "7",
+              "name": "Grade 7",
+              "ageRange": "12-13",
+              "subjectsKey": "usMiddle"
+            },
+            {
+              "id": "8",
+              "name": "Grade 8",
+              "ageRange": "13-14",
+              "subjectsKey": "usMiddle"
+            },
+            {
+              "id": "9",
+              "name": "Grade 9",
+              "ageRange": "14-15",
+              "subjectsKey": "usHigh"
+            },
+            {
+              "id": "10",
+              "name": "Grade 10",
+              "ageRange": "15-16",
+              "subjectsKey": "usHigh"
+            },
+            {
+              "id": "11",
+              "name": "Grade 11",
+              "ageRange": "16-17",
+              "subjectsKey": "usHigh"
+            },
+            {
+              "id": "12",
+              "name": "Grade 12",
+              "ageRange": "17-18",
+              "subjectsKey": "usHigh"
+            }
+          ]
+        },
+        {
+          "id": "ap_pathway",
+          "name": "Advanced Placement (AP)",
+          "grades": [
+            {
+              "id": "9",
+              "name": "Grade 9",
+              "ageRange": "14-15",
+              "subjectsKey": "ap"
+            },
+            {
+              "id": "10",
+              "name": "Grade 10",
+              "ageRange": "15-16",
+              "subjectsKey": "ap"
+            },
+            {
+              "id": "11",
+              "name": "Grade 11",
+              "ageRange": "16-17",
+              "subjectsKey": "ap"
+            },
+            {
+              "id": "12",
+              "name": "Grade 12",
+              "ageRange": "17-18",
+              "subjectsKey": "ap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ib",
+      "name": "International Baccalaureate (IB)",
+      "pathwayLabel": "Choose Programme",
+      "pathways": [
+        {
+          "id": "ib_pyp",
+          "name": "Primary Years Programme (PYP)",
+          "grades": [
+            {
+              "id": "1",
+              "name": "Grade 1",
+              "ageRange": "6-7",
+              "subjectsKey": "ibPyp"
+            },
+            {
+              "id": "2",
+              "name": "Grade 2",
+              "ageRange": "7-8",
+              "subjectsKey": "ibPyp"
+            },
+            {
+              "id": "3",
+              "name": "Grade 3",
+              "ageRange": "8-9",
+              "subjectsKey": "ibPyp"
+            },
+            {
+              "id": "4",
+              "name": "Grade 4",
+              "ageRange": "9-10",
+              "subjectsKey": "ibPyp"
+            },
+            {
+              "id": "5",
+              "name": "Grade 5",
+              "ageRange": "10-11",
+              "subjectsKey": "ibPyp"
+            }
+          ]
+        },
+        {
+          "id": "ib_myp",
+          "name": "Middle Years Programme (MYP)",
+          "grades": [
+            {
+              "id": "6",
+              "name": "Grade 6",
+              "ageRange": "11-12",
+              "subjectsKey": "ibMyp"
+            },
+            {
+              "id": "7",
+              "name": "Grade 7",
+              "ageRange": "12-13",
+              "subjectsKey": "ibMyp"
+            },
+            {
+              "id": "8",
+              "name": "Grade 8",
+              "ageRange": "13-14",
+              "subjectsKey": "ibMyp"
+            },
+            {
+              "id": "9",
+              "name": "Grade 9",
+              "ageRange": "14-15",
+              "subjectsKey": "ibMyp"
+            },
+            {
+              "id": "10",
+              "name": "Grade 10",
+              "ageRange": "15-16",
+              "subjectsKey": "ibMyp"
+            }
+          ]
+        },
+        {
+          "id": "ib_dp",
+          "name": "Diploma Programme (DP)",
+          "grades": [
+            {
+              "id": "11",
+              "name": "Grade 11",
+              "ageRange": "16-17",
+              "subjectsKey": "ibDp"
+            },
+            {
+              "id": "12",
+              "name": "Grade 12",
+              "ageRange": "17-18",
+              "subjectsKey": "ibDp"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "australian",
+      "name": "Australian Curriculum",
+      "pathwayLabel": "Choose State/Territory",
+      "pathways": [
+        {
+          "id": "australian_nsw",
+          "name": "New South Wales (NSW)",
+          "grades": [
+            {
+              "id": "foundation",
+              "name": "Foundation",
+              "ageRange": "5-6",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_1",
+              "name": "Year 1",
+              "ageRange": "6-7",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_2",
+              "name": "Year 2",
+              "ageRange": "7-8",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_3",
+              "name": "Year 3",
+              "ageRange": "8-9",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_4",
+              "name": "Year 4",
+              "ageRange": "9-10",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_5",
+              "name": "Year 5",
+              "ageRange": "10-11",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_6",
+              "name": "Year 6",
+              "ageRange": "11-12",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_7",
+              "name": "Year 7",
+              "ageRange": "12-13",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_8",
+              "name": "Year 8",
+              "ageRange": "13-14",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_9",
+              "name": "Year 9",
+              "ageRange": "14-15",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_10",
+              "name": "Year 10",
+              "ageRange": "15-16",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_11",
+              "name": "Year 11",
+              "ageRange": "16-17",
+              "subjectsKey": "auSeniorNsw"
+            },
+            {
+              "id": "year_12",
+              "name": "Year 12",
+              "ageRange": "17-18",
+              "subjectsKey": "auSeniorNsw"
+            }
+          ]
+        },
+        {
+          "id": "australian_vic",
+          "name": "Victoria (VIC)",
+          "grades": [
+            {
+              "id": "foundation",
+              "name": "Foundation",
+              "ageRange": "5-6",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_1",
+              "name": "Year 1",
+              "ageRange": "6-7",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_2",
+              "name": "Year 2",
+              "ageRange": "7-8",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_3",
+              "name": "Year 3",
+              "ageRange": "8-9",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_4",
+              "name": "Year 4",
+              "ageRange": "9-10",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_5",
+              "name": "Year 5",
+              "ageRange": "10-11",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_6",
+              "name": "Year 6",
+              "ageRange": "11-12",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_7",
+              "name": "Year 7",
+              "ageRange": "12-13",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_8",
+              "name": "Year 8",
+              "ageRange": "13-14",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_9",
+              "name": "Year 9",
+              "ageRange": "14-15",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_10",
+              "name": "Year 10",
+              "ageRange": "15-16",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_11",
+              "name": "Year 11",
+              "ageRange": "16-17",
+              "subjectsKey": "auSeniorVic"
+            },
+            {
+              "id": "year_12",
+              "name": "Year 12",
+              "ageRange": "17-18",
+              "subjectsKey": "auSeniorVic"
+            }
+          ]
+        },
+        {
+          "id": "australian_qld",
+          "name": "Queensland (QLD)",
+          "grades": [
+            {
+              "id": "foundation",
+              "name": "Foundation",
+              "ageRange": "5-6",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_1",
+              "name": "Year 1",
+              "ageRange": "6-7",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_2",
+              "name": "Year 2",
+              "ageRange": "7-8",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_3",
+              "name": "Year 3",
+              "ageRange": "8-9",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_4",
+              "name": "Year 4",
+              "ageRange": "9-10",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_5",
+              "name": "Year 5",
+              "ageRange": "10-11",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_6",
+              "name": "Year 6",
+              "ageRange": "11-12",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_7",
+              "name": "Year 7",
+              "ageRange": "12-13",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_8",
+              "name": "Year 8",
+              "ageRange": "13-14",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_9",
+              "name": "Year 9",
+              "ageRange": "14-15",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_10",
+              "name": "Year 10",
+              "ageRange": "15-16",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_11",
+              "name": "Year 11",
+              "ageRange": "16-17",
+              "subjectsKey": "auSeniorQld"
+            },
+            {
+              "id": "year_12",
+              "name": "Year 12",
+              "ageRange": "17-18",
+              "subjectsKey": "auSeniorQld"
+            }
+          ]
+        },
+        {
+          "id": "australian_wa",
+          "name": "Western Australia (WA)",
+          "grades": [
+            {
+              "id": "foundation",
+              "name": "Foundation",
+              "ageRange": "5-6",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_1",
+              "name": "Year 1",
+              "ageRange": "6-7",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_2",
+              "name": "Year 2",
+              "ageRange": "7-8",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_3",
+              "name": "Year 3",
+              "ageRange": "8-9",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_4",
+              "name": "Year 4",
+              "ageRange": "9-10",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_5",
+              "name": "Year 5",
+              "ageRange": "10-11",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_6",
+              "name": "Year 6",
+              "ageRange": "11-12",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_7",
+              "name": "Year 7",
+              "ageRange": "12-13",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_8",
+              "name": "Year 8",
+              "ageRange": "13-14",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_9",
+              "name": "Year 9",
+              "ageRange": "14-15",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_10",
+              "name": "Year 10",
+              "ageRange": "15-16",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_11",
+              "name": "Year 11",
+              "ageRange": "16-17",
+              "subjectsKey": "auSeniorWa"
+            },
+            {
+              "id": "year_12",
+              "name": "Year 12",
+              "ageRange": "17-18",
+              "subjectsKey": "auSeniorWa"
+            }
+          ]
+        },
+        {
+          "id": "australian_sa",
+          "name": "South Australia (SA)",
+          "grades": [
+            {
+              "id": "foundation",
+              "name": "Foundation",
+              "ageRange": "5-6",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_1",
+              "name": "Year 1",
+              "ageRange": "6-7",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_2",
+              "name": "Year 2",
+              "ageRange": "7-8",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_3",
+              "name": "Year 3",
+              "ageRange": "8-9",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_4",
+              "name": "Year 4",
+              "ageRange": "9-10",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_5",
+              "name": "Year 5",
+              "ageRange": "10-11",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_6",
+              "name": "Year 6",
+              "ageRange": "11-12",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_7",
+              "name": "Year 7",
+              "ageRange": "12-13",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_8",
+              "name": "Year 8",
+              "ageRange": "13-14",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_9",
+              "name": "Year 9",
+              "ageRange": "14-15",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_10",
+              "name": "Year 10",
+              "ageRange": "15-16",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_11",
+              "name": "Year 11",
+              "ageRange": "16-17",
+              "subjectsKey": "auSeniorSa"
+            },
+            {
+              "id": "year_12",
+              "name": "Year 12",
+              "ageRange": "17-18",
+              "subjectsKey": "auSeniorSa"
+            }
+          ]
+        },
+        {
+          "id": "australian_tas",
+          "name": "Tasmania (TAS)",
+          "grades": [
+            {
+              "id": "foundation",
+              "name": "Foundation",
+              "ageRange": "5-6",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_1",
+              "name": "Year 1",
+              "ageRange": "6-7",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_2",
+              "name": "Year 2",
+              "ageRange": "7-8",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_3",
+              "name": "Year 3",
+              "ageRange": "8-9",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_4",
+              "name": "Year 4",
+              "ageRange": "9-10",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_5",
+              "name": "Year 5",
+              "ageRange": "10-11",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_6",
+              "name": "Year 6",
+              "ageRange": "11-12",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_7",
+              "name": "Year 7",
+              "ageRange": "12-13",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_8",
+              "name": "Year 8",
+              "ageRange": "13-14",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_9",
+              "name": "Year 9",
+              "ageRange": "14-15",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_10",
+              "name": "Year 10",
+              "ageRange": "15-16",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_11",
+              "name": "Year 11",
+              "ageRange": "16-17",
+              "subjectsKey": "auSeniorTas"
+            },
+            {
+              "id": "year_12",
+              "name": "Year 12",
+              "ageRange": "17-18",
+              "subjectsKey": "auSeniorTas"
+            }
+          ]
+        },
+        {
+          "id": "australian_act",
+          "name": "Australian Capital Territory (ACT)",
+          "grades": [
+            {
+              "id": "foundation",
+              "name": "Foundation",
+              "ageRange": "5-6",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_1",
+              "name": "Year 1",
+              "ageRange": "6-7",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_2",
+              "name": "Year 2",
+              "ageRange": "7-8",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_3",
+              "name": "Year 3",
+              "ageRange": "8-9",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_4",
+              "name": "Year 4",
+              "ageRange": "9-10",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_5",
+              "name": "Year 5",
+              "ageRange": "10-11",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_6",
+              "name": "Year 6",
+              "ageRange": "11-12",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_7",
+              "name": "Year 7",
+              "ageRange": "12-13",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_8",
+              "name": "Year 8",
+              "ageRange": "13-14",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_9",
+              "name": "Year 9",
+              "ageRange": "14-15",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_10",
+              "name": "Year 10",
+              "ageRange": "15-16",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_11",
+              "name": "Year 11",
+              "ageRange": "16-17",
+              "subjectsKey": "auSeniorAct"
+            },
+            {
+              "id": "year_12",
+              "name": "Year 12",
+              "ageRange": "17-18",
+              "subjectsKey": "auSeniorAct"
+            }
+          ]
+        },
+        {
+          "id": "australian_nt",
+          "name": "Northern Territory (NT)",
+          "grades": [
+            {
+              "id": "foundation",
+              "name": "Foundation",
+              "ageRange": "5-6",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_1",
+              "name": "Year 1",
+              "ageRange": "6-7",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_2",
+              "name": "Year 2",
+              "ageRange": "7-8",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_3",
+              "name": "Year 3",
+              "ageRange": "8-9",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_4",
+              "name": "Year 4",
+              "ageRange": "9-10",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_5",
+              "name": "Year 5",
+              "ageRange": "10-11",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_6",
+              "name": "Year 6",
+              "ageRange": "11-12",
+              "subjectsKey": "auPrimary"
+            },
+            {
+              "id": "year_7",
+              "name": "Year 7",
+              "ageRange": "12-13",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_8",
+              "name": "Year 8",
+              "ageRange": "13-14",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_9",
+              "name": "Year 9",
+              "ageRange": "14-15",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_10",
+              "name": "Year 10",
+              "ageRange": "15-16",
+              "subjectsKey": "auSecondary"
+            },
+            {
+              "id": "year_11",
+              "name": "Year 11",
+              "ageRange": "16-17",
+              "subjectsKey": "auSeniorNt"
+            },
+            {
+              "id": "year_12",
+              "name": "Year 12",
+              "ageRange": "17-18",
+              "subjectsKey": "auSeniorNt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "canadian",
+      "name": "Canadian Curriculum",
+      "pathwayLabel": "Choose Province/Territory",
+      "pathways": [
+        {
+          "id": "canadian_ontario",
+          "name": "Ontario – OSSD",
+          "grades": [
+            {
+              "id": "kindergarten",
+              "name": "Kindergarten",
+              "ageRange": "5-6",
+              "subjectsKey": null
+            },
+            {
+              "id": "grade_1",
+              "name": "Grade 1",
+              "ageRange": "6-7",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_2",
+              "name": "Grade 2",
+              "ageRange": "7-8",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_3",
+              "name": "Grade 3",
+              "ageRange": "8-9",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_4",
+              "name": "Grade 4",
+              "ageRange": "9-10",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_5",
+              "name": "Grade 5",
+              "ageRange": "10-11",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_6",
+              "name": "Grade 6",
+              "ageRange": "11-12",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_7",
+              "name": "Grade 7",
+              "ageRange": "12-13",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_8",
+              "name": "Grade 8",
+              "ageRange": "13-14",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_9",
+              "name": "Grade 9",
+              "ageRange": "14-15",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_10",
+              "name": "Grade 10",
+              "ageRange": "15-16",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_11",
+              "name": "Grade 11",
+              "ageRange": "16-17",
+              "subjectsKey": "caSeniorOntario"
+            },
+            {
+              "id": "grade_12",
+              "name": "Grade 12",
+              "ageRange": "17-18",
+              "subjectsKey": "caSeniorOntario"
+            }
+          ]
+        },
+        {
+          "id": "canadian_bc",
+          "name": "British Columbia",
+          "grades": [
+            {
+              "id": "kindergarten",
+              "name": "Kindergarten",
+              "ageRange": "5-6",
+              "subjectsKey": null
+            },
+            {
+              "id": "grade_1",
+              "name": "Grade 1",
+              "ageRange": "6-7",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_2",
+              "name": "Grade 2",
+              "ageRange": "7-8",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_3",
+              "name": "Grade 3",
+              "ageRange": "8-9",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_4",
+              "name": "Grade 4",
+              "ageRange": "9-10",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_5",
+              "name": "Grade 5",
+              "ageRange": "10-11",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_6",
+              "name": "Grade 6",
+              "ageRange": "11-12",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_7",
+              "name": "Grade 7",
+              "ageRange": "12-13",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_8",
+              "name": "Grade 8",
+              "ageRange": "13-14",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_9",
+              "name": "Grade 9",
+              "ageRange": "14-15",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_10",
+              "name": "Grade 10",
+              "ageRange": "15-16",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_11",
+              "name": "Grade 11",
+              "ageRange": "16-17",
+              "subjectsKey": "caSeniorBc"
+            },
+            {
+              "id": "grade_12",
+              "name": "Grade 12",
+              "ageRange": "17-18",
+              "subjectsKey": "caSeniorBc"
+            }
+          ]
+        },
+        {
+          "id": "canadian_alberta",
+          "name": "Alberta",
+          "grades": [
+            {
+              "id": "kindergarten",
+              "name": "Kindergarten",
+              "ageRange": "5-6",
+              "subjectsKey": null
+            },
+            {
+              "id": "grade_1",
+              "name": "Grade 1",
+              "ageRange": "6-7",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_2",
+              "name": "Grade 2",
+              "ageRange": "7-8",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_3",
+              "name": "Grade 3",
+              "ageRange": "8-9",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_4",
+              "name": "Grade 4",
+              "ageRange": "9-10",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_5",
+              "name": "Grade 5",
+              "ageRange": "10-11",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_6",
+              "name": "Grade 6",
+              "ageRange": "11-12",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_7",
+              "name": "Grade 7",
+              "ageRange": "12-13",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_8",
+              "name": "Grade 8",
+              "ageRange": "13-14",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_9",
+              "name": "Grade 9",
+              "ageRange": "14-15",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_10",
+              "name": "Grade 10",
+              "ageRange": "15-16",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_11",
+              "name": "Grade 11",
+              "ageRange": "16-17",
+              "subjectsKey": "caSeniorAlberta"
+            },
+            {
+              "id": "grade_12",
+              "name": "Grade 12",
+              "ageRange": "17-18",
+              "subjectsKey": "caSeniorAlberta"
+            }
+          ]
+        },
+        {
+          "id": "canadian_quebec",
+          "name": "Quebec",
+          "grades": [
+            {
+              "id": "kindergarten",
+              "name": "Kindergarten",
+              "ageRange": "5-6",
+              "subjectsKey": null
+            },
+            {
+              "id": "grade_1",
+              "name": "Grade 1",
+              "ageRange": "6-7",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_2",
+              "name": "Grade 2",
+              "ageRange": "7-8",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_3",
+              "name": "Grade 3",
+              "ageRange": "8-9",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_4",
+              "name": "Grade 4",
+              "ageRange": "9-10",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_5",
+              "name": "Grade 5",
+              "ageRange": "10-11",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_6",
+              "name": "Grade 6",
+              "ageRange": "11-12",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_7",
+              "name": "Grade 7",
+              "ageRange": "12-13",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_8",
+              "name": "Grade 8",
+              "ageRange": "13-14",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_9",
+              "name": "Grade 9",
+              "ageRange": "14-15",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_10",
+              "name": "Grade 10",
+              "ageRange": "15-16",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_11",
+              "name": "Grade 11",
+              "ageRange": "16-17",
+              "subjectsKey": "caSeniorQuebec"
+            },
+            {
+              "id": "grade_12",
+              "name": "Grade 12",
+              "ageRange": "17-18",
+              "subjectsKey": "caSeniorQuebec"
+            }
+          ]
+        },
+        {
+          "id": "canadian_manitoba",
+          "name": "Manitoba",
+          "grades": [
+            {
+              "id": "kindergarten",
+              "name": "Kindergarten",
+              "ageRange": "5-6",
+              "subjectsKey": null
+            },
+            {
+              "id": "grade_1",
+              "name": "Grade 1",
+              "ageRange": "6-7",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_2",
+              "name": "Grade 2",
+              "ageRange": "7-8",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_3",
+              "name": "Grade 3",
+              "ageRange": "8-9",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_4",
+              "name": "Grade 4",
+              "ageRange": "9-10",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_5",
+              "name": "Grade 5",
+              "ageRange": "10-11",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_6",
+              "name": "Grade 6",
+              "ageRange": "11-12",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_7",
+              "name": "Grade 7",
+              "ageRange": "12-13",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_8",
+              "name": "Grade 8",
+              "ageRange": "13-14",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_9",
+              "name": "Grade 9",
+              "ageRange": "14-15",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_10",
+              "name": "Grade 10",
+              "ageRange": "15-16",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_11",
+              "name": "Grade 11",
+              "ageRange": "16-17",
+              "subjectsKey": "caSeniorManitoba"
+            },
+            {
+              "id": "grade_12",
+              "name": "Grade 12",
+              "ageRange": "17-18",
+              "subjectsKey": "caSeniorManitoba"
+            }
+          ]
+        },
+        {
+          "id": "canadian_saskatchewan",
+          "name": "Saskatchewan",
+          "grades": [
+            {
+              "id": "kindergarten",
+              "name": "Kindergarten",
+              "ageRange": "5-6",
+              "subjectsKey": null
+            },
+            {
+              "id": "grade_1",
+              "name": "Grade 1",
+              "ageRange": "6-7",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_2",
+              "name": "Grade 2",
+              "ageRange": "7-8",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_3",
+              "name": "Grade 3",
+              "ageRange": "8-9",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_4",
+              "name": "Grade 4",
+              "ageRange": "9-10",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_5",
+              "name": "Grade 5",
+              "ageRange": "10-11",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_6",
+              "name": "Grade 6",
+              "ageRange": "11-12",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_7",
+              "name": "Grade 7",
+              "ageRange": "12-13",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_8",
+              "name": "Grade 8",
+              "ageRange": "13-14",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_9",
+              "name": "Grade 9",
+              "ageRange": "14-15",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_10",
+              "name": "Grade 10",
+              "ageRange": "15-16",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_11",
+              "name": "Grade 11",
+              "ageRange": "16-17",
+              "subjectsKey": "caSeniorSaskatchewan"
+            },
+            {
+              "id": "grade_12",
+              "name": "Grade 12",
+              "ageRange": "17-18",
+              "subjectsKey": "caSeniorSaskatchewan"
+            }
+          ]
+        },
+        {
+          "id": "canadian_maritimes",
+          "name": "Maritimes (Atlantic)",
+          "grades": [
+            {
+              "id": "kindergarten",
+              "name": "Kindergarten",
+              "ageRange": "5-6",
+              "subjectsKey": null
+            },
+            {
+              "id": "grade_1",
+              "name": "Grade 1",
+              "ageRange": "6-7",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_2",
+              "name": "Grade 2",
+              "ageRange": "7-8",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_3",
+              "name": "Grade 3",
+              "ageRange": "8-9",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_4",
+              "name": "Grade 4",
+              "ageRange": "9-10",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_5",
+              "name": "Grade 5",
+              "ageRange": "10-11",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_6",
+              "name": "Grade 6",
+              "ageRange": "11-12",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_7",
+              "name": "Grade 7",
+              "ageRange": "12-13",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_8",
+              "name": "Grade 8",
+              "ageRange": "13-14",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_9",
+              "name": "Grade 9",
+              "ageRange": "14-15",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_10",
+              "name": "Grade 10",
+              "ageRange": "15-16",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_11",
+              "name": "Grade 11",
+              "ageRange": "16-17",
+              "subjectsKey": "caSeniorMaritimes"
+            },
+            {
+              "id": "grade_12",
+              "name": "Grade 12",
+              "ageRange": "17-18",
+              "subjectsKey": "caSeniorMaritimes"
+            }
+          ]
+        },
+        {
+          "id": "canadian_territories",
+          "name": "Territories (YT · NT · NU)",
+          "grades": [
+            {
+              "id": "kindergarten",
+              "name": "Kindergarten",
+              "ageRange": "5-6",
+              "subjectsKey": null
+            },
+            {
+              "id": "grade_1",
+              "name": "Grade 1",
+              "ageRange": "6-7",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_2",
+              "name": "Grade 2",
+              "ageRange": "7-8",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_3",
+              "name": "Grade 3",
+              "ageRange": "8-9",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_4",
+              "name": "Grade 4",
+              "ageRange": "9-10",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_5",
+              "name": "Grade 5",
+              "ageRange": "10-11",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_6",
+              "name": "Grade 6",
+              "ageRange": "11-12",
+              "subjectsKey": "caElementary"
+            },
+            {
+              "id": "grade_7",
+              "name": "Grade 7",
+              "ageRange": "12-13",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_8",
+              "name": "Grade 8",
+              "ageRange": "13-14",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_9",
+              "name": "Grade 9",
+              "ageRange": "14-15",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_10",
+              "name": "Grade 10",
+              "ageRange": "15-16",
+              "subjectsKey": "caSecondary"
+            },
+            {
+              "id": "grade_11",
+              "name": "Grade 11",
+              "ageRange": "16-17",
+              "subjectsKey": "caSeniorTerritories"
+            },
+            {
+              "id": "grade_12",
+              "name": "Grade 12",
+              "ageRange": "17-18",
+              "subjectsKey": "caSeniorTerritories"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

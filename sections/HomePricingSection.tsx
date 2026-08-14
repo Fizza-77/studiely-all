@@ -1,113 +1,144 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import { useAuth } from "@/components/providers/auth-provider";
 import { STUDIELY_APP } from "@/lib/appUrls";
+import {
+  FALLBACK_QUOTE,
+  createPayPalProAccessOrder,
+  getWebProPricingQuote,
+  paypalCheckoutUrls,
+  type PlanKey,
+  type PricingQuote,
+} from "@/lib/billing/paypal";
 
 const BLUE = "#4F35F2";
 const LIME = "#E8FF2F";
-const PINK = "#FF4D8D";
-const TITLE_BLUE = "#3B5BDB";
+const PINK = "#FF2D8A";
+const TITLE_BLUE = "#4F35F2";
 
 type Feature = {
   text: string;
   highlight?: boolean;
 };
 
-type Plan = {
+type MarketingPlan = {
   name: string;
-  price: string;
+  planKey?: PlanKey;
+  priceFrom: (q: PricingQuote) => string;
   priceSuffix?: string;
-  orig?: string;
-  cad: string;
+  cadFrom: (q: PricingQuote) => string;
   feats: Feature[];
   cta: string;
   fine: string;
-  href: string;
   badge?: { label: string; bg: string; color: string };
   featured?: boolean;
+  free?: boolean;
 };
 
-const PLANS: Plan[] = [
+const PLANS: MarketingPlan[] = [
   {
     name: "Free",
-    price: "$0",
-    cad: "Forever free",
+    free: true,
+    priceFrom: () => "$0",
+    cadFrom: () => "Forever free",
     feats: [
       { text: "5 total generations", highlight: true },
       { text: "Notes (5 only)" },
       { text: "Flashcards (5 only)" },
+      { text: "Quizzes (5 only)" },
+      { text: "Exam Qs (5 only)" },
+      { text: "Export PDF / Word" },
+      { text: "Nyla Priority" },
+      { text: "Study Streaks" },
     ],
     cta: "Get Started",
     fine: "After 5 gens, upgrade.",
-    href: STUDIELY_APP.signUp,
   },
   {
     name: "Monthly",
-    price: "$9.99",
+    planKey: "monthly",
+    priceFrom: (q) => `${q.currencySymbol}${q.m.price}`,
     priceSuffix: "/mo",
-    orig: "$ 14.99",
-    cad: "One payment per month of access",
+    cadFrom: () => "One payment per month of access",
     feats: [
       { text: "Total 100 generations for 1 month", highlight: true },
       { text: "Unlimited all tools" },
       { text: "Export PDF & Word" },
+      { text: "Offline Access" },
+      { text: "Nyla Priority" },
+      { text: "Learning Analytics" },
+      { text: "Study Streaks" },
     ],
     cta: "Choose Monthly",
     fine: "Cancel anytime.",
-    href: STUDIELY_APP.pricing,
   },
   {
     name: "3 Months",
-    price: "$26.99",
+    planKey: "three_month",
+    priceFrom: (q) => `${q.currencySymbol}${q.q.total}`,
     priceSuffix: " total",
-    orig: "$ 39.99",
-    cad: "$14.99 USD/mo - one payment per 3 months of access",
+    cadFrom: (q) =>
+      `${q.currencySymbol}${q.q.perMonth} ${q.currencyCode}/mo · one payment per 3 months of access`,
     feats: [
       { text: "Total 300 generations for 3 months", highlight: true },
       { text: "Everything in Monthly" },
       { text: "Unlimited all tools" },
+      { text: "Export PDF & Word" },
+      { text: "Offline Access" },
+      { text: "Nyla Priority" },
+      { text: "Analytics" },
     ],
     cta: "Choose 3 Months",
     fine: "Cancel anytime.",
-    href: STUDIELY_APP.pricing,
   },
   {
     name: "6 Months",
-    price: "$49.99",
+    planKey: "six_month",
+    priceFrom: (q) => `${q.currencySymbol}${q.s.total}`,
     priceSuffix: " total",
-    orig: "$ 74.99",
-    cad: "$14.99 USD/mo - one payment per 6 months of access",
+    cadFrom: (q) =>
+      `${q.currencySymbol}${q.s.perMonth} ${q.currencyCode}/mo · one payment per 6 months of access`,
     feats: [
       { text: "Total 600 generations for 6 months", highlight: true },
       { text: "Everything in Monthly" },
       { text: "Unlimited all tools" },
+      { text: "Export PDF & Word" },
+      { text: "Offline Access" },
+      { text: "Nyla Priority" },
+      { text: "Analytics" },
     ],
     cta: "Choose 6 Months",
     fine: "Cancel anytime.",
-    href: STUDIELY_APP.pricing,
     badge: { label: "POPULAR", bg: BLUE, color: "#FFFFFF" },
   },
   {
     name: "Annual",
-    price: "$89.99",
+    planKey: "yearly",
+    priceFrom: (q) => `${q.currencySymbol}${q.y.total}`,
     priceSuffix: " total",
-    orig: "$ 139.99",
-    cad: "$14.99 USD/mo - One annual payment",
+    cadFrom: (q) =>
+      `${q.currencySymbol}${q.y.perMonth} ${q.currencyCode}/mo · One annual payment`,
     feats: [
       { text: "Total 1200 generations for 12 months", highlight: true },
       { text: "Everything in Monthly" },
       { text: "Unlimited all tools" },
+      { text: "Export PDF & Word" },
+      { text: "Offline Access" },
+      { text: "Nyla Priority" },
+      { text: "Learning Analytics" },
+      { text: "Study Streaks" },
     ],
     cta: "Choose Annual",
     fine: "Cancel anytime.",
-    href: STUDIELY_APP.pricing,
     badge: { label: "BEST VALUE", bg: PINK, color: "#FFFFFF" },
     featured: true,
   },
 ];
 
-const LimeCheck = ({ featured = false }: { featured?: boolean }) => (
+const LimeCheck = () => (
   <span
     className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full"
     style={{ backgroundColor: LIME }}
@@ -116,8 +147,8 @@ const LimeCheck = ({ featured = false }: { featured?: boolean }) => (
     <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" fill="none">
       <path
         d="M2.5 6.2 4.8 8.5 9.5 3.5"
-        stroke={featured ? BLUE : "#1E1B4B"}
-        strokeWidth="2"
+        stroke="#1E1B4B"
+        strokeWidth="2.2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -125,88 +156,158 @@ const LimeCheck = ({ featured = false }: { featured?: boolean }) => (
   </span>
 );
 
+const outlineBtnClass =
+  "mt-auto inline-flex w-full items-center justify-center rounded-full border-2 bg-white px-4 py-2.5 font-sans text-[13px] font-bold transition-colors hover:bg-[#F5F3FF] disabled:cursor-wait disabled:opacity-70";
+
 interface HomePricingSectionProps {
   sectionRef?: React.Ref<HTMLElement>;
+  /** `page` = marketing /pricing (no large “Pricing” title — hero covers it). */
+  variant?: "home" | "page";
 }
 
-export const HomePricingSection = ({ sectionRef }: HomePricingSectionProps) => {
+export const HomePricingSection = ({
+  sectionRef,
+  variant = "home",
+}: HomePricingSectionProps) => {
+  const { user, phase } = useAuth();
+  const [quote, setQuote] = useState<PricingQuote>(FALLBACK_QUOTE);
+  const [busy, setBusy] = useState<PlanKey | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
+  const isPage = variant === "page";
+
+  useEffect(() => {
+    void getWebProPricingQuote().then(setQuote);
+  }, []);
+
+  async function checkout(planKey: PlanKey) {
+    setError(null);
+    setInfo(null);
+
+    if (!user) {
+      window.location.href = `${STUDIELY_APP.login}?next=${encodeURIComponent(`/pricing?plan=${planKey}`)}`;
+      return;
+    }
+
+    setBusy(planKey);
+    try {
+      const { returnUrl, cancelUrl } = paypalCheckoutUrls(
+        window.location.origin,
+      );
+      const { approvalUrl } = await createPayPalProAccessOrder({
+        planKey,
+        returnUrl,
+        cancelUrl,
+      });
+      if (!approvalUrl) throw new Error("No PayPal approval URL returned.");
+      window.location.href = approvalUrl;
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Checkout failed. Please try again or open Pricing after signing in.",
+      );
+      setBusy(null);
+    }
+  }
+
   return (
     <section
       id="pricing"
       ref={sectionRef}
-      aria-labelledby="homepage-pricing-heading"
+      aria-labelledby={
+        isPage ? "pricing-plans-heading" : "homepage-pricing-heading"
+      }
       className="bg-bg-base pb-[clamp(1.75rem,4vw,3rem)] pt-0"
     >
       <div className="wrap">
-        <h2
-          id="homepage-pricing-heading"
-          className="mb-[clamp(1.15rem,2.25vw,1.65rem)] text-center font-heading text-[clamp(2rem,3.8vw,3rem)] font-bold tracking-[-0.02em] text-[#1E1B4B]"
-        >
-          Pricing
-        </h2>
+        {isPage ? (
+          <h2 id="pricing-plans-heading" className="sr-only">
+            Choose a plan
+          </h2>
+        ) : (
+          <>
+            <h2
+              id="homepage-pricing-heading"
+              className="mb-2 text-center font-heading text-[clamp(2rem,3.8vw,3rem)] font-bold tracking-[-0.02em] text-[#1E1B4B]"
+            >
+              Pricing
+            </h2>
+            <p className="mx-auto mb-[clamp(1.15rem,2.25vw,1.65rem)] max-w-2xl text-center text-sm text-[#5B5A6A]">
+              {quote.regionLine}
+            </p>
+          </>
+        )}
 
-        <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-4">
+        {info ? (
+          <p className="mx-auto mb-4 max-w-2xl rounded-2xl bg-[#ECEAFF] px-4 py-3 text-center text-sm font-medium text-[#4F35F2]">
+            {info}
+          </p>
+        ) : null}
+        {error ? (
+          <p className="mx-auto mb-4 max-w-2xl rounded-2xl bg-[#FEF2F2] px-4 py-3 text-center text-sm font-medium text-[#B91C1C]">
+            {error}
+          </p>
+        ) : null}
+
+        <div className="mx-auto grid w-full max-w-none grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-3.5">
           {PLANS.map((plan) => {
             const featured = Boolean(plan.featured);
+            const price = plan.priceFrom(quote);
+            const cad = plan.cadFrom(quote);
+            const isBusy = plan.planKey ? busy === plan.planKey : false;
+            const ctaLabel = isBusy
+              ? "Redirecting to PayPal…"
+              : user || plan.free
+                ? plan.cta
+                : "Sign in to buy";
 
             return (
               <div
                 key={plan.name}
                 role="article"
                 aria-label={`${plan.name} plan`}
-                className={`relative flex h-full flex-col rounded-[24px] px-4 py-4 shadow-[0_14px_32px_rgba(30,27,75,0.12)] transition-[translate,box-shadow] duration-300 ease-out hover:z-10 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(30,27,75,0.18)] motion-reduce:transition-none motion-reduce:hover:translate-none sm:px-5 sm:py-5 ${
+                className={`relative flex h-full flex-col rounded-[28px] px-4 py-5 shadow-[0_12px_28px_rgba(30,27,75,0.1)] transition-[translate,box-shadow] duration-300 ease-out hover:z-10 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(30,27,75,0.16)] motion-reduce:transition-none motion-reduce:hover:translate-none sm:rounded-[32px] sm:px-5 sm:py-6 ${
                   featured ? "" : "border border-[#ECECF2] bg-white"
                 }`}
-                style={featured ? { backgroundColor: BLUE } : undefined}
+                style={
+                  featured
+                    ? {
+                        background:
+                          "linear-gradient(165deg, #3B5BDB 0%, #4F35F2 48%, #7B3FF0 100%)",
+                      }
+                    : undefined
+                }
               >
-                {plan.name === "Free" && (
-                  <Image
-                    src="/swirl.svg"
-                    alt=""
-                    width={360}
-                    height={360}
-                    unoptimized
-                    aria-hidden
-                    className="pointer-events-none absolute -right-20 -top-24 z-[1] h-auto w-[16rem] select-none sm:-right-16 sm:-top-20 sm:w-[19rem]"
-                    draggable={false}
-                  />
-                )}
-
-                {plan.badge && (
+                {plan.badge ? (
                   <span
-                    className="absolute -right-1.5 -top-2.5 rounded-full px-3 py-1 font-sans text-[9px] font-extrabold uppercase tracking-[0.1em] shadow-[0_4px_12px_rgba(30,27,75,0.18)] sm:right-2 sm:top-[-10px]"
-                    style={{ backgroundColor: plan.badge.bg, color: plan.badge.color }}
+                    className="absolute right-3 top-0 z-[3] -translate-y-1/2 rounded-full px-3 py-1 font-sans text-[9px] font-extrabold uppercase tracking-[0.1em] shadow-[0_4px_12px_rgba(30,27,75,0.18)]"
+                    style={{
+                      backgroundColor: plan.badge.bg,
+                      color: plan.badge.color,
+                    }}
                   >
                     {plan.badge.label}
                   </span>
-                )}
+                ) : null}
 
-                {/* Fixed header stack keeps titles / strikethrough / prices / cad on one row across cards */}
-                <div className="relative z-[2] mb-3 flex shrink-0 flex-col">
+                <div className="relative z-[2] mb-4 flex shrink-0 flex-col">
                   <h3
-                    className="mb-1.5 min-h-[1.35rem] font-sans text-[1.2rem] font-extrabold leading-none sm:min-h-[1.4rem] sm:text-[1.3rem]"
+                    className="mb-3 font-sans text-[1.25rem] font-extrabold leading-none sm:text-[1.35rem]"
                     style={{ color: featured ? "#FFFFFF" : TITLE_BLUE }}
                   >
                     {plan.name}
                   </h3>
 
-                  <div
-                    className={`mb-0.5 flex min-h-[1.125rem] items-center font-heading text-[12px] leading-none line-through ${
-                      featured ? "text-white/45" : "text-[#A8A8B5]"
-                    }`}
-                  >
-                    {plan.orig ?? "\u00A0"}
-                  </div>
-
-                  <div className="mb-1 flex min-h-[2.1rem] flex-wrap items-baseline gap-x-1 sm:min-h-[2.25rem]">
+                  <div className="mb-1.5 flex flex-wrap items-baseline gap-x-1">
                     <span
-                      className={`font-heading text-[clamp(1.65rem,2.1vw,2.05rem)] font-extrabold leading-none tracking-[-0.03em] ${
+                      className={`font-heading text-[clamp(1.75rem,2.2vw,2.15rem)] font-extrabold leading-none tracking-[-0.03em] ${
                         featured ? "text-white" : "text-[#1E1B4B]"
                       }`}
                     >
-                      {plan.price}
+                      {price}
                     </span>
-                    {plan.priceSuffix && (
+                    {plan.priceSuffix ? (
                       <span
                         className={`font-heading text-[clamp(1rem,1.35vw,1.2rem)] font-bold leading-none tracking-[-0.02em] ${
                           featured ? "text-white" : "text-[#1E1B4B]"
@@ -214,27 +315,22 @@ export const HomePricingSection = ({ sectionRef }: HomePricingSectionProps) => {
                       >
                         {plan.priceSuffix}
                       </span>
-                    )}
+                    ) : null}
                   </div>
 
                   <p
-                    className={`min-h-[2.25rem] font-sans text-[11px] leading-snug ${
-                      featured ? "text-white/65" : "text-[#5B5A6A]"
+                    className={`min-h-[2.4rem] font-sans text-[11px] leading-snug ${
+                      featured ? "text-white/75" : "text-[#8B8A9A]"
                     }`}
                   >
-                    {plan.cad}
+                    {cad}
                   </p>
                 </div>
 
-                <div
-                  className={`mb-3 h-px w-full shrink-0 ${featured ? "bg-white/20" : "bg-[#ECECF2]"}`}
-                  aria-hidden
-                />
-
-                <ul className="m-0 mb-4 flex list-none flex-col gap-2 p-0">
+                <ul className="m-0 mb-5 flex list-none flex-col gap-2.5 p-0">
                   {plan.feats.map((feat) => (
                     <li key={feat.text} className="flex items-start gap-2">
-                      <LimeCheck featured={featured} />
+                      <LimeCheck />
                       <span
                         className={`font-sans text-[12px] leading-snug ${
                           featured
@@ -242,8 +338,8 @@ export const HomePricingSection = ({ sectionRef }: HomePricingSectionProps) => {
                               ? "font-semibold text-[#E8FF2F]"
                               : "text-white"
                             : feat.highlight
-                              ? "font-medium text-[#3B5BDB]"
-                              : "text-[#2A2B36]"
+                              ? "font-semibold text-[#4F35F2]"
+                              : "text-[#5B5A6A]"
                         }`}
                       >
                         {feat.text}
@@ -252,22 +348,43 @@ export const HomePricingSection = ({ sectionRef }: HomePricingSectionProps) => {
                   ))}
                 </ul>
 
-                <Link
-                  href={plan.href}
-                  className={`mt-auto inline-flex w-full items-center justify-center rounded-full px-4 py-2.5 font-sans text-[13px] font-bold transition-opacity hover:opacity-90 ${
-                    featured ? "" : "text-white"
-                  }`}
-                  style={{
-                    backgroundColor: featured ? LIME : BLUE,
-                    color: featured ? BLUE : undefined,
-                  }}
-                >
-                  {plan.cta}
-                </Link>
+                {plan.free ? (
+                  <Link
+                    href={STUDIELY_APP.signUp}
+                    className={outlineBtnClass}
+                    style={{ borderColor: BLUE, color: BLUE }}
+                  >
+                    {plan.cta}
+                  </Link>
+                ) : featured ? (
+                  <button
+                    type="button"
+                    disabled={isBusy || phase === "initializing"}
+                    onClick={() => {
+                      if (plan.planKey) void checkout(plan.planKey);
+                    }}
+                    className="mt-auto inline-flex w-full items-center justify-center rounded-full px-4 py-2.5 font-sans text-[13px] font-extrabold text-[#1E1B4B] shadow-[0_0_24px_rgba(232,255,47,0.55)] transition-opacity hover:opacity-95 disabled:cursor-wait disabled:opacity-70"
+                    style={{ backgroundColor: LIME }}
+                  >
+                    {ctaLabel}
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    disabled={isBusy || phase === "initializing"}
+                    onClick={() => {
+                      if (plan.planKey) void checkout(plan.planKey);
+                    }}
+                    className={outlineBtnClass}
+                    style={{ borderColor: BLUE, color: BLUE }}
+                  >
+                    {ctaLabel}
+                  </button>
+                )}
 
                 <span
-                  className={`mt-2 block text-center font-sans text-[10px] ${
-                    featured ? "text-white/45" : "text-[#A8A8B5]"
+                  className={`mt-2.5 block text-center font-sans text-[10px] ${
+                    featured ? "text-white/55" : "text-[#A8A8B5]"
                   }`}
                 >
                   {plan.fine}

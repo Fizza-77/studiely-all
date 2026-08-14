@@ -1,0 +1,298 @@
+[
+  {
+    "id": "ib_pyp",
+    "name": "International Baccalaureate (IB) – Primary Years Programme (PYP)"
+  },
+  {
+    "id": "ib_myp",
+    "name": "International Baccalaureate (IB) – Middle Years Programme (MYP)"
+  },
+  {
+    "id": "ib_dp",
+    "name": "International Baccalaureate (IB) – Diploma Programme (DP)"
+  },
+  {
+    "id": "uk_national_ks1_ks2",
+    "name": "UK National Curriculum (KS1 & KS2)"
+  },
+  {
+    "id": "uk_national_ks3",
+    "name": "UK National Curriculum (KS3: Years 7–9)"
+  },
+  {
+    "id": "uk_national_ks4_gcse",
+    "name": "UK National Curriculum (KS4 / GCSE)"
+  },
+  {
+    "id": "uk_national_ks5_as_a_level",
+    "name": "UK National Curriculum (KS5 / AS & A Level)"
+  },
+  {
+    "id": "cambridge_primary",
+    "name": "Cambridge International (Cambridge Primary)"
+  },
+  {
+    "id": "cambridge_primary_checkpoint",
+    "name": "Cambridge International (Cambridge Primary Checkpoint)"
+  },
+  {
+    "id": "cambridge_lower_secondary",
+    "name": "Cambridge International (Cambridge Lower Secondary)"
+  },
+  {
+    "id": "cambridge_lower_secondary_checkpoint",
+    "name": "Cambridge International (Cambridge Lower Secondary Checkpoint)"
+  },
+  {
+    "id": "cambridge_igcse",
+    "name": "Cambridge International (IGCSE / Cambridge Upper Secondary)"
+  },
+  {
+    "id": "cambridge_as_a_level",
+    "name": "Cambridge International (AS & A Level / Cambridge Advanced)"
+  },
+  {
+    "id": "pearson_edexcel_ks1_ks2",
+    "name": "Pearson Edexcel (KS1 & KS2)"
+  },
+  {
+    "id": "pearson_edexcel_ks3",
+    "name": "Pearson Edexcel (KS3)"
+  },
+  {
+    "id": "pearson_edexcel_ks4",
+    "name": "Pearson Edexcel (KS4)"
+  },
+  {
+    "id": "pearson_edexcel_ks5",
+    "name": "Pearson Edexcel (KS5)"
+  },
+  {
+    "id": "us_elementary",
+    "name": "US Standards (Common Core / NGSS) - Elementary School"
+  },
+  {
+    "id": "us_middle_school",
+    "name": "US Standards (Common Core / NGSS) - Middle School"
+  },
+  {
+    "id": "us_high_school",
+    "name": "US Standards (Common Core / NGSS) - High School"
+  },
+  {
+    "id": "us_ap_pathway",
+    "name": "US Advanced Placement (AP) Pathway"
+  },
+  {
+    "id": "australian_nsw_primary",
+    "name": "Australian Curriculum – New South Wales (NSW) Primary"
+  },
+  {
+    "id": "australian_nsw_secondary",
+    "name": "Australian Curriculum – New South Wales (NSW) Secondary"
+  },
+  {
+    "id": "australian_nsw_hsc",
+    "name": "Australian Curriculum – New South Wales (NSW) Higher School Certificate (HSC)"
+  },
+  {
+    "id": "australian_vic_primary",
+    "name": "Australian Curriculum – Victoria (VIC) Primary"
+  },
+  {
+    "id": "australian_vic_secondary",
+    "name": "Australian Curriculum – Victoria (VIC) Secondary"
+  },
+  {
+    "id": "australian_vic_vce",
+    "name": "Australian Curriculum – Victoria (VIC) Victorian Certificate of Education (VCE)"
+  },
+  {
+    "id": "australian_qld_primary",
+    "name": "Australian Curriculum – Queensland (QLD) Primary"
+  },
+  {
+    "id": "australian_qld_secondary",
+    "name": "Australian Curriculum – Queensland (QLD) Secondary"
+  },
+  {
+    "id": "australian_qld_qce",
+    "name": "Australian Curriculum – Queensland (QLD) Queensland Certificate of Education (QCE)"
+  },
+  {
+    "id": "australian_wa_primary",
+    "name": "Australian Curriculum – Western Australia (WA) Primary"
+  },
+  {
+    "id": "australian_wa_secondary",
+    "name": "Australian Curriculum – Western Australia (WA) Secondary"
+  },
+  {
+    "id": "australian_wa_wace",
+    "name": "Australian Curriculum – Western Australia (WA) Western Australian Certificate of Education (WACE)"
+  },
+  {
+    "id": "australian_sa_primary",
+    "name": "Australian Curriculum – South Australia (SA) Primary"
+  },
+  {
+    "id": "australian_sa_secondary",
+    "name": "Australian Curriculum – South Australia (SA) Secondary"
+  },
+  {
+    "id": "australian_sa_sace",
+    "name": "Australian Curriculum – South Australia (SA) South Australian Certificate of Education (SACE)"
+  },
+  {
+    "id": "australian_tas_primary",
+    "name": "Australian Curriculum – Tasmania (TAS) Primary"
+  },
+  {
+    "id": "australian_tas_secondary",
+    "name": "Australian Curriculum – Tasmania (TAS) Secondary"
+  },
+  {
+    "id": "australian_tas_tce",
+    "name": "Australian Curriculum – Tasmania (TAS) Tasmanian Certificate of Education (TCE)"
+  },
+  {
+    "id": "australian_act_primary",
+    "name": "Australian Curriculum – Australian Capital Territory (ACT) Primary"
+  },
+  {
+    "id": "australian_act_secondary",
+    "name": "Australian Curriculum – Australian Capital Territory (ACT) Secondary"
+  },
+  {
+    "id": "australian_act_senior",
+    "name": "Australian Curriculum – Australian Capital Territory (ACT) Senior Secondary"
+  },
+  {
+    "id": "australian_nt_primary",
+    "name": "Australian Curriculum – Northern Territory (NT) Primary"
+  },
+  {
+    "id": "australian_nt_secondary",
+    "name": "Australian Curriculum – Northern Territory (NT) Secondary"
+  },
+  {
+    "id": "australian_nt_ntcet",
+    "name": "Australian Curriculum – Northern Territory (NT) Northern Territory Certificate of Education and Training (NTCET / NTCE)"
+  },
+  {
+    "id": "australian",
+    "name": "Australian Curriculum"
+  },
+  {
+    "id": "british",
+    "name": "British Curriculum"
+  },
+  {
+    "id": "us",
+    "name": "US Curriculum"
+  },
+  {
+    "id": "ib",
+    "name": "International Baccalaureate (IB)"
+  },
+  {
+    "id": "canadian_ontario_elementary",
+    "name": "Canadian Curriculum – Ontario (OSSD) Elementary"
+  },
+  {
+    "id": "canadian_ontario_secondary",
+    "name": "Canadian Curriculum – Ontario (OSSD) Secondary"
+  },
+  {
+    "id": "canadian_ontario_ossd",
+    "name": "Canadian Curriculum – Ontario Secondary School Diploma (OSSD)"
+  },
+  {
+    "id": "canadian_bc_elementary",
+    "name": "Canadian Curriculum – British Columbia (BC) Elementary"
+  },
+  {
+    "id": "canadian_bc_secondary",
+    "name": "Canadian Curriculum – British Columbia (BC) Secondary"
+  },
+  {
+    "id": "canadian_bc_dogwood",
+    "name": "Canadian Curriculum – British Columbia Graduation Program (Dogwood Diploma)"
+  },
+  {
+    "id": "canadian_alberta_elementary",
+    "name": "Canadian Curriculum – Alberta Program of Studies Elementary"
+  },
+  {
+    "id": "canadian_alberta_secondary",
+    "name": "Canadian Curriculum – Alberta Program of Studies Secondary"
+  },
+  {
+    "id": "canadian_alberta_diploma",
+    "name": "Canadian Curriculum – Alberta High School Diploma Program"
+  },
+  {
+    "id": "canadian_quebec_elementary",
+    "name": "Canadian Curriculum – Quebec MEES Elementary"
+  },
+  {
+    "id": "canadian_quebec_secondary",
+    "name": "Canadian Curriculum – Quebec MEES Secondary"
+  },
+  {
+    "id": "canadian_quebec_des",
+    "name": "Canadian Curriculum – Quebec High School Diploma (DES)"
+  },
+  {
+    "id": "canadian_manitoba_elementary",
+    "name": "Canadian Curriculum – Manitoba Elementary"
+  },
+  {
+    "id": "canadian_manitoba_secondary",
+    "name": "Canadian Curriculum – Manitoba Secondary"
+  },
+  {
+    "id": "canadian_manitoba_diploma",
+    "name": "Canadian Curriculum – Manitoba High School Diploma Program"
+  },
+  {
+    "id": "canadian_saskatchewan_elementary",
+    "name": "Canadian Curriculum – Saskatchewan Elementary"
+  },
+  {
+    "id": "canadian_saskatchewan_secondary",
+    "name": "Canadian Curriculum – Saskatchewan Secondary"
+  },
+  {
+    "id": "canadian_saskatchewan_diploma",
+    "name": "Canadian Curriculum – Saskatchewan High School Diploma Program"
+  },
+  {
+    "id": "canadian_maritimes_elementary",
+    "name": "Canadian Curriculum – Atlantic Canada (Maritimes) Elementary"
+  },
+  {
+    "id": "canadian_maritimes_secondary",
+    "name": "Canadian Curriculum – Atlantic Canada (Maritimes) Secondary"
+  },
+  {
+    "id": "canadian_maritimes_diploma",
+    "name": "Canadian Curriculum – Atlantic Provinces High School Diploma"
+  },
+  {
+    "id": "canadian_territories_elementary",
+    "name": "Canadian Curriculum – Northern Territories Elementary"
+  },
+  {
+    "id": "canadian_territories_secondary",
+    "name": "Canadian Curriculum – Northern Territories Secondary"
+  },
+  {
+    "id": "canadian_territories_diploma",
+    "name": "Canadian Curriculum – Territorial High School Diploma"
+  },
+  {
+    "id": "canadian",
+    "name": "Canadian Curriculum"
+  }
+]

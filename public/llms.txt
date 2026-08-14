@@ -55,13 +55,8 @@ Exam boards referenced (content aligned, not officially affiliated):
 
 ## Legal
 
-- Legal hub: https://studiely.com/legal
 - Privacy Policy: https://studiely.com/privacy-policy
 - Terms of Service: https://studiely.com/terms-of-service
 - Acceptable Use Policy: https://studiely.com/acceptable-use
 - Cookie Policy: https://studiely.com/cookie-policy
 - Disclaimer: https://studiely.com/disclaimer
-- Delete account & data: https://studiely.com/legal/delete-account-and-data
-- Apple Privacy Policy: https://studiely.com/legal/privacy-policy-apple
-- Web Privacy Policy: https://studiely.com/legal/web/privacy-policy
-- Refund Policy: https://studiely.com/legal/web/refund-policy

@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { STUDIELY_APP } from "@/lib/appUrls";
 import { HOME_SHELL } from "@/lib/homeShell";
+import { usePwaInstall } from "@/hooks/use-pwa-install";
 
 interface NavbarProps {
   visibleSections?: string[];
@@ -14,8 +15,10 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
   const [open, setOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(null);
   const [navbarVisible, setNavbarVisible] = useState(true);
+  const [installHint, setInstallHint] = useState<string | null>(null);
   const scrollIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
+  const { install, showInstallUi } = usePwaInstall();
 
   useEffect(() => {
     const onScroll = () => {
@@ -49,6 +52,12 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!installHint) return;
+    const t = setTimeout(() => setInstallHint(null), 6500);
+    return () => clearTimeout(t);
+  }, [installHint]);
+
   const isLinkActive = (href: string) => {
     const path = href.startsWith("http") ? href : href.split("?")[0].split("#")[0];
     if (href.includes("#")) {
@@ -60,7 +69,7 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
   const links = [
     ["Home", "/"],
     ["Curriculum", "/curriculum"],
-    ["Pricing", STUDIELY_APP.pricing],
+    ["Pricing", "/pricing"],
     ["FAQs", "/faqs"],
     ["Blogs", "/blogs"],
     ["Nyla AI", "/nyla"],
@@ -69,6 +78,27 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
 
   const showNavbar = navbarVisible || open;
 
+  async function onInstallApp() {
+    const result = await install();
+    if (
+      result === "accepted" ||
+      result === "installed" ||
+      result === "busy" ||
+      result === "unavailable"
+    ) {
+      setInstallHint(null);
+      return;
+    }
+    if (result === "ios") {
+      setInstallHint(
+        "On iPhone/iPad: tap Share → Add to Home Screen to install Studiely.",
+      );
+    }
+  }
+
+  const installButtonClass =
+    "funky-button inline-flex h-9 items-center justify-center rounded-full bg-[#FF2D8A] px-4 text-sm font-semibold text-[#4F35F2] transition hover:brightness-110";
+
   return (
     <>
       <header
@@ -76,11 +106,11 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
           showNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className={`${HOME_SHELL} bg-bg-base/90 pb-0 pt-1 backdrop-blur-md md:pt-1.5`}>
-          <div className="flex h-[46px] items-center justify-between gap-3 rounded-[24px] bg-[#E8FF2F] px-3 sm:h-[50px] sm:px-4 md:rounded-[32px] md:px-5 lg:px-6">
+        <div className={`${HOME_SHELL} pb-0 pt-1 md:pt-1.5`}>
+          <div className="flex h-14 min-h-14 items-center justify-between gap-3 rounded-[24px] bg-[#E8FF2F] px-3 sm:px-4 md:rounded-[32px] md:px-5 lg:px-6">
             <Link
               href="/"
-              className="flex shrink-0 items-center text-[#4F35F2] transition-opacity hover:opacity-80"
+              className="flex h-9 shrink-0 items-center text-[#4F35F2] transition-opacity hover:opacity-80"
               aria-label="Studiely home"
             >
               {/* eslint-disable-next-line @next/next/no-img-element -- SVG logo; avoid Next Image caching stale fill */}
@@ -88,8 +118,8 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
                 src="/logo-group.svg?v=blue"
                 alt="Studiely"
                 width={140}
-                height={40}
-                className="h-7 w-auto shrink-0 object-contain sm:h-8"
+                height={32}
+                className="h-8 w-auto shrink-0 object-contain"
               />
             </Link>
 
@@ -110,7 +140,7 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
                     href={href}
                     aria-current={active ? "page" : undefined}
                     onClick={() => setActiveLink(href)}
-                    className={`funky-link whitespace-nowrap px-2 py-1 text-[12px] font-medium transition-colors xl:px-2.5 xl:text-[13px] ${
+                    className={`funky-link whitespace-nowrap px-2.5 py-1 text-sm font-medium transition-colors ${
                       active
                         ? "funky-link-active font-semibold text-[#4F35F2]"
                         : "text-[#1E1B4B] hover:text-[#4F35F2]"
@@ -122,28 +152,37 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
               })}
             </nav>
 
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="hidden items-center gap-3 md:flex">
-                <a
-                  href={STUDIELY_APP.login}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="funky-link text-[12px] font-semibold text-[#1E1B4B] transition-colors hover:text-[#4F35F2] xl:text-[13px]"
-                >
-                  Login
-                </a>
-                <a
+            <div className="flex items-center gap-2">
+              <div className="hidden items-center gap-2 md:flex">
+                {showInstallUi ? (
+                  <button
+                    type="button"
+                    onClick={() => void onInstallApp()}
+                    className={installButtonClass}
+                  >
+                    Install App
+                  </button>
+                ) : null}
+                <Link
                   href={STUDIELY_APP.signUp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="funky-button inline-flex items-center justify-center rounded-full bg-[#4F35F2] px-3.5 py-1.5 text-[12px] font-semibold text-white transition-opacity hover:opacity-90 xl:px-4 xl:text-[13px]"
+                  className="funky-button inline-flex h-9 items-center justify-center rounded-full bg-[#4F35F2] px-4 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                 >
                   Start Free
-                </a>
+                </Link>
               </div>
 
+              {showInstallUi ? (
+                <button
+                  type="button"
+                  onClick={() => void onInstallApp()}
+                  className={`${installButtonClass} md:hidden`}
+                >
+                  Install App
+                </button>
+              ) : null}
+
               <button
-                className="flex flex-col gap-[5px] border-none bg-transparent p-1 lg:hidden"
+                className="flex size-9 shrink-0 flex-col items-center justify-center gap-[5px] border-none bg-transparent p-0 lg:hidden"
                 onClick={() => setOpen((o) => !o)}
                 aria-expanded={open}
                 aria-label="Toggle menu"
@@ -162,16 +201,27 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
             </div>
           </div>
         </div>
+
+        {installHint ? (
+          <div className={`${HOME_SHELL} pt-2`}>
+            <p
+              role="status"
+              className="rounded-2xl border border-[#E8E6F0] bg-white px-3.5 py-2.5 text-center text-xs font-medium text-[#1E1B4B] shadow-[0_8px_24px_rgba(17,24,39,0.08)] sm:text-sm"
+            >
+              {installHint}
+            </p>
+          </div>
+        ) : null}
       </header>
 
       <div
-        className="h-[calc(46px+0.25rem)] shrink-0 sm:h-[calc(50px+0.25rem)] md:h-[calc(50px+0.375rem)]"
+        className="h-[calc(3.5rem+0.25rem)] shrink-0 md:h-[calc(3.5rem+0.375rem)]"
         aria-hidden
       />
 
       {open ? (
         <div
-          className="nav-menu-enter fixed inset-x-0 top-[calc(46px+0.25rem)] z-[399] border-b border-border-default bg-white p-4 shadow-lg sm:top-[calc(50px+0.25rem)] sm:p-6 md:top-[calc(50px+0.375rem)] lg:hidden"
+          className="nav-menu-enter fixed inset-x-0 top-[calc(3.5rem+0.25rem)] z-[399] border-b border-border-default bg-white p-4 shadow-lg sm:p-6 md:top-[calc(3.5rem+0.375rem)] lg:hidden"
           role="dialog"
           aria-label="Mobile navigation"
         >
@@ -197,23 +247,26 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
             </Link>
             );
           })}
-          <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-            <a
-              href={STUDIELY_APP.login}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex flex-1 items-center justify-center rounded-full border border-[#4F35F2] px-4 py-3 text-sm font-semibold text-[#4F35F2] funky-button"
-            >
-              Login
-            </a>
-            <a
+          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+            {showInstallUi ? (
+              <button
+                type="button"
+                onClick={() => {
+                  void onInstallApp();
+                  setOpen(false);
+                }}
+                className="funky-button inline-flex flex-1 items-center justify-center rounded-full bg-[#FF2D8A] px-4 py-3 text-sm font-semibold text-[#4F35F2]"
+              >
+                Install App
+              </button>
+            ) : null}
+            <Link
               href={STUDIELY_APP.signUp}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
               className="funky-button inline-flex flex-1 items-center justify-center rounded-full bg-[#4F35F2] px-4 py-3 text-sm font-semibold text-white"
             >
               Start Free
-            </a>
+            </Link>
           </div>
         </div>
       ) : null}

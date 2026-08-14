@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Hanken_Grotesk, Inter, Montserrat, Plus_Jakarta_Sans } from "next/font/google";
+import { Great_Vibes, Hanken_Grotesk, Inter, Manrope, Montserrat, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { DEFAULT_OG_IMAGE_PATH, SITE_URL } from "@/lib/site";
 import { CookieConsentBannerClient } from "@/components/CookieConsentBannerClient";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
-import { Navbar } from "@/components/Navbar";
+import { PwaRegister } from "@/components/PwaRegister";
 import { SiteInteractions } from "@/components/SiteInteractions";
 
 const inter = Inter({
@@ -31,10 +31,24 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope-face",
+  display: "swap",
+});
+
+const greatVibes = Great_Vibes({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-great-vibes-face",
+  display: "swap",
+});
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#FFFBEF",
+  viewportFit: "cover",
+  themeColor: "#E8FF2F",
 };
 
 export const metadata: Metadata = {
@@ -67,10 +81,20 @@ export const metadata: Metadata = {
   creator: "Studiely",
   publisher: "Studiely",
   icons: {
-    icon: [{ url: "/studiely-logo.svg", type: "image/svg+xml" }],
-    shortcut: "/studiely-logo.svg",
-    apple: "/logo.jpeg",
+    icon: [
+      { url: "/blue-icon.svg", type: "image/svg+xml" },
+      { url: "/icons/pwa-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/pwa-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/blue-icon.svg",
+    apple: [{ url: "/icons/pwa-192.png", sizes: "192x192", type: "image/png" }],
   },
+  appleWebApp: {
+    capable: true,
+    title: "Studiely",
+    statusBarStyle: "black-translucent",
+  },
+  applicationName: "Studiely",
   openGraph: {
     type: "website",
     siteName: "Studiely",
@@ -96,7 +120,6 @@ export const metadata: Metadata = {
       "for every curriculum. Free to start.",
     images: [DEFAULT_OG_IMAGE_PATH],
   },
-  /** Per-route canonical is set in each page’s metadata to avoid duplicate signals. */
   alternates: {
     languages: {
       "en-GB": SITE_URL,
@@ -136,7 +159,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${montserrat.variable} ${hankenGrotesk.variable} ${plusJakartaSans.variable}`}
+      className={`${inter.variable} ${montserrat.variable} ${hankenGrotesk.variable} ${plusJakartaSans.variable} ${manrope.variable} ${greatVibes.variable} h-full`}
       suppressHydrationWarning
     >
       <head>
@@ -145,17 +168,17 @@ export default function RootLayout({
           content="ixoxjly0raima1favd2auxjangpbg5"
         />
       </head>
-      <body className="site-funky antialiased font-sans bg-bg-base text-body">
+      <body className="site-funky antialiased font-sans bg-bg-base text-body flex min-h-full flex-col">
         <GoogleAnalytics />
         <SiteInteractions />
+        <PwaRegister />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationJsonLd),
           }}
         />
-        <Navbar />
-        <div>{children}</div>
+        {children}
         <CookieConsentBannerClient />
       </body>
     </html>

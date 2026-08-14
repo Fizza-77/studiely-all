@@ -14,33 +14,38 @@
         "type": 301
       },
       {
-        "source": "/pricing",
-        "destination": "/app/pricing",
+        "source": "/app",
+        "destination": "/home",
         "type": 301
       },
       {
-        "source": "/pricing/",
-        "destination": "/app/pricing",
+        "source": "/app/",
+        "destination": "/home",
         "type": 301
       },
       {
-        "source": "/app/exam-practice",
-        "destination": "/app/exampractice",
+        "source": "/app/login",
+        "destination": "/login",
         "type": 301
       },
       {
-        "source": "/app/exam-practice/",
-        "destination": "/app/exampractice",
+        "source": "/app/sign-up",
+        "destination": "/signup",
         "type": 301
       },
       {
-        "source": "/app/price",
-        "destination": "/app/pricing",
+        "source": "/app/signup",
+        "destination": "/signup",
         "type": 301
       },
       {
-        "source": "/app/price/",
-        "destination": "/app/pricing",
+        "source": "/app/pricing",
+        "destination": "/pricing",
+        "type": 301
+      },
+      {
+        "source": "/app/pricing/",
+        "destination": "/pricing",
         "type": 301
       }
     ],
@@ -64,19 +69,6 @@
         ]
       }
     ],
-    "rewrites": [
-      {
-        "source": "/app/pricing",
-        "destination": "/app/pricing.html"
-      },
-      {
-        "source": "/app/pricing/",
-        "destination": "/app/pricing.html"
-      },
-      {
-        "source": "/app/**",
-        "destination": "/app/index.html"
-      }
-    ]
+    "rewrites": []
   }
 }

@@ -7,10 +7,6 @@ export const LEGAL_ROUTES = {
   cookiePolicy: "/cookie-policy",
   acceptableUse: "/acceptable-use",
   disclaimer: "/disclaimer",
-  /** Index of app-store / web legal HTML documents */
-  legalIndex: "/legal",
-  deleteAccount: "/legal/delete-account-and-data",
-  refundPolicyWeb: "/legal/web/refund-policy",
 } as const;
 
 export const complianceLinkClass =

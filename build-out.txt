@@ -1,0 +1,86 @@
+﻿
+> studiely_web@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  Γ£ô inlineCss
+  ┬╖ optimizePackageImports
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 24.5s
+  Running TypeScript ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/43) ...
+  Generating static pages using 3 workers (10/43) 
+  Generating static pages using 3 workers (21/43) 
+  Generating static pages using 3 workers (32/43) 
+node.exe : [blogs] fetch blog slugs: transient failure (attempt 1/5), retrying in 2000msΓÇª
+At C:\Users\fizza\AppData\Roaming\npm\npm.ps1:24 char:5
++     & "node$exe"  "$basedir/node_modules/npm/bin/npm-cli.js" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([blogs] fetch b...ng in 2000msΓÇª:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Γ£ô Generating static pages using 3 workers (43/43) in 13.8s
+  Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ Γùï /acceptable-use
+Γö£ ╞Æ /api/ai/[...path]
+Γö£ ╞Æ /api/callable/[name]
+Γö£ ╞Æ /api/contact
+Γö£ ╞Æ /api/public/blogs/[blogId]/reactions
+Γö£ ╞Æ /blog
+Γö£ ╞Æ /blog/[slug]
+Γö£ Γùï /contact
+Γö£ Γùï /cookie-policy
+Γö£ Γùï /curriculum
+Γö£ Γùï /disclaimer
+Γö£ Γùï /faqs
+Γö£ Γùï /features
+Γö£ Γùï /generate
+Γö£ Γùï /help
+Γö£ Γùï /help/chat
+Γö£ Γùï /help/contact
+Γö£ Γùï /help/faq
+Γö£ Γùï /home
+Γö£ Γùï /legal
+Γö£ ΓùÅ /legal/[doc]
+Γöé Γö£ /legal/privacy-policy
+Γöé Γö£ /legal/terms-of-service
+Γöé Γö£ /legal/disclaimer
+Γöé Γöö [+2 more paths]
+Γö£ Γùï /legal/delete-account-and-data
+Γö£ Γùï /legal/privacy-policy
+Γö£ Γùï /legal/privacy-policy-apple
+Γö£ Γùï /legal/terms-of-service
+Γö£ Γùï /legal/web/privacy-policy
+Γö£ Γùï /legal/web/refund-policy
+Γö£ Γùï /library
+Γö£ ╞Æ /library/[id]
+Γö£ ╞Æ /library/[id]/quiz
+Γö£ Γùï /login
+Γö£ Γùï /nyla
+Γö£ Γùï /parent-consent
+Γö£ Γùï /practice/writing
+Γö£ Γùï /pricing
+Γö£ Γùï /pricing/success
+Γö£ Γùï /privacy-policy
+Γö£ Γùï /profile
+Γö£ Γùï /robots.txt
+Γö£ Γùï /signup
+Γö£ Γùï /signup/parental
+Γö£ Γùï /sitemap.xml
+Γö£ Γùï /smartlink
+Γö£ Γùï /terms-of-service
+Γöö Γùï /verify-email
+
+
+Γùï  (Static)   prerendered as static content
+ΓùÅ  (SSG)      prerendered as static HTML (uses generateStaticParams)
+╞Æ  (Dynamic)  server-rendered on demand
+

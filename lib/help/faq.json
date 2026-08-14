@@ -1,0 +1,296 @@
+[
+  {
+    "id": "a",
+    "title": "A. Getting Started & Account",
+    "entries": [
+      {
+        "question": "What is Studiely?",
+        "answer": "Studiely is an AI-powered learning platform designed to help students understand concepts, revise effectively, and prepare for assessments across multiple international curricula using smart study tools."
+      },
+      {
+        "question": "Who is Studiely for?",
+        "answer": "Studiely is designed for students studying under British, IB, American, Canadian, and Australian curricula."
+      },
+      {
+        "question": "Is Studiely free?",
+        "answer": "Yes. Studiely offers a free Starter plan with limited monthly generations so students can explore the platform before upgrading."
+      },
+      {
+        "question": "Do I need a teacher to use Studiely?",
+        "answer": "No. Studiely is fully self-guided and can be used independently by students."
+      },
+      {
+        "question": "Which devices are supported?",
+        "answer": "Studiely works on web browsers and mobile devices (Android and iOS)."
+      },
+      {
+        "question": "Is Studiely available on web and mobile?",
+        "answer": "Yes. You can access Studiely on the web and through our mobile applications."
+      },
+      {
+        "question": "How do I create an account?",
+        "answer": "You can sign up using your email address and create a secure password directly in the app or on the website."
+      },
+      {
+        "question": "Can I use Studiely without signing up?",
+        "answer": "No. An account is required to save progress, manage generations, and ensure data security."
+      },
+      {
+        "question": "How do I change my password?",
+        "answer": "Go to Profile → Account Settings → Change Password and follow the instructions."
+      },
+      {
+        "question": "I forgot my password — what do I do?",
+        "answer": "Use the \"Forgot Password\" option on the login screen to reset your password via email."
+      },
+      {
+        "question": "Can I delete my account?",
+        "answer": "Yes. You can request account deletion through the Account Deletion page listed in our Help Center."
+      },
+      {
+        "question": "What happens to my data if I delete my account?",
+        "answer": "All personal data and generated content associated with your account are permanently deleted in accordance with our Privacy Policy."
+      }
+    ]
+  },
+  {
+    "id": "b",
+    "title": "B. Curriculum & Academic Scope",
+    "entries": [
+      {
+        "question": "Which curricula does Studiely support?",
+        "answer": "Studiely supports:\n· British (IGCSE / GCSE)\n· IB (PYP, MYP, DP)\n· American\n· Canadian\n· Australian"
+      },
+      {
+        "question": "Which grades and year levels are covered?",
+        "answer": "Coverage varies by curriculum and subject, following official syllabus structures."
+      },
+      {
+        "question": "Can I switch between curricula?",
+        "answer": "Yes. You can change your curriculum selection at any time from the settings or generation screen."
+      },
+      {
+        "question": "Is content aligned with official exam boards?",
+        "answer": "Yes. Content is aligned with official curriculum frameworks and exam board expectations."
+      },
+      {
+        "question": "Does Studiely support IGCSE exam preparation?",
+        "answer": "Yes. Studiely includes exam-focused tools specifically designed for IGCSE and similar exam-based curricula."
+      },
+      {
+        "question": "Does Studiely support IB (PYP / MYP / DP)?",
+        "answer": "Yes. Studiely follows IB philosophy strictly:\n· PYP focuses on conceptual understanding (no exams)\n· MYP and DP include assessment-aligned content where appropriate"
+      },
+      {
+        "question": "Why are exam-style questions disabled for PYP?",
+        "answer": "IB PYP does not have formal examinations. Studiely respects IB philosophy and avoids exam-focused content where it is not appropriate."
+      },
+      {
+        "question": "Can I study multiple subjects at once?",
+        "answer": "Yes. You can generate content for different subjects and topics as needed."
+      }
+    ]
+  },
+  {
+    "id": "c",
+    "title": "C. Feature-Specific FAQs",
+    "entries": [
+      {
+        "question": "Summary Notes: What are Summary Notes?",
+        "answer": "Clear, structured explanations of key concepts, definitions, and formulas for quick understanding."
+      },
+      {
+        "question": "Summary Notes: How long are the notes?",
+        "answer": "Length varies by plan, ranging from 250 to 600 words."
+      },
+      {
+        "question": "Summary Notes: Are they exam-oriented or concept-based?",
+        "answer": "They are concept-first, with exam relevance added where appropriate."
+      },
+      {
+        "question": "Summary Notes: Can I regenerate notes?",
+        "answer": "Yes. You can regenerate content to improve clarity or depth."
+      },
+      {
+        "question": "Summary Notes: Can I export notes as PDF?",
+        "answer": "Yes. PDF and printable exports are available."
+      },
+      {
+        "question": "Summary Notes: Are notes plagiarism-free?",
+        "answer": "Yes. All content is original and AI-generated uniquely for each request."
+      },
+      {
+        "question": "Flashcards: How do flashcards work?",
+        "answer": "They present bite-sized questions and answers to support memorisation and revision."
+      },
+      {
+        "question": "Flashcards: How many flashcards are generated?",
+        "answer": "Between 10–30 depending on your plan."
+      },
+      {
+        "question": "Flashcards: Are flashcards downloadable?",
+        "answer": "Yes, including Anki-compatible formats (Pro plan)."
+      },
+      {
+        "question": "Quiz: Are quizzes exam-style?",
+        "answer": "Yes, for exam-based curricula. PYP quizzes focus on understanding, not exams."
+      },
+      {
+        "question": "Quiz: Do quizzes include answers?",
+        "answer": "Yes, with instant feedback and explanations."
+      },
+      {
+        "question": "Quiz: Can I retake quizzes?",
+        "answer": "Yes. You can regenerate or retry quizzes anytime."
+      },
+      {
+        "question": "Quiz: How is difficulty decided?",
+        "answer": "Based on your selected difficulty level and curriculum standards."
+      },
+      {
+        "question": "Exam Focus (Pro Only): What is Exam Focus?",
+        "answer": "A breakdown of how a topic appears in exams and how marks are awarded."
+      },
+      {
+        "question": "Exam Focus: Which exams does it cover?",
+        "answer": "Primarily IGCSE, GCSE, MYP, DP, and equivalent systems."
+      },
+      {
+        "question": "Exam Focus: Why is it not available for all curricula?",
+        "answer": "Some curricula do not use formal exams."
+      },
+      {
+        "question": "Common Mistakes: What kind of mistakes are shown?",
+        "answer": "Frequent student errors and misconceptions related to the topic."
+      },
+      {
+        "question": "Common Mistakes: Are these based on real exams?",
+        "answer": "They are informed by common examiner observations and student patterns."
+      },
+      {
+        "question": "Worked Examples: Are solutions step-by-step?",
+        "answer": "Yes. Each example shows a clear method from start to finish."
+      },
+      {
+        "question": "Worked Examples: Do examples include marking guidance?",
+        "answer": "Yes, where exam marking is applicable."
+      }
+    ]
+  },
+  {
+    "id": "d",
+    "title": "D. AI & Content Generation",
+    "entries": [
+      {
+        "question": "How does Studiely generate content?",
+        "answer": "Studiely uses advanced AI models guided by curriculum-specific rules and prompts."
+      },
+      {
+        "question": "Is AI content accurate?",
+        "answer": "Content is designed to be curriculum-aligned and educationally sound. You can regenerate or refine outputs anytime."
+      },
+      {
+        "question": "Why do outputs differ sometimes?",
+        "answer": "AI adapts to your inputs, difficulty level, and curriculum selection."
+      },
+      {
+        "question": "Can I control difficulty level?",
+        "answer": "Yes. You can choose beginner, intermediate, or advanced levels."
+      }
+    ]
+  },
+  {
+    "id": "e",
+    "title": "E. Usage Limits & Fair Usage Policy",
+    "entries": [
+      {
+        "question": "What does \"50 generations per month\" mean?",
+        "answer": "Each time you generate notes, quizzes, or other tools counts as one generation."
+      },
+      {
+        "question": "Do regenerations count?",
+        "answer": "Yes. Each regeneration counts as a new generation."
+      }
+    ]
+  },
+  {
+    "id": "f",
+    "title": "F. Pricing, Payments & Subscriptions",
+    "entries": [
+      {
+        "question": "How much does Studiely cost?",
+        "answer": "Studiely offers Free and Pro plans with monthly, quarterly, biannual, and yearly options."
+      },
+      {
+        "question": "Can I cancel my subscription?",
+        "answer": "Yes. You can cancel anytime through your app store or account settings."
+      },
+      {
+        "question": "Will I be charged automatically?",
+        "answer": "Yes. Subscriptions renew automatically unless cancelled."
+      },
+      {
+        "question": "Are refunds available?",
+        "answer": "Refunds are handled according to platform policies (Google Play, Apple App Store, or Web)."
+      }
+    ]
+  },
+  {
+    "id": "g",
+    "title": "G. Privacy, Security & Compliance",
+    "entries": [
+      {
+        "question": "Is my data safe?",
+        "answer": "Yes. Studiely follows strict data protection and security practices."
+      },
+      {
+        "question": "Does Studiely share my data?",
+        "answer": "No personal data is sold or shared without consent."
+      },
+      {
+        "question": "Where can I read the Privacy Policy?",
+        "answer": "The Privacy Policy is available in the Help Center and website footer."
+      },
+      {
+        "question": "How do I request account deletion?",
+        "answer": "Use the Account Deletion Request page linked in the Help Center."
+      }
+    ]
+  },
+  {
+    "id": "h",
+    "title": "H. Technical Issues & Troubleshooting",
+    "entries": [
+      {
+        "question": "Content is not generating — what should I do?",
+        "answer": "Check your internet connection and retry. If the issue persists, contact support."
+      },
+      {
+        "question": "How do I report a bug?",
+        "answer": "Use the support chat or contact form in the Help Center."
+      }
+    ]
+  },
+  {
+    "id": "i",
+    "title": "I. Feedback, Support & Future Features",
+    "entries": [
+      {
+        "question": "How do I contact support?",
+        "answer": "Pro users can chat instantly. Free users can submit a support request form."
+      },
+      {
+        "question": "Can I talk to a real person?",
+        "answer": "Yes. Human support is available for complex or account-related issues."
+      },
+      {
+        "question": "How fast does support respond?",
+        "answer": "AI responses are instant. Human response times vary based on availability."
+      },
+      {
+        "question": "Will teacher features be added?",
+        "answer": "Yes. Teacher tools are planned for future releases."
+      }
+    ]
+  }
+]

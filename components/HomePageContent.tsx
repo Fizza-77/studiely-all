@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { Footer } from "@/components/Footer";
 import { HeroSection } from "@/sections/HeroSection";
 import { StudySmarterSection } from "@/sections/StudySmarterSection";
@@ -24,35 +24,16 @@ const RewardsProgressSection = dynamic(
 const ReviewsSection = dynamic(() => import("@/sections/ReviewsSection").then((m) => m.ReviewsSection), {
   ssr: true,
 });
-const HomePricingSection = dynamic(
-  () => import("@/sections/HomePricingSection").then((m) => m.HomePricingSection),
-  { ssr: true }
-);
 const SisterSection = dynamic(() => import("@/sections/SisterSection").then((m) => m.SisterSection), {
   ssr: true,
 });
 
-type HomePageContentProps = {
-  /** When true (e.g. `/features` route), scroll to the hero after mount. */
-  scrollToHeroOnMount?: boolean;
-};
-
-export function HomePageContent({ scrollToHeroOnMount = false }: HomePageContentProps) {
+export function HomePageContent() {
   const nylaRef = useRef<HTMLElement>(null);
   const curriculumRef = useRef<HTMLElement>(null);
   const rewardsRef = useRef<HTMLElement>(null);
   const reviewsRef = useRef<HTMLElement>(null);
-  const pricingRef = useRef<HTMLElement>(null);
   const sisterRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (!scrollToHeroOnMount) return;
-    const scroll = () => {
-      document.getElementById("hero")?.scrollIntoView({ behavior: "instant", block: "start" });
-    };
-    const frame = window.requestAnimationFrame(scroll);
-    return () => window.cancelAnimationFrame(frame);
-  }, [scrollToHeroOnMount]);
 
   return (
     <>
@@ -73,7 +54,6 @@ export function HomePageContent({ scrollToHeroOnMount = false }: HomePageContent
           <RewardsProgressSection sectionRef={rewardsRef} />
           <ReviewsSection sectionRef={reviewsRef} />
         </div>
-        <HomePricingSection sectionRef={pricingRef} />
         <SisterSection sectionRef={sisterRef} />
       </main>
       <Footer />
