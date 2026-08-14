@@ -593,9 +593,10 @@ function GenerateInner() {
   }, [modeSegment]);
 
   function selectStudyMode(name: string) {
-    setStudyMode(name);
+    const next = resolveGenerateModeName(name);
+    setStudyMode(next);
     setShowModes(false);
-    router.replace(generateHref(name), { scroll: false });
+    router.replace(generateHref(next), { scroll: false });
   }
 
   useEffect(() => {

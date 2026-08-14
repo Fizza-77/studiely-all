@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#E8FF2F" />
+    <title>Offline — Studiely</title>
+    <style>
+      :root {
+        --lime: #e8ff2f;
+        --indigo: #4f35f2;
+        --pink: #ff2d8a;
+        --cream: #fffbef;
+        --ink: #1e1b4b;
+        --muted: #5b5b6b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif;
+      }
+      body {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 9999px;
+        filter: blur(64px);
+        pointer-events: none;
+      }
+      .blob-a {
+        width: 28rem;
+        height: 28rem;
+        left: -6rem;
+        top: 4rem;
+        background: radial-gradient(circle, var(--lime) 0%, transparent 70%);
+        opacity: 0.5;
+      }
+      .blob-b {
+        width: 24rem;
+        height: 24rem;
+        right: -5rem;
+        bottom: 2.5rem;
+        background: radial-gradient(circle, var(--indigo) 0%, transparent 70%);
+        opacity: 0.4;
+      }
+      .wrap {
+        position: relative;
+        z-index: 1;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 40rem;
+        padding: 1.5rem 1.25rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .logo {
+        height: 2.25rem;
+        width: auto;
+      }
+      .center {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 4rem 0;
+      }
+      .icon {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 1.75rem;
+        background: var(--indigo);
+        display: grid;
+        place-items: center;
+        margin-bottom: 1.5rem;
+      }
+      .eyebrow {
+        font-size: clamp(3rem, 10vw, 4.5rem);
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        line-height: 1;
+        color: var(--indigo);
+        margin: 0;
+      }
+      h1 {
+        margin: 1rem 0 0;
+        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+      }
+      p {
+        margin: 1rem 0 0;
+        max-width: 26rem;
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+      button {
+        margin-top: 2.25rem;
+        border: 0;
+        border-radius: 9999px;
+        height: 3rem;
+        padding: 0 2rem;
+        background: var(--lime);
+        color: var(--ink);
+        font-weight: 700;
+        font-size: 0.875rem;
+        cursor: pointer;
+      }
+      button:hover {
+        filter: brightness(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-a" aria-hidden="true"></div>
+    <div class="blob blob-b" aria-hidden="true"></div>
+    <div class="wrap">
+      <img class="logo" src="/logo-group.svg?v=blue" alt="Studiely" width="160" height="36" />
+      <div class="center">
+        <div class="icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+            <path d="M1 1l22 22" stroke="#fff" stroke-width="2.2" stroke-linecap="round" />
+            <path
+              d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.58 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"
+              stroke="#fff"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <p class="eyebrow" aria-hidden="true">Offline</p>
+        <h1>No internet connection</h1>
+        <p>
+          Studiely needs a connection to load your notes, quizzes, and Nyla. Check Wi‑Fi or
+          mobile data, then try again.
+        </p>
+        <button type="button" onclick="location.reload()">Try again</button>
+      </div>
+    </div>
+    <script>
+      window.addEventListener("online", function () {
+        location.reload();
+      });
+    </script>
+  </body>
+</html>

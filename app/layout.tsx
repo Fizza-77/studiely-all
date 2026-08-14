@@ -4,6 +4,7 @@ import "./globals.css";
 import { DEFAULT_OG_IMAGE_PATH, SITE_URL } from "@/lib/site";
 import { CookieConsentBannerClient } from "@/components/CookieConsentBannerClient";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { OfflineScreen } from "@/components/offline/OfflineScreen";
 import { PwaRegister } from "@/components/PwaRegister";
 import { SiteInteractions } from "@/components/SiteInteractions";
 
@@ -179,6 +180,7 @@ export default function RootLayout({
           }}
         />
         {children}
+        <OfflineScreen />
         <CookieConsentBannerClient />
       </body>
     </html>
