@@ -133,10 +133,10 @@ export function AppShell({
       >
         <div className={`${HOME_SHELL} pb-0 pt-1 md:pt-1.5`}>
           <div className={NAV_BAR}>
-            <Link
-              href="/home"
+            <BrowserLink
+              href="/"
               className="flex h-9 shrink-0 items-center text-[#4F35F2] transition-opacity hover:opacity-80"
-              aria-label="Studiely home"
+              aria-label="Studiely website"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -146,7 +146,7 @@ export function AppShell({
                 height={32}
                 className={NAV_LOGO}
               />
-            </Link>
+            </BrowserLink>
 
             <nav
               className="hidden items-center gap-1 lg:flex xl:gap-2"

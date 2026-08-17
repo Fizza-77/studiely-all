@@ -20,27 +20,27 @@ const STEPS = [
     n: "1",
     title: "Choose Your Curriculum",
     desc: "Select from GCSE, A-Level, IB, or University level content across dozens of subjects.",
-    src: "/lemonnote.svg",
+    src: "/yellowcard.svg",
     width: 357,
-    height: 425,
+    height: 381,
     light: false,
   },
   {
     n: "2",
     title: "Enter Your Topic",
     desc: "Paste your notes, upload a textbook PDF, or simply type the topic you need help with.",
-    src: "/pinknote.svg?v=3",
+    src: "/pinkcard.svg",
     width: 357,
-    height: 425,
+    height: 412,
     light: false,
   },
   {
     n: "3",
     title: "Generate and Study",
     desc: "Get instant AI-powered flashcards, practice questions and structured summary notes.",
-    src: "/bluenote.svg?v=2",
+    src: "/bluecard.svg",
     width: 357,
-    height: 425,
+    height: 384,
     light: true,
   },
 ] as const;
@@ -112,8 +112,8 @@ export const HowItWorksSection = ({ sectionRef }: HowItWorksSectionProps) => (
             key={n}
             className="group relative flex w-0 min-w-0 flex-1 flex-col"
           >
-            {/* Identical frame size for all three SVGs */}
-            <div className="@container relative aspect-[357/425] w-full overflow-visible shadow-[0_14px_32px_rgba(30,27,75,0)] transition-[translate,filter] duration-300 ease-out will-change-[translate] group-hover:z-10 group-hover:-translate-y-1.5 group-hover:drop-shadow-[0_20px_40px_rgba(30,27,75,0.18)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+            {/* Identical frame size for all three SVGs (tallest card aspect) */}
+            <div className="@container relative aspect-[357/412] w-full overflow-visible shadow-[0_14px_32px_rgba(30,27,75,0)] transition-[translate,filter] duration-300 ease-out will-change-[translate] group-hover:z-10 group-hover:-translate-y-1.5 group-hover:drop-shadow-[0_20px_40px_rgba(30,27,75,0.18)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
               <Image
                 src={src}
                 alt={`Step ${n}: ${title}`}
@@ -124,23 +124,8 @@ export const HowItWorksSection = ({ sectionRef }: HowItWorksSectionProps) => (
                 className="absolute inset-0 h-full w-full select-none object-contain object-center"
                 draggable={false}
               />
-              {/* Blue star overlaid — kept out of SVG height so all notebooks match */}
-              {n === "3" && (
-                <svg
-                  viewBox="0 0 90 90"
-                  className="pointer-events-none absolute bottom-[2%] right-[-2%] z-[1] h-[16%] w-auto select-none"
-                  aria-hidden
-                >
-                  <path
-                    d="M45 8C52.7 33.7 63.6 41.3 90.4 39.8C64.7 47.5 57.1 58.4 58.6 85.2C50.9 59.5 40 51.9 13.2 53.4C38.9 45.7 46.5 34.8 45 8Z"
-                    fill="#FFFFFF"
-                    stroke="#111111"
-                    strokeWidth="1.8"
-                  />
-                </svg>
-              )}
               {/* Text scales with card width via container queries; kept inside the cover */}
-              <div className="pointer-events-none absolute left-[10%] right-[13%] top-[33%] bottom-[7%] flex flex-col overflow-hidden sm:left-[11%] sm:right-[15%] sm:top-[38%] sm:bottom-[9%] md:left-[12%] md:right-[16%]">
+              <div className="pointer-events-none absolute left-[10%] right-[13%] top-[36%] bottom-[8%] flex flex-col overflow-hidden sm:left-[11%] sm:right-[15%] sm:top-[38%] sm:bottom-[10%] md:left-[12%] md:right-[16%]">
                 <h3
                   className={`flex h-[2.4em] w-full shrink-0 items-start justify-center text-center font-heading text-[clamp(0.6rem,5.6cqi,1.65rem)] font-extrabold leading-[1.12] tracking-[-0.02em] sm:h-[2.5em] sm:leading-[1.15] ${
                     light ? "text-white" : "text-[#1E1B4B]"

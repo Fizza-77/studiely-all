@@ -97,14 +97,19 @@ function accentForNote(note: GeneratedNote, index: number) {
   return { ...cycle, label: note.studyMode || "Summary Notes" };
 }
 
-function openLabelForTab(tab: LibraryTab) {
-  switch (tab) {
-    case "flashcards":
-      return "Open deck";
-    case "quizzes":
+function openLabelForStudyMode(studyMode: string): string {
+  switch (studyMode) {
+    case "Flashcards":
+      return "Open cards";
+    case "Quiz":
       return "Open quiz";
-    case "exam":
-      return "Open session";
+    case "Exam Focus":
+      return "Open exam questions";
+    case "Common Mistakes":
+      return "Open mistakes";
+    case "Examples":
+      return "Open examples";
+    case "Summary Notes":
     default:
       return "Open notes";
   }
@@ -558,7 +563,7 @@ export function LibraryScreen({
                               className="text-sm font-bold transition hover:underline"
                               style={{ color: accent.tag }}
                             >
-                              {openLabelForTab(tab)} →
+                              {openLabelForStudyMode(note.studyMode)} →
                             </Link>
                             <div className="relative">
                               <button

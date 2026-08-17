@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import { useRef } from "react";
-import { Footer } from "@/components/Footer";
 import { HeroSection } from "@/sections/HeroSection";
 import { StudySmarterSection } from "@/sections/StudySmarterSection";
 
@@ -36,27 +35,24 @@ export function HomePageContent() {
   const sisterRef = useRef<HTMLElement>(null);
 
   return (
-    <>
-      <main role="main">
-        <div className="relative bg-bg-base">
-          {/* One continuous glow behind hero→cards so no clipped seam */}
-          <div
-            className="pointer-events-none absolute left-1/2 top-[42%] z-0 aspect-square w-[min(130vw,860px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#E8FF2F]/28 blur-[120px]"
-            aria-hidden
-          />
-          <HeroSection />
-          <StudySmarterSection />
-        </div>
-        <HowItWorksSection />
-        <NylaSection sectionRef={nylaRef} />
-        <SupportedCountriesSection sectionRef={curriculumRef} />
-        <div className="bg-bg-base">
-          <RewardsProgressSection sectionRef={rewardsRef} />
-          <ReviewsSection sectionRef={reviewsRef} />
-        </div>
-        <SisterSection sectionRef={sisterRef} />
-      </main>
-      <Footer />
-    </>
+    <main role="main">
+      <div className="relative bg-bg-base">
+        {/* One continuous glow behind hero→cards so no clipped seam */}
+        <div
+          className="pointer-events-none absolute left-1/2 top-[42%] z-0 aspect-square w-[min(130vw,860px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#E8FF2F]/28 blur-[120px]"
+          aria-hidden
+        />
+        <HeroSection />
+        <StudySmarterSection />
+      </div>
+      <HowItWorksSection />
+      <NylaSection sectionRef={nylaRef} />
+      <SupportedCountriesSection sectionRef={curriculumRef} />
+      <div className="bg-bg-base">
+        <RewardsProgressSection sectionRef={rewardsRef} />
+        <ReviewsSection sectionRef={reviewsRef} />
+      </div>
+      <SisterSection sectionRef={sisterRef} />
+    </main>
   );
 }

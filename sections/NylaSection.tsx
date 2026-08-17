@@ -224,16 +224,15 @@ export const NylaSection = ({ sectionRef }: NylaSectionProps) => {
                     style={{ backgroundColor: BLUE }}
                   >
                     <span
-                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
-                      style={{ backgroundColor: LIME }}
+                      className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full"
                     >
                       <Image
-                        src="/Nyla.png"
+                        src="/icons/ayla-yellow.svg"
                         alt=""
-                        width={20}
-                        height={18}
+                        width={32}
+                        height={32}
                         unoptimized
-                        className="h-[18px] w-auto object-contain"
+                        className="h-full w-full object-cover"
                         aria-hidden
                       />
                     </span>

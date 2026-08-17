@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { Footer } from "@/components/Footer";
 import { DEFAULT_OG_IMAGE_PATH, SITE_URL } from "@/lib/site";
 import { buildBreadcrumbSchema } from "@/lib/seo";
 import { PricingHeroSection } from "@/sections/PricingHeroSection";
@@ -50,7 +49,6 @@ export default function MarketingPricingPage() {
         <HomePricingSection variant="page" />
         <PricingExtrasSection />
       </main>
-      <Footer />
     </>
   );
 }

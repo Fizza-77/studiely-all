@@ -340,6 +340,41 @@ input:-webkit-autofill:focus {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+.flashcard-body {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+.flashcard-body .markdown-math,
+.flashcard-body p,
+.flashcard-body li {
+  font-size: inherit;
+  line-height: inherit;
+}
+@media (min-width: 640px) {
+  .flashcard-face {
+    padding: 2.5rem 2.75rem;
+    border-radius: 1.25rem;
+  }
+  .flashcard-body {
+    font-size: 1.5rem;
+  }
+}
+@media (min-width: 768px) {
+  .flashcard-face {
+    padding: 3rem 3.25rem;
+  }
+  .flashcard-body {
+    font-size: 1.75rem;
+  }
+}
+@media (min-width: 1024px) {
+  .flashcard-face {
+    padding: 3.5rem 3.75rem;
+  }
+  .flashcard-body {
+    font-size: 2rem;
+  }
+}
 .flashcard-face-front {
   transform: rotateY(0deg);
 }

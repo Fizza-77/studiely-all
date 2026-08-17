@@ -643,6 +643,24 @@ function YourSubjectsSection({
   );
 }
 
+function openCtaForStudyMode(studyMode: string): string {
+  switch (studyMode) {
+    case "Flashcards":
+      return "Open cards";
+    case "Quiz":
+      return "Open quiz";
+    case "Exam Focus":
+      return "Open exam questions";
+    case "Common Mistakes":
+      return "Open mistakes";
+    case "Examples":
+      return "Open examples";
+    case "Summary Notes":
+    default:
+      return "Open notes";
+  }
+}
+
 function ResumeCard({
   note,
   mastery,
@@ -678,7 +696,11 @@ function ResumeCard({
   const subtitle = note
     ? `${subject} · last opened ${relativeOpened(note.createdAt)}`
     : "Generate summary notes, flashcards, or a quiz in seconds.";
-  const cta = note ? "Open notes" : isGuest ? "Log in" : "Create notes";
+  const cta = note
+    ? openCtaForStudyMode(studyMode)
+    : isGuest
+      ? "Log in"
+      : "Create notes";
 
   return (
     <div className="relative overflow-hidden rounded-[28px] bg-white">

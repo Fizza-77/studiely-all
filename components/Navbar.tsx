@@ -97,7 +97,7 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
   }
 
   const installButtonClass =
-    "funky-button inline-flex h-9 items-center justify-center rounded-full bg-[#FF2D8A] px-4 text-sm font-semibold text-[#4F35F2] transition hover:brightness-110";
+    "funky-button inline-flex h-9 items-center justify-center rounded-full bg-[#FF2D8A] px-4 text-sm font-semibold !text-white transition hover:brightness-110";
 
   return (
     <>
@@ -111,7 +111,7 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
             <Link
               href="/"
               className="flex h-9 shrink-0 items-center text-[#4F35F2] transition-opacity hover:opacity-80"
-              aria-label="Studiely home"
+              aria-label="Studiely website"
             >
               {/* eslint-disable-next-line @next/next/no-img-element -- SVG logo; avoid Next Image caching stale fill */}
               <img
@@ -255,7 +255,7 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
                   void onInstallApp();
                   setOpen(false);
                 }}
-                className="funky-button inline-flex flex-1 items-center justify-center rounded-full bg-[#FF2D8A] px-4 py-3 text-sm font-semibold text-[#4F35F2]"
+                className="funky-button inline-flex flex-1 items-center justify-center rounded-full bg-[#FF2D8A] px-4 py-3 text-sm font-semibold !text-white"
               >
                 Install App
               </button>

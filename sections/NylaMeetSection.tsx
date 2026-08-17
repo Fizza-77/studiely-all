@@ -168,16 +168,15 @@ export const NylaMeetSection = () => {
               <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#F0F0F4] px-3 py-4 sm:flex-nowrap sm:px-5">
                 <div className="flex min-w-0 items-center gap-3">
                   <span
-                    className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full"
-                    style={{ backgroundColor: BLUE }}
+                    className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full ring-2 ring-[#E8E6F0]"
                   >
                     <Image
-                      src="/Nyla.png"
+                      src="/icons/ayla-yellow.svg"
                       alt=""
-                      width={22}
-                      height={20}
+                      width={40}
+                      height={40}
                       unoptimized
-                      className="h-[18px] w-auto brightness-0 invert"
+                      className="h-full w-full object-cover"
                       aria-hidden
                     />
                   </span>
@@ -332,12 +331,12 @@ export const NylaMeetSection = () => {
             >
               Chat with Nyla
               <Image
-                src="/Nyla.png"
+                src="/icons/ayla-yellow.svg"
                 alt=""
-                width={18}
-                height={16}
+                width={22}
+                height={22}
                 unoptimized
-                className="h-4 w-auto brightness-0 invert"
+                className="h-[22px] w-[22px] rounded-full object-cover"
                 aria-hidden
               />
             </Link>

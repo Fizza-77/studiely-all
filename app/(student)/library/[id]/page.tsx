@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 
 import { AppShell } from "@/components/layout/app-shell";
 import { DataConsentGate } from "@/components/auth/data-consent-gate";
@@ -14,7 +15,6 @@ import {
 } from "@/components/ui/auth-form";
 import { MarkdownMathView } from "@/components/ui/markdown-math-view";
 import { InteractiveQuiz } from "@/components/ui/interactive-quiz";
-import { QuizReview } from "@/components/ui/quiz-review";
 import { EmptyState, LoadingBlock } from "@/components/ui/student-ui";
 import { exportNote } from "@/lib/export/note-export";
 import { generateStudyContent } from "@/lib/generate/ai";
@@ -55,6 +55,9 @@ export default function NoteReviewPage() {
   const [cardIndex, setCardIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [quizStarted, setQuizStarted] = useState(false);
+  const [quizSession, setQuizSession] = useState(0);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     if (phase === "guest" || !user || !noteId) {
@@ -87,6 +90,15 @@ export default function NoteReviewPage() {
     setQuizStarted(false);
   }, [noteId]);
 
+  useEffect(() => {
+    if (!deleteOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [deleteOpen]);
+
   const flashcards = useMemo(() => {
     if (!note || note.studyMode !== "Flashcards") return null;
     return parseFlashcardsFromMarkdown(note.notes);
@@ -117,14 +129,16 @@ export default function NoteReviewPage() {
     }
   }
 
-  async function onDelete() {
+  async function confirmDelete() {
     if (!user || !note) return;
-    if (!window.confirm("Delete this note? This cannot be undone.")) return;
+    setDeleting(true);
     setBusy(true);
     try {
       await deleteNote(user.uid, note.id);
+      setDeleteOpen(false);
       router.replace("/library");
     } finally {
+      setDeleting(false);
       setBusy(false);
     }
   }
@@ -227,7 +241,7 @@ export default function NoteReviewPage() {
                 }}
                 onRegenerate={() => void onRegenerate()}
                 onFavorite={() => void toggleFavorite()}
-                onDelete={() => void onDelete()}
+                onDelete={() => setDeleteOpen(true)}
               />
 
               {regenError ? (
@@ -245,7 +259,7 @@ export default function NoteReviewPage() {
             <div className="mt-6 px-[0.7in]">
               {flashcards && flashcards.length > 0 ? (
                 <div className={CONTENT_CARD_CLASS}>
-                  <div className="mx-auto w-full max-w-3xl lg:max-w-none">
+                  <div className="mx-auto w-full max-w-5xl xl:max-w-6xl">
                     <button
                       type="button"
                       onClick={() => setFlipped((f) => !f)}
@@ -256,7 +270,7 @@ export default function NoteReviewPage() {
                     >
                       <div
                         key={cardIndex}
-                        className={`flashcard-inner min-h-56 sm:min-h-64 md:min-h-72 lg:min-h-80 ${
+                        className={`flashcard-inner min-h-64 sm:min-h-72 md:min-h-80 lg:min-h-[28rem] xl:min-h-[32rem] ${
                           flipped ? "is-flipped" : ""
                         }`}
                       >
@@ -271,20 +285,14 @@ export default function NoteReviewPage() {
                           }
                         >
                           <p
-                            className="font-semibold tracking-wide uppercase"
-                            style={{
-                              fontSize: "0.75rem",
-                              color: flashTheme.front.label,
-                            }}
+                            className="text-xs font-semibold tracking-wide uppercase sm:text-sm md:text-base"
+                            style={{ color: flashTheme.front.label }}
                           >
                             Front · {cardIndex + 1}/{flashcards.length}
                           </p>
                           <div
-                            className="mt-4 w-full font-medium"
-                            style={{
-                              fontSize: "1.125rem",
-                              color: flashTheme.front.text,
-                            }}
+                            className="flashcard-body mt-4 w-full max-w-4xl font-medium"
+                            style={{ color: flashTheme.front.text }}
                           >
                             <MarkdownMathView
                               size="reading"
@@ -292,11 +300,8 @@ export default function NoteReviewPage() {
                             />
                           </div>
                           <p
-                            className="mt-6"
-                            style={{
-                              fontSize: "0.75rem",
-                              color: flashTheme.front.hint,
-                            }}
+                            className="mt-6 text-xs sm:text-sm md:text-base"
+                            style={{ color: flashTheme.front.hint }}
                           >
                             Tap to flip
                           </p>
@@ -312,20 +317,14 @@ export default function NoteReviewPage() {
                           }
                         >
                           <p
-                            className="font-semibold tracking-wide uppercase"
-                            style={{
-                              fontSize: "0.75rem",
-                              color: flashTheme.back.label,
-                            }}
+                            className="text-xs font-semibold tracking-wide uppercase sm:text-sm md:text-base"
+                            style={{ color: flashTheme.back.label }}
                           >
                             Back · {cardIndex + 1}/{flashcards.length}
                           </p>
                           <div
-                            className="mt-4 w-full font-medium"
-                            style={{
-                              fontSize: "1.125rem",
-                              color: flashTheme.back.text,
-                            }}
+                            className="flashcard-body mt-4 w-full max-w-4xl font-medium"
+                            style={{ color: flashTheme.back.text }}
                           >
                             <MarkdownMathView
                               size="reading"
@@ -333,11 +332,8 @@ export default function NoteReviewPage() {
                             />
                           </div>
                           <p
-                            className="mt-6"
-                            style={{
-                              fontSize: "0.75rem",
-                              color: flashTheme.back.hint,
-                            }}
+                            className="mt-6 text-xs sm:text-sm md:text-base"
+                            style={{ color: flashTheme.back.hint }}
                           >
                             Tap to flip
                           </p>
@@ -380,11 +376,11 @@ export default function NoteReviewPage() {
                     </details>
                   </div>
                 </div>
-              ) : quiz && quiz.questions.length > 0 ? (
+              ) : note.studyMode === "Quiz" ? (
                 <div className={CONTENT_CARD_CLASS}>
-                  {quizStarted && user ? (
+                  {quizStarted && user && quiz && quiz.questions.length > 0 ? (
                     <InteractiveQuiz
-                      key={`${note.id}-quiz`}
+                      key={`${note.id}-quiz-${quizSession}`}
                       quiz={quiz}
                       uid={user.uid}
                       subject={note.subject}
@@ -394,31 +390,40 @@ export default function NoteReviewPage() {
                     />
                   ) : (
                     <>
-                      <div className="mb-4 flex justify-center">
+                      <div className="mb-6 flex flex-col items-center gap-2">
                         <PrimaryButton
                           type="button"
                           className="w-auto px-6"
-                          onClick={() => setQuizStarted(true)}
+                          disabled={
+                            !user || !quiz || quiz.questions.length === 0
+                          }
+                          onClick={() => {
+                            if (!quiz || quiz.questions.length === 0) return;
+                            setQuizSession((n) => n + 1);
+                            setQuizStarted(true);
+                          }}
                         >
                           Start interactive quiz
                         </PrimaryButton>
+                        {!quiz || quiz.questions.length === 0 ? (
+                          <p
+                            className="max-w-md text-center text-[#6B7280]"
+                            style={{ fontSize: "0.875rem" }}
+                          >
+                            This quiz needs multiple-choice questions (A–D) with
+                            a clear correct answer to run interactively. You can
+                            still review the content below.
+                          </p>
+                        ) : null}
                       </div>
-                      <QuizReview quiz={quiz} />
+                      <article className="mx-auto w-full max-w-5xl xl:max-w-6xl">
+                        <MarkdownMathView
+                          size="reading"
+                          content={note.notes || "No content."}
+                        />
+                      </article>
                     </>
                   )}
-                  {!quizStarted ? (
-                    <details className="mt-6 rounded-2xl border border-[#E8E6F0] bg-[#FAFAFC] p-4 sm:p-5 md:p-6">
-                      <summary
-                        className="cursor-pointer font-semibold text-[#111827]"
-                        style={{ fontSize: "0.9375rem" }}
-                      >
-                        View full markdown
-                      </summary>
-                      <div className="mt-3">
-                        <MarkdownMathView size="reading" content={note.notes} />
-                      </div>
-                    </details>
-                  ) : null}
                 </div>
               ) : (
                 <article className={CONTENT_CARD_CLASS}>
@@ -448,6 +453,49 @@ export default function NoteReviewPage() {
           </div>
         )}
       </AppShell>
+      {deleteOpen && note
+        ? createPortal(
+            <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/45 p-4">
+              <div
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="delete-note-title"
+                className="w-full max-w-md rounded-2xl border border-[#E8E6F0] bg-white p-6 shadow-[0_16px_40px_rgba(17,24,39,0.18)]"
+              >
+                <h2
+                  id="delete-note-title"
+                  className="font-heading text-xl font-extrabold text-[#111827]"
+                >
+                  Delete this note?
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-[#6B7280]">
+                  {note.topic
+                    ? `“${note.topic}” will be permanently removed from your library. This cannot be undone.`
+                    : "This note will be permanently removed from your library. This cannot be undone."}
+                </p>
+                <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-end">
+                  <SecondaryButton
+                    type="button"
+                    className="sm:!w-auto sm:px-5"
+                    disabled={deleting}
+                    onClick={() => setDeleteOpen(false)}
+                  >
+                    Cancel
+                  </SecondaryButton>
+                  <PrimaryButton
+                    type="button"
+                    className="sm:!w-auto sm:px-5 !bg-[#FF2D8A] hover:!brightness-105"
+                    loading={deleting}
+                    onClick={() => void confirmDelete()}
+                  >
+                    Delete
+                  </PrimaryButton>
+                </div>
+              </div>
+            </div>,
+            document.body,
+          )
+        : null}
     </DataConsentGate>
   );
 }
@@ -510,14 +558,23 @@ function NoteHeroCard({
       }}
     >
       <div className="min-w-0 flex-1">
-        <p
-          className="inline-flex rounded-full px-3 py-1 font-bold tracking-[0.08em] text-white uppercase"
-          style={{ background: "#FF2D8A", fontSize: "0.75rem" }}
-        >
-          {note.studyMode || "Summary Notes"}
-        </p>
+        <div className="mb-3 flex items-center gap-3">
+          <Link
+            href="/library"
+            aria-label="Back to library"
+            className="inline-flex size-10 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-white transition hover:bg-white/25"
+          >
+            <BackArrowIcon />
+          </Link>
+          <p
+            className="inline-flex rounded-full px-3 py-1 font-bold tracking-[0.08em] text-white uppercase"
+            style={{ background: "#FF2D8A", fontSize: "0.75rem" }}
+          >
+            {note.studyMode || "Summary Notes"}
+          </p>
+        </div>
         <h1
-          className="mt-2 font-heading font-extrabold leading-tight tracking-tight text-white"
+          className="font-heading font-extrabold leading-tight tracking-tight text-white"
           style={{ fontSize: "1.75rem" }}
         >
           {note.topic || "Untitled"}
@@ -671,6 +728,20 @@ function ChevronIcon({ open }: { open?: boolean }) {
     >
       <path
         d="m6 9 6 6 6-6"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function BackArrowIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M19 12H5M12 19l-7-7 7-7"
         stroke="currentColor"
         strokeWidth="2.2"
         strokeLinecap="round"

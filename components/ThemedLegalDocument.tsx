@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Footer } from "@/components/Footer";
 import { extractLegalDocumentParts } from "@/lib/legal/extractLegalDocumentParts";
 import { HOME_SHELL } from "@/lib/homeShell";
 import { LegalHeroSection } from "@/sections/LegalHeroSection";
@@ -45,7 +44,6 @@ export const ThemedLegalDocument = ({
           </article>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

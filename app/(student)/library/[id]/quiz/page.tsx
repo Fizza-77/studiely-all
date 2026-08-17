@@ -9,11 +9,8 @@ import { DataConsentGate } from "@/components/auth/data-consent-gate";
 import { useAuth } from "@/components/providers/auth-provider";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/auth-form";
 import { InteractiveQuiz } from "@/components/ui/interactive-quiz";
-import {
-  EmptyState,
-  LoadingBlock,
-  PageHeader,
-} from "@/components/ui/student-ui";
+import { MarkdownMathView } from "@/components/ui/markdown-math-view";
+import { EmptyState, LoadingBlock } from "@/components/ui/student-ui";
 import { fetchNoteById } from "@/lib/student/data";
 import { parseQuizFromMarkdown, type Quiz } from "@/lib/student/quiz-parser";
 import type { GeneratedNote } from "@/lib/student/types";
@@ -29,6 +26,8 @@ export default function InteractiveQuizPage() {
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [started, setStarted] = useState(false);
+  const [session, setSession] = useState(0);
 
   useEffect(() => {
     if (authPhase === "guest" || !user || !noteId) {
@@ -106,21 +105,50 @@ export default function InteractiveQuizPage() {
               </Link>
             }
           />
-        ) : !quiz || !note || !user ? null : (
-          <>
-            <PageHeader
-              eyebrow="Interactive quiz"
-              title={note.topic || "Quiz"}
-              subtitle={`${note.subject || "General"}${note.difficulty ? ` · ${note.difficulty}` : ""}`}
-            />
+        ) : !quiz || !note || !user ? null : started ? (
+          <div className="mx-auto w-full max-w-5xl xl:max-w-6xl">
             <InteractiveQuiz
+              key={`${note.id}-quiz-${session}`}
               quiz={quiz}
               uid={user.uid}
               subject={note.subject}
               topic={note.topic}
-              onExit={() => router.push(`/library/${noteId}`)}
+              onExit={() => {
+                setStarted(false);
+                router.push(`/library/${noteId}`);
+              }}
             />
-          </>
+          </div>
+        ) : (
+          <div className="mx-auto w-full max-w-5xl xl:max-w-6xl">
+            <div className="mb-6 flex justify-center">
+              <PrimaryButton
+                type="button"
+                className="w-auto px-6"
+                onClick={() => {
+                  setSession((n) => n + 1);
+                  setStarted(true);
+                }}
+              >
+                Start interactive quiz
+              </PrimaryButton>
+            </div>
+            <article className="rounded-[24px] border-[5px] border-[#F3F7A8] bg-white p-6 shadow-[0_8px_24px_rgba(17,24,39,0.04)] sm:p-8 md:p-10 lg:p-12">
+              <MarkdownMathView
+                size="reading"
+                content={note.notes || "No content."}
+              />
+            </article>
+            <div className="mt-6 flex justify-center">
+              <SecondaryButton
+                type="button"
+                className="w-auto px-5"
+                onClick={() => router.push(`/library/${noteId}`)}
+              >
+                Back to note
+              </SecondaryButton>
+            </div>
+          </div>
         )}
       </AppShell>
     </DataConsentGate>

@@ -137,6 +137,7 @@ export function isMarketingPath(pathname: string): boolean {
 export function isPwaBrowserOnlyPath(pathname: string): boolean {
   const path = pathOnly(pathname);
   return (
+    path === "/" ||
     matchesPrefix(path, "/pricing") ||
     matchesPrefix(path, "/faqs") ||
     matchesPrefix(path, "/blog") ||
@@ -228,12 +229,12 @@ export function resolvePwaNavigation(
     return { type: "stay" };
   }
 
-  // Pricing and other marketing pages always leave the PWA for the device browser.
+  // Marketing landing `/`, pricing, FAQs, etc. always leave the PWA for the device browser.
   if (isPwaBrowserOnlyPath(path)) {
     return { type: "browser", href };
   }
 
-  // Marketing landing `/`, smartlink, and anything else → app home.
+  // Unknown paths → app home.
   return { type: "home" };
 }
 

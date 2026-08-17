@@ -60,7 +60,7 @@ const ECOSYSTEM_CARDS = [
     edgeColor: PINK,
     href: "https://linguatude.com",
     linkLabel: "Visit Linguatude",
-    logo: "/logo-linguatude.jpg",
+    logo: "/linguatude.jpeg",
     paragraphs: [
       "Built for learners whose next university place, immigration step or career opportunity depends on achieving a target English score.",
       "Linguatude is built for learners whose next university place, immigration step or career opportunity depends on achieving a target English score. Where Studiely supports curriculum study, Linguatude supports the test that opens the next door.",

@@ -39,6 +39,26 @@ function modeNoun(studyMode: string) {
   return "notes";
 }
 
+/** Flashcards / notes / exam questions are plural; quiz is singular. */
+function modeIsPlural(studyMode: string) {
+  return studyMode !== "Quiz";
+}
+
+function readyHeadline(studyMode: string) {
+  const noun = modeNoun(studyMode);
+  return modeIsPlural(studyMode)
+    ? `Your ${noun} are ready!`
+    : `Your ${noun} is ready!`;
+}
+
+function openCtaLabel(studyMode: string, isGuest: boolean) {
+  if (isGuest) return "View preview";
+  if (studyMode === "Flashcards") return "Open my flashcards";
+  if (studyMode === "Quiz") return "Start my live quiz";
+  if (studyMode === "Exam Focus") return "Open my exam questions";
+  return "Open my notes";
+}
+
 function creatingLabel(studyMode: string) {
   if (studyMode === "Flashcards") return "CREATING YOUR FLASHCARDS";
   if (studyMode === "Quiz") return "CREATING YOUR QUIZ";
@@ -75,6 +95,7 @@ export function GenerationProgressScreen({
   const [tipIndex] = useState(() => Math.floor(Math.random() * WAIT_TIPS.length));
   const done = phase === "complete";
   const noun = modeNoun(meta.studyMode);
+  const plural = modeIsPlural(meta.studyMode);
 
   useEffect(() => {
     if (done) {
@@ -148,8 +169,8 @@ export function GenerationProgressScreen({
             <p className="mt-2 max-w-md text-[15px] leading-relaxed text-[#6B7280]">
               {done
                 ? meta.isGuest
-                  ? `Nyla finished your ${noun} — preview them below, then sign up to save.`
-                  : `Nyla finished your ${noun} — they're saved in your library.`
+                  ? `Nyla finished your ${noun} — preview ${plural ? "them" : "it"} below, then sign up to save.`
+                  : `Nyla finished your ${noun} — ${plural ? "they're" : "it's"} saved in your library.`
                 : `Nyla is crafting your ${noun}. Hang tight.`}
             </p>
 
@@ -235,7 +256,7 @@ export function GenerationProgressScreen({
                   style={{ background: PINK }}
                 >
                   <BookIcon />
-                  {meta.isGuest ? "View preview" : "Open my notes"}
+                  {openCtaLabel(meta.studyMode, meta.isGuest)}
                 </button>
                 <button
                   type="button"
@@ -292,7 +313,7 @@ export function GenerationProgressScreen({
                     <BigCheckIcon />
                   </span>
                   <p className="font-heading text-xl font-extrabold text-[#111827]">
-                    Your {noun} are ready!
+                    {readyHeadline(meta.studyMode)}
                   </p>
                   <p className="mt-2 text-sm text-[#6B7280]">
                     {meta.isGuest

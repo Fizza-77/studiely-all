@@ -6,7 +6,14 @@ const STUDY_MODE_RULES: Record<string, string> = {
   Flashcards:
     "Produce 10–20 flashcards. Format each as: Q: … / A: … on separate lines. Cover key terms and concepts only.",
   Quiz:
-    "Produce 8–15 quiz questions mixing MCQ and short answer. Number them. For MCQs include options A–D and mark the correct answer clearly.",
+    [
+      "Produce 8–12 multiple-choice quiz questions only (A–D).",
+      "Number each question as 1. 2. 3. …",
+      "Under each question list options exactly as: A. … B. … C. … D. …",
+      "CRITICAL: End with a plain Answers section header on its own line — the word Answers with no bold, italics, or markdown heading.",
+      "Under Answers list only letters, one per line, like: 1. A  2. C  3. B",
+      "Do not put correct answers inline under questions; only in the Answers section.",
+    ].join(" "),
   "Exam Focus":
     "Write exam-oriented notes (200–400 words) focused on likely exam angles, command words, and how to structure answers.",
   "Common Mistakes":
@@ -89,6 +96,13 @@ export function buildUserPrompt(params: GenerateParams): string {
   lines.push("");
   lines.push(params.studyMode);
   lines.push("[Content here]");
+  if (params.studyMode === "Quiz") {
+    lines.push("");
+    lines.push("Answers");
+    lines.push("1. A");
+    lines.push("2. B");
+    lines.push("(continue for every question — letter only)");
+  }
   if (includeCommonMistakes) {
     lines.push("");
     lines.push("Common Mistakes");

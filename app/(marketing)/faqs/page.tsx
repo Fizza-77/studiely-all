@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { FaqPageContent } from "@/components/FaqPageContent";
-import { Footer } from "@/components/Footer";
 import { DEFAULT_OG_IMAGE_PATH, SITE_URL } from "@/lib/site";
 import { FaqHeroSection } from "@/sections/FaqHeroSection";
 import { FAQ_SECTIONS } from "@/lib/faq";
@@ -51,7 +50,6 @@ export default function FaqsPage() {
         <main className="min-h-screen overflow-x-clip bg-bg-base">
           <FaqPageContent sections={FAQ_SECTIONS} />
         </main>
-        <Footer />
       </div>
     </>
   );

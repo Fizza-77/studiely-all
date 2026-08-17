@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Footer } from "@/components/Footer";
 import { NylaHeroSection } from "@/sections/NylaHeroSection";
 import { NylaWhySection } from "@/sections/NylaWhySection";
 import { NylaMeetSection } from "@/sections/NylaMeetSection";
@@ -57,7 +56,6 @@ export default function NylaFeaturePage() {
         <NylaMeetSection />
         <NylaStudyFlowSection />
       </main>
-      <Footer />
     </>
   );
 }

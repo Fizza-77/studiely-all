@@ -854,7 +854,12 @@ function GenerateInner() {
 
   function onOpenGeneratedNotes() {
     if (completedNoteId) {
-      router.push(`/library/${completedNoteId}`);
+      // Quizzes open the live interactive player; other modes open the note detail.
+      if (studyMode === "Quiz") {
+        router.push(`/library/${completedNoteId}/quiz`);
+      } else {
+        router.push(`/library/${completedNoteId}`);
+      }
       return;
     }
     setGenPhase("idle");
