@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useAuth } from "@/components/providers/auth-provider";
 import { STUDIELY_APP } from "@/lib/appUrls";
@@ -64,8 +64,19 @@ export const PricingHeroSection = () => {
   const router = useRouter();
   const [googleBusy, setGoogleBusy] = useState(false);
   const [googleError, setGoogleError] = useState<string | null>(null);
+  // Auth restores on the client after SSR — gate signed-in UI until mount
+  // so server HTML and the first client paint always match.
+  const [authUiReady, setAuthUiReady] = useState(false);
 
-  const signedIn = Boolean(user) && phase !== "guest" && phase !== "initializing";
+  useEffect(() => {
+    setAuthUiReady(true);
+  }, []);
+
+  const signedIn =
+    authUiReady &&
+    Boolean(user) &&
+    phase !== "guest" &&
+    phase !== "initializing";
 
   async function onGoogleSignIn() {
     setGoogleError(null);
@@ -199,7 +210,7 @@ export const PricingHeroSection = () => {
               <div className="flex flex-col gap-2 xs:flex-row sm:flex-row sm:items-center sm:gap-2.5">
                 <button
                   type="button"
-                  disabled={googleBusy || phase === "initializing"}
+                  disabled={googleBusy || phase === "initializing" || !authUiReady}
                   onClick={() => void onGoogleSignIn()}
                   className="inline-flex h-11 items-center justify-center gap-2 rounded-xl px-4 font-jakarta text-[13px] font-bold text-[#1E1B4B] transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-70 sm:h-10 sm:rounded-[12px] sm:text-[14px]"
                   style={{ backgroundColor: LIME }}

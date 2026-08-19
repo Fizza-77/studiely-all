@@ -1,30 +1,41 @@
 import type { GenerateParams } from "@/lib/generate/ai";
 
-const STUDY_MODE_RULES: Record<string, string> = {
-  "Summary Notes":
-    "Write clear summary notes (about 250–600 words depending on difficulty). Use Markdown headings and bullets. Stay curriculum-aligned.",
-  Flashcards:
-    "Produce 10–20 flashcards. Format each as: Q: … / A: … on separate lines. Cover key terms and concepts only.",
-  Quiz:
-    [
-      "Produce 8–12 multiple-choice quiz questions only (A–D).",
+/** Flutter parity: Free 8–12, Premium 15–20 (dominant curriculum default). */
+function quizCountRule(isPremium: boolean): string {
+  return isPremium
+    ? "Produce 15–20 multiple-choice quiz questions only (A–D). Premium: 15–20 questions."
+    : "Produce 8–12 multiple-choice quiz questions only (A–D). Free: 8–12 questions.";
+}
+
+function studyModeRules(studyMode: string, isPremium: boolean): string {
+  if (studyMode === "Quiz") {
+    return [
+      quizCountRule(isPremium),
+      "ALL questions must be multiple-choice with exactly 4 options (A, B, C, D).",
       "Number each question as 1. 2. 3. …",
-      "Under each question list options exactly as: A. … B. … C. … D. …",
+      "Format each question as: 1. [Question text] then A. … B. … C. … D. …",
+      "CRITICAL: The quiz must be attemptable — use ONLY multiple-choice questions; no short-answer, open-ended, or fill-in-the-blank questions.",
       "CRITICAL: End with a plain Answers section header on its own line — the word Answers with no bold, italics, or markdown heading.",
       "Under Answers list only letters, one per line, like: 1. A  2. C  3. B",
       "Do not put correct answers inline under questions; only in the Answers section.",
-    ].join(" "),
-  "Exam Focus":
-    "Write exam-oriented notes (200–400 words) focused on likely exam angles, command words, and how to structure answers.",
-  "Common Mistakes":
-    "List common mistakes for this topic with short corrections. Use bullets.",
-  Examples:
-    "Give worked examples with steps. Keep explanations age-appropriate.",
-};
+    ].join(" ");
+  }
 
-function studyModeRules(studyMode: string): string {
+  const rules: Record<string, string> = {
+    "Summary Notes":
+      "Write clear summary notes (about 250–600 words depending on difficulty). Use Markdown headings and bullets. Stay curriculum-aligned.",
+    Flashcards:
+      "Produce 10–20 flashcards. Format each as: Q: … / A: … on separate lines. Cover key terms and concepts only.",
+    "Exam Focus":
+      "Write exam-oriented notes (200–400 words) focused on likely exam angles, command words, and how to structure answers.",
+    "Common Mistakes":
+      "List common mistakes for this topic with short corrections. Use bullets.",
+    Examples:
+      "Give worked examples with steps. Keep explanations age-appropriate.",
+  };
+
   return (
-    STUDY_MODE_RULES[studyMode] ??
+    rules[studyMode] ??
     `Generate content for study mode: ${studyMode}. Follow the topic and difficulty.`
   );
 }
@@ -45,6 +56,7 @@ export function buildUserPrompt(params: GenerateParams): string {
   const isExamFocus = params.studyMode === "Exam Focus";
   const includeCommonMistakes =
     isExamFocus && Boolean(params.includeCommonMistakes);
+  const isPremium = Boolean(params.isPremium);
   const lines: string[] = [];
 
   lines.push(
@@ -71,7 +83,7 @@ export function buildUserPrompt(params: GenerateParams): string {
     lines.push("");
   }
   lines.push("CONTENT RULES & LIMITS (STRICT)");
-  lines.push(studyModeRules(params.studyMode));
+  lines.push(studyModeRules(params.studyMode, isPremium));
   if (params.includeMnemonics) {
     lines.push("Mnemonics (Free extra) - Keep short, playful, and memorable.");
   }
