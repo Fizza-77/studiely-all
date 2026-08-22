@@ -1,62 +1,31 @@
 # Studiely
 
-> Studiely is an AI-powered study platform for school students. It provides curriculum-aligned summary notes, flashcards, quizzes, exam practice, and Nyla (AI tutor) for IGCSE, GCSE, IB, A-Level, SAT, HSC, and more. Free to start on web, iOS, and Android.
+> Studiely is an AI-powered study platform for school students. It helps students create curriculum-aligned notes, flashcards, quizzes, exam practice and revision priorities, with Nyla as an AI study tutor. Free to start on web, iOS and Android.
 
-## About
+Studiely supports major school pathways including IGCSE, GCSE, IB, A-Level, AP, HSC and other regional curricula. It is not affiliated with, endorsed by, or an official product of Cambridge Assessment International Education, Pearson Edexcel, AQA, OCR, the IB Organisation, or any other examination board.
 
-- Brand: Studiely
-- Website: https://studiely.com
-- App: https://www.studiely.app
-- Company: Skyen Solutions (trade name of Qismat Ventures W.L.L.), Bahrain
-- Sister platforms: Make My Lesson (https://makemylesson.ai), Linguatude (https://linguatude.com)
-- Support: support@studiely.com
+## Main
 
-Studiely is not affiliated with, endorsed by, or an official product of Cambridge Assessment International Education, Pearson Edexcel, AQA, OCR, the IB Organisation, or any other examination board.
-
-## Main Pages
-
-- Home: https://studiely.com/
-- Features: https://studiely.com/features
-- Nyla AI Tutor: https://studiely.com/nyla
-- Blog: https://studiely.com/blog
-- FAQs: https://studiely.com/faqs
-- Contact: https://studiely.com/contact
-- Pricing: https://www.studiely.app/app/pricing
-- Login: https://www.studiely.app/app/login
-- Sign up: https://www.studiely.app/app/sign-up
-- Sitemap: https://studiely.com/sitemap.xml
-
-## Study Tools
-
-- Summary Notes: https://studiely.app/app/summary-notes
-- Flashcards: https://studiely.app/app/flashcards
-- Quiz: https://studiely.app/app/quiz
-- Exam Practice: https://www.studiely.app/app/exampractice
-- Exam Focus: https://studiely.app/app/exam-focus
-- Nyla AI Tutor: https://www.studiely.app/app/nyla
-- Library: https://www.studiely.app/app/library
-- Mnemonics generator (in-app)
-
-## Exams & Curricula
-
-Supported curriculum systems:
-- British: IGCSE, GCSE, A-Level
-- International Baccalaureate (IB): PYP, MYP, Diploma Programme
-- US: AP courses, Common Core-aligned content
-- Canadian: province-aligned content (Grade 1–12)
-- Australian: NAPLAN, HSC, VCE, QCE, WACE, SACE, TCE, ACT SSC, NTCET, ATAR
-
-Exam boards referenced (content aligned, not officially affiliated):
-- Cambridge Assessment International Education
-- Pearson Edexcel
-- AQA
-- OCR
-- IB Organisation
+- [Home](https://www.studiely.com/): Overview of Studiely study tools and how the platform works
+- [Pricing](https://www.studiely.com/pricing): Free plan and Premium subscription options
+- [Curriculum](https://www.studiely.com/curriculum): Supported curricula, subjects and study pathways
+- [Nyla AI Tutor](https://www.studiely.com/nyla): Product page for Studiely’s AI study tutor
+- [FAQs](https://www.studiely.com/faqs): Common questions about Studiely, plans and study tools
+- [Blog](https://www.studiely.com/blogs): Study tips, product updates and education articles
+- [Contact](https://www.studiely.com/contact): Support and contact options for Studiely
 
 ## Legal
 
-- Privacy Policy: https://studiely.com/privacy-policy
-- Terms of Service: https://studiely.com/terms-of-service
-- Acceptable Use Policy: https://studiely.com/acceptable-use
-- Cookie Policy: https://studiely.com/cookie-policy
-- Disclaimer: https://studiely.com/disclaimer
+- [Privacy Policy](https://www.studiely.com/privacy-policy): How Studiely collects and protects personal data
+- [Terms of Service](https://www.studiely.com/terms-of-service): Terms for using Studiely
+- [Acceptable Use Policy](https://www.studiely.com/acceptable-use): Allowed and prohibited use of the platform
+- [Cookie Policy](https://www.studiely.com/cookie-policy): Cookie and tracking information
+- [Disclaimer](https://www.studiely.com/disclaimer): Important limitations and educational-use notices
+
+## Optional
+
+- [Sitemap](https://www.studiely.com/sitemap.xml): Machine-readable list of public site URLs
+- [Make My Lesson](https://makemylesson.ai): Sister platform for teachers
+- [Linguatude](https://linguatude.com): Sister language-learning platform
+- [Worksheeta](https://worksheeta.com): Sister worksheet platform
+- [Support email](mailto:support@studiely.com): support@studiely.com

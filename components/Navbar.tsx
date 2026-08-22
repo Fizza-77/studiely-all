@@ -11,14 +11,49 @@ interface NavbarProps {
   visibleSections?: string[];
 }
 
+const FEATURE_LINKS = [
+  { label: "Flashcard Maker", href: "/features/flashcard-maker" },
+  { label: "Notes Generator", href: "/features/notes-generator" },
+  { label: "Quiz Generator", href: "/features/quiz-generator" },
+  { label: "Exam Focus", href: "/features/exam-focus" },
+] as const;
+
 export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) => {
   const [open, setOpen] = useState(false);
+  const [featuresOpen, setFeaturesOpen] = useState(false);
+  const [mobileFeaturesOpen, setMobileFeaturesOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(null);
   const [navbarVisible, setNavbarVisible] = useState(true);
   const [installHint, setInstallHint] = useState<string | null>(null);
   const scrollIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const featuresRef = useRef<HTMLDivElement | null>(null);
+  const featuresCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
   const { install, showInstallUi } = usePwaInstall();
+
+  const clearFeaturesCloseTimer = () => {
+    if (featuresCloseTimerRef.current) {
+      clearTimeout(featuresCloseTimerRef.current);
+      featuresCloseTimerRef.current = null;
+    }
+  };
+
+  const openFeaturesMenu = () => {
+    clearFeaturesCloseTimer();
+    setFeaturesOpen(true);
+  };
+
+  const scheduleCloseFeaturesMenu = () => {
+    clearFeaturesCloseTimer();
+    featuresCloseTimerRef.current = setTimeout(() => {
+      setFeaturesOpen(false);
+      featuresCloseTimerRef.current = null;
+    }, 120);
+  };
+
+  useEffect(() => {
+    return () => clearFeaturesCloseTimer();
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -58,6 +93,29 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
     return () => clearTimeout(t);
   }, [installHint]);
 
+  useEffect(() => {
+    setFeaturesOpen(false);
+    setMobileFeaturesOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!featuresOpen) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (!featuresRef.current?.contains(e.target as Node)) {
+        setFeaturesOpen(false);
+      }
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setFeaturesOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [featuresOpen]);
+
   const isLinkActive = (href: string) => {
     const path = href.startsWith("http") ? href : href.split("?")[0].split("#")[0];
     if (href.includes("#")) {
@@ -65,6 +123,8 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
     }
     return pathname === path || activeLink === href;
   };
+
+  const featuresActive = pathname.startsWith("/features");
 
   const links = [
     ["Home", "/"],
@@ -99,6 +159,13 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
   const installButtonClass =
     "funky-button inline-flex h-9 items-center justify-center rounded-full bg-[#FF2D8A] px-4 text-sm font-semibold !text-white transition hover:brightness-110";
 
+  const navLinkClass = (active: boolean) =>
+    `funky-link whitespace-nowrap px-2.5 py-1 text-sm font-medium transition-colors ${
+      active
+        ? "funky-link-active font-semibold text-[#4F35F2]"
+        : "text-[#1E1B4B] hover:text-[#4F35F2]"
+    }`;
+
   return (
     <>
       <header
@@ -127,24 +194,101 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
               className="hidden items-center gap-1 lg:flex xl:gap-2"
               aria-label="Main"
             >
-              {links.map(([label, href]) => {
+              {links.slice(0, 2).map(([label, href]) => {
                 const active =
                   label === "Home"
                     ? pathname === "/" && !activeLink
-                    : label === "Nyla AI"
-                      ? pathname === "/nyla"
-                      : isLinkActive(href);
+                    : isLinkActive(href);
                 return (
                   <Link
                     key={label}
                     href={href}
                     aria-current={active ? "page" : undefined}
                     onClick={() => setActiveLink(href)}
-                    className={`funky-link whitespace-nowrap px-2.5 py-1 text-sm font-medium transition-colors ${
-                      active
-                        ? "funky-link-active font-semibold text-[#4F35F2]"
-                        : "text-[#1E1B4B] hover:text-[#4F35F2]"
-                    }`}
+                    className={navLinkClass(active)}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+
+              <div
+                className="relative"
+                ref={featuresRef}
+                onMouseEnter={openFeaturesMenu}
+                onMouseLeave={scheduleCloseFeaturesMenu}
+              >
+                <button
+                  type="button"
+                  aria-expanded={featuresOpen}
+                  aria-haspopup="menu"
+                  onClick={() => setFeaturesOpen((v) => !v)}
+                  onFocus={openFeaturesMenu}
+                  className={`${navLinkClass(featuresActive || featuresOpen)} inline-flex items-center gap-1`}
+                >
+                  Features
+                  <svg
+                    viewBox="0 0 12 12"
+                    className={`h-3 w-3 transition-transform ${featuresOpen ? "rotate-180" : ""}`}
+                    fill="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M2.5 4.5 6 8l3.5-3.5"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+
+                {featuresOpen ? (
+                  <div
+                    role="menu"
+                    aria-label="Features"
+                    className="absolute left-1/2 top-full z-[410] min-w-[11.5rem] -translate-x-1/2 pt-2"
+                  >
+                    <div className="overflow-hidden rounded-2xl border border-[#E8E6F0] bg-white py-1.5 shadow-[0_12px_32px_rgba(30,27,75,0.14)]">
+                      {FEATURE_LINKS.map((item) => {
+                        const active = pathname === item.href;
+                        return (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            role="menuitem"
+                            aria-current={active ? "page" : undefined}
+                            onClick={() => {
+                              setActiveLink(item.href);
+                              setFeaturesOpen(false);
+                            }}
+                            className={`block px-3.5 py-2.5 text-sm transition-colors ${
+                              active
+                                ? "bg-[#f4ffe6] font-semibold text-[#4F35F2]"
+                                : "text-[#1E1B4B] hover:bg-[#F8F7FC] hover:text-[#4F35F2]"
+                            }`}
+                          >
+                            {item.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+
+              {links.slice(2).map(([label, href]) => {
+                const active =
+                  label === "Nyla AI"
+                    ? pathname === "/nyla"
+                    : isLinkActive(href);
+                return (
+                  <Link
+                    key={label}
+                    href={href}
+                    aria-current={active ? "page" : undefined}
+                    onClick={() => setActiveLink(href)}
+                    className={navLinkClass(active)}
                   >
                     {label}
                   </Link>
@@ -221,30 +365,95 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
 
       {open ? (
         <div
-          className="nav-menu-enter fixed inset-x-0 top-[calc(3.5rem+0.25rem)] z-[399] border-b border-border-default bg-white p-4 shadow-lg sm:p-6 md:top-[calc(3.5rem+0.375rem)] lg:hidden"
+          className="nav-menu-enter fixed inset-x-0 top-[calc(3.5rem+0.25rem)] z-[399] max-h-[calc(100dvh-3.75rem)] overflow-y-auto border-b border-border-default bg-white p-4 shadow-lg sm:p-6 md:top-[calc(3.5rem+0.375rem)] lg:hidden"
           role="dialog"
           aria-label="Mobile navigation"
         >
-          {links.map(([label, href]) => {
+          {links.slice(0, 2).map(([label, href]) => {
             const active =
-              label === "Home"
-                ? pathname === "/"
-                : label === "Nyla AI"
-                  ? pathname === "/nyla"
-                  : isLinkActive(href);
+              label === "Home" ? pathname === "/" : isLinkActive(href);
             return (
-            <Link
-              key={label}
-              href={href}
-              onClick={() => setOpen(false)}
-              className={`block border-b border-border-lt px-3 py-3 text-base transition-colors last:border-b-0 ${
-                active
+              <Link
+                key={label}
+                href={href}
+                onClick={() => setOpen(false)}
+                className={`block border-b border-border-lt px-3 py-3 text-base transition-colors ${
+                  active
+                    ? "bg-[#f4ffe6] font-semibold text-[#4F35F2]"
+                    : "text-[#1E1B4B] hover:text-[#4F35F2]"
+                }`}
+              >
+                {label}
+              </Link>
+            );
+          })}
+
+          <div className="border-b border-border-lt">
+            <button
+              type="button"
+              aria-expanded={mobileFeaturesOpen}
+              onClick={() => setMobileFeaturesOpen((v) => !v)}
+              className={`flex w-full items-center justify-between px-3 py-3 text-left text-base transition-colors ${
+                featuresActive
                   ? "bg-[#f4ffe6] font-semibold text-[#4F35F2]"
-                  : "text-[#1E1B4B] hover:text-[#4F35F2]"
+                  : "text-[#1E1B4B]"
               }`}
             >
-              {label}
-            </Link>
+              Features
+              <svg
+                viewBox="0 0 12 12"
+                className={`h-3.5 w-3.5 transition-transform ${mobileFeaturesOpen ? "rotate-180" : ""}`}
+                fill="none"
+                aria-hidden
+              >
+                <path
+                  d="M2.5 4.5 6 8l3.5-3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            {mobileFeaturesOpen ? (
+              <div className="pb-2 pl-2">
+                {FEATURE_LINKS.map((item) => {
+                  const active = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className={`block rounded-xl px-3 py-2.5 text-[15px] transition-colors ${
+                        active
+                          ? "bg-[#f4ffe6] font-semibold text-[#4F35F2]"
+                          : "text-[#1E1B4B] hover:text-[#4F35F2]"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            ) : null}
+          </div>
+
+          {links.slice(2).map(([label, href]) => {
+            const active =
+              label === "Nyla AI" ? pathname === "/nyla" : isLinkActive(href);
+            return (
+              <Link
+                key={label}
+                href={href}
+                onClick={() => setOpen(false)}
+                className={`block border-b border-border-lt px-3 py-3 text-base transition-colors last:border-b-0 ${
+                  active
+                    ? "bg-[#f4ffe6] font-semibold text-[#4F35F2]"
+                    : "text-[#1E1B4B] hover:text-[#4F35F2]"
+                }`}
+              >
+                {label}
+              </Link>
             );
           })}
           <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
