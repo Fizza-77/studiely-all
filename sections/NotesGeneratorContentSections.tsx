@@ -82,11 +82,13 @@ const FLOW = [
     title: "Understand",
     desc: "Use notes to understand the topic first — structure, terms and main ideas.",
     color: BLUE,
+    dark: false,
   },
   {
     title: "Recall",
     desc: "Use flashcards to check memory of definitions, steps and evidence.",
     color: PINK,
+    dark: false,
   },
   {
     title: "Apply",

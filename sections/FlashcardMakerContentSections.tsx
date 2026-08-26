@@ -82,11 +82,13 @@ const TIPS = [
     title: "Keep one idea per card",
     desc: "A stronger card asks for one definition, one formula step, one quote connection or one reason a process happens — not a whole chapter.",
     color: BLUE,
+    dark: false,
   },
   {
     title: "Rewrite weak cards after mistakes",
     desc: "Long cards become mini-notes students reread. Short, specific cards make weak points obvious.",
     color: PINK,
+    dark: false,
   },
   {
     title: "Move into quizzes when recall improves",

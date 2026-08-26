@@ -81,11 +81,13 @@ const PATHS = [
     title: "Review notes or flashcards",
     desc: "Low recall means rebuild memory first — go back to notes or flashcards before trying again.",
     color: BLUE,
+    dark: false,
   },
   {
     title: "Revisit the topic slowly",
     desc: "Repeated mistakes mean the concept is not secure yet. Slow down and rebuild understanding.",
     color: PINK,
+    dark: false,
   },
   {
     title: "Move into exam-style tasks",

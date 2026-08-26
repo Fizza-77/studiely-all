@@ -81,11 +81,13 @@ const PLAN = [
     title: "Choose the next action",
     desc: "Use focus areas to pick the right tool — notes, flashcards, quizzes or exam practice.",
     color: BLUE,
+    dark: false,
   },
   {
     title: "Face weak topics",
     desc: "Do not ignore weak topics because they feel uncomfortable. Put them on the list and act.",
     color: PINK,
+    dark: false,
   },
   {
     title: "Stay aligned",
