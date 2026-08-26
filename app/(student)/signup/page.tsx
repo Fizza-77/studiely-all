@@ -12,14 +12,19 @@ import {
   PrimaryButton,
   SecondaryButton,
   TextInput,
+  PasswordInput,
 } from "@/components/ui/auth-form";
+import { SocialAuthButtons } from "@/components/auth/social-auth-buttons";
 import {
   mapFirebaseError,
   signUpAdult,
   signUpUnder13,
+  signUpWithGoogle,
+  signUpWithApple,
 } from "@/lib/auth/service";
 import { calculateAge, EMAIL_REGEX, MINIMUM_AGE } from "@/lib/auth/types";
 import { LEGAL_URLS } from "@/lib/config/constants";
+import { useAuth } from "@/components/providers/auth-provider";
 
 function defaultDob(): string {
   const d = new Date();
@@ -29,6 +34,7 @@ function defaultDob(): string {
 
 export default function SignupPage() {
   const router = useRouter();
+  const { refreshPhase } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [dob, setDob] = useState(defaultDob);
@@ -124,62 +130,129 @@ export default function SignupPage() {
     await submitAdult();
   }
 
+  async function onGoogleSignUp() {
+    setError(null);
+    if (!agree) {
+      setError("Please agree to the Terms before continuing with Google.");
+      return;
+    }
+    if (!dob) {
+      setError("Please select your date of birth before continuing with Google.");
+      return;
+    }
+    if (age != null && age < MINIMUM_AGE) {
+      setError(
+        `Under-${MINIMUM_AGE} accounts need parental sign-up — Google is for ages ${MINIMUM_AGE}+.`,
+      );
+      return;
+    }
+    setLoading(true);
+    try {
+      const user = await signUpWithGoogle({
+        name,
+        dateOfBirth: dob,
+        agree,
+      });
+      if (!user) return;
+      await refreshPhase();
+      router.replace("/home");
+    } catch (err) {
+      setError(mapFirebaseError(err));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function onAppleSignUp() {
+    setError(null);
+    if (!agree) {
+      setError("Please agree to the Terms before continuing with Apple.");
+      return;
+    }
+    if (!dob) {
+      setError("Please select your date of birth before continuing with Apple.");
+      return;
+    }
+    if (age != null && age < MINIMUM_AGE) {
+      setError(
+        `Under-${MINIMUM_AGE} accounts need parental sign-up — Apple is for ages ${MINIMUM_AGE}+.`,
+      );
+      return;
+    }
+    setLoading(true);
+    try {
+      const user = await signUpWithApple({
+        name,
+        dateOfBirth: dob,
+        agree,
+      });
+      if (!user) return;
+      await refreshPhase();
+      router.replace("/home");
+    } catch (err) {
+      setError(mapFirebaseError(err));
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <AuthShell>
       <AuthCard
         title="Create your account"
         subtitle="Free plan includes study notes, flashcards, and quizzes."
+        className="max-w-md sm:max-w-2xl"
       >
         {error ? <Alert>{error}</Alert> : null}
 
         <form onSubmit={(e) => void onSubmit(e)}>
-          <Field label="Full name">
-            <TextInput
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              autoComplete="name"
-              required
-            />
-          </Field>
-          <Field label="Email">
-            <TextInput
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
-              required
-            />
-          </Field>
-          <Field label="Date of birth">
-            <TextInput
-              type="date"
-              value={dob}
-              onChange={(e) => setDob(e.target.value)}
-              max={new Date().toISOString().slice(0, 10)}
-              min="1950-01-01"
-              required
-            />
-          </Field>
-          <Field label="Password">
-            <TextInput
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="new-password"
-              minLength={6}
-              required
-            />
-          </Field>
-          <Field label="Confirm password">
-            <TextInput
-              type="password"
-              value={confirm}
-              onChange={(e) => setConfirm(e.target.value)}
-              autoComplete="new-password"
-              minLength={6}
-              required
-            />
-          </Field>
+          <div className="sm:grid sm:grid-cols-2 sm:gap-x-5">
+            <Field label="Full name" className="sm:mb-5">
+              <TextInput
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                autoComplete="name"
+                required
+              />
+            </Field>
+            <Field label="Email" className="sm:mb-5">
+              <TextInput
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+                required
+              />
+            </Field>
+            <Field label="Date of birth" className="sm:col-span-2 sm:mb-5">
+              <TextInput
+                type="date"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+                max={new Date().toISOString().slice(0, 10)}
+                min="1950-01-01"
+                required
+              />
+            </Field>
+            <Field label="Password" className="sm:mb-5">
+              <PasswordInput
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
+                minLength={6}
+                required
+              />
+            </Field>
+            <Field label="Confirm password" className="sm:mb-5">
+              <PasswordInput
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+                autoComplete="new-password"
+                minLength={6}
+                required
+              />
+            </Field>
+          </div>
 
           <label className="mb-4 flex items-start gap-2 text-sm text-[var(--color-gray-text)]">
             <input
@@ -215,6 +288,16 @@ export default function SignupPage() {
             Create account
           </PrimaryButton>
         </form>
+
+        <div className="mt-4">
+          <SocialAuthButtons
+            busy={loading}
+            onGoogle={() => void onGoogleSignUp()}
+            onApple={() => void onAppleSignUp()}
+            googleLabel="Sign up with Google"
+            appleLabel="Sign up with Apple"
+          />
+        </div>
 
         <p className="mt-6 text-center text-sm text-[var(--color-gray-text)]">
           Already have an account?{" "}

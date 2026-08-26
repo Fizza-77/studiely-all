@@ -12,6 +12,7 @@ import { EmptyState, LoadingBlock } from "@/components/ui/student-ui";
 import { useStudentData } from "@/hooks/use-student-data";
 import { formatRelativeTime, setNoteFavorite } from "@/lib/student/data";
 import { librarySubjectPath } from "@/lib/student/library-paths";
+import { generateHref } from "@/lib/generate/modes";
 import {
   filterNotesByTab,
   type GeneratedNote,
@@ -21,6 +22,22 @@ import {
 const PINK = "#FF2D8A";
 const PURPLE = "#4F35F2";
 const LIME = "#E8FF2F";
+
+function createHrefForLibraryTab(tab: LibraryTab): string {
+  switch (tab) {
+    case "flashcards":
+      return generateHref("Flashcards");
+    case "quizzes":
+      return generateHref("Quiz");
+    case "exam":
+      return generateHref("Exam Focus");
+    case "notes":
+      return generateHref("Summary Notes");
+    case "favorites":
+    default:
+      return "/generate";
+  }
+}
 
 type CategoryCard = {
   id: LibraryTab;
@@ -183,6 +200,7 @@ export function LibraryScreen({
   }, [notes, subjectFilter]);
 
   const tabNotes = useMemo(() => filterNotesByTab(notes, tab), [notes, tab]);
+  const createHref = createHrefForLibraryTab(tab);
 
   const subjects = useMemo(() => {
     const set = new Set<string>();
@@ -265,7 +283,7 @@ export function LibraryScreen({
               </p>
             </div>
             <Link
-              href="/generate"
+              href={createHref}
               className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-bold text-white transition hover:brightness-110"
               style={{ background: PINK }}
             >
@@ -479,7 +497,7 @@ export function LibraryScreen({
                         : "Generate study material to fill this tab."
                   }
                   action={
-                    <Link href="/generate">
+                    <Link href={createHref}>
                       <PrimaryButton type="button" className="w-auto px-5">
                         Create new
                       </PrimaryButton>

@@ -13,15 +13,19 @@ import {
   PrimaryButton,
   SecondaryButton,
   TextInput,
+  PasswordInput,
 } from "@/components/ui/auth-form";
 import {
   loginWithEmail,
+  loginWithGoogle,
+  loginWithApple,
   mapFirebaseError,
   sendPasswordResetEmail,
   signOutUser,
 } from "@/lib/auth/service";
 import { EMAIL_REGEX } from "@/lib/auth/types";
 import { LEGAL_URLS } from "@/lib/config/constants";
+import { SocialAuthButtons } from "@/components/auth/social-auth-buttons";
 
 function safeNextPath(raw: string | null): string {
   if (!raw) return "/home";
@@ -60,6 +64,38 @@ function LoginInner() {
     setLoading(true);
     try {
       await loginWithEmail(email, password);
+      await refreshPhase();
+      router.replace(nextPath);
+    } catch (err) {
+      setError(mapFirebaseError(err));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function onGoogle() {
+    setError(null);
+    setInfo(null);
+    setLoading(true);
+    try {
+      const user = await loginWithGoogle();
+      if (!user) return; // redirect flow
+      await refreshPhase();
+      router.replace(nextPath);
+    } catch (err) {
+      setError(mapFirebaseError(err));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function onApple() {
+    setError(null);
+    setInfo(null);
+    setLoading(true);
+    try {
+      const user = await loginWithApple();
+      if (!user) return;
       await refreshPhase();
       router.replace(nextPath);
     } catch (err) {
@@ -117,8 +153,7 @@ function LoginInner() {
             />
           </Field>
           <Field label="Password">
-            <TextInput
-              type="password"
+            <PasswordInput
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -142,6 +177,16 @@ function LoginInner() {
             Sign in
           </PrimaryButton>
         </form>
+
+        <div className="mt-4">
+          <SocialAuthButtons
+            busy={loading}
+            onGoogle={() => void onGoogle()}
+            onApple={() => void onApple()}
+            googleLabel="Sign in with Google"
+            appleLabel="Sign in with Apple"
+          />
+        </div>
 
         <div className="mt-3">
           <SecondaryButton type="button" onClick={continueAsGuest}>

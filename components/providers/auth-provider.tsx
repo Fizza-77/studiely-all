@@ -18,7 +18,7 @@ import {
   fetchStudentDoc,
   hasParentalConsent,
   isChildAccount,
-  completeGoogleRedirectLogin,
+  completeOAuthRedirectLogin,
   mapFirebaseError,
   signOutUser,
 } from "@/lib/auth/service";
@@ -173,8 +173,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const auth = getFirebaseAuth();
     setFirebaseReady(true);
 
-    // Finish Google redirect sign-in (PWA / mobile) before relying on auth state.
-    void completeGoogleRedirectLogin().catch((err) => {
+    // Finish Google/Apple redirect sign-in (PWA / mobile) before relying on auth state.
+    void completeOAuthRedirectLogin().catch((err) => {
       if (cancelled) return;
       setError(mapFirebaseError(err));
     });

@@ -11,6 +11,8 @@ import type {
 } from "./types";
 import { subjectDisplayName } from "./types";
 
+export { getCurriculumIdFromPathway } from "./mapping";
+
 const subjectCatalog = subjects as Record<string, SubjectInfo[]>;
 const boards = (hierarchy as { boards: BoardInfo[] }).boards;
 const leafList = leaves as LeafCurriculum[];

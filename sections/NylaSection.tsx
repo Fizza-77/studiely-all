@@ -123,7 +123,7 @@ export const NylaSection = ({ sectionRef }: NylaSectionProps) => {
     >
       <div className="wrap">
         <div className="relative overflow-hidden rounded-[28px] md:rounded-[40px]">
-          <div className="grid lg:grid-cols-2">
+          <div className="grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.78fr)]">
             {/* Left panel */}
             <div
               className="relative px-[clamp(1.25rem,4vw,3.25rem)] py-[clamp(1.35rem,3vw,2.25rem)]"
@@ -132,49 +132,80 @@ export const NylaSection = ({ sectionRef }: NylaSectionProps) => {
                   "linear-gradient(145deg, #4F35F2 0%, #4A30E8 55%, #4530E0 100%)",
               }}
             >
-              <h2
-                id="nyla-heading"
-                className="mb-4 max-w-[16ch] font-heading text-[clamp(1.85rem,4vw,3rem)] font-extrabold leading-[1.12] tracking-[-0.02em] text-white"
-              >
-                Meet <span style={{ color: LIME }}>Nyla</span>, Your personal AI Tutor
-              </h2>
-              <p className="mb-5 max-w-[34rem] font-sans text-[clamp(0.95rem,1.05vw,1.1rem)] leading-relaxed text-white/85">
-                Nyla understands your curriculum and knows exactly where you are in your study
-                journey.
-              </p>
+              <div className="grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(180px,46%)] lg:gap-3 xl:gap-5">
+                <div className="min-w-0">
+                  <h2
+                    id="nyla-heading"
+                    className="mb-4 font-heading text-[clamp(1.5rem,3.1vw,2.5rem)] font-extrabold leading-[1.18] tracking-[-0.02em] text-white"
+                  >
+                    Meet <span style={{ color: LIME }}>Nyla</span>, Your personal
+                    <br className="hidden min-[380px]:inline" />
+                    <span className="min-[380px]:hidden"> </span>
+                    AI Tutor
+                  </h2>
+                  <p className="mb-5 max-w-[34rem] font-sans text-[clamp(0.95rem,1.05vw,1.1rem)] leading-relaxed text-white/85">
+                    Nyla understands your curriculum and knows exactly where you are in your study
+                    journey.
+                  </p>
 
-              <ul className="m-0 flex list-none flex-col gap-5 p-0">
-                {FEATURES.map((feature) => (
-                  <li key={feature.title} className="flex gap-3.5">
-                    <span
-                      className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
-                      style={{ backgroundColor: LIME }}
-                    >
-                      {"iconSrc" in feature ? (
-                        <Image
-                          src={feature.iconSrc}
-                          alt=""
-                          width={22}
-                          height={22}
-                          unoptimized
-                          className="h-[22px] w-[22px] object-contain"
-                          aria-hidden
-                        />
-                      ) : (
-                        <feature.Icon />
-                      )}
-                    </span>
-                    <div>
-                      <p className="mb-1 font-heading text-[1rem] font-bold text-white">
-                        {feature.title}
-                      </p>
-                      <p className="m-0 font-sans text-[14px] leading-relaxed text-white/75">
-                        {feature.desc}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                  <ul className="m-0 flex list-none flex-col gap-5 p-0">
+                    {FEATURES.map((feature) => (
+                      <li key={feature.title} className="flex gap-3.5">
+                        <span
+                          className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
+                          style={{ backgroundColor: LIME }}
+                        >
+                          {"iconSrc" in feature ? (
+                            <Image
+                              src={feature.iconSrc}
+                              alt=""
+                              width={22}
+                              height={22}
+                              unoptimized
+                              className="h-[22px] w-[22px] object-contain"
+                              aria-hidden
+                            />
+                          ) : (
+                            <feature.Icon />
+                          )}
+                        </span>
+                        <div>
+                          <p className="mb-1 font-heading text-[1rem] font-bold text-white">
+                            {feature.title}
+                          </p>
+                          <p className="m-0 font-sans text-[14px] leading-relaxed text-white/75">
+                            {feature.desc}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Former UK-card student art — right of copy, left of chat preview */}
+                <div className="relative mx-auto flex w-full max-w-[320px] translate-y-1 items-center justify-center sm:translate-y-2 lg:mx-0 lg:max-w-none lg:translate-y-3 lg:justify-end">
+                  <svg
+                    viewBox="0 0 100 100"
+                    aria-hidden
+                    className="pointer-events-none absolute right-[8%] top-[6%] z-[1] h-auto w-[clamp(3.5rem,8vw,5.5rem)] opacity-40"
+                  >
+                    <path
+                      fill="#1B1468"
+                      d="M50 4 L61.2 36.2 L95 38.5 L68.5 59.5 L77.5 92 L50 74.5 L22.5 92 L31.5 59.5 L5 38.5 L38.8 36.2 Z"
+                    />
+                  </svg>
+                  <Image
+                    src="/US-student.png"
+                    alt=""
+                    width={480}
+                    height={600}
+                    unoptimized
+                    className="relative z-[2] h-auto w-full max-w-[280px] select-none object-contain object-center drop-shadow-[0_18px_40px_rgba(0,0,0,0.28)] sm:max-w-[300px] lg:max-w-[340px]"
+                    aria-hidden
+                    draggable={false}
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Right panel — 10% less opaque */}
@@ -209,7 +240,7 @@ export const NylaSection = ({ sectionRef }: NylaSectionProps) => {
                 draggable={false}
               />
 
-              <div className="relative z-[2] mx-auto flex w-full max-w-[340px] items-center justify-center py-8 sm:max-w-[360px]">
+              <div className="relative z-[2] mx-auto flex w-full max-w-[300px] items-center justify-center py-8 sm:max-w-[320px]">
                 {/* Gray ring behind chat */}
                 <div
                   aria-hidden

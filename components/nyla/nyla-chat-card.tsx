@@ -124,6 +124,8 @@ export function NylaChatCard({
     void sendMessage(prompt);
   }
 
+  const chatStarted = messages.some((m) => m.role === "user");
+
   return (
     <section
       className="relative overflow-hidden rounded-[28px] p-5 text-white shadow-[0_18px_40px_rgba(79,53,242,0.28)]"
@@ -218,25 +220,27 @@ export function NylaChatCard({
         </p>
       ) : null}
 
-      <div
-        className={
-          chipLayout === "grid"
-            ? "mt-3 grid grid-cols-2 gap-2"
-            : "mt-3 flex flex-wrap gap-2"
-        }
-      >
-        {quickPrompts.map((item) => (
-          <NylaChip
-            key={item.label}
-            tone={item.tone ?? (chipLayout === "grid" ? "glass" : "white")}
-            icon={item.icon}
-            disabled={busy}
-            onClick={() => void sendMessage(item.prompt ?? item.label)}
-          >
-            {item.label}
-          </NylaChip>
-        ))}
-      </div>
+      {!chatStarted ? (
+        <div
+          className={
+            chipLayout === "grid"
+              ? "mt-3 grid grid-cols-2 gap-2"
+              : "mt-3 flex flex-wrap gap-2"
+          }
+        >
+          {quickPrompts.map((item) => (
+            <NylaChip
+              key={item.label}
+              tone={item.tone ?? (chipLayout === "grid" ? "glass" : "white")}
+              icon={item.icon}
+              disabled={busy}
+              onClick={() => void sendMessage(item.prompt ?? item.label)}
+            >
+              {item.label}
+            </NylaChip>
+          ))}
+        </div>
+      ) : null}
 
       <form className="mt-4 flex items-stretch gap-2" onSubmit={onSubmit}>
         <input

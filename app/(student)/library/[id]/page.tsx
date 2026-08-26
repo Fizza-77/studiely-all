@@ -17,9 +17,8 @@ import { MarkdownMathView } from "@/components/ui/markdown-math-view";
 import { InteractiveQuiz } from "@/components/ui/interactive-quiz";
 import { EmptyState, LoadingBlock } from "@/components/ui/student-ui";
 import { exportNote } from "@/lib/export/note-export";
-import { generateStudyContent } from "@/lib/generate/ai";
-import { updateGeneratedNoteContent } from "@/lib/generate/update";
-import { parseSubjectInput } from "@/lib/curriculum/types";
+import { generateHref } from "@/lib/generate/modes";
+import { regenerateHrefFromNote } from "@/lib/generate/regenerate-href";
 import {
   deleteNote,
   fetchNoteById,
@@ -28,7 +27,6 @@ import {
 import { parseFlashcardsFromMarkdown } from "@/lib/student/flashcard-parser";
 import { parseQuizFromMarkdown } from "@/lib/student/quiz-parser";
 import type { GeneratedNote } from "@/lib/student/types";
-import { useStudentData } from "@/hooks/use-student-data";
 
 function formatNoteDate(date: Date | null): string {
   if (!date) return "—";
@@ -43,14 +41,12 @@ export default function NoteReviewPage() {
   const params = useParams<{ id: string }>();
   const router = useRouter();
   const { phase, user } = useAuth();
-  const { stats } = useStudentData();
   const noteId = params.id;
 
   const [note, setNote] = useState<GeneratedNote | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
-  const [regenError, setRegenError] = useState<string | null>(null);
   const [exportError, setExportError] = useState<string | null>(null);
   const [cardIndex, setCardIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -115,8 +111,6 @@ export default function NoteReviewPage() {
 
   const flashTheme = flashcardTheme(cardIndex);
 
-  const isPremium = stats?.isPremium === true;
-
   async function toggleFavorite() {
     if (!user || !note) return;
     setBusy(true);
@@ -144,46 +138,8 @@ export default function NoteReviewPage() {
   }
 
   async function onRegenerate() {
-    if (!user || !note) return;
-    setRegenError(null);
-
-    const curriculumId = note.curriculumId;
-    if (!curriculumId) {
-      setRegenError(
-        "This note has no curriculum id — open Create to generate a new one.",
-      );
-      return;
-    }
-
-    const { subject, subjectCode } = parseSubjectInput(note.subject);
-    setBusy(true);
-    try {
-      const content = await generateStudyContent({
-        curriculumId,
-        curriculumName: note.curriculumName ?? curriculumId,
-        subject,
-        subjectCode,
-        topic: note.topic,
-        studyMode: note.studyMode,
-        difficulty: (note.difficulty as "Easy" | "Medium" | "Hard") || "Medium",
-        grade: note.grade ?? "",
-        isPremium,
-        premiumModes: isPremium
-          ? ["Exam Focus", "Common Mistakes", "Examples"]
-          : [],
-        includeMnemonics: note.includeMnemonics ?? true,
-        includeExamStyleQs: note.includeExamStyleQs ?? false,
-      });
-
-      await updateGeneratedNoteContent(user.uid, note.id, content);
-      setNote({ ...note, notes: content });
-      setCardIndex(0);
-      setFlipped(false);
-    } catch (err) {
-      setRegenError(err instanceof Error ? err.message : "Regenerate failed");
-    } finally {
-      setBusy(false);
-    }
+    if (!note) return;
+    router.push(regenerateHrefFromNote(note));
   }
 
   return (
@@ -239,16 +195,11 @@ export default function NoteReviewPage() {
                     ),
                   );
                 }}
-                onRegenerate={() => void onRegenerate()}
+                onRegenerate={onRegenerate}
                 onFavorite={() => void toggleFavorite()}
                 onDelete={() => setDeleteOpen(true)}
               />
 
-              {regenError ? (
-                <div className="mt-4">
-                  <Alert>{regenError}</Alert>
-                </div>
-              ) : null}
               {exportError ? (
                 <div className="mt-4">
                   <Alert>{exportError}</Alert>
@@ -442,7 +393,7 @@ export default function NoteReviewPage() {
                   ← Back to library
                 </Link>
                 <Link
-                  href="/generate"
+                  href={generateHref(note.studyMode)}
                   className="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-extrabold transition hover:brightness-105"
                   style={{ background: "#E8FF2F", color: "#4F35F2" }}
                 >

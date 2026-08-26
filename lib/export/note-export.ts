@@ -27,6 +27,33 @@ function safeFilename(parts: string[]): string {
     .slice(0, 80);
 }
 
+/**
+ * Prepare a page: solid white background, then a faint watermark underneath.
+ * Call this before drawing any content so text always paints on top.
+ */
+function preparePdfPage(doc: jsPDF): void {
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+
+  doc.setFillColor(255, 255, 255);
+  doc.rect(0, 0, pageW, pageH, "F");
+
+  // Light gray — no opacity graphics state (avoids translucent body text).
+  doc.setTextColor(228, 228, 232);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(26);
+  doc.text(WATERMARK, pageW / 2, pageH / 2, {
+    align: "center",
+    angle: -30,
+  });
+
+  // Reset to opaque body defaults for anything drawn next.
+  doc.setTextColor(17, 24, 39);
+  doc.setDrawColor(180);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+}
+
 function headingLevelDocx(level: 1 | 2 | 3) {
   if (level === 1) return HeadingLevel.HEADING_1;
   if (level === 2) return HeadingLevel.HEADING_2;
@@ -120,6 +147,7 @@ function drawPdfRuns(
     const line = wrapped[li];
     if (y > opts.pageH - opts.margin) {
       doc.addPage();
+      preparePdfPage(doc);
       y = opts.margin;
     }
 
@@ -150,6 +178,7 @@ function drawPdfRuns(
       if (!slice) continue;
       const bold = opts.forceBold || run.bold;
       doc.setFontSize(opts.fontSize);
+      doc.setTextColor(17, 24, 39);
       doc.setFont(
         "helvetica",
         bold ? "bold" : run.italic ? "italic" : "normal",
@@ -166,30 +195,180 @@ function drawPdfRuns(
   return y - opts.y;
 }
 
-/** Notes PDF with markdown headings/bold rendered (not raw # / **). */
-export async function exportNotePdf(note: GeneratedNote): Promise<void> {
-  const doc = new jsPDF({ unit: "pt", format: "a4" });
+function blockPlainText(block: MdBlock): string {
+  if (block.type === "blank") return "";
+  return runsToPlain(block.runs).trim();
+}
+
+const LABELED_META =
+  /^(study notes|flashcards|quiz|exam focus|overview|curriculum|subject|grade(?:\s*level)?|difficulty|summary notes|common mistakes|examples)\s*:/i;
+const ALONE_META =
+  /^(study notes|flashcards|quiz|exam focus|overview|summary notes|common mistakes|examples)$/i;
+
+/**
+ * Drop the AI preamble (Study Notes / Overview / Subject / Difficulty / …)
+ * so it is not repeated under the PDF header.
+ */
+function stripLeadingMetaBlocks(
+  blocks: MdBlock[],
+  note?: Pick<GeneratedNote, "topic" | "studyMode" | "subject">,
+): MdBlock[] {
+  const topic = note?.topic?.trim().toLowerCase() || "";
+  const studyMode = note?.studyMode?.trim().toLowerCase() || "";
+  const subject = note?.subject?.trim().toLowerCase() || "";
+
+  const isLeadingMeta = (plain: string) => {
+    const t = plain.trim();
+    if (!t) return true;
+    if (LABELED_META.test(t) || ALONE_META.test(t)) return true;
+    const lower = t.toLowerCase();
+    if (studyMode && lower === studyMode) return true;
+    if (topic && lower === topic) return true;
+    if (subject && lower === subject) return true;
+    return false;
+  };
+
+  const out: MdBlock[] = [];
+  let pastHeader = false;
+
+  for (const block of blocks) {
+    if (block.type === "blank") {
+      if (pastHeader) out.push(block);
+      continue;
+    }
+    const plain = blockPlainText(block);
+    if (!pastHeader) {
+      if (isLeadingMeta(plain)) continue;
+      pastHeader = true;
+      out.push(block);
+      continue;
+    }
+    // After overview prose, still drop Curriculum / Subject / Difficulty / mode labels
+    // until real structure (heading / list) appears.
+    const hasStructure = out.some(
+      (b) => b.type === "heading" || b.type === "listItem",
+    );
+    if (
+      !hasStructure &&
+      (LABELED_META.test(plain.trim()) || ALONE_META.test(plain.trim()))
+    ) {
+      continue;
+    }
+    out.push(block);
+  }
+
+  while (out.length && out[0].type === "blank") out.shift();
+  return out;
+}
+
+function studyModeHeaderLabel(studyMode: string, topic: string): string {
+  if (studyMode === "Flashcards") return `Flashcards: ${topic}`;
+  if (studyMode === "Quiz") return `Quiz: ${topic}`;
+  if (studyMode === "Exam Focus") return `Exam Focus: ${topic}`;
+  return `Study Notes: ${topic}`;
+}
+
+/** Subject line for header meta — e.g. "Design & Technology (9705)". */
+function subjectHeaderLabel(note: GeneratedNote): string {
+  const subject = note.subject?.trim() || "General";
+  const curriculum = note.curriculumName?.trim() || "";
+  if (!curriculum) return subject;
+  // Avoid duplicating if subject already includes the curriculum / code.
+  if (subject.toLowerCase().includes(curriculum.toLowerCase())) return subject;
+  const codeMatch = curriculum.match(/\((\d{3,5})\)/);
+  if (codeMatch && !subject.includes(codeMatch[0])) {
+    return `${subject} ${codeMatch[0]}`;
+  }
+  return subject;
+}
+
+/**
+ * Shared PDF header for every library export:
+ *   topic
+ *   Subject · Study mode · Difficulty
+ *   Study Notes: topic  (or Flashcards / Quiz / Exam Focus)
+ *   Overview
+ *   Subject: …
+ *   Difficulty: …
+ *   ────────────
+ * Returns Y position for body start.
+ */
+function drawPdfDocumentHeader(
+  doc: jsPDF,
+  note: GeneratedNote,
+  opts?: { margin?: number },
+): number {
   const pageW = doc.internal.pageSize.getWidth();
-  const pageH = doc.internal.pageSize.getHeight();
-  const margin = 48;
+  const margin = opts?.margin ?? 48;
   const maxW = pageW - margin * 2;
+  const topic = note.topic?.trim() || "Study notes";
+  const subject = subjectHeaderLabel(note);
+  const difficulty = note.difficulty?.trim() || "Medium";
+  const studyMode = note.studyMode?.trim() || "Summary Notes";
+
+  let y = margin;
 
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(16);
-  doc.text(note.topic || "Study notes", margin, margin);
+  doc.setFontSize(18);
+  doc.setTextColor(17, 24, 39);
+  const titleLines = doc.splitTextToSize(topic, maxW) as string[];
+  doc.text(titleLines, margin, y);
+  y += titleLines.length * 22 + 6;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
-  doc.setTextColor(100);
-  doc.text(
-    `${note.subject || "General"} · ${note.studyMode}${note.difficulty ? ` · ${note.difficulty}` : ""}`,
-    margin,
-    margin + 18,
-  );
-  doc.setTextColor(20);
+  doc.setTextColor(107, 114, 128);
+  const meta = `${subject} · ${studyMode} · ${difficulty}`;
+  const metaLines = doc.splitTextToSize(meta, maxW) as string[];
+  doc.text(metaLines, margin, y);
+  y += metaLines.length * 13 + 10;
 
-  const blocks = markdownToBlocks(note.notes || "");
-  let y = margin + 40;
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(12);
+  doc.setTextColor(17, 24, 39);
+  const modeLabelLines = doc.splitTextToSize(
+    studyModeHeaderLabel(studyMode, topic),
+    maxW,
+  ) as string[];
+  doc.text(modeLabelLines, margin, y);
+  y += modeLabelLines.length * 16 + 10;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
+  doc.text("Overview", margin, y);
+  y += 16;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10);
+  doc.setTextColor(55, 65, 81);
+  doc.text(`Subject: ${subject}`, margin, y);
+  y += 14;
+  doc.text(`Difficulty: ${difficulty}`, margin, y);
+  y += 16;
+
+  doc.setDrawColor(209, 213, 219);
+  doc.setLineWidth(1);
+  doc.line(margin, y, pageW - margin, y);
+  y += 18;
+
+  doc.setTextColor(17, 24, 39);
+  return y;
+}
+
+/** Notes / quiz / exam-focus PDF with markdown headings/bold rendered. */
+export async function exportNotePdf(note: GeneratedNote): Promise<void> {
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  const pageH = doc.internal.pageSize.getHeight();
+  const margin = 48;
+  const maxW = doc.internal.pageSize.getWidth() - margin * 2;
+
+  preparePdfPage(doc);
+  let y = drawPdfDocumentHeader(doc, note, { margin });
+
+  const blocks = stripLeadingMetaBlocks(
+    markdownToBlocks(note.notes || ""),
+    note,
+  );
 
   for (const block of blocks) {
     if (block.type === "blank") {
@@ -198,6 +377,7 @@ export async function exportNotePdf(note: GeneratedNote): Promise<void> {
     }
     if (y > pageH - margin - 20) {
       doc.addPage();
+      preparePdfPage(doc);
       y = margin;
     }
     if (block.type === "heading") {
@@ -220,6 +400,7 @@ export async function exportNotePdf(note: GeneratedNote): Promise<void> {
     if (block.type === "listItem") {
       doc.setFont("helvetica", "normal");
       doc.setFontSize(11);
+      doc.setTextColor(17, 24, 39);
       doc.text("•", margin, y);
       const h = drawPdfRuns(doc, block.runs, {
         x: margin + 14,
@@ -243,19 +424,6 @@ export async function exportNotePdf(note: GeneratedNote): Promise<void> {
       margin,
     });
     y += h + 4;
-  }
-
-  const pageCount = doc.getNumberOfPages();
-  for (let i = 1; i <= pageCount; i++) {
-    doc.setPage(i);
-    doc.setTextColor(180);
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(28);
-    doc.text(WATERMARK, pageW / 2, pageH / 2, {
-      align: "center",
-      angle: -30,
-    });
-    doc.setTextColor(20);
   }
 
   doc.save(
@@ -297,58 +465,9 @@ export async function exportNoteDocx(note: GeneratedNote): Promise<void> {
   );
 }
 
-/** Flashcard grid PDF — no watermark (Flutter parity). */
+/** Flashcards PDF — same document header + body format as notes / quiz / exam. */
 export async function exportFlashcardsPdf(note: GeneratedNote): Promise<void> {
-  const cards = parseFlashcardsFromMarkdown(note.notes);
-  if (!cards?.length) {
-    throw new Error("No flashcards could be parsed from this note.");
-  }
-
-  const pdf = new jsPDF({ unit: "pt", format: "a4" });
-  const pw = pdf.internal.pageSize.getWidth();
-  const ph = pdf.internal.pageSize.getHeight();
-  const m = 36;
-  const g = 12;
-  const cw = (pw - m * 2 - g) / 2;
-  const rh = (ph - m * 2 - g - 20) / 2;
-
-  for (let start = 0; start < cards.length; start += 4) {
-    if (start > 0) pdf.addPage();
-    pdf.setFont("helvetica", "bold");
-    pdf.setFontSize(12);
-    pdf.text(`Flashcards: ${note.topic || "Untitled"}`, m, 24);
-
-    for (let slot = 0; slot < 4; slot++) {
-      const idx = start + slot;
-      if (idx >= cards.length) break;
-      const col = slot % 2;
-      const row = Math.floor(slot / 2);
-      const x = m + col * (cw + g);
-      const y = m + 20 + row * (rh + g);
-      pdf.setDrawColor(160);
-      pdf.rect(x, y, cw, rh);
-      pdf.setFontSize(9);
-      pdf.setFont("helvetica", "bold");
-      pdf.text(`Card ${idx + 1}`, x + 8, y + 16);
-      pdf.setFont("helvetica", "normal");
-      pdf.setFontSize(10);
-      const frontLines = pdf.splitTextToSize(
-        `Front: ${cards[idx].front}`,
-        cw - 16,
-      ) as string[];
-      pdf.text(frontLines, x + 8, y + 34);
-      const backY = y + 34 + frontLines.length * 12 + 8;
-      const backLines = pdf.splitTextToSize(
-        `Back: ${cards[idx].back}`,
-        cw - 16,
-      ) as string[];
-      pdf.text(backLines, x + 8, backY);
-    }
-  }
-
-  pdf.save(
-    `${safeFilename([note.subject || "flashcards", note.topic || "export", "Studiely"])}.pdf`,
-  );
+  await exportNotePdf(note);
 }
 
 export async function exportFlashcardsDocx(note: GeneratedNote): Promise<void> {
@@ -477,8 +596,8 @@ export async function exportNote(
     return;
   }
   if (format === "pdf") {
-    if (isFlashcards) await exportFlashcardsPdf(note);
-    else await exportNotePdf(note);
+    // Notes, quiz, exam focus, and flashcards all share the same PDF layout.
+    await exportNotePdf(note);
     return;
   }
   if (isFlashcards) await exportFlashcardsDocx(note);

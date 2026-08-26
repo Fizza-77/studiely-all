@@ -3,6 +3,7 @@ import {
   deleteUser,
   EmailAuthProvider,
   GoogleAuthProvider,
+  OAuthProvider,
   getRedirectResult,
   reauthenticateWithCredential,
   signInWithEmailAndPassword,
@@ -10,6 +11,7 @@ import {
   signInWithRedirect,
   signOut,
   updatePassword,
+  type AuthProvider,
   type User,
 } from "firebase/auth";
 import {
@@ -27,12 +29,23 @@ import { FirebaseError } from "firebase/app";
 import { getFirebaseAuth, getFirebaseDb } from "@/lib/firebase/client";
 import { callFunction } from "@/lib/firebase/functions";
 import { COLLECTIONS } from "@/lib/config/constants";
-import { guestMode } from "@/lib/auth/guest";
+import { guestIds, guestMode } from "@/lib/auth/guest";
 import {
   calculateAge,
   MINIMUM_AGE,
   type StudentDocSummary,
 } from "@/lib/auth/types";
+
+const OAUTH_INTENT_KEY = "studiely_oauth_intent";
+const OAUTH_SIGNUP_META_KEY = "studiely_oauth_signup_meta";
+
+export type OAuthIntent = "login" | "signup";
+
+export type OAuthSignupMeta = {
+  name?: string;
+  dateOfBirth?: string;
+  agree?: boolean;
+};
 
 export function mapFirebaseError(err: unknown): string {
   if (err instanceof FirebaseError) {
@@ -52,11 +65,15 @@ export function mapFirebaseError(err: unknown): string {
       case "auth/too-many-requests":
         return "Too many attempts. Please try again later.";
       case "auth/popup-closed-by-user":
-        return "Google sign-in was cancelled.";
+        return "Sign-in was cancelled.";
+      case "auth/cancelled-popup-request":
+        return "Sign-in was cancelled.";
       case "auth/popup-blocked":
         return "Pop-up blocked. Allow pop-ups for this site and try again.";
       case "auth/account-exists-with-different-credential":
         return "An account already exists with this email using a different sign-in method.";
+      case "auth/operation-not-allowed":
+        return "This sign-in method is not available right now. Please try another option.";
       case "functions/resource-exhausted":
         return "Rate limit reached. Please wait and try again.";
       default:
@@ -117,44 +134,95 @@ export function hasParentalConsent(student: StudentDocSummary): boolean {
   return student.parentalConsentGiven && student.parentId != null;
 }
 
-export async function loginWithEmail(email: string, password: string) {
-  const cred = await signInWithEmailAndPassword(
-    getFirebaseAuth(),
-    email.trim(),
-    password.trim(),
-  );
-  guestMode.exit();
-  return cred.user;
+/** Flutter parity: merge guest generation quota after login/signup via CF. */
+export async function mergeGuestProfileOnLogin(): Promise<void> {
+  try {
+    await callFunction(
+      "mergeGuestProfileOnLogin",
+      { deviceId: guestIds.getDeviceId() },
+      { requireAuth: true },
+    );
+  } catch {
+    /* best-effort — don't block sign-in */
+  }
 }
 
-export async function loginWithGoogle() {
+function preferOAuthRedirect(): boolean {
+  if (typeof window === "undefined") return false;
+  return (
+    window.matchMedia("(display-mode: standalone)").matches ||
+    window.matchMedia("(display-mode: fullscreen)").matches ||
+    window.matchMedia("(display-mode: minimal-ui)").matches ||
+    ("standalone" in navigator &&
+      Boolean((navigator as Navigator & { standalone?: boolean }).standalone)) ||
+    /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+  );
+}
+
+function rememberOAuthIntent(
+  intent: OAuthIntent,
+  meta?: OAuthSignupMeta,
+): void {
+  if (typeof window === "undefined") return;
+  sessionStorage.setItem(OAUTH_INTENT_KEY, intent);
+  if (intent === "signup" && meta) {
+    sessionStorage.setItem(OAUTH_SIGNUP_META_KEY, JSON.stringify(meta));
+  } else {
+    sessionStorage.removeItem(OAUTH_SIGNUP_META_KEY);
+  }
+}
+
+function consumeOAuthIntent(): {
+  intent: OAuthIntent;
+  meta: OAuthSignupMeta | null;
+} {
+  if (typeof window === "undefined") {
+    return { intent: "login", meta: null };
+  }
+  const intent =
+    sessionStorage.getItem(OAUTH_INTENT_KEY) === "signup" ? "signup" : "login";
+  let meta: OAuthSignupMeta | null = null;
+  try {
+    const raw = sessionStorage.getItem(OAUTH_SIGNUP_META_KEY);
+    if (raw) meta = JSON.parse(raw) as OAuthSignupMeta;
+  } catch {
+    meta = null;
+  }
+  sessionStorage.removeItem(OAUTH_INTENT_KEY);
+  sessionStorage.removeItem(OAUTH_SIGNUP_META_KEY);
+  return { intent, meta };
+}
+
+function googleProvider(): GoogleAuthProvider {
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({ prompt: "select_account" });
+  return provider;
+}
+
+function appleProvider(): OAuthProvider {
+  const provider = new OAuthProvider("apple.com");
+  provider.addScope("email");
+  provider.addScope("name");
+  return provider;
+}
+
+/**
+ * Firebase Auth popup/redirect (EduPlayce parity — no CF for token exchange).
+ * Returns null when redirect was started (page navigates away).
+ */
+async function signInWithAuthProvider(
+  provider: AuthProvider,
+): Promise<User | null> {
   const auth = getFirebaseAuth();
 
-  // Popups hide the opener (esp. PWA / mobile) and trigger a Firebase Auth
-  // IndexedDB bug ("Database is closing/hidden") on firebase 12.17.x.
-  // Prefer redirect when the document cannot stay visible with a popup.
-  const preferRedirect =
-    typeof window !== "undefined" &&
-    (window.matchMedia("(display-mode: standalone)").matches ||
-      window.matchMedia("(display-mode: fullscreen)").matches ||
-      window.matchMedia("(display-mode: minimal-ui)").matches ||
-      ("standalone" in navigator &&
-        Boolean(
-          (navigator as Navigator & { standalone?: boolean }).standalone,
-        )) ||
-      /iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
-
-  if (preferRedirect) {
+  if (preferOAuthRedirect()) {
     await signInWithRedirect(auth, provider);
-    // Navigation away — caller should not expect a User return.
-    return null as unknown as User;
+    return null;
   }
 
-  let cred;
   try {
-    cred = await signInWithPopup(auth, provider);
+    const cred = await signInWithPopup(auth, provider);
+    return cred.user;
   } catch (err) {
     const raw = err instanceof Error ? err.message : "";
     if (
@@ -163,45 +231,158 @@ export async function loginWithGoogle() {
       (err instanceof FirebaseError && err.code === "auth/popup-blocked")
     ) {
       await signInWithRedirect(auth, provider);
-      return null as unknown as User;
+      return null;
     }
     throw err;
   }
+}
 
-  const student = await fetchStudentDoc(cred.user.uid);
+async function createStudentFromOAuth(
+  user: User,
+  meta: OAuthSignupMeta | null,
+): Promise<void> {
+  const name =
+    meta?.name?.trim() ||
+    user.displayName?.trim() ||
+    (user.email ? user.email.split("@")[0] : "") ||
+    "Student";
+  const email = (user.email || "").trim();
+  if (!email) {
+    throw new Error(
+      "Your provider did not share an email. Use email sign-up, or allow email access and try again.",
+    );
+  }
+
+  const dobStr = meta?.dateOfBirth?.trim();
+  if (!dobStr) {
+    await signOut(getFirebaseAuth());
+    throw new Error(
+      "Select your date of birth and agree to the Terms on the sign-up form, then continue with Google or Apple.",
+    );
+  }
+  if (!meta?.agree) {
+    await signOut(getFirebaseAuth());
+    throw new Error(
+      "Please agree to the Terms before continuing with Google or Apple.",
+    );
+  }
+
+  const dateOfBirth = new Date(dobStr);
+  const age = calculateAge(dateOfBirth);
+  if (age < MINIMUM_AGE) {
+    await signOut(getFirebaseAuth());
+    throw new Error(
+      `Under-${MINIMUM_AGE} accounts need parental sign-up — Google/Apple self sign-up is for ages ${MINIMUM_AGE}+.`,
+    );
+  }
+
+  await setDoc(doc(getFirebaseDb(), COLLECTIONS.students, user.uid), {
+    name,
+    email,
+    uid: user.uid,
+    membership_type: "free",
+    subscription_plan: "free",
+    date_of_birth: Timestamp.fromDate(dateOfBirth),
+    age,
+    age_verified: true,
+    email_verified: true,
+    createdAt: serverTimestamp(),
+  });
+}
+
+/**
+ * After OAuth Auth succeeds: ensure Students doc (signup) or require it (login),
+ * then call mergeGuestProfileOnLogin.
+ */
+async function finishOAuthSession(
+  user: User,
+  intent: OAuthIntent,
+  meta: OAuthSignupMeta | null,
+): Promise<User> {
+  const auth = getFirebaseAuth();
+  let student = await fetchStudentDoc(user.uid);
+
+  if (!student) {
+    if (intent !== "signup") {
+      try {
+        await signOut(auth);
+      } catch {
+        /* ignore */
+      }
+      throw new Error(
+        "No Studiely account is linked to this login. Sign up first, then use Google or Apple.",
+      );
+    }
+    await createStudentFromOAuth(user, meta);
+    student = await fetchStudentDoc(user.uid);
+  }
+
   if (!student) {
     try {
       await signOut(auth);
     } catch {
       /* ignore */
     }
-    throw new Error(
-      "No Studiely account is linked to this Google login. Sign up first, or use Open app sign-in with your Studiely email.",
-    );
+    throw new Error("Could not create your student profile. Please try again.");
   }
+
   guestMode.exit();
+  await mergeGuestProfileOnLogin();
+  return user;
+}
+
+export async function loginWithEmail(email: string, password: string) {
+  const cred = await signInWithEmailAndPassword(
+    getFirebaseAuth(),
+    email.trim(),
+    password.trim(),
+  );
+  guestMode.exit();
+  await mergeGuestProfileOnLogin();
   return cred.user;
 }
 
-/** Complete Google redirect sign-in after returning to the app. */
-export async function completeGoogleRedirectLogin(): Promise<User | null> {
+export async function loginWithGoogle() {
+  rememberOAuthIntent("login");
+  const user = await signInWithAuthProvider(googleProvider());
+  if (!user) return null as unknown as User;
+  return finishOAuthSession(user, "login", null);
+}
+
+export async function loginWithApple() {
+  rememberOAuthIntent("login");
+  const user = await signInWithAuthProvider(appleProvider());
+  if (!user) return null as unknown as User;
+  return finishOAuthSession(user, "login", null);
+}
+
+export async function signUpWithGoogle(meta: OAuthSignupMeta) {
+  rememberOAuthIntent("signup", meta);
+  const user = await signInWithAuthProvider(googleProvider());
+  if (!user) return null as unknown as User;
+  return finishOAuthSession(user, "signup", meta);
+}
+
+export async function signUpWithApple(meta: OAuthSignupMeta) {
+  rememberOAuthIntent("signup", meta);
+  const user = await signInWithAuthProvider(appleProvider());
+  if (!user) return null as unknown as User;
+  return finishOAuthSession(user, "signup", meta);
+}
+
+/** Complete Google/Apple redirect sign-in after returning to the app. */
+export async function completeOAuthRedirectLogin(): Promise<User | null> {
   const auth = getFirebaseAuth();
   const result = await getRedirectResult(auth);
   if (!result?.user) return null;
 
-  const student = await fetchStudentDoc(result.user.uid);
-  if (!student) {
-    try {
-      await signOut(auth);
-    } catch {
-      /* ignore */
-    }
-    throw new Error(
-      "No Studiely account is linked to this Google login. Sign up first, or use Open app sign-in with your Studiely email.",
-    );
-  }
-  guestMode.exit();
-  return result.user;
+  const { intent, meta } = consumeOAuthIntent();
+  return finishOAuthSession(result.user, intent, meta);
+}
+
+/** @deprecated Prefer completeOAuthRedirectLogin */
+export async function completeGoogleRedirectLogin(): Promise<User | null> {
+  return completeOAuthRedirectLogin();
 }
 
 export async function sendPasswordResetEmail(email: string) {
@@ -266,6 +447,7 @@ export async function signUpAdult(input: AdultSignupInput): Promise<User> {
     });
     await sendVerificationOtp();
     guestMode.exit();
+    await mergeGuestProfileOnLogin();
     return user;
   } catch (err) {
     try {
@@ -324,6 +506,7 @@ export async function signUpUnder13(
     });
 
     guestMode.exit();
+    await mergeGuestProfileOnLogin();
     return user;
   } catch (err) {
     try {
@@ -446,6 +629,7 @@ export async function signUpParental(
 
       await sendVerificationOtp();
       guestMode.exit();
+      await mergeGuestProfileOnLogin();
       return child;
     } catch (err) {
       try {

@@ -11,6 +11,7 @@ import {
   Field,
   PrimaryButton,
   TextInput,
+  PasswordInput,
 } from "@/components/ui/auth-form";
 import { mapFirebaseError, signUpParental } from "@/lib/auth/service";
 import { calculateAge, EMAIL_REGEX, MINIMUM_AGE } from "@/lib/auth/types";
@@ -101,6 +102,7 @@ export default function ParentalSignupPage() {
       <AuthCard
         title="Parent sign-up"
         subtitle="Create a parent account and a linked child account (under 13)."
+        className="max-w-md sm:max-w-2xl"
       >
         {error ? <Alert>{error}</Alert> : null}
 
@@ -108,93 +110,93 @@ export default function ParentalSignupPage() {
           <h2 className="mb-3 text-sm font-semibold tracking-wide text-[var(--color-core-blue)] uppercase">
             Parent
           </h2>
-          <Field label="Parent full name">
-            <TextInput
-              value={parentName}
-              onChange={(e) => setParentName(e.target.value)}
-              required
-            />
-          </Field>
-          <Field label="Parent email">
-            <TextInput
-              type="email"
-              value={parentEmail}
-              onChange={(e) => setParentEmail(e.target.value)}
-              required
-            />
-          </Field>
-          <Field label="Relationship">
-            <TextInput
-              value={relationship}
-              onChange={(e) => setRelationship(e.target.value)}
-              placeholder="Parent"
-            />
-          </Field>
-          <Field label="Parent password">
-            <TextInput
-              type="password"
-              value={parentPassword}
-              onChange={(e) => setParentPassword(e.target.value)}
-              minLength={6}
-              required
-            />
-          </Field>
-          <Field label="Confirm parent password">
-            <TextInput
-              type="password"
-              value={parentConfirm}
-              onChange={(e) => setParentConfirm(e.target.value)}
-              minLength={6}
-              required
-            />
-          </Field>
+          <div className="sm:grid sm:grid-cols-2 sm:gap-x-5">
+            <Field label="Parent full name" className="sm:mb-5">
+              <TextInput
+                value={parentName}
+                onChange={(e) => setParentName(e.target.value)}
+                required
+              />
+            </Field>
+            <Field label="Parent email" className="sm:mb-5">
+              <TextInput
+                type="email"
+                value={parentEmail}
+                onChange={(e) => setParentEmail(e.target.value)}
+                required
+              />
+            </Field>
+            <Field label="Relationship" className="sm:col-span-2 sm:mb-5">
+              <TextInput
+                value={relationship}
+                onChange={(e) => setRelationship(e.target.value)}
+                placeholder="Parent"
+              />
+            </Field>
+            <Field label="Parent password" className="sm:mb-5">
+              <PasswordInput
+                value={parentPassword}
+                onChange={(e) => setParentPassword(e.target.value)}
+                minLength={6}
+                required
+              />
+            </Field>
+            <Field label="Confirm parent password" className="sm:mb-5">
+              <PasswordInput
+                value={parentConfirm}
+                onChange={(e) => setParentConfirm(e.target.value)}
+                minLength={6}
+                required
+              />
+            </Field>
+          </div>
 
           <h2 className="mt-6 mb-3 text-sm font-semibold tracking-wide text-[var(--color-core-blue)] uppercase">
             Child
           </h2>
-          <Field label="Child full name">
-            <TextInput
-              value={childName}
-              onChange={(e) => setChildName(e.target.value)}
-              required
-            />
-          </Field>
-          <Field label="Child email">
-            <TextInput
-              type="email"
-              value={childEmail}
-              onChange={(e) => setChildEmail(e.target.value)}
-              required
-            />
-          </Field>
-          <Field label="Child date of birth">
-            <TextInput
-              type="date"
-              value={childDob}
-              onChange={(e) => setChildDob(e.target.value)}
-              max={new Date().toISOString().slice(0, 10)}
-              min="2010-01-01"
-              required
-            />
-          </Field>
-          <Field label="Child password">
-            <TextInput
-              type="password"
-              value={childPassword}
-              onChange={(e) => setChildPassword(e.target.value)}
-              minLength={6}
-              required
-            />
-          </Field>
-          <Field label="Confirm child password">
-            <TextInput
-              type="password"
-              value={childConfirm}
-              onChange={(e) => setChildConfirm(e.target.value)}
-              minLength={6}
-              required
-            />
-          </Field>
+          <div className="sm:grid sm:grid-cols-2 sm:gap-x-5">
+            <Field label="Child full name" className="sm:mb-5">
+              <TextInput
+                value={childName}
+                onChange={(e) => setChildName(e.target.value)}
+                required
+              />
+            </Field>
+            <Field label="Child email" className="sm:mb-5">
+              <TextInput
+                type="email"
+                value={childEmail}
+                onChange={(e) => setChildEmail(e.target.value)}
+                required
+              />
+            </Field>
+            <Field label="Child date of birth" className="sm:col-span-2 sm:mb-5">
+              <TextInput
+                type="date"
+                value={childDob}
+                onChange={(e) => setChildDob(e.target.value)}
+                max={new Date().toISOString().slice(0, 10)}
+                min="2010-01-01"
+                required
+              />
+            </Field>
+            <Field label="Child password" className="sm:mb-5">
+              <PasswordInput
+                value={childPassword}
+                onChange={(e) => setChildPassword(e.target.value)}
+                minLength={6}
+                required
+              />
+            </Field>
+            <Field label="Confirm child password" className="sm:mb-5">
+              <PasswordInput
+                value={childConfirm}
+                onChange={(e) => setChildConfirm(e.target.value)}
+                minLength={6}
+                required
+              />
+            </Field>
+          </div>
 
           <label className="mb-3 flex items-start gap-2 text-sm text-[var(--color-gray-text)]">
             <input

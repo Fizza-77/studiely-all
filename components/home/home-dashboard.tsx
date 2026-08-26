@@ -233,10 +233,7 @@ export function HomeDashboard({
           </div>
         </div>
 
-        <aside
-          className="min-w-0 h-fit lg:sticky lg:self-start"
-          style={{ top: "min(4.75rem, calc(100vh - 100%))" }}
-        >
+        <aside className="min-w-0 h-fit lg:sticky lg:top-[4.75rem] lg:max-h-[calc(100dvh-5.5rem)] lg:self-start lg:overflow-y-auto lg:overscroll-y-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <div className="flex flex-col gap-4 lg:pt-1">
           <NylaChatCard
             displayName={displayName}

@@ -540,22 +540,61 @@ function GenerateInner() {
   const legacyModeQuery = searchParams.get("mode");
   const initialMode = resolveGenerateModeName(modeSegment ?? legacyModeQuery);
 
-  const [boardId, setBoardId] = useState(boards[0]?.id ?? "");
-  const [pathwayId, setPathwayId] = useState(
-    boards[0]?.pathways[0]?.id ?? "",
+  const prefillBoard = searchParams.get("board")?.trim() || "";
+  const prefillPathway = searchParams.get("pathway")?.trim() || "";
+  const prefillGrade = searchParams.get("grade")?.trim() || "";
+  const prefillSubject = searchParams.get("subject")?.trim() || "";
+  const prefillTopic = searchParams.get("topic")?.trim() || "";
+  const prefillDifficulty = searchParams.get("difficulty")?.trim() || "";
+  const prefillMnemonics = searchParams.get("mnemonics") === "1";
+  const prefillExamQs = searchParams.get("examQs") === "1";
+  const prefillMistakes = searchParams.get("mistakes") === "1";
+  const isRegenPrefill = searchParams.get("regen") === "1";
+
+  const [boardId, setBoardId] = useState(
+    () =>
+      (prefillBoard && boards.some((b) => b.id === prefillBoard)
+        ? prefillBoard
+        : boards[0]?.id) ?? "",
   );
-  const [gradeId, setGradeId] = useState(
-    boards[0]?.pathways[0]?.grades.find((g) => g.subjectsKey)?.id ?? "",
-  );
+  const [pathwayId, setPathwayId] = useState(() => {
+    if (prefillBoard && prefillPathway) {
+      const board = boards.find((b) => b.id === prefillBoard);
+      if (board?.pathways.some((p) => p.id === prefillPathway)) {
+        return prefillPathway;
+      }
+    }
+    return boards[0]?.pathways[0]?.id ?? "";
+  });
+  const [gradeId, setGradeId] = useState(() => {
+    if (prefillBoard && prefillPathway && prefillGrade) {
+      const pathway = boards
+        .find((b) => b.id === prefillBoard)
+        ?.pathways.find((p) => p.id === prefillPathway);
+      if (pathway?.grades.some((g) => g.id === prefillGrade)) {
+        return prefillGrade;
+      }
+    }
+    return (
+      boards[0]?.pathways[0]?.grades.find((g) => g.subjectsKey)?.id ?? ""
+    );
+  });
   const [subject, setSubject] = useState("");
   const [customSubject, setCustomSubject] = useState("");
   const [subjectQuery, setSubjectQuery] = useState("");
-  const [topic, setTopic] = useState("");
+  const [topic, setTopic] = useState(() => prefillTopic);
   const [studyMode, setStudyMode] = useState(initialMode);
-  const [difficulty, setDifficulty] = useState<Difficulty>("Medium");
-  const [includeMnemonics, setIncludeMnemonics] = useState(false);
-  const [includeExamStyleQs, setIncludeExamStyleQs] = useState(false);
-  const [includeCommonMistakes, setIncludeCommonMistakes] = useState(false);
+  const [difficulty, setDifficulty] = useState<Difficulty>(() =>
+    prefillDifficulty === "Easy" ||
+    prefillDifficulty === "Medium" ||
+    prefillDifficulty === "Hard"
+      ? prefillDifficulty
+      : "Medium",
+  );
+  const [includeMnemonics, setIncludeMnemonics] = useState(prefillMnemonics);
+  const [includeExamStyleQs, setIncludeExamStyleQs] = useState(prefillExamQs);
+  const [includeCommonMistakes, setIncludeCommonMistakes] =
+    useState(prefillMistakes);
   const [showModes, setShowModes] = useState(false);
   const [openSetup, setOpenSetup] = useState<
     null | "board" | "pathway" | "grade"
@@ -575,10 +614,11 @@ function GenerateInner() {
   const [guestPreview, setGuestPreview] = useState<string | null>(null);
   const [activeStep, setActiveStep] = useState<
     "subject" | "difficulty" | "extras" | "topic"
-  >("subject");
+  >(() => (isRegenPrefill && prefillTopic ? "topic" : "subject"));
   const [extraHelp, setExtraHelp] = useState<
     "mnemonics" | "exam" | "mistakes" | null
   >(null);
+  const prefillSubjectApplied = useRef(false);
 
   useEffect(() => {
     // Legacy `/generate?mode=Summary%20Notes` → `/generate/notes`
@@ -591,6 +631,45 @@ function GenerateInner() {
     const next = resolveGenerateModeName(modeSegment);
     setStudyMode(next);
   }, [modeSegment]);
+
+  // Apply subject from library regenerate once options for the prefilled grade load.
+  useEffect(() => {
+    if (prefillSubjectApplied.current) return;
+    if (!prefillSubject) return;
+    if (!boardId || !pathwayId || !gradeId) return;
+
+    const options = getSubjectOptions(boardId, pathwayId, gradeId);
+    if (options.includes(prefillSubject)) {
+      setSubject(prefillSubject);
+      setCustomSubject("");
+      setSubjectQuery(prefillSubject);
+    } else {
+      setSubject("__custom__");
+      setCustomSubject(prefillSubject);
+      setSubjectQuery(prefillSubject);
+    }
+    prefillSubjectApplied.current = true;
+    if (isRegenPrefill) {
+      setActiveStep(prefillTopic ? "topic" : "difficulty");
+    }
+  }, [
+    prefillSubject,
+    prefillTopic,
+    isRegenPrefill,
+    boardId,
+    pathwayId,
+    gradeId,
+  ]);
+
+  useEffect(() => {
+    if (!isRegenPrefill) return;
+    const el = document.getElementById("generate-study-form");
+    if (!el) return;
+    const t = window.setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
+    return () => window.clearTimeout(t);
+  }, [isRegenPrefill]);
 
   function selectStudyMode(name: string) {
     const next = resolveGenerateModeName(name);
@@ -953,7 +1032,7 @@ function GenerateInner() {
               ref={setupRef}
               className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3"
             >
-              <span className="shrink-0 text-[10px] font-bold tracking-[0.14em] text-[#9CA3AF] uppercase">
+              <span className="shrink-0 text-[10px] font-bold tracking-[0.14em] text-[#111827] uppercase">
                 Your setup
               </span>
               <div className="grid min-w-0 flex-1 gap-2 sm:grid-cols-3">

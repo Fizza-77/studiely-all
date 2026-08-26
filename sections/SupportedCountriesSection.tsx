@@ -56,6 +56,36 @@ const CardFlag = ({ src }: { src: string }) => (
   />
 );
 
+/** Landmark photo — grows to fill leftover card space without covering text. */
+const CardLandmark = ({
+  src,
+  alt,
+  className = "",
+  fit = "cover",
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  fit?: "cover" | "contain";
+}) => (
+  <div
+    className={`relative min-h-[140px] overflow-hidden rounded-[22px] ${className}`}
+  >
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      unoptimized
+      sizes="(max-width: 768px) 90vw, 45vw"
+      className={
+        fit === "contain"
+          ? "object-contain object-center"
+          : "object-cover object-center"
+      }
+    />
+  </div>
+);
+
 const CardTitle = ({
   children,
   subtitle,
@@ -229,24 +259,23 @@ export const SupportedCountriesSection = ({
         </div>
 
         <div className="flex flex-col gap-4 md:gap-5">
-          <div className="grid grid-cols-1 gap-4 md:gap-5 lg:grid-cols-[minmax(0,1.72fr)_minmax(0,1fr)] lg:gap-5">
+          <div className="grid grid-cols-1 items-stretch gap-4 md:gap-5 lg:grid-cols-[minmax(0,1.72fr)_minmax(0,1fr)] lg:gap-5">
             {/* United Kingdom */}
             <article
-              className={`relative overflow-hidden rounded-[28px] p-6 sm:p-8 ${CARD_HOVER_BORDER}`}
+              className={`relative flex h-full flex-col overflow-hidden rounded-[28px] p-6 sm:p-8 ${CARD_HOVER_BORDER}`}
               style={{ backgroundColor: BLUE }}
             >
-              <div className="grid min-h-[300px] grid-cols-1 items-stretch gap-6 md:min-h-[340px] md:grid-cols-[minmax(0,42%)_minmax(0,58%)] md:gap-0">
-                <div className="relative z-[1] flex flex-col justify-center">
-                  <CardFlag src="/UK.png" />
-                  <h3 className="mb-1 mt-2 font-heading text-[clamp(2rem,3.8vw,2.85rem)] font-extrabold leading-[1.02] tracking-[-0.02em] text-white">
-                    United
-                    <br />
-                    Kingdom
-                  </h3>
-                  <p className="mb-5 font-heading text-[13px] font-bold text-white/90 sm:text-[14px]">
-                    Secondary to A Level
-                  </p>
-                  <ul className="m-0 flex list-none flex-col gap-3 p-0">
+              <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
+                <CardFlag src="/UK.png" />
+                <h3 className="mb-1 mt-2 whitespace-nowrap font-heading text-[clamp(1.35rem,2.4vw,1.85rem)] font-extrabold leading-[1.05] tracking-[-0.02em] text-white">
+                  United Kingdom
+                </h3>
+                <p className="mb-3 font-heading text-[13px] font-bold text-white/90 sm:text-[14px]">
+                  Secondary to A Level
+                </p>
+
+                <div className="flex min-h-0 flex-1 flex-col gap-4 sm:flex-row sm:items-stretch sm:gap-5">
+                  <ul className="relative z-[1] m-0 flex min-w-0 shrink-0 list-none flex-col gap-3 p-0 sm:max-w-[55%]">
                     {[
                       "Cambridge IGCSE, AS, A Level",
                       "Edexcel IGCSE, AS, A Level",
@@ -260,194 +289,239 @@ export const SupportedCountriesSection = ({
                       </li>
                     ))}
                   </ul>
-                </div>
 
-                <div className="relative min-h-[280px] md:-my-4 md:-mr-8 md:min-h-0 lg:-mr-10">
-                  <div className="relative h-full min-h-[280px] md:min-h-[340px]">
-                    <svg
-                      viewBox="0 0 100 100"
-                      aria-hidden
-                      className="pointer-events-none absolute right-[12%] top-[16%] z-[1] h-auto w-[clamp(4rem,8vw,6rem)] opacity-45"
-                    >
-                      <path
-                        fill="#1B1468"
-                        d="M50 4 L61.2 36.2 L95 38.5 L68.5 59.5 L77.5 92 L50 74.5 L22.5 92 L31.5 59.5 L5 38.5 L38.8 36.2 Z"
-                      />
-                    </svg>
-                    <Image
-                      src="/US-student.png"
-                      alt=""
-                      fill
-                      unoptimized
-                      sizes="(max-width: 768px) 90vw, 50vw"
-                      className="z-[2] origin-bottom-right -translate-x-2 translate-y-3 scale-[1.02] object-contain object-bottom object-right sm:-translate-x-3 sm:translate-y-4 sm:scale-[1.06] md:-translate-x-4 md:translate-y-5 md:scale-[1.1]"
-                      aria-hidden
-                    />
-                  </div>
+                  <CardLandmark
+                    src="/UK.webp"
+                    alt="Palace of Westminster and Big Ben at night"
+                    fit="cover"
+                    className="min-h-[150px] w-full flex-1 sm:min-h-[160px] sm:min-w-[42%]"
+                  />
                 </div>
               </div>
             </article>
 
             {/* United States */}
             <article
-              className={`relative rounded-[28px] bg-white px-6 py-7 sm:px-7 sm:py-8 ${CARD_HOVER_BORDER}`}
+              className={`relative overflow-hidden rounded-[28px] bg-white p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
             >
-              <CardTitle subtitle="Kindergarten to College Admissions">
-                <CardFlag src="/USA.png" />
-                <CountryHeading>United States</CountryHeading>
-              </CardTitle>
+              <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] sm:gap-4">
+                <div className="relative z-[1] min-w-0">
+                  <CardTitle subtitle="Kindergarten to College Admissions">
+                    <CardFlag src="/USA.png" />
+                    <CountryHeading>United States</CountryHeading>
+                  </CardTitle>
 
-              <ul className="m-0 flex list-none flex-col gap-4 p-0">
-                {[
-                  {
-                    title: "Foundational",
-                    item: "Common Core State Standards",
-                  },
-                  {
-                    title: "Advanced",
-                    item: "Advanced Placement (AP)",
-                  },
-                  {
-                    title: "Admissions",
-                    item: "Digital SAT",
-                  },
-                ].map((row, i) => (
-                  <li key={row.title} className="flex items-start gap-2.5">
-                    <NumBadge n={i + 1} />
-                    <div className="min-w-0">
-                      <p className="m-0 font-heading text-[14px] font-bold text-[#1E1B4B]">
-                        {row.title}
-                      </p>
-                      <p className="m-0 mt-1 flex items-start gap-2 font-sans text-[13px] leading-snug text-[#2A2B36] sm:text-[14px]">
-                        <span
-                          className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full"
-                          style={{ backgroundColor: BLUE }}
-                          aria-hidden
-                        />
-                        {row.item}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                  <ul className="m-0 flex list-none flex-col gap-4 p-0">
+                    {[
+                      {
+                        title: "Foundational",
+                        item: "Common Core State Standards",
+                      },
+                      {
+                        title: "Advanced",
+                        item: "Advanced Placement (AP)",
+                      },
+                      {
+                        title: "Admissions",
+                        item: "Digital SAT",
+                      },
+                    ].map((row, i) => (
+                      <li key={row.title} className="flex items-start gap-2.5">
+                        <NumBadge n={i + 1} />
+                        <div className="min-w-0">
+                          <p className="m-0 font-heading text-[14px] font-bold text-[#1E1B4B]">
+                            {row.title}
+                          </p>
+                          <p className="m-0 mt-1 flex items-start gap-2 font-sans text-[13px] leading-snug text-[#2A2B36] sm:text-[14px]">
+                            <span
+                              className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full"
+                              style={{ backgroundColor: BLUE }}
+                              aria-hidden
+                            />
+                            {row.item}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="relative w-full overflow-hidden rounded-[22px]">
+                  <Image
+                    src="/US.webp"
+                    alt="Statue of Liberty at night"
+                    width={480}
+                    height={860}
+                    unoptimized
+                    sizes="(max-width: 768px) 90vw, 40vw"
+                    className="h-auto w-full object-contain object-center"
+                  />
+                </div>
+              </div>
             </article>
           </div>
 
           <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-3 md:gap-5">
             {/* International Baccalaureate */}
-            <article className={`rounded-[28px] bg-white px-6 py-7 sm:px-6 sm:py-7 ${CARD_HOVER_BORDER}`}>
-              <CardTitle subtitle="Primary to Diploma Programme">
-                <CardFlag src="/USA.png" />
-                <CountryHeading>
-                  International
-                  <br />
-                  Baccalaureate
-                </CountryHeading>
-              </CardTitle>
-              <ul className="m-0 flex list-none flex-col gap-3 p-0">
-                <NumberedRow n={1}>Primary Years Programme (PYP)</NumberedRow>
-                <NumberedRow n={2}>Middle Years Programme (MYP)</NumberedRow>
-                <NumberedRow n={3}>Diploma Programme (DP)</NumberedRow>
-              </ul>
+            <article
+              className={`overflow-hidden rounded-[28px] bg-white p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
+            >
+              <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+                <div className="relative z-[1] min-w-0">
+                  <CardTitle subtitle="Primary to Diploma Programme">
+                    <CardFlag src="/USA.png" />
+                    <CountryHeading>
+                      International
+                      <br />
+                      Baccalaureate
+                    </CountryHeading>
+                  </CardTitle>
+                  <ul className="m-0 flex list-none flex-col gap-3 p-0">
+                    <NumberedRow n={1}>Primary Years Programme (PYP)</NumberedRow>
+                    <NumberedRow n={2}>Middle Years Programme (MYP)</NumberedRow>
+                    <NumberedRow n={3}>Diploma Programme (DP)</NumberedRow>
+                  </ul>
+                </div>
+                <div className="relative w-full overflow-hidden rounded-[22px]">
+                  <Image
+                    src="/IB.webp"
+                    alt="Washington Monument at night"
+                    width={480}
+                    height={860}
+                    unoptimized
+                    sizes="(max-width: 768px) 90vw, 30vw"
+                    className="h-auto w-full object-contain object-center"
+                  />
+                </div>
+              </div>
             </article>
 
             {/* Australia */}
             <motion.article
               layout
               transition={expandTransition}
-              className={`rounded-[28px] px-6 py-7 sm:px-6 sm:py-7 ${CARD_HOVER_BORDER}`}
+              className={`flex h-full flex-col overflow-hidden rounded-[28px] p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
               style={{ backgroundColor: LIME }}
             >
-              <CardTitle subtitle="Primary to Senior Secondary">
-                <CardFlag src="/Aus.png" />
-                <CountryHeading>Australia</CountryHeading>
-              </CardTitle>
-              <ul className="m-0 flex list-none flex-col gap-3 p-0">
-                {ausPreview.map((item, i) => (
-                  <NumberedRow key={item} n={i + 1}>
-                    {item}
-                  </NumberedRow>
-                ))}
-              </ul>
-              <ExpandableExtras open={ausExpanded}>
-                <ul className="m-0 flex list-none flex-col gap-3 p-0">
-                  {ausExtra.map((item, i) => (
-                    <motion.li
-                      key={item}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{
-                        ...expandTransition,
-                        delay: openDelay(i),
-                      }}
-                      className="flex items-start gap-2.5"
-                    >
-                      <NumBadge n={PREVIEW_COUNT + i + 1} />
-                      <span className="font-sans text-[13px] leading-snug text-[#2A2B36] sm:text-[14px]">
-                        {item}
-                      </span>
-                    </motion.li>
-                  ))}
-                </ul>
-                <div className="mt-5">
-                  <p className="mb-3 font-heading text-[14px] font-bold text-[#1E1B4B]">
-                    National Assessments
-                  </p>
-                  <ul className="m-0 flex list-none flex-col gap-3 p-0">
-                    <NumberedRow n={1}>NAPLAN</NumberedRow>
-                  </ul>
+              <div className="flex min-h-0 flex-1 flex-col gap-4">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                  <div className="relative z-[1] min-w-0 flex-1">
+                    <CardTitle subtitle="Primary to Senior Secondary">
+                      <CardFlag src="/Aus.png" />
+                      <CountryHeading>Australia</CountryHeading>
+                    </CardTitle>
+                  </div>
+                  <CardLandmark
+                    src="/Australia.webp"
+                    alt="Sydney Opera House at night"
+                    fit="cover"
+                    className="aspect-[16/10] w-full min-h-[120px] shrink-0 self-start sm:w-[min(48%,12rem)] sm:min-w-[10rem] sm:flex-1 sm:aspect-auto sm:min-h-[140px]"
+                  />
                 </div>
-              </ExpandableExtras>
-              <ReadMoreBtn
-                expanded={ausExpanded}
-                onToggle={() => setAusExpanded((v) => !v)}
-              />
+
+                <div className="relative z-[1] w-full min-w-0">
+                  <ul className="m-0 flex w-full list-none flex-col gap-3 p-0">
+                    {ausPreview.map((item, i) => (
+                      <NumberedRow key={item} n={i + 1}>
+                        {item}
+                      </NumberedRow>
+                    ))}
+                  </ul>
+                  <ExpandableExtras open={ausExpanded}>
+                    <ul className="m-0 flex w-full list-none flex-col gap-3 p-0">
+                      {ausExtra.map((item, i) => (
+                        <motion.li
+                          key={item}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          transition={{
+                            ...expandTransition,
+                            delay: openDelay(i),
+                          }}
+                          className="flex items-start gap-2.5"
+                        >
+                          <NumBadge n={PREVIEW_COUNT + i + 1} />
+                          <span className="font-sans text-[13px] leading-snug text-[#2A2B36] sm:text-[14px]">
+                            {item}
+                          </span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                    <div className="mt-5">
+                      <p className="mb-3 font-heading text-[14px] font-bold text-[#1E1B4B]">
+                        National Assessments
+                      </p>
+                      <ul className="m-0 flex list-none flex-col gap-3 p-0">
+                        <NumberedRow n={1}>NAPLAN</NumberedRow>
+                      </ul>
+                    </div>
+                  </ExpandableExtras>
+                  <ReadMoreBtn
+                    expanded={ausExpanded}
+                    onToggle={() => setAusExpanded((v) => !v)}
+                  />
+                </div>
+              </div>
             </motion.article>
 
             {/* Canada */}
             <motion.article
               layout
               transition={expandTransition}
-              className={`rounded-[28px] bg-white px-6 py-7 sm:px-6 sm:py-7 ${CARD_HOVER_BORDER}`}
+              className={`overflow-hidden rounded-[28px] bg-white p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
             >
-              <CardTitle subtitle="Primary to High School Graduation">
-                <CardFlag src="/Canada.png" />
-                <CountryHeading>Canada</CountryHeading>
-              </CardTitle>
-              <ul className="m-0 flex list-none flex-col gap-3 p-0">
-                {canadaPreview.map((item, i) => (
-                  <NumberedRow key={item} n={i + 1}>
-                    {item}
-                  </NumberedRow>
-                ))}
-              </ul>
-              <ExpandableExtras open={canadaExpanded}>
-                <ul className="m-0 flex list-none flex-col gap-3 p-0">
-                  {canadaExtra.map((item, i) => (
-                    <motion.li
-                      key={item}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{
-                        ...expandTransition,
-                        delay: openDelay(i),
-                      }}
-                      className="flex items-start gap-2.5"
-                    >
-                      <NumBadge n={PREVIEW_COUNT + i + 1} />
-                      <span className="font-sans text-[13px] leading-snug text-[#2A2B36] sm:text-[14px]">
+              <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+                <div className="relative z-[1] min-w-0">
+                  <CardTitle subtitle="Primary to High School Graduation">
+                    <CardFlag src="/Canada.png" />
+                    <CountryHeading>Canada</CountryHeading>
+                  </CardTitle>
+                  <ul className="m-0 flex list-none flex-col gap-3 p-0">
+                    {canadaPreview.map((item, i) => (
+                      <NumberedRow key={item} n={i + 1}>
                         {item}
-                      </span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </ExpandableExtras>
-              <ReadMoreBtn
-                expanded={canadaExpanded}
-                onToggle={() => setCanadaExpanded((v) => !v)}
-              />
+                      </NumberedRow>
+                    ))}
+                  </ul>
+                  <ExpandableExtras open={canadaExpanded}>
+                    <ul className="m-0 flex list-none flex-col gap-3 p-0">
+                      {canadaExtra.map((item, i) => (
+                        <motion.li
+                          key={item}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          transition={{
+                            ...expandTransition,
+                            delay: openDelay(i),
+                          }}
+                          className="flex items-start gap-2.5"
+                        >
+                          <NumBadge n={PREVIEW_COUNT + i + 1} />
+                          <span className="font-sans text-[13px] leading-snug text-[#2A2B36] sm:text-[14px]">
+                            {item}
+                          </span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </ExpandableExtras>
+                  <ReadMoreBtn
+                    expanded={canadaExpanded}
+                    onToggle={() => setCanadaExpanded((v) => !v)}
+                  />
+                </div>
+                <div className="relative w-full overflow-hidden rounded-[22px]">
+                  <Image
+                    src="/Canada.webp"
+                    alt="CN Tower and Toronto skyline at night"
+                    width={480}
+                    height={860}
+                    unoptimized
+                    sizes="(max-width: 768px) 90vw, 30vw"
+                    className="h-auto w-full object-contain object-center"
+                  />
+                </div>
+              </div>
             </motion.article>
           </div>
         </div>
