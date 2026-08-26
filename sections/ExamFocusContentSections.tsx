@@ -81,19 +81,16 @@ const PLAN = [
     title: "Choose the next action",
     desc: "Use focus areas to pick the right tool — notes, flashcards, quizzes or exam practice.",
     color: BLUE,
-    dark: false,
   },
   {
     title: "Face weak topics",
     desc: "Do not ignore weak topics because they feel uncomfortable. Put them on the list and act.",
     color: PINK,
-    dark: false,
   },
   {
     title: "Stay aligned",
     desc: "Check teacher instructions and official requirements before final preparation.",
     color: LIME,
-    dark: true,
   },
 ] as const;
 
@@ -127,34 +124,37 @@ export const ExamFocusPlanSection = () => {
         </Reveal>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
-          {PLAN.map((item, i) => (
-            <Reveal key={item.title} delay={i * 0.08} y={26}>
-              <article
-                className="funky-card relative flex h-full flex-col overflow-hidden rounded-[24px] px-5 py-6 shadow-[0_14px_36px_rgba(30,27,75,0.12)] sm:rounded-[28px] sm:px-6 sm:py-7"
-                style={{
-                  backgroundColor: item.color,
-                  color: item.dark ? "#1E1B4B" : "#FFFFFF",
-                }}
-              >
-                <span className="mb-3 font-heading text-[11px] font-extrabold uppercase tracking-[0.14em] opacity-80">
-                  0{i + 1}
-                </span>
-                <h3 className="mb-2 font-jakarta text-[1.15rem] font-extrabold">
-                  {item.title}
-                </h3>
-                <p
-                  className="m-0 text-[13px] leading-[1.7] sm:text-[14px]"
+          {PLAN.map((item, i) => {
+            const onLime = item.color === LIME;
+            return (
+              <Reveal key={item.title} delay={i * 0.08} y={26}>
+                <article
+                  className="funky-card relative flex h-full flex-col overflow-hidden rounded-[24px] px-5 py-6 shadow-[0_14px_36px_rgba(30,27,75,0.12)] sm:rounded-[28px] sm:px-6 sm:py-7"
                   style={{
-                    color: item.dark
-                      ? "rgba(30,27,75,0.8)"
-                      : "rgba(255,255,255,0.9)",
+                    backgroundColor: item.color,
+                    color: onLime ? "#1E1B4B" : "#FFFFFF",
                   }}
                 >
-                  {item.desc}
-                </p>
-              </article>
-            </Reveal>
-          ))}
+                  <span className="mb-3 font-heading text-[11px] font-extrabold uppercase tracking-[0.14em] opacity-80">
+                    0{i + 1}
+                  </span>
+                  <h3 className="mb-2 font-jakarta text-[1.15rem] font-extrabold">
+                    {item.title}
+                  </h3>
+                  <p
+                    className="m-0 text-[13px] leading-[1.7] sm:text-[14px]"
+                    style={{
+                      color: onLime
+                        ? "rgba(30,27,75,0.8)"
+                        : "rgba(255,255,255,0.9)",
+                    }}
+                  >
+                    {item.desc}
+                  </p>
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
