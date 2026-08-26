@@ -6,6 +6,9 @@ import { Suspense } from "react";
 
 import "../student-globals.css";
 
+/** Student routes need request/auth context — do not statically prerender. */
+export const dynamic = "force-dynamic";
+
 /**
  * Student web app shell (login, home, generate, …).
  * Fonts come from root layout (Inter + Montserrat) so marketing + app match.

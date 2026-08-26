@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   experimental: {
     /** Inline global CSS into HTML to reduce render-blocking CSS on first paint (LCP). */
     inlineCss: true,
+    /** Absorb intermittent Next 16 workUnitAsyncStorage prerender races. */
+    staticGenerationRetryCount: 3,
     optimizePackageImports: [
       "lucide-react",
       "framer-motion",
