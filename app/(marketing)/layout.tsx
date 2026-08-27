@@ -1,15 +1,9 @@
 import { Suspense, type ReactNode } from "react";
-import dynamic from "next/dynamic";
 
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { NylaFabLazy } from "@/components/NylaFabLazy";
 import { MarketingPwaGuard } from "@/components/pwa/MarketingPwaGuard";
-
-/** Ask Nyla FAB — load after paint; keeps Firebase/FAQ out of the first JS. */
-const NylaFab = dynamic(
-  () => import("@/components/NylaFab").then((m) => m.NylaFab),
-  { ssr: false, loading: () => null },
-);
 
 /** Marketing / landing pages — site chrome with Navbar + Footer.
  *  No AuthProvider here: Firebase Auth must not sit on the LCP critical path.
@@ -25,7 +19,7 @@ export default function MarketingLayout({
         <Navbar />
         <div>{children}</div>
         <Footer />
-        <NylaFab />
+        <NylaFabLazy />
       </MarketingPwaGuard>
     </Suspense>
   );
