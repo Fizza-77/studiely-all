@@ -69,7 +69,7 @@ export const FlashcardMakerHeroSection = () => {
             y={28}
           >
             <Image
-              src="/hero-star.png"
+              src="/hero-star.webp"
               alt=""
               width={180}
               height={180}

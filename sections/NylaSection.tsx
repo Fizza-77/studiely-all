@@ -195,7 +195,7 @@ export const NylaSection = ({ sectionRef }: NylaSectionProps) => {
                     />
                   </svg>
                   <Image
-                    src="/US-student.png"
+                    src="/US-student.webp"
                     alt=""
                     width={480}
                     height={600}

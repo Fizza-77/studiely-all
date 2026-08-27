@@ -41,7 +41,7 @@ export const ExamFocusDirectionSection = () => {
           <Reveal delay={0.1} y={30}>
             <div className="relative mx-auto w-full max-w-md">
               <Image
-                src="/flower.png"
+                src="/flower.webp"
                 alt=""
                 width={160}
                 height={160}

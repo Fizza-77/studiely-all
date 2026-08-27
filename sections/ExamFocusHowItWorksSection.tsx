@@ -52,7 +52,7 @@ export const ExamFocusHowItWorksSection = () => {
               </p>
             </div>
             <Image
-              src="/flower.png"
+              src="/flower.webp"
               alt=""
               width={320}
               height={320}

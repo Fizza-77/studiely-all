@@ -50,7 +50,7 @@ export const NylaStudyFlowSection = () => {
             </div>
 
             <Image
-              src="/flower.png"
+              src="/flower.webp"
               alt=""
               width={360}
               height={360}

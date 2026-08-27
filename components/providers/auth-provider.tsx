@@ -9,19 +9,10 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { onAuthStateChanged, type User } from "firebase/auth";
+import type { User } from "firebase/auth";
 
 import { isFirebaseConfigured } from "@/lib/firebase/config";
-import { getFirebaseAuth } from "@/lib/firebase/client";
 import { guestMode } from "@/lib/auth/guest";
-import {
-  fetchStudentDoc,
-  hasParentalConsent,
-  isChildAccount,
-  completeOAuthRedirectLogin,
-  mapFirebaseError,
-  signOutUser,
-} from "@/lib/auth/service";
 import type { AuthPhase, StudentDocSummary } from "@/lib/auth/types";
 
 type AuthContextValue = {
@@ -35,6 +26,12 @@ type AuthContextValue = {
   enterGuestMode: () => void;
 };
 
+type AuthProviderProps = {
+  children: ReactNode;
+  /** Delay Firebase Auth (iframe + SDK) until idle — use on marketing pages for LCP. */
+  deferFirebase?: boolean;
+};
+
 const AuthContext = createContext<AuthContextValue>({
   phase: "initializing",
   user: null,
@@ -46,7 +43,12 @@ const AuthContext = createContext<AuthContextValue>({
   enterGuestMode: () => {},
 });
 
-function friendlyStorageError(raw: string): string {
+async function mapAuthError(err: unknown): Promise<string> {
+  const { mapFirebaseError } = await import("@/lib/auth/service");
+  return mapFirebaseError(err);
+}
+
+async function friendlyStorageError(raw: string): Promise<string> {
   const msg = raw.toLowerCase();
   if (
     msg.includes("database is closing") ||
@@ -59,7 +61,7 @@ function friendlyStorageError(raw: string): string {
   if (msg.includes("quota") || msg.includes("space") || msg.includes("disk")) {
     return "Browser storage is full. Free some space, then reload.";
   }
-  return mapFirebaseError(new Error(raw));
+  return mapAuthError(new Error(raw));
 }
 
 function phaseFromUser(
@@ -85,6 +87,13 @@ async function resolvePhase(user: User | null): Promise<{
     return { phase: "guest", student: null };
   }
 
+  const {
+    fetchStudentDoc,
+    hasParentalConsent,
+    isChildAccount,
+    signOutUser,
+  } = await import("@/lib/auth/service");
+
   await user.reload();
 
   let student: StudentDocSummary | null;
@@ -94,7 +103,7 @@ async function resolvePhase(user: User | null): Promise<{
     // IndexedDB / disk / network failures must NOT wipe a valid Auth session to guest.
     const message =
       err instanceof Error ? err.message : "Could not load profile from Firestore.";
-    const soft = friendlyStorageError(message);
+    const soft = await friendlyStorageError(message);
     return {
       phase: phaseFromUser(user, null),
       student: null,
@@ -119,7 +128,10 @@ async function resolvePhase(user: User | null): Promise<{
   };
 }
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+export function AuthProvider({
+  children,
+  deferFirebase = false,
+}: AuthProviderProps) {
   const [phase, setPhase] = useState<AuthPhase>("initializing");
   const [user, setUser] = useState<User | null>(null);
   const [student, setStudent] = useState<StudentDocSummary | null>(null);
@@ -142,7 +154,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setPhase(resolved.phase);
       setError(resolved.softError ?? null);
     } catch (err) {
-      const message = friendlyStorageError(
+      const message = await friendlyStorageError(
         err instanceof Error ? err.message : "Auth failed",
       );
       // Keep Firebase Auth user if present — only go guest when there is no session.
@@ -170,48 +182,86 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     let cancelled = false;
-    const auth = getFirebaseAuth();
-    setFirebaseReady(true);
+    let unsub = () => {};
+    let timeout = 0;
+    let idleId: number | undefined;
+    let deferTimer = 0;
 
-    // Finish Google/Apple redirect sign-in (PWA / mobile) before relying on auth state.
-    void completeOAuthRedirectLogin().catch((err) => {
+    const start = async () => {
       if (cancelled) return;
-      setError(mapFirebaseError(err));
-    });
+      const [{ onAuthStateChanged }, { getFirebaseAuth }, { completeOAuthRedirectLogin }] =
+        await Promise.all([
+          import("firebase/auth"),
+          import("@/lib/firebase/client"),
+          import("@/lib/auth/service"),
+        ]);
+      if (cancelled) return;
 
-    const unsub = onAuthStateChanged(auth, (next) => {
-      void (async () => {
+      const auth = getFirebaseAuth();
+      setFirebaseReady(true);
+
+      // Finish Google/Apple redirect sign-in (PWA / mobile) before relying on auth state.
+      void completeOAuthRedirectLogin().catch(async (err) => {
         if (cancelled) return;
-        setPhase("initializing");
-        await applyUser(next);
-      })();
-    });
-
-    const timeout = window.setTimeout(() => {
-      if (cancelled) return;
-      // Never force guest while Firebase still has a signed-in user (slow Firestore).
-      if (auth.currentUser) return;
-      setPhase((current) => {
-        if (current === "initializing") {
-          guestMode.enable();
-          return "guest";
-        }
-        return current;
+        setError(await mapAuthError(err));
       });
-    }, 8000);
+
+      unsub = onAuthStateChanged(auth, (next) => {
+        void (async () => {
+          if (cancelled) return;
+          setPhase("initializing");
+          await applyUser(next);
+        })();
+      });
+
+      timeout = window.setTimeout(() => {
+        if (cancelled) return;
+        // Never force guest while Firebase still has a signed-in user (slow Firestore).
+        if (auth.currentUser) return;
+        setPhase((current) => {
+          if (current === "initializing") {
+            guestMode.enable();
+            return "guest";
+          }
+          return current;
+        });
+      }, 8000);
+    };
+
+    if (deferFirebase) {
+      // Paint marketing LCP first; treat as guest until Auth catches up.
+      guestMode.enable();
+      setPhase("guest");
+      const load = () => {
+        void start();
+      };
+      if (typeof window.requestIdleCallback === "function") {
+        idleId = window.requestIdleCallback(load, { timeout: 4000 });
+      } else {
+        deferTimer = window.setTimeout(load, 2500);
+      }
+    } else {
+      void start();
+    }
 
     return () => {
       cancelled = true;
       unsub();
       window.clearTimeout(timeout);
+      if (idleId != null && typeof window.cancelIdleCallback === "function") {
+        window.cancelIdleCallback(idleId);
+      }
+      if (deferTimer) window.clearTimeout(deferTimer);
     };
-  }, [applyUser]);
+  }, [applyUser, deferFirebase]);
 
   const refreshPhase = useCallback(async () => {
+    const { getFirebaseAuth } = await import("@/lib/firebase/client");
     await applyUser(getFirebaseAuth().currentUser);
   }, [applyUser]);
 
   const recheckEmailVerification = useCallback(async () => {
+    const { getFirebaseAuth } = await import("@/lib/firebase/client");
     const current = getFirebaseAuth().currentUser;
     if (!current) return;
     await current.reload();

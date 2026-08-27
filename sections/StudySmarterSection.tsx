@@ -80,7 +80,7 @@ export const StudySmarterSection = () => {
                 style={{ backgroundColor: PURPLE }}
               >
                 <Image
-                  src="/flower.png"
+                  src="/flower.webp"
                   alt=""
                   width={80}
                   height={80}

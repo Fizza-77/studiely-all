@@ -64,7 +64,7 @@ export const ExamFocusProblemSection = () => {
               draggable={false}
             />
             <Image
-              src="/flower.png"
+              src="/flower.webp"
               alt=""
               width={280}
               height={280}

@@ -78,7 +78,7 @@ export const NotesGeneratorCtaSection = () => {
               style={{ backgroundColor: BLUE }}
             >
               <Image
-                src="/flower.png"
+                src="/flower.webp"
                 alt=""
                 width={220}
                 height={220}

@@ -13,7 +13,7 @@ export default function MarketingLayout({
   children: ReactNode;
 }) {
   return (
-    <AuthProvider>
+    <AuthProvider deferFirebase>
       <Suspense fallback={null}>
         <MarketingPwaGuard>
           <Navbar />

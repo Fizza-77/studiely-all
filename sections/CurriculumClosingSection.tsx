@@ -33,7 +33,7 @@ export const CurriculumClosingSection = () => {
             </a>
 
             <Image
-              src="/flower.png"
+              src="/flower.webp"
               alt=""
               width={360}
               height={360}

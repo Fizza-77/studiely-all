@@ -68,6 +68,12 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      <link
+        rel="preload"
+        as="image"
+        href="/hero-img.webp"
+        fetchPriority="high"
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -240,7 +240,7 @@ export const SupportedCountriesSection = ({
               <span className="relative block whitespace-nowrap font-extrabold" style={{ color: BLUE }}>
                 UK, US, IB, Australia &amp; Canada
                 <Image
-                  src="/finger.png"
+                  src="/finger.webp"
                   alt=""
                   width={800}
                   height={800}
@@ -266,7 +266,7 @@ export const SupportedCountriesSection = ({
               style={{ backgroundColor: BLUE }}
             >
               <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
-                <CardFlag src="/UK.png" />
+                <CardFlag src="/UK-flag.webp" />
                 <h3 className="mb-1 mt-2 whitespace-nowrap font-heading text-[clamp(1.35rem,2.4vw,1.85rem)] font-extrabold leading-[1.05] tracking-[-0.02em] text-white">
                   United Kingdom
                 </h3>
@@ -307,7 +307,7 @@ export const SupportedCountriesSection = ({
               <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] sm:gap-4">
                 <div className="relative z-[1] min-w-0">
                   <CardTitle subtitle="Kindergarten to College Admissions">
-                    <CardFlag src="/USA.png" />
+                    <CardFlag src="/USA-flag.webp" />
                     <CountryHeading>United States</CountryHeading>
                   </CardTitle>
 
@@ -368,7 +368,7 @@ export const SupportedCountriesSection = ({
               <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
                 <div className="relative z-[1] min-w-0">
                   <CardTitle subtitle="Primary to Diploma Programme">
-                    <CardFlag src="/USA.png" />
+                    <CardFlag src="/USA-flag.webp" />
                     <CountryHeading>
                       International
                       <br />

@@ -1,8 +1,6 @@
-"use client";
-
 import Image from "next/image";
-import { STUDIELY_APP } from "@/lib/appUrls";
 import { HOME_SHELL } from "@/lib/homeShell";
+import { HeroCtas } from "@/sections/HeroCtas";
 
 export const HeroSection = () => {
   return (
@@ -30,47 +28,29 @@ export const HeroSection = () => {
                 subject.
               </p>
 
-              <div className="flex w-full flex-nowrap items-center gap-2 sm:w-auto sm:gap-4">
-                <button
-                  type="button"
-                  onClick={() => window.open(STUDIELY_APP.signUp, "_blank")}
-                  className="funky-button inline-flex min-w-0 flex-1 items-center justify-center rounded-full bg-[#E8FF2F] px-3 py-2.5 text-[clamp(0.75rem,0.65rem+0.4vw,1.05rem)] font-bold text-[#4F35F2] shadow-[0_8px_24px_rgba(0,0,0,0.18)] sm:flex-none sm:px-7 sm:py-3"
-                >
-                  Start Studying Free
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    document
-                      .getElementById("how-it-works")
-                      ?.scrollIntoView({ behavior: "smooth" })
-                  }
-                  className="funky-button inline-flex min-w-0 flex-1 items-center justify-center rounded-full border border-white/45 bg-transparent px-3 py-2.5 text-[clamp(0.75rem,0.65rem+0.4vw,1.05rem)] font-semibold text-white transition-colors hover:bg-white/10 sm:flex-none sm:px-7 sm:py-3"
-                >
-                  See How It Works
-                </button>
-              </div>
+              <HeroCtas />
             </div>
 
             <div className="relative mx-auto w-full min-w-0 max-w-none translate-x-0 sm:max-w-[min(100%,clamp(440px,62vw,680px))] sm:translate-x-0 lg:max-w-[min(100%,clamp(280px,32vw,520px))] lg:translate-x-4 lg:justify-self-end">
               <Image
-                src="/hero-img.png"
+                src="/hero-img.webp"
                 alt="Student studying with Studiely AI tools on a laptop"
                 width={1040}
                 height={1040}
                 priority
-                unoptimized
+                fetchPriority="high"
+                loading="eager"
                 sizes="(max-width: 640px) 92vw, (max-width: 1024px) min(62vw, 680px), min(32vw, 520px)"
                 className="h-auto max-h-[clamp(260px,68vw,380px)] w-full select-none object-contain sm:max-h-[clamp(320px,44vw,480px)] lg:max-h-[clamp(200px,26vw,320px)]"
                 draggable={false}
               />
               <Image
-                src="/hero-star.png"
+                src="/hero-star.webp"
                 alt=""
                 width={140}
                 height={140}
                 priority
-                unoptimized
+                fetchPriority="low"
                 aria-hidden
                 className="pointer-events-none absolute left-0 top-0 z-[2] h-auto w-[clamp(3.5rem,6vw,6rem)] -translate-x-[30%] -translate-y-[18%] select-none drop-shadow-[0_0_14px_rgba(255,255,255,0.55)] sm:-translate-x-[48%] sm:-translate-y-[22%]"
                 draggable={false}
