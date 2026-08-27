@@ -5,7 +5,6 @@ import { STUDIELY_APP } from "@/lib/appUrls";
 import { HOME_SHELL, HOME_TOOLS_CARD, HOME_TOOLS_GRID } from "@/lib/homeShell";
 
 const PURPLE = "#4F35F2";
-const PINK = "#FF36C6";
 
 const FEATURES = [
   {
@@ -54,7 +53,7 @@ export const StudySmarterSection = () => {
           id="study-smarter-heading"
           className="mb-[clamp(0.55rem,1.5vw,1rem)] text-center font-heading text-[clamp(1.1rem,0.85rem+1.1vw,2.15rem)] font-extrabold uppercase leading-[1.15] tracking-[-0.02em] text-navy"
         >
-          Choose a tool to <span style={{ color: PINK }}>get started</span>
+          Choose a tool to <span style={{ color: "#B01080" }}>get started</span>
         </h2>
 
         <div className={HOME_TOOLS_GRID}>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { HOME_SHELL } from "@/lib/homeShell";
 import { HeroCtas } from "@/sections/HeroCtas";
 
+/** LCP image: static WebP (not /_next/image) so preload href matches the request. */
 export const HeroSection = () => {
   return (
     <section id="hero" className="relative z-[1] bg-transparent">
@@ -40,6 +41,8 @@ export const HeroSection = () => {
                 priority
                 fetchPriority="high"
                 loading="eager"
+                decoding="sync"
+                unoptimized
                 sizes="(max-width: 640px) 92vw, (max-width: 1024px) min(62vw, 680px), min(32vw, 520px)"
                 className="h-auto max-h-[clamp(260px,68vw,380px)] w-full select-none object-contain sm:max-h-[clamp(320px,44vw,480px)] lg:max-h-[clamp(200px,26vw,320px)]"
                 draggable={false}
@@ -49,8 +52,9 @@ export const HeroSection = () => {
                 alt=""
                 width={140}
                 height={140}
-                priority
+                loading="lazy"
                 fetchPriority="low"
+                unoptimized
                 aria-hidden
                 className="pointer-events-none absolute left-0 top-0 z-[2] h-auto w-[clamp(3.5rem,6vw,6rem)] -translate-x-[30%] -translate-y-[18%] select-none drop-shadow-[0_0_14px_rgba(255,255,255,0.55)] sm:-translate-x-[48%] sm:-translate-y-[22%]"
                 draggable={false}

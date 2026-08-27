@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { HomePageContent } from "@/components/HomePageContent";
 import { DEFAULT_OG_IMAGE_PATH, SITE_URL } from "@/lib/site";
+import { HeroSection } from "@/sections/HeroSection";
 
 const webAppSchema = {
   "@context": "https://schema.org",
@@ -72,6 +73,7 @@ export default function Home() {
         rel="preload"
         as="image"
         href="/hero-img.webp"
+        type="image/webp"
         fetchPriority="high"
       />
       <script
@@ -80,7 +82,7 @@ export default function Home() {
           __html: JSON.stringify(webAppSchema),
         }}
       />
-      <HomePageContent />
+      <HomePageContent hero={<HeroSection />} />
     </>
   );
 }

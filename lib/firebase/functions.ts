@@ -1,4 +1,3 @@
-import { getFirebaseAuth } from "./client";
 import { FIREBASE_PROJECT, FUNCTIONS_REGION } from "@/lib/config/constants";
 import { withBasePath } from "@/lib/config/base-path";
 
@@ -61,6 +60,7 @@ export async function callCallableWithHttp<
   };
 
   if (requireAuth) {
+    const { getFirebaseAuth } = await import("./client");
     const user = getFirebaseAuth().currentUser;
     if (user) {
       const idToken = await user.getIdToken(true);

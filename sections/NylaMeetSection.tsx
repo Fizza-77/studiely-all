@@ -255,7 +255,7 @@ export const NylaMeetSection = () => {
 
               <div className="border-t border-[#F0F0F4] bg-white px-3 py-4 sm:px-5">
                 <div className="flex items-center gap-2 rounded-full bg-[#F3F3F7] px-2 py-1.5 pl-4">
-                  <span className="flex-1 font-sans text-[12.5px] text-[#8B8D9A]">
+                  <span className="flex-1 font-sans text-[12.5px] text-[#5B5A6A]">
                     Ask Nyla anything...
                   </span>
                   <span

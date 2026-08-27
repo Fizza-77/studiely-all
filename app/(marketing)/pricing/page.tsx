@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
+import { MarketingAuthScope } from "@/components/providers/marketing-auth-scope";
 import { DEFAULT_OG_IMAGE_PATH, SITE_URL } from "@/lib/site";
 import { buildBreadcrumbSchema } from "@/lib/seo";
 import { PricingHeroSection } from "@/sections/PricingHeroSection";
@@ -41,14 +42,16 @@ export default function MarketingPricingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <main className="min-h-screen bg-bg-base font-jakarta">
-        <PricingHeroSection />
-        <Suspense fallback={null}>
-          <PricingCheckoutBridge />
-        </Suspense>
-        <HomePricingSection variant="page" />
-        <PricingExtrasSection />
-      </main>
+      <MarketingAuthScope>
+        <main className="min-h-screen bg-bg-base font-jakarta">
+          <PricingHeroSection />
+          <Suspense fallback={null}>
+            <PricingCheckoutBridge />
+          </Suspense>
+          <HomePricingSection variant="page" />
+          <PricingExtrasSection />
+        </main>
+      </MarketingAuthScope>
     </>
   );
 }

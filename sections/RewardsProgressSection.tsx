@@ -3,7 +3,6 @@
 import Image from "next/image";
 
 const BLUE = "#4F35F2";
-const PINK = "#FF36C6";
 
 const REWARDS = [
   {
@@ -16,7 +15,7 @@ const REWARDS = [
   {
     title: "Subject Mastery Certificates",
     body: "Download and share recognized certificates once you complete a module.",
-    bg: PINK,
+    bg: "#C91890",
     icon: "/cup.png",
     featured: true,
   },
@@ -48,7 +47,7 @@ export const RewardsProgressSection = ({
             id="rewards-progress-heading"
             className="mx-auto font-heading text-[clamp(1.15rem,5vw,2.65rem)] font-semibold leading-[1.18] tracking-[-0.02em]"
           >
-            <span className="block whitespace-nowrap" style={{ color: PINK }}>
+            <span className="block whitespace-nowrap" style={{ color: "#B01080" }}>
               Study Daily. Earn Rewards.
             </span>
             <span className="mt-1 block whitespace-nowrap text-[#1E1B4B]">

@@ -11,10 +11,7 @@ import {
 } from "react";
 
 import { STUDIELY_APP } from "@/lib/appUrls";
-import {
-  sendSupportChat,
-  type SupportChatMessage,
-} from "@/lib/help/support-chat";
+import type { SupportChatMessage } from "@/lib/help/support-chat";
 
 const LIME = "#E8FF2F";
 const INDIGO = "#4F35F2";
@@ -165,6 +162,7 @@ function NylaMarketingChat({
     setBusy(true);
 
     try {
+      const { sendSupportChat } = await import("@/lib/help/support-chat");
       const reply = await sendSupportChat({
         history,
         userMessage: trimmed,

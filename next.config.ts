@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  /** Ship browser source maps so Lighthouse / DevTools can attribute large chunks. */
+  productionBrowserSourceMaps: true,
   experimental: {
     /** Inline global CSS into HTML to reduce render-blocking CSS on first paint (LCP). */
     inlineCss: true,

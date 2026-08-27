@@ -118,7 +118,8 @@ function ReviewSlide({
     const dist = Math.abs(v);
     if (dist > STEP * 2.15) return 0;
     const closeness = smoothstep(1 - dist / (STEP * 1.15));
-    return 0.42 + 0.58 * closeness;
+    // Floor opacity high enough that card text still meets WCAG AA when side-peeking.
+    return 0.88 + 0.12 * closeness;
   });
 
   const zIndex = useTransform(x, (v) =>
@@ -192,7 +193,7 @@ function ReviewSlide({
               </p>
               <p
                 className={`m-0 mt-0.5 font-sans text-[13px] ${
-                  review.blue ? "text-white/75" : "text-[#5B5A6A]"
+                  review.blue ? "text-white" : "text-[#4A4A58]"
                 }`}
               >
                 {review.role}

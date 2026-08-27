@@ -234,7 +234,7 @@ export function CookieConsentBanner() {
                 Privacy
               </Link>
               , and the policies above.{" "}
-              <span className="text-[#8B8D9A]">
+              <span className="text-[#5B5A6A]">
                 Qismat Ventures W.L.L · Bahrain
               </span>
             </p>

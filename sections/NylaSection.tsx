@@ -314,7 +314,7 @@ export const NylaSection = ({ sectionRef }: NylaSectionProps) => {
 
                   <div className="bg-white px-3.5 pb-3.5 pt-0">
                     <div className="flex items-center gap-2 rounded-full bg-[#ECEEF6] px-2 py-1.5 pl-4">
-                      <span className="flex-1 font-sans text-[12.5px] text-[#8B8D9A]">
+                      <span className="flex-1 font-sans text-[12.5px] text-[#5B5A6A]">
                         Type your question…
                       </span>
                       <Link

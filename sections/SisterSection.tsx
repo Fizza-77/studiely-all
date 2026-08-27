@@ -55,7 +55,7 @@ const ECOSYSTEM_CARDS = [
     name: "Linguatude",
     subtitle: "— For English Test Preparation",
     badge: "IELTS, TOEFL, PTE AND CAMBRIDGE",
-    badgeBg: PINK,
+    badgeBg: "#C91890",
     badgeColor: "#FFFFFF",
     edgeColor: PINK,
     href: "https://linguatude.com",

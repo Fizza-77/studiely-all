@@ -6,7 +6,6 @@ import { HOME_SHELL, HOME_TOOLS_BAND_INSET } from "@/lib/homeShell";
 
 const LIME = "#E8FF2F";
 const PURPLE = "#4F35F2";
-const PINK = "#FF36C6";
 
 const STATS = [
   { n: "5", suf: "K+", label: "STUDENTS" },
@@ -75,7 +74,7 @@ export const HowItWorksSection = ({ sectionRef }: HowItWorksSectionProps) => (
               </div>
               <div
                 className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.06em] sm:text-[10px] md:text-[11px]"
-                style={{ color: PINK }}
+                style={{ color: "#1E1B4B" }}
               >
                 {stat.label}
               </div>
@@ -101,7 +100,7 @@ export const HowItWorksSection = ({ sectionRef }: HowItWorksSectionProps) => (
         <h2 className="mb-1.5 font-heading text-[clamp(1.75rem,3.5vw,2.75rem)] font-extrabold tracking-[-0.02em] text-navy sm:mb-2">
           How It Works
         </h2>
-        <p className="mx-auto max-w-[36rem] font-sans text-[clamp(0.65rem,0.55rem+0.3vw,0.82rem)] font-light leading-snug text-muted sm:leading-relaxed">
+        <p className="mx-auto max-w-[36rem] font-sans text-[clamp(0.65rem,0.55rem+0.3vw,0.82rem)] font-medium leading-snug text-[#4A4A58] sm:leading-relaxed">
           Three simple steps to supercharge your studying and crush your exams.
         </p>
       </div>
