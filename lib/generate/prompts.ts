@@ -40,7 +40,7 @@ function studyModeRules(studyMode: string, isPremium: boolean): string {
   );
 }
 
-/** System prompt sent to existing callOpenAI / callOpenAIGuest (Flutter parity). */
+/** System prompt sent to Firebase `callOpenAI` (authenticated generation). */
 export function buildSystemPrompt(params: Pick<GenerateParams, "curriculumName" | "curriculumId">): string {
   const curriculum = params.curriculumName || params.curriculumId;
   return [

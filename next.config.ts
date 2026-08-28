@@ -2,8 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
-  /** Ship browser source maps so Lighthouse / DevTools can attribute large chunks. */
-  productionBrowserSourceMaps: true,
+  productionBrowserSourceMaps: false,
   experimental: {
     /** Inline global CSS into HTML to reduce render-blocking CSS on first paint (LCP). */
     inlineCss: true,
@@ -19,7 +18,41 @@ const nextConfig: NextConfig = {
   },
   compress: true,
   async headers() {
+    const csp = [
+      "default-src 'self'",
+      "base-uri 'self'",
+      "object-src 'none'",
+      "frame-ancestors 'self'",
+      "form-action 'self'",
+      "img-src 'self' data: blob: https:",
+      "font-src 'self' data: https://fonts.gstatic.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      // Next/Firebase/Turnstile/PayPal require script flexibility; tighten further with nonces later.
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com https://www.gstatic.com https://apis.google.com https://appleid.cdn-apple.com https://www.paypal.com https://www.sandbox.paypal.com",
+      "connect-src 'self' https: wss:",
+      "frame-src 'self' https://challenges.cloudflare.com https://*.firebaseapp.com https://accounts.google.com https://appleid.apple.com https://www.paypal.com https://www.sandbox.paypal.com",
+      "worker-src 'self' blob:",
+      "upgrade-insecure-requests",
+    ].join("; ");
+
     return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=(), payment=(self)",
+          },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          { key: "Content-Security-Policy", value: csp },
+        ],
+      },
       {
         source: "/:path*(svg|jpg|jpeg|png|webp|avif|gif|ico|woff2)",
         headers: [

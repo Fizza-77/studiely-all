@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import { buildBlogPostingJsonLd } from "@/lib/blogSchema";
 import { getBlogBySlugForStudiely } from "@/lib/blogs";
+import { sanitizeBlogHtml } from "@/lib/security/sanitize-html";
 import { DEFAULT_OG_IMAGE_PATH, SITE_URL } from "@/lib/site";
 import { buildBreadcrumbSchema } from "@/lib/seo";
 import "../blog-content.module.css";
@@ -223,7 +224,9 @@ export default async function BlogPostPage({ params }: PageProps) {
             {blog.content ? (
               <div
                 className="blog-content"
-                dangerouslySetInnerHTML={{ __html: blog.content }}
+                dangerouslySetInnerHTML={{
+                  __html: sanitizeBlogHtml(blog.content),
+                }}
               />
             ) : (
               <p className="font-jakarta text-[13px] text-[#5B5A6A]">

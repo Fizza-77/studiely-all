@@ -1275,15 +1275,24 @@ function MilestonesPanel({
 
                   <div className="mt-auto flex w-full max-w-md items-end justify-between gap-4 pt-4 sm:pt-5">
                     <div className="flex min-w-0 flex-1 flex-col items-start">
-                      <div className="flex w-full max-w-[120px] flex-col items-center">
-                      <div
+                      <div className="flex w-full max-w-[140px] flex-col items-center">
+                        {/* eslint-disable-next-line @next/next/no-img-element -- SVG logo; match certificate header */}
+                        <img
+                          src="/logo-group.svg?v=blue"
+                          alt="Studiely"
+                          width={100}
+                          height={28}
+                          className="mb-2 h-5 w-auto object-contain sm:h-6"
+                          crossOrigin="anonymous"
+                        />
+                        <div
                           className="mb-2 h-px w-full"
-                        style={{ background: "#D4AF37" }}
-                      />
+                          style={{ background: "#D4AF37" }}
+                        />
                         <p className="text-center text-xs text-[#71717A]">
                           Team Studiely
                         </p>
-                    </div>
+                      </div>
                     </div>
                     <div className="flex min-w-0 flex-1 flex-col items-end">
                       <div className="flex w-full max-w-[120px] flex-col items-center">

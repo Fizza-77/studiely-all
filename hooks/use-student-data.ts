@@ -11,6 +11,7 @@ import {
 } from "@/lib/student/data";
 import {
   fetchStudyCredits,
+  FREE_TOTAL_GENERATION_LIMIT,
   type StudyCredits,
 } from "@/lib/student/study-credits";
 import type {
@@ -51,20 +52,17 @@ export function useStudentData(): StudentDataState {
       setProfile(null);
       setNotes([]);
       setAttempts([]);
-      if (!silent) setLoading(true);
+      setStats(null);
+      setCredits({
+        used: 0,
+        total: FREE_TOTAL_GENERATION_LIMIT,
+        remaining: FREE_TOTAL_GENERATION_LIMIT,
+        isPremium: false,
+        rewardCreditsRemaining: 0,
+        freeBaseLimit: FREE_TOTAL_GENERATION_LIMIT,
+      });
+      setLoading(false);
       setError(null);
-      try {
-        const c = await fetchStudyCredits({ guest: true });
-        setCredits(c);
-        setStats(null);
-      } catch (err) {
-        setCredits(null);
-        setError(
-          err instanceof Error ? err.message : "Failed to load study credits",
-        );
-      } finally {
-        if (!silent) setLoading(false);
-      }
       return;
     }
 

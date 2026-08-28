@@ -4,7 +4,8 @@ import {
   getReactionDataForBlogAndReactor,
   type ReactionType,
 } from "@/lib/blogReactions";
-import { getClientIpFromHeaders, resolveReactorId } from "@/lib/reactorId";
+import { getClientIpFromHeaders, REACTOR_COOKIE_NAME, resolveReactorId } from "@/lib/reactorId";
+import { rateLimitTake } from "@/lib/security/rate-limit";
 import { supabaseServer as supabase } from "@/lib/supabaseServer";
 
 const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY?.trim() || "";
@@ -84,7 +85,13 @@ export async function POST(
     return NextResponse.json({ error: "Verification failed" }, { status: 403 });
   }
 
-  const reactorId = resolveReactorId(req.headers);
+  const ipKey = remoteip || "unknown";
+  const limited = rateLimitTake(`reactions:${ipKey}`, 40, 60 * 60 * 1000);
+  if (!limited.ok) {
+    return NextResponse.json({ error: "Too many requests." }, { status: 429 });
+  }
+
+  const reactorId = resolveReactorId(req);
 
   const { error: deleteError } = await supabase
     .from("blog_reactions")
@@ -93,7 +100,7 @@ export async function POST(
     .eq("reactor_id", reactorId);
 
   if (deleteError) {
-    console.error("[blog_reactions] Supabase delete failed:", JSON.stringify(deleteError, null, 2));
+    console.error("[blog_reactions] Supabase delete failed:", deleteError.message);
     return NextResponse.json({ error: "Could not save reaction." }, { status: 500 });
   }
 
@@ -104,12 +111,22 @@ export async function POST(
   });
 
   if (insertError) {
-    console.error("[blog_reactions] Supabase insert failed:", JSON.stringify(insertError, null, 2));
+    console.error("[blog_reactions] Supabase insert failed:", insertError.message);
     return NextResponse.json({ error: "Could not save reaction." }, { status: 500 });
   }
 
   const reactionData = await getReactionDataForBlogAndReactor(blogId, reactorId);
-  return NextResponse.json(reactionData, { status: 200 });
+  const res = NextResponse.json(reactionData, { status: 200 });
+  if (!req.cookies.get(REACTOR_COOKIE_NAME)?.value) {
+    res.cookies.set(REACTOR_COOKIE_NAME, reactorId, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365,
+    });
+  }
+  return res;
 }
 
 export async function GET(
@@ -121,7 +138,17 @@ export async function GET(
     return NextResponse.json({ error: "Missing blogId." }, { status: 400 });
   }
 
-  const reactorId = getClientIpFromHeaders(req.headers);
+  const reactorId = resolveReactorId(req);
   const reactionData = await getReactionDataForBlogAndReactor(blogId, reactorId);
-  return NextResponse.json(reactionData, { status: 200 });
+  const res = NextResponse.json(reactionData, { status: 200 });
+  if (!req.cookies.get(REACTOR_COOKIE_NAME)?.value && !getClientIpFromHeaders(req.headers)) {
+    res.cookies.set(REACTOR_COOKIE_NAME, reactorId, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365,
+    });
+  }
+  return res;
 }

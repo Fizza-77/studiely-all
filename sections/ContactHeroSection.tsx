@@ -1,13 +1,31 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useEffect, useRef, useState, FormEvent } from "react";
 import Image from "next/image";
+import Script from "next/script";
 import { GraduationCap, Zap, type LucideIcon } from "lucide-react";
 
 const BLUE = "#4F35F2";
 const LIME = "#E8FF2F";
 const PINK = "#FF36C6";
 const INPUT_BG = "#FFFBEF";
+
+type TurnstileWindow = Window & {
+  turnstile?: {
+    render: (
+      el: HTMLElement,
+      opts: {
+        sitekey: string;
+        callback: (token: string) => void;
+        "error-callback"?: () => void;
+        "expired-callback"?: () => void;
+        size?: string;
+      },
+    ) => string;
+    reset: (id: string) => void;
+    remove: (id: string) => void;
+  };
+};
 
 type Highlight =
   | {
@@ -70,6 +88,32 @@ export const ContactHeroSection = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+  const turnstileContainerRef = useRef<HTMLDivElement | null>(null);
+  const widgetIdRef = useRef<string | null>(null);
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() || "";
+
+  useEffect(() => {
+    if (!scriptLoaded || !siteKey || !turnstileContainerRef.current || widgetIdRef.current) {
+      return;
+    }
+    const api = (window as TurnstileWindow).turnstile;
+    if (!api) return;
+    widgetIdRef.current = api.render(turnstileContainerRef.current, {
+      sitekey: siteKey,
+      size: "flexible",
+      callback: (token) => setTurnstileToken(token),
+      "expired-callback": () => setTurnstileToken(null),
+      "error-callback": () => setTurnstileToken(null),
+    });
+    return () => {
+      if (widgetIdRef.current && (window as TurnstileWindow).turnstile) {
+        (window as TurnstileWindow).turnstile!.remove(widgetIdRef.current);
+      }
+      widgetIdRef.current = null;
+    };
+  }, [scriptLoaded, siteKey]);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -77,23 +121,25 @@ export const ContactHeroSection = () => {
       setStatus("error");
       return;
     }
+    if (!turnstileToken) {
+      setStatus("error");
+      return;
+    }
 
     setStatus("loading");
-
-    const composedMessage = [
-      fullName.trim() ? `Name: ${fullName.trim()}` : null,
-      subject.trim() ? `Subject: ${subject.trim()}` : null,
-      "",
-      message.trim(),
-    ]
-      .filter((line) => line !== null)
-      .join("\n");
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim(), message: composedMessage }),
+        body: JSON.stringify({
+          email: email.trim(),
+          message: message.trim(),
+          fullName: fullName.trim(),
+          subject: subject.trim(),
+          turnstileToken,
+          company: "", // honeypot
+        }),
       });
 
       if (!response.ok) throw new Error("Failed to send");
@@ -103,6 +149,10 @@ export const ContactHeroSection = () => {
       setEmail("");
       setSubject("");
       setMessage("");
+      setTurnstileToken(null);
+      if (widgetIdRef.current && (window as TurnstileWindow).turnstile) {
+        (window as TurnstileWindow).turnstile!.reset(widgetIdRef.current);
+      }
     } catch {
       setStatus("error");
     }
@@ -275,9 +325,30 @@ export const ContactHeroSection = () => {
                 />
               </div>
 
+              {/* Honeypot — leave empty */}
+              <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                <label htmlFor="contact-company">Company</label>
+                <input id="contact-company" type="text" name="company" tabIndex={-1} autoComplete="off" defaultValue="" />
+              </div>
+
+              {siteKey ? (
+                <>
+                  <Script
+                    src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+                    strategy="afterInteractive"
+                    onLoad={() => setScriptLoaded(true)}
+                  />
+                  <div ref={turnstileContainerRef} className="min-h-[65px]" />
+                </>
+              ) : (
+                <p className="m-0 font-jakarta text-[12px] text-[#D91A8F]">
+                  Contact verification is not configured. Please try again later.
+                </p>
+              )}
+
               <button
                 type="submit"
-                disabled={status === "loading"}
+                disabled={status === "loading" || !turnstileToken || !siteKey}
                 className="w-full rounded-[16px] px-4 py-3.5 font-jakarta text-[15px] font-bold text-[#1E1B4B] shadow-[0_8px_24px_rgba(232,255,47,0.35)] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
                 style={{ backgroundColor: LIME }}
               >

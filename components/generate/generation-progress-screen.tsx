@@ -151,28 +151,37 @@ export function GenerationProgressScreen({
         <div className="mx-auto grid w-full max-w-none gap-8 px-4 py-6 sm:px-6 sm:py-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-10 lg:py-10">
           {/* Left column */}
           <div className="min-w-0">
-            <div
-              className="flex size-16 items-center justify-center rounded-[22px] text-white sm:size-[72px]"
-              style={{
-                background: done
-                  ? `linear-gradient(145deg, ${PURPLE} 0%, #6366F1 100%)`
-                  : `linear-gradient(145deg, ${PURPLE} 0%, #7C6CF0 100%)`,
-              }}
-              aria-hidden
-            >
-              {done ? <SmileIcon /> : <SparkIcon />}
-            </div>
+            <div className="flex flex-col items-center text-center">
+              <div
+                className="flex size-16 items-center justify-center overflow-hidden rounded-[22px] sm:size-[72px]"
+                style={{
+                  background: done
+                    ? `linear-gradient(145deg, ${PURPLE} 0%, #6366F1 100%)`
+                    : `linear-gradient(145deg, ${PURPLE} 0%, #7C6CF0 100%)`,
+                }}
+                aria-hidden
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/icons/ayla-yellow.svg"
+                  alt=""
+                  width={56}
+                  height={56}
+                  className="size-12 rounded-full object-cover ring-2 ring-white/35 sm:size-14"
+                />
+              </div>
 
-            <h1 className="mt-5 font-heading text-[clamp(1.85rem,3.5vw,2.6rem)] font-extrabold tracking-tight text-[#111827]">
-              {done ? "All done!" : "Almost there…"}
-            </h1>
-            <p className="mt-2 max-w-md text-[15px] leading-relaxed text-[#6B7280]">
-              {done
-                ? meta.isGuest
-                  ? `Nyla finished your ${noun} — preview ${plural ? "them" : "it"} below, then sign up to save.`
-                  : `Nyla finished your ${noun} — ${plural ? "they're" : "it's"} saved in your library.`
-                : `Nyla is crafting your ${noun}. Hang tight.`}
-            </p>
+              <h1 className="mt-5 font-heading text-[clamp(1.85rem,3.5vw,2.6rem)] font-extrabold tracking-tight text-[#111827]">
+                {done ? "All done!" : "Almost there…"}
+              </h1>
+              <p className="mt-2 max-w-md text-[15px] leading-relaxed text-[#6B7280]">
+                {done
+                  ? meta.isGuest
+                    ? `Nyla finished your ${noun} — preview ${plural ? "them" : "it"} below, then sign up to save.`
+                    : `Nyla finished your ${noun} — ${plural ? "they're" : "it's"} saved in your library.`
+                  : `Nyla is crafting your ${noun}. Hang tight.`}
+              </p>
+            </div>
 
             <div className="mt-7">
               <div className="mb-2 flex items-center justify-between gap-3">
@@ -381,21 +390,6 @@ function CancelIcon() {
         d="M6 6l12 12M18 6L6 18"
         stroke="currentColor"
         strokeWidth="2.2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function SmileIcon() {
-  return (
-    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="9" cy="10" r="1.4" fill="currentColor" />
-      <circle cx="15" cy="10" r="1.4" fill="currentColor" />
-      <path
-        d="M8.5 14.5c1.2 1.4 2.6 2 3.5 2s2.3-.6 3.5-2"
-        stroke="currentColor"
-        strokeWidth="1.8"
         strokeLinecap="round"
       />
     </svg>

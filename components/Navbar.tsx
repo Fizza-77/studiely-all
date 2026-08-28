@@ -308,7 +308,7 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
                   </button>
                 ) : null}
                 <Link
-                  href={STUDIELY_APP.signUp}
+                  href={STUDIELY_APP.notes}
                   className="funky-button inline-flex h-9 items-center justify-center rounded-full bg-[#4F35F2] px-4 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                 >
                   Start Free
@@ -470,7 +470,7 @@ export const Navbar = ({ visibleSections: _visibleSections = [] }: NavbarProps) 
               </button>
             ) : null}
             <Link
-              href={STUDIELY_APP.signUp}
+              href={STUDIELY_APP.notes}
               onClick={() => setOpen(false)}
               className="funky-button inline-flex flex-1 items-center justify-center rounded-full bg-[#4F35F2] px-4 py-3 text-sm font-semibold text-white"
             >

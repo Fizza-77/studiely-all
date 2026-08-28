@@ -14,6 +14,7 @@ import { useRouter, useParams, useSearchParams } from "next/navigation";
 
 import { AppShell } from "@/components/layout/app-shell";
 import { DataConsentGate } from "@/components/auth/data-consent-gate";
+import { GuestUpgradeDialog } from "@/components/auth/guest-upgrade-dialog";
 import {
   GenerateStickySidebar,
   type GenerateTip,
@@ -22,12 +23,9 @@ import { GenerationProgressScreen } from "@/components/generate/generation-progr
 import { useAuth } from "@/components/providers/auth-provider";
 import {
   Alert,
-  PrimaryButton,
-  SecondaryButton,
   TextInput,
 } from "@/components/ui/auth-form";
 import { EmptyState, LoadingBlock } from "@/components/ui/student-ui";
-import { MarkdownMathView } from "@/components/ui/markdown-math-view";
 import { useStudentData } from "@/hooks/use-student-data";
 import {
   getAgeForGrade,
@@ -611,7 +609,7 @@ function GenerateInner() {
   const [completedNoteId, setCompletedNoteId] = useState<string | null>(null);
   const cancelledRef = useRef(false);
   const [error, setError] = useState<string | null>(null);
-  const [guestPreview, setGuestPreview] = useState<string | null>(null);
+  const [showGuestSignup, setShowGuestSignup] = useState(false);
   const [activeStep, setActiveStep] = useState<
     "subject" | "difficulty" | "extras" | "topic"
   >(() => (isRegenPrefill && prefillTopic ? "topic" : "subject"));
@@ -631,6 +629,10 @@ function GenerateInner() {
     const next = resolveGenerateModeName(modeSegment);
     setStudyMode(next);
   }, [modeSegment]);
+
+  useEffect(() => {
+    if (isGuest) setShowGuestSignup(true);
+  }, [isGuest]);
 
   // Apply subject from library regenerate once options for the prefilled grade load.
   useEffect(() => {
@@ -760,7 +762,7 @@ function GenerateInner() {
     credits?.remaining ??
     stats?.studyCreditsRemaining ??
     Math.max(0, creditsTotal - creditsUsed);
-  const atLimit = !isPremium && creditsLeft <= 0;
+  const atLimit = !isGuest && !isPremium && creditsLeft <= 0;
 
   const selectedMode = STUDY_MODES.find((m) => m.name === studyMode);
   const modeLocked = !isGuest && !!selectedMode?.locked && !isPremium;
@@ -815,8 +817,12 @@ function GenerateInner() {
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
-    setGuestPreview(null);
     setCompletedNoteId(null);
+
+    if (isGuest || !user) {
+      setShowGuestSignup(true);
+      return;
+    }
 
     if (!leaf) {
       setError("Select a valid curriculum pathway and grade.");
@@ -875,21 +881,14 @@ function GenerateInner() {
             studyMode === "Quiz"
               ? false
               : includeMnemonics,
-          includeExamStyleQs: includeExamStyleQs && (isPremium || isGuest),
+          includeExamStyleQs: includeExamStyleQs && isPremium,
           includeCommonMistakes:
             studyMode === "Exam Focus" ? includeCommonMistakes : false,
           age,
         },
-        { guest: isGuest },
       );
 
       if (cancelledRef.current) return;
-
-      if (isGuest || !user) {
-        setGuestPreview(content);
-        setGenPhase("complete");
-        return;
-      }
 
       const noteId = await saveGeneratedNote(user.uid, {
         subject: subjectRaw,
@@ -980,7 +979,7 @@ function GenerateInner() {
               studyMode !== "Flashcards" &&
               studyMode !== "Exam Focus" &&
               studyMode !== "Quiz",
-            isGuest: isGuest || !user,
+            isGuest: false,
           }}
           onCancel={onCancelGeneration}
           onOpenNotes={onOpenGeneratedNotes}
@@ -1005,18 +1004,24 @@ function GenerateInner() {
                     className="size-1.5 shrink-0 rounded-full bg-[#FF2D8A]"
                     aria-hidden
                   />
-                  {creditsLeft} credit{creditsLeft === 1 ? "" : "s"} left
+                  {isGuest
+                    ? `${FREE_TOTAL_GENERATION_LIMIT} free after sign up`
+                    : `${creditsLeft} credit${creditsLeft === 1 ? "" : "s"} left`}
                 </span>
               </div>
             </header>
 
             {isGuest ? (
               <Alert tone="info">
-                Guest generations are not saved.{" "}
+                You can explore the generator here.{" "}
                 <Link href="/signup" className="font-semibold underline">
-                  Sign up
+                  Sign up free
                 </Link>{" "}
-                to keep notes in My Library.
+                or{" "}
+                <Link href="/login" className="font-semibold underline">
+                  sign in
+                </Link>{" "}
+                to use your 5 free generations and save to My Library.
               </Alert>
             ) : null}
 
@@ -1766,31 +1771,6 @@ function GenerateInner() {
               </div>
             </form>
 
-            {guestPreview ? (
-              <div className="rounded-[28px] border border-[#E8E6F0] bg-white p-5">
-                <h2 className="font-heading text-lg font-extrabold text-[#111827]">
-                  Preview (not saved)
-                </h2>
-                <div className="mt-4 max-h-[28rem] overflow-auto">
-                  <MarkdownMathView content={guestPreview} />
-                </div>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <Link href="/signup">
-                    <PrimaryButton type="button" className="w-auto px-5">
-                      Sign up to save
-                    </PrimaryButton>
-                  </Link>
-                  <SecondaryButton
-                    type="button"
-                    className="w-auto px-5"
-                    onClick={() => setGuestPreview(null)}
-                  >
-                    Dismiss
-                  </SecondaryButton>
-                </div>
-              </div>
-            ) : null}
-
             {!leaf && !loading ? (
               <EmptyState
                 title="Pick a grade with subjects"
@@ -1802,6 +1782,12 @@ function GenerateInner() {
           <GenerateStickySidebar tip={tip} displayName={displayName} />
         </div>
       )}
+      {showGuestSignup ? (
+        <GuestUpgradeDialog
+          studyMode={studyMode}
+          onClose={() => setShowGuestSignup(false)}
+        />
+      ) : null}
     </div>
   );
 }

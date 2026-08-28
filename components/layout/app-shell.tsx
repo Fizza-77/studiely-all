@@ -127,7 +127,7 @@ export function AppShell({
   return (
     <div className="flex min-h-full flex-1 flex-col bg-[#FFFBEF]">
       <header
-        className={`fixed inset-x-0 top-0 z-[400] bg-[#FFFBEF] pt-[env(safe-area-inset-top,0px)] transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-x-0 top-0 z-[400] pt-[env(safe-area-inset-top,0px)] transition-transform duration-300 ease-in-out ${
           showNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
