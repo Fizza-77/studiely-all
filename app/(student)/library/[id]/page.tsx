@@ -132,7 +132,7 @@ export default function NoteReviewPage() {
           />
         ) : loading ? (
           <LoadingBlock />
-        ) : error || !note ? (
+        ) : error || !note || !user ? (
           <EmptyState
             title="Note unavailable"
             body={error ?? "Not found"}
