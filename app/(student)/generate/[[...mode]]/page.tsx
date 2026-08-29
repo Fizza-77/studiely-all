@@ -615,7 +615,7 @@ function GenerateInner() {
   const [guestSignupReason, setGuestSignupReason] =
     useState<GuestUpgradeReason>("save");
   const [bottomToast, setBottomToast] = useState<ReactNode | null>(null);
-  const bottomToastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const bottomToastTimerRef = useRef<number | null>(null);
   const [activeStep, setActiveStep] = useState<
     "subject" | "difficulty" | "extras" | "topic"
   >(() => (isRegenPrefill && prefillTopic ? "topic" : "subject"));
