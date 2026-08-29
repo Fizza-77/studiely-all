@@ -29,7 +29,7 @@ type Phase = "play" | "results";
 
 type InteractiveQuizProps = {
   quiz: Quiz;
-  uid: string;
+  uid?: string;
   subject?: string;
   topic?: string;
   /** Compact layout for embedding inside the note content card. */
@@ -98,12 +98,14 @@ export function InteractiveQuiz({
     setSaving(true);
     setError(null);
     try {
-      await saveQuizAttempt(uid, {
-        subject: quiz.subject || subject || "",
-        topic: quiz.topic || topic || "",
-        score: s,
-        totalQuestions: quiz.questions.length,
-      });
+      if (uid) {
+        await saveQuizAttempt(uid, {
+          subject: quiz.subject || subject || "",
+          topic: quiz.topic || topic || "",
+          score: s,
+          totalQuestions: quiz.questions.length,
+        });
+      }
       setUiPhase("results");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not save attempt");

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 import { AppShell } from "@/components/layout/app-shell";
@@ -13,8 +13,7 @@ import {
   PrimaryButton,
   SecondaryButton,
 } from "@/components/ui/auth-form";
-import { MarkdownMathView } from "@/components/ui/markdown-math-view";
-import { InteractiveQuiz } from "@/components/ui/interactive-quiz";
+import { GeneratedStudyContent } from "@/components/library/generated-study-content";
 import { EmptyState, LoadingBlock } from "@/components/ui/student-ui";
 import { exportNote } from "@/lib/export/note-export";
 import { generateHref } from "@/lib/generate/modes";
@@ -24,8 +23,6 @@ import {
   fetchNoteById,
   setNoteFavorite,
 } from "@/lib/student/data";
-import { parseFlashcardsFromMarkdown } from "@/lib/student/flashcard-parser";
-import { parseQuizFromMarkdown } from "@/lib/student/quiz-parser";
 import type { GeneratedNote } from "@/lib/student/types";
 
 function formatNoteDate(date: Date | null): string {
@@ -48,10 +45,6 @@ export default function NoteReviewPage() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [exportError, setExportError] = useState<string | null>(null);
-  const [cardIndex, setCardIndex] = useState(0);
-  const [flipped, setFlipped] = useState(false);
-  const [quizStarted, setQuizStarted] = useState(false);
-  const [quizSession, setQuizSession] = useState(0);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
@@ -83,10 +76,6 @@ export default function NoteReviewPage() {
   }, [phase, user, noteId]);
 
   useEffect(() => {
-    setQuizStarted(false);
-  }, [noteId]);
-
-  useEffect(() => {
     if (!deleteOpen) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -94,22 +83,6 @@ export default function NoteReviewPage() {
       document.body.style.overflow = prev;
     };
   }, [deleteOpen]);
-
-  const flashcards = useMemo(() => {
-    if (!note || note.studyMode !== "Flashcards") return null;
-    return parseFlashcardsFromMarkdown(note.notes);
-  }, [note]);
-
-  const quiz = useMemo(() => {
-    if (!note || note.studyMode !== "Quiz") return null;
-    return parseQuizFromMarkdown(note.notes, {
-      subject: note.subject,
-      topic: note.topic,
-      difficulty: note.difficulty,
-    });
-  }, [note]);
-
-  const flashTheme = flashcardTheme(cardIndex);
 
   async function toggleFavorite() {
     if (!user || !note) return;
@@ -208,182 +181,7 @@ export default function NoteReviewPage() {
             </div>
 
             <div className="mt-6 px-[0.7in]">
-              {flashcards && flashcards.length > 0 ? (
-                <div className={CONTENT_CARD_CLASS}>
-                  <div className="mx-auto w-full max-w-5xl xl:max-w-6xl">
-                    <button
-                      type="button"
-                      onClick={() => setFlipped((f) => !f)}
-                      className="flashcard-scene block w-full cursor-pointer border-0 bg-transparent p-0 text-left"
-                      aria-label={
-                        flipped ? "Show front of card" : "Show back of card"
-                      }
-                    >
-                      <div
-                        key={cardIndex}
-                        className={`flashcard-inner min-h-64 sm:min-h-72 md:min-h-80 lg:min-h-[28rem] xl:min-h-[32rem] ${
-                          flipped ? "is-flipped" : ""
-                        }`}
-                      >
-                        <div
-                          className="flashcard-face flashcard-face-front"
-                          style={
-                            {
-                              background: flashTheme.front.bg,
-                              color: flashTheme.front.text,
-                              ["--color-text"]: flashTheme.front.text,
-                            } as CSSProperties
-                          }
-                        >
-                          <p
-                            className="text-xs font-semibold tracking-wide uppercase sm:text-sm md:text-base"
-                            style={{ color: flashTheme.front.label }}
-                          >
-                            Front · {cardIndex + 1}/{flashcards.length}
-                          </p>
-                          <div
-                            className="flashcard-body mt-4 w-full max-w-4xl font-medium"
-                            style={{ color: flashTheme.front.text }}
-                          >
-                            <MarkdownMathView
-                              size="reading"
-                              content={flashcards[cardIndex].front}
-                            />
-                          </div>
-                          <p
-                            className="mt-6 text-xs sm:text-sm md:text-base"
-                            style={{ color: flashTheme.front.hint }}
-                          >
-                            Tap to flip
-                          </p>
-                        </div>
-                        <div
-                          className="flashcard-face flashcard-face-back"
-                          style={
-                            {
-                              background: flashTheme.back.bg,
-                              color: flashTheme.back.text,
-                              ["--color-text"]: flashTheme.back.text,
-                            } as CSSProperties
-                          }
-                        >
-                          <p
-                            className="text-xs font-semibold tracking-wide uppercase sm:text-sm md:text-base"
-                            style={{ color: flashTheme.back.label }}
-                          >
-                            Back · {cardIndex + 1}/{flashcards.length}
-                          </p>
-                          <div
-                            className="flashcard-body mt-4 w-full max-w-4xl font-medium"
-                            style={{ color: flashTheme.back.text }}
-                          >
-                            <MarkdownMathView
-                              size="reading"
-                              content={flashcards[cardIndex].back}
-                            />
-                          </div>
-                          <p
-                            className="mt-6 text-xs sm:text-sm md:text-base"
-                            style={{ color: flashTheme.back.hint }}
-                          >
-                            Tap to flip
-                          </p>
-                        </div>
-                      </div>
-                    </button>
-                    <div className="mt-4 flex flex-nowrap items-center justify-between gap-3">
-                      <SecondaryButton
-                        type="button"
-                        className="!w-auto shrink-0 px-4"
-                        disabled={cardIndex === 0}
-                        onClick={() => {
-                          setCardIndex((i) => Math.max(0, i - 1));
-                          setFlipped(false);
-                        }}
-                      >
-                        Previous
-                      </SecondaryButton>
-                      <SecondaryButton
-                        type="button"
-                        className="!w-auto shrink-0 px-4"
-                        disabled={cardIndex >= flashcards.length - 1}
-                        onClick={() => {
-                          setCardIndex((i) =>
-                            Math.min(flashcards.length - 1, i + 1),
-                          );
-                          setFlipped(false);
-                        }}
-                      >
-                        Next
-                      </SecondaryButton>
-                    </div>
-                    <details className="mt-6 rounded-2xl border border-[#E8E6F0] bg-[#FAFAFC] p-4">
-                      <summary className="cursor-pointer text-sm font-semibold text-[#111827]">
-                        View raw markdown
-                      </summary>
-                      <div className="mt-3">
-                        <MarkdownMathView size="reading" content={note.notes} />
-                      </div>
-                    </details>
-                  </div>
-                </div>
-              ) : note.studyMode === "Quiz" ? (
-                <div className={CONTENT_CARD_CLASS}>
-                  {quizStarted && user && quiz && quiz.questions.length > 0 ? (
-                    <InteractiveQuiz
-                      key={`${note.id}-quiz-${quizSession}`}
-                      quiz={quiz}
-                      uid={user.uid}
-                      subject={note.subject}
-                      topic={note.topic}
-                      embedded
-                      onExit={() => setQuizStarted(false)}
-                    />
-                  ) : (
-                    <>
-                      <div className="mb-6 flex flex-col items-center gap-2">
-                        <PrimaryButton
-                          type="button"
-                          className="w-auto px-6"
-                          disabled={
-                            !user || !quiz || quiz.questions.length === 0
-                          }
-                          onClick={() => {
-                            if (!quiz || quiz.questions.length === 0) return;
-                            setQuizSession((n) => n + 1);
-                            setQuizStarted(true);
-                          }}
-                        >
-                          Start interactive quiz
-                        </PrimaryButton>
-                        {!quiz || quiz.questions.length === 0 ? (
-                          <p
-                            className="max-w-md text-center text-[#6B7280]"
-                            style={{ fontSize: "0.875rem" }}
-                          >
-                            This quiz needs multiple-choice questions (A–D) with
-                            a clear correct answer to run interactively. You can
-                            still review the content below.
-                          </p>
-                        ) : null}
-                      </div>
-                      <article className="mx-auto w-full max-w-5xl xl:max-w-6xl">
-                        <MarkdownMathView
-                          size="reading"
-                          content={note.notes || "No content."}
-                        />
-                      </article>
-                    </>
-                  )}
-                </div>
-              ) : (
-                <article className={CONTENT_CARD_CLASS}>
-                  <MarkdownMathView
-                    size="reading"
-                    content={note.notes || "No content."}
-                  />
-                </article>
-              )}
+              <GeneratedStudyContent note={note} uid={user.uid} />
 
               <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
                 <Link
@@ -451,8 +249,9 @@ export default function NoteReviewPage() {
   );
 }
 
-const CONTENT_CARD_CLASS =
-  "library-content-card w-full min-h-[22rem] rounded-[24px] border-[5px] border-[#F3F7A8] bg-white p-6 shadow-[0_8px_24px_rgba(17,24,39,0.04)] sm:min-h-[26rem] sm:rounded-[28px] sm:p-8 md:min-h-[30rem] md:p-10 lg:min-h-[34rem] lg:p-12 xl:min-h-[38rem] xl:p-14";
+const LIME = "#E8FF2F";
+const BLUE = "#4F35F2";
+const PINK = "#FF2D8A";
 
 function NoteHeroCard({
   note,
@@ -609,30 +408,6 @@ function NoteHeroCard({
       </div>
     </section>
   );
-}
-
-const LIME = "#E8FF2F";
-const BLUE = "#4F35F2";
-const PINK = "#FF2D8A";
-
-/** Per-card colors: front = solid brand, back = lighter shade. Cycles by index. */
-const FLASHCARD_THEMES = [
-  {
-    front: { bg: BLUE, label: "rgba(255,255,255,0.9)", text: "#FFFFFF", hint: "rgba(255,255,255,0.75)" },
-    back: { bg: "#E4DEFF", label: BLUE, text: "#1E1B4B", hint: "#6B7280" },
-  },
-  {
-    front: { bg: PINK, label: "rgba(255,255,255,0.9)", text: "#FFFFFF", hint: "rgba(255,255,255,0.75)" },
-    back: { bg: "#FFE0EF", label: PINK, text: "#1E1B4B", hint: "#6B7280" },
-  },
-  {
-    front: { bg: LIME, label: BLUE, text: "#1E1B4B", hint: "#5B5A6A" },
-    back: { bg: "#F5FFB8", label: BLUE, text: "#1E1B4B", hint: "#6B7280" },
-  },
-] as const;
-
-function flashcardTheme(index: number) {
-  return FLASHCARD_THEMES[index % FLASHCARD_THEMES.length]!;
 }
 
 function HeroIconButton({

@@ -12,6 +12,7 @@ import {
 import {
   fetchStudyCredits,
   FREE_TOTAL_GENERATION_LIMIT,
+  recordFreeGenerationUsed,
   type StudyCredits,
 } from "@/lib/student/study-credits";
 import type {
@@ -32,6 +33,8 @@ type StudentDataState = {
   stats: DashboardStats | null;
   credits: StudyCredits | null;
   refresh: (options?: RefreshOptions) => Promise<void>;
+  /** Persist + optimistically apply one free generation used on this device. */
+  bumpCreditsUsed: () => void;
 };
 
 export function useStudentData(): StudentDataState {
@@ -53,16 +56,19 @@ export function useStudentData(): StudentDataState {
       setNotes([]);
       setAttempts([]);
       setStats(null);
-      setCredits({
-        used: 0,
-        total: FREE_TOTAL_GENERATION_LIMIT,
-        remaining: FREE_TOTAL_GENERATION_LIMIT,
-        isPremium: false,
-        rewardCreditsRemaining: 0,
-        freeBaseLimit: FREE_TOTAL_GENERATION_LIMIT,
-      });
-      setLoading(false);
+      if (!silent) setLoading(true);
       setError(null);
+      try {
+        const c = await fetchStudyCredits({ guest: true });
+        setCredits(c);
+      } catch (err) {
+        setCredits(null);
+        setError(
+          err instanceof Error ? err.message : "Failed to load guest credits",
+        );
+      } finally {
+        if (!silent) setLoading(false);
+      }
       return;
     }
 
@@ -98,9 +104,44 @@ export function useStudentData(): StudentDataState {
     }
   }, [phase, user, isGuest]);
 
+  const bumpCreditsUsed = useCallback(() => {
+    recordFreeGenerationUsed();
+    setCredits((prev) => {
+      if (!prev || prev.isPremium) return prev;
+      const freeBase = prev.freeBaseLimit ?? FREE_TOTAL_GENERATION_LIMIT;
+      const rewards = prev.rewardCreditsRemaining ?? 0;
+      const nextFreeUsed = Math.min(freeBase, accountFreeUsedFrom(prev) + 1);
+      const remaining = Math.max(0, freeBase - nextFreeUsed) + rewards;
+      return {
+        ...prev,
+        used: Math.max(0, prev.total - remaining),
+        remaining,
+      };
+    });
+  }, []);
+
   useEffect(() => {
     void refresh();
   }, [refresh]);
 
-  return { loading, error, profile, notes, attempts, stats, credits, refresh };
+  return {
+    loading,
+    error,
+    profile,
+    notes,
+    attempts,
+    stats,
+    credits,
+    refresh,
+    bumpCreditsUsed,
+  };
+}
+
+function accountFreeUsedFrom(credits: StudyCredits): number {
+  const rewards = credits.rewardCreditsRemaining ?? 0;
+  const freeBase = credits.freeBaseLimit ?? FREE_TOTAL_GENERATION_LIMIT;
+  return Math.min(
+    freeBase,
+    Math.max(0, credits.total - credits.remaining - rewards),
+  );
 }

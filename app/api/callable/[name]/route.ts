@@ -15,6 +15,7 @@ const ALLOWED_CALLABLES = new Set([
   "verifyEmailOTP",
   "sendParentConsentEmail",
   "callOpenAI",
+  "callOpenAIGuest",
   "callGemini",
   "callNylaSupport",
   "getWrittenResponseFeedback",
@@ -45,6 +46,35 @@ const AUTH_REQUIRED = new Set([
   "sendParentConsentEmail",
 ]);
 
+const HOUR_MS = 60 * 60 * 1000;
+
+/** Per-callable hourly limits (read-light callables get higher caps). */
+const CALLABLE_HOURLY_LIMITS: Record<string, number> = {
+  getStudyCredits: 300,
+  callOpenAIGuest: 40,
+  sendPasswordReset: 15,
+};
+
+const DEFAULT_CALLABLE_HOURLY_LIMIT = 60;
+
+function callableRateLimitKey(
+  name: string,
+  ip: string,
+  data: unknown,
+): string {
+  if (name === "getStudyCredits") {
+    if (typeof data === "object" && data !== null && "deviceId" in data) {
+      const deviceId = String(
+        (data as { deviceId?: unknown }).deviceId ?? "",
+      ).trim();
+      if (deviceId) {
+        return `callable:${name}:device:${deviceId.slice(0, 80)}`;
+      }
+    }
+  }
+  return `callable:${name}:${ip}`;
+}
+
 type RouteContext = {
   params: Promise<{ name: string }>;
 };
@@ -65,18 +95,6 @@ export async function POST(request: Request, context: RouteContext) {
   }
 
   const ip = getTrustedClientIp(request.headers) || "unknown";
-  const limited = rateLimitTake(`callable:${name}:${ip}`, 60, 60 * 60 * 1000);
-  if (!limited.ok) {
-    return NextResponse.json(
-      {
-        error: {
-          message: "Too many requests. Please try again later.",
-          status: "RESOURCE_EXHAUSTED",
-        },
-      },
-      { status: 429, headers: { "Retry-After": String(limited.retryAfterSec) } },
-    );
-  }
 
   let body: unknown;
   try {
@@ -110,6 +128,32 @@ export async function POST(request: Request, context: RouteContext) {
       },
       { status: 400 },
     );
+  }
+
+  const requestData = (body as { data: unknown }).data;
+
+  if (process.env.NODE_ENV !== "development") {
+    const limit =
+      CALLABLE_HOURLY_LIMITS[name] ?? DEFAULT_CALLABLE_HOURLY_LIMIT;
+    const limited = rateLimitTake(
+      callableRateLimitKey(name, ip, requestData),
+      limit,
+      HOUR_MS,
+    );
+    if (!limited.ok) {
+      return NextResponse.json(
+        {
+          error: {
+            message: "Too many requests. Please try again later.",
+            status: "RESOURCE_EXHAUSTED",
+          },
+        },
+        {
+          status: 429,
+          headers: { "Retry-After": String(limited.retryAfterSec) },
+        },
+      );
+    }
   }
 
   const auth = request.headers.get("authorization");

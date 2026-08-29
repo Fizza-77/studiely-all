@@ -4,29 +4,46 @@ import Link from "next/link";
 
 import { PrimaryButton, SecondaryButton } from "@/components/ui/auth-form";
 
+export type GuestUpgradeReason = "save" | "exhausted";
+
 type GuestUpgradeDialogProps = {
-  studyMode: string;
+  reason: GuestUpgradeReason;
+  studyMode?: string;
+  guestCreditsTotal?: number;
   onClose: () => void;
 };
 
-function headlineForStudyMode(studyMode: string): string {
+function headlineForReason(reason: GuestUpgradeReason, studyMode?: string): string {
+  if (reason === "exhausted") {
+    return "Free credits used up";
+  }
   const labels: Record<string, string> = {
     "Summary Notes": "notes",
     Flashcards: "flashcards",
     Quiz: "quiz",
     "Exam Focus": "exam questions",
-    "Common Mistakes": "common mistakes",
-    Examples: "examples",
   };
-  const label = labels[studyMode] ?? studyMode.toLowerCase();
-  return `Sign in to generate your ${label}`;
+  const label = studyMode ? labels[studyMode] ?? studyMode.toLowerCase() : "content";
+  return `Sign in to save your ${label}`;
 }
 
-/**
- * Guests may browse generate UI but must sign in/up for 5 free credits.
- */
+function descriptionForReason(
+  reason: GuestUpgradeReason,
+  guestCreditsTotal?: number,
+): string {
+  if (reason === "exhausted") {
+    if (typeof guestCreditsTotal === "number" && guestCreditsTotal > 0) {
+      return `You've used all ${guestCreditsTotal} guest credit${guestCreditsTotal === 1 ? "" : "s"} on this device. Sign in for account credits or upgrade your plan to keep generating.`;
+    }
+    return "You've used all guest credits on this device. Sign in for account credits or upgrade your plan to keep generating.";
+  }
+  return "Sign in for free account credits and save to My Library.";
+}
+
 export function GuestUpgradeDialog({
+  reason,
   studyMode,
+  guestCreditsTotal,
   onClose,
 }: GuestUpgradeDialogProps) {
   return (
@@ -41,10 +58,10 @@ export function GuestUpgradeDialog({
           id="guest-upgrade-title"
           className="font-heading text-xl font-extrabold text-[#111827]"
         >
-          {headlineForStudyMode(studyMode)}
+          {headlineForReason(reason, studyMode)}
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-[#6B7280]">
-          Get 5 free credits on your first sign in.
+          {descriptionForReason(reason, guestCreditsTotal)}
         </p>
         <div className="mt-6 flex flex-col gap-2 sm:flex-row">
           <Link href="/signup" className="flex-1" onClick={onClose}>
@@ -58,12 +75,21 @@ export function GuestUpgradeDialog({
             </SecondaryButton>
           </Link>
         </div>
+        {reason === "exhausted" ? (
+          <Link
+            href="/pricing"
+            className="mt-3 block text-center text-sm font-semibold text-[#4F35F2] hover:underline"
+            onClick={onClose}
+          >
+            View plans &amp; upgrade
+          </Link>
+        ) : null}
         <button
           type="button"
           onClick={onClose}
           className="mt-4 w-full text-center text-xs font-semibold text-[#9CA3AF] hover:text-[#6B7280]"
         >
-          Keep browsing
+          {reason === "save" ? "Keep preview" : "Close"}
         </button>
       </div>
     </div>

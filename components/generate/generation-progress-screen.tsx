@@ -23,6 +23,8 @@ type GenerationProgressScreenProps = {
   onCancel: () => void;
   onOpenNotes: () => void;
   onReplay: () => void;
+  onSaveToLibrary?: () => void;
+  onViewPreview?: () => void;
 };
 
 const WAIT_TIPS = [
@@ -52,7 +54,7 @@ function readyHeadline(studyMode: string) {
 }
 
 function openCtaLabel(studyMode: string, isGuest: boolean) {
-  if (isGuest) return "View preview";
+  if (isGuest) return "Save to library";
   if (studyMode === "Flashcards") return "Open my flashcards";
   if (studyMode === "Quiz") return "Start my live quiz";
   if (studyMode === "Exam Focus") return "Open my exam questions";
@@ -88,6 +90,8 @@ export function GenerationProgressScreen({
   onCancel,
   onOpenNotes,
   onReplay,
+  onSaveToLibrary,
+  onViewPreview,
 }: GenerationProgressScreenProps) {
   const steps = useMemo(() => buildSteps(meta), [meta]);
   const [progress, setProgress] = useState(8);
@@ -96,6 +100,14 @@ export function GenerationProgressScreen({
   const done = phase === "complete";
   const noun = modeNoun(meta.studyMode);
   const plural = modeIsPlural(meta.studyMode);
+
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, []);
 
   useEffect(() => {
     if (done) {
@@ -122,7 +134,7 @@ export function GenerationProgressScreen({
   }, [done, steps.length, meta.topic, meta.studyMode]);
 
   return (
-    <div className="fixed inset-0 z-[500] flex min-h-0 flex-col overflow-hidden bg-[#FFFBEF]">
+    <div className="fixed inset-0 z-[500] flex h-[100dvh] max-h-[100dvh] flex-col overflow-hidden bg-[#FFFBEF]">
       {/* Lime top bar */}
       <div className="shrink-0 px-3 pt-2 sm:px-4 sm:pt-2.5 md:px-6">
         <div className="mx-auto flex h-14 min-h-14 max-w-[min(100%,2400px)] items-center justify-between gap-3 rounded-[24px] bg-[#E8FF2F] px-3 sm:rounded-[32px] sm:px-5 md:px-[clamp(1.25rem,2.5vw,2.5rem)]">
@@ -147,13 +159,13 @@ export function GenerationProgressScreen({
         </div>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-y-auto">
-        <div className="mx-auto grid w-full max-w-none gap-8 px-4 py-6 sm:px-6 sm:py-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-10 lg:py-10">
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="mx-auto grid w-full max-w-none items-start gap-5 px-4 py-4 sm:px-6 sm:py-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8 lg:py-6">
           {/* Left column */}
-          <div className="min-w-0">
+          <div className="min-h-0 min-w-0">
             <div className="flex flex-col items-center text-center">
               <div
-                className="flex size-16 items-center justify-center overflow-hidden rounded-[22px] sm:size-[72px]"
+                className="flex size-14 items-center justify-center overflow-hidden rounded-[20px] sm:size-16 sm:rounded-[22px]"
                 style={{
                   background: done
                     ? `linear-gradient(145deg, ${PURPLE} 0%, #6366F1 100%)`
@@ -167,14 +179,14 @@ export function GenerationProgressScreen({
                   alt=""
                   width={56}
                   height={56}
-                  className="size-12 rounded-full object-cover ring-2 ring-white/35 sm:size-14"
+                  className="size-11 rounded-full object-cover ring-2 ring-white/35 sm:size-12"
                 />
               </div>
 
-              <h1 className="mt-5 font-heading text-[clamp(1.85rem,3.5vw,2.6rem)] font-extrabold tracking-tight text-[#111827]">
+              <h1 className="mt-3 font-heading text-[clamp(1.65rem,3.2vw,2.35rem)] font-extrabold tracking-tight text-[#111827] sm:mt-4">
                 {done ? "All done!" : "Almost there…"}
               </h1>
-              <p className="mt-2 max-w-md text-[15px] leading-relaxed text-[#6B7280]">
+              <p className="mt-1.5 max-w-md text-sm leading-relaxed text-[#6B7280] sm:mt-2 sm:text-[15px]">
                 {done
                   ? meta.isGuest
                     ? `Nyla finished your ${noun} — preview ${plural ? "them" : "it"} below, then sign up to save.`
@@ -183,7 +195,7 @@ export function GenerationProgressScreen({
               </p>
             </div>
 
-            <div className="mt-7">
+            <div className="mt-4 sm:mt-5">
               <div className="mb-2 flex items-center justify-between gap-3">
                 <p
                   className="text-[11px] font-extrabold tracking-[0.14em] uppercase"
@@ -209,13 +221,13 @@ export function GenerationProgressScreen({
               </div>
             </div>
 
-            <ul className="mt-5 flex flex-col gap-2.5">
+            <ul className="mt-3 flex flex-col gap-2 sm:mt-4">
               {steps.map((label, i) => {
                 const checked = i < completedCount || done;
                 return (
                   <li
                     key={label}
-                    className="flex items-start gap-3 rounded-2xl border border-[#F0E7C8] bg-[#FFF9E8] px-3.5 py-3"
+                    className="flex items-start gap-3 rounded-2xl border border-[#F0E7C8] bg-[#FFF9E8] px-3 py-2.5 sm:px-3.5 sm:py-3"
                   >
                     <span
                       className={`mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-lg ${
@@ -240,7 +252,7 @@ export function GenerationProgressScreen({
               })}
             </ul>
 
-            <div className="mt-5 flex items-start gap-3 rounded-2xl border border-[#F9C2D8] bg-[#FFF0F6] px-4 py-3.5">
+            <div className="mt-3 flex items-start gap-3 rounded-2xl border border-[#F9C2D8] bg-[#FFF0F6] px-3.5 py-3 sm:mt-4 sm:px-4 sm:py-3.5">
               <span
                 className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-xl text-[#FF2D8A]"
                 style={{ background: "#FFE4F1" }}
@@ -257,31 +269,54 @@ export function GenerationProgressScreen({
             </div>
 
             {done ? (
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <button
-                  type="button"
-                  onClick={onOpenNotes}
-                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-extrabold text-white transition hover:brightness-110"
-                  style={{ background: PINK }}
-                >
-                  <BookIcon />
-                  {openCtaLabel(meta.studyMode, meta.isGuest)}
-                </button>
-                <button
-                  type="button"
-                  onClick={onReplay}
-                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-[#E5E7EB] bg-white px-5 py-3.5 text-sm font-bold text-[#6B7280] transition hover:bg-[#FAFAFC]"
-                >
-                  <ReplayIcon />
-                  Replay preview
-                </button>
+              <div className="mt-4 flex flex-col gap-3 sm:mt-5 sm:flex-row">
+                {meta.isGuest ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={onViewPreview}
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-extrabold text-white transition hover:brightness-110"
+                      style={{ background: PINK }}
+                    >
+                      <BookIcon />
+                      {openCtaLabel(meta.studyMode, false)}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={onSaveToLibrary}
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-[#E5E7EB] bg-white px-5 py-3.5 text-sm font-bold text-[#6B7280] transition hover:bg-[#FAFAFC]"
+                    >
+                      Save to library
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      onClick={onOpenNotes}
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-extrabold text-white transition hover:brightness-110"
+                      style={{ background: PINK }}
+                    >
+                      <BookIcon />
+                      {openCtaLabel(meta.studyMode, meta.isGuest)}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={onReplay}
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-[#E5E7EB] bg-white px-5 py-3.5 text-sm font-bold text-[#6B7280] transition hover:bg-[#FAFAFC]"
+                    >
+                      <ReplayIcon />
+                      Generate again
+                    </button>
+                  </>
+                )}
               </div>
             ) : null}
           </div>
 
           {/* Right column */}
-          <div className="min-w-0">
-            <div className="mb-3 flex flex-wrap items-center gap-2">
+          <div className="hidden min-h-0 min-w-0 lg:block">
+            <div className="mb-2 flex flex-wrap items-center gap-2">
               <span className="text-[10px] font-bold tracking-[0.14em] text-[#9CA3AF] uppercase">
                 Making
               </span>
@@ -305,7 +340,7 @@ export function GenerationProgressScreen({
               ) : null}
             </div>
 
-            <div className="relative flex min-h-[320px] flex-col items-center justify-center rounded-[28px] border border-[#E8E6F0] bg-white px-6 py-12 text-center shadow-[0_16px_40px_rgba(17,24,39,0.08)] sm:min-h-[420px]">
+            <div className="relative flex min-h-[280px] flex-col items-center justify-center rounded-[28px] border border-[#E8E6F0] bg-white px-6 py-10 text-center shadow-[0_16px_40px_rgba(17,24,39,0.08)] xl:min-h-[360px]">
               <span
                 className="pointer-events-none absolute right-5 top-5 h-6 w-14 rounded-full opacity-80"
                 style={{ background: "#FEF3C7" }}

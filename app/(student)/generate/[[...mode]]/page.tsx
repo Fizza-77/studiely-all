@@ -14,12 +14,13 @@ import { useRouter, useParams, useSearchParams } from "next/navigation";
 
 import { AppShell } from "@/components/layout/app-shell";
 import { DataConsentGate } from "@/components/auth/data-consent-gate";
-import { GuestUpgradeDialog } from "@/components/auth/guest-upgrade-dialog";
+import { GuestUpgradeDialog, type GuestUpgradeReason } from "@/components/auth/guest-upgrade-dialog";
 import {
   GenerateStickySidebar,
   type GenerateTip,
 } from "@/components/generate/generate-sidebar";
 import { GenerationProgressScreen } from "@/components/generate/generation-progress-screen";
+import { GeneratedStudyContent } from "@/components/library/generated-study-content";
 import { useAuth } from "@/components/providers/auth-provider";
 import {
   Alert,
@@ -532,7 +533,7 @@ function GenerateInner() {
   const searchParams = useSearchParams();
   const { phase, user, student } = useAuth();
   const isGuest = phase === "guest" && !user;
-  const { loading, stats, credits, refresh } = useStudentData();
+  const { loading, stats, credits, refresh, bumpCreditsUsed, error: creditsLoadError } = useStudentData();
 
   const modeSegment = Array.isArray(params.mode) ? params.mode[0] : params.mode;
   const legacyModeQuery = searchParams.get("mode");
@@ -608,8 +609,13 @@ function GenerateInner() {
   );
   const [completedNoteId, setCompletedNoteId] = useState<string | null>(null);
   const cancelledRef = useRef(false);
-  const [error, setError] = useState<string | null>(null);
+  const [guestPreview, setGuestPreview] = useState<string | null>(null);
+  const guestPreviewRef = useRef<HTMLDivElement>(null);
   const [showGuestSignup, setShowGuestSignup] = useState(false);
+  const [guestSignupReason, setGuestSignupReason] =
+    useState<GuestUpgradeReason>("save");
+  const [bottomToast, setBottomToast] = useState<ReactNode | null>(null);
+  const bottomToastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [activeStep, setActiveStep] = useState<
     "subject" | "difficulty" | "extras" | "topic"
   >(() => (isRegenPrefill && prefillTopic ? "topic" : "subject"));
@@ -629,10 +635,6 @@ function GenerateInner() {
     const next = resolveGenerateModeName(modeSegment);
     setStudyMode(next);
   }, [modeSegment]);
-
-  useEffect(() => {
-    if (isGuest) setShowGuestSignup(true);
-  }, [isGuest]);
 
   // Apply subject from library regenerate once options for the prefilled grade load.
   useEffect(() => {
@@ -675,9 +677,16 @@ function GenerateInner() {
 
   function selectStudyMode(name: string) {
     const next = resolveGenerateModeName(name);
+    if (next === studyMode) {
+      setShowModes(false);
+      return;
+    }
     setStudyMode(next);
     setShowModes(false);
-    router.replace(generateHref(next), { scroll: false });
+    // Update the URL without Next.js navigation so form state (board, grade, subject, etc.) is kept.
+    if (typeof window !== "undefined") {
+      window.history.replaceState(window.history.state, "", generateHref(next));
+    }
   }
 
   useEffect(() => {
@@ -755,14 +764,73 @@ function GenerateInner() {
 
   const isPremium =
     stats?.studyCreditsIsPremium === true || stats?.isPremium === true;
-  const creditsUsed = credits?.used ?? stats?.studyCreditsUsed ?? 0;
-  const creditsTotal =
-    credits?.total ?? stats?.studyCreditsTotal ?? FREE_TOTAL_GENERATION_LIMIT;
-  const creditsLeft =
-    credits?.remaining ??
-    stats?.studyCreditsRemaining ??
-    Math.max(0, creditsTotal - creditsUsed);
-  const atLimit = !isGuest && !isPremium && creditsLeft <= 0;
+  const creditsUsed = isGuest
+    ? (credits?.used ?? 0)
+    : (credits?.used ?? stats?.studyCreditsUsed ?? 0);
+  const creditsTotal = isGuest
+    ? (credits?.total ?? 0)
+    : (credits?.total ?? stats?.studyCreditsTotal ?? FREE_TOTAL_GENERATION_LIMIT);
+  const creditsLeft = isGuest
+    ? (credits?.remaining ?? 0)
+    : (credits?.remaining ??
+      stats?.studyCreditsRemaining ??
+      Math.max(0, creditsTotal - creditsUsed));
+  const atLimit = !isPremium && (isGuest ? !credits || creditsLeft <= 0 : creditsLeft <= 0);
+
+  useEffect(() => {
+    if (loading || !isGuest || !credits || creditsLeft > 0) return;
+    flashBottomToast(
+      <>
+        You&apos;ve used all {creditsTotal} free credit
+        {creditsTotal === 1 ? "" : "s"} on this device.{" "}
+        <button
+          type="button"
+          className="font-semibold underline"
+          onClick={() => {
+            setGuestSignupReason("exhausted");
+            setShowGuestSignup(true);
+          }}
+        >
+          Sign in or upgrade
+        </button>{" "}
+        to keep generating.
+      </>,
+      2000,
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only when credits hit zero
+  }, [loading, isGuest, credits, creditsLeft]);
+
+  useEffect(() => {
+    return () => {
+      if (bottomToastTimerRef.current) {
+        window.clearTimeout(bottomToastTimerRef.current);
+      }
+    };
+  }, []);
+
+  function flashBottomToast(content: ReactNode, durationMs = 2000) {
+    setBottomToast(content);
+    if (bottomToastTimerRef.current) {
+      window.clearTimeout(bottomToastTimerRef.current);
+    }
+    bottomToastTimerRef.current = window.setTimeout(() => {
+      setBottomToast(null);
+      bottomToastTimerRef.current = null;
+    }, durationMs);
+  }
+
+  function flashSignedInLimitToast() {
+    flashBottomToast(
+      <>
+        No free generations left on this device. Upgrade on{" "}
+        <Link href="/pricing" className="font-semibold underline">
+          Pricing
+        </Link>
+        , or wait if you expect reward credits.
+      </>,
+      3000,
+    );
+  }
 
   const selectedMode = STUDY_MODES.find((m) => m.name === studyMode);
   const modeLocked = !isGuest && !!selectedMode?.locked && !isPremium;
@@ -816,16 +884,11 @@ function GenerateInner() {
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
-    setError(null);
     setCompletedNoteId(null);
-
-    if (isGuest || !user) {
-      setShowGuestSignup(true);
-      return;
-    }
+    setGuestPreview(null);
 
     if (!leaf) {
-      setError("Select a valid curriculum pathway and grade.");
+      flashBottomToast("Select a valid curriculum pathway and grade.");
       setOpenSetup("grade");
       return;
     }
@@ -833,23 +896,26 @@ function GenerateInner() {
     const subjectRaw =
       subject === "__custom__" ? customSubject.trim() : subject.trim();
     if (!subjectRaw) {
-      setError("Choose or type a subject.");
+      flashBottomToast("Choose or type a subject.");
       setActiveStep("subject");
       return;
     }
     if (!topic.trim()) {
-      setError("Enter a topic.");
+      flashBottomToast("Enter a topic.");
       setActiveStep("topic");
       return;
     }
     if (modeLocked) {
-      setError("That study mode requires Pro. Upgrade or pick a free mode.");
+      flashBottomToast("That study mode requires Pro. Upgrade or pick a free mode.");
       return;
     }
     if (atLimit) {
-      setError(
-        `Free plan limit reached (${creditsUsed} / ${creditsTotal} used, ${creditsLeft} left). Upgrade for more generations.`,
-      );
+      if (isGuest || !user) {
+        setGuestSignupReason("exhausted");
+        setShowGuestSignup(true);
+        return;
+      }
+      flashSignedInLimitToast();
       return;
     }
 
@@ -881,14 +947,24 @@ function GenerateInner() {
             studyMode === "Quiz"
               ? false
               : includeMnemonics,
-          includeExamStyleQs: includeExamStyleQs && isPremium,
+          includeExamStyleQs: includeExamStyleQs && (isPremium || isGuest),
           includeCommonMistakes:
             studyMode === "Exam Focus" ? includeCommonMistakes : false,
           age,
         },
+        { guest: isGuest || !user },
       );
 
       if (cancelledRef.current) return;
+
+      bumpCreditsUsed();
+
+      if (isGuest || !user) {
+        setGuestPreview(content);
+        setGenPhase("complete");
+        await refresh({ silent: true });
+        return;
+      }
 
       const noteId = await saveGeneratedNote(user.uid, {
         subject: subjectRaw,
@@ -911,12 +987,23 @@ function GenerateInner() {
       if (cancelledRef.current) return;
 
       setCompletedNoteId(noteId);
-      await refresh();
+      await refresh({ silent: true });
       setGenPhase("complete");
     } catch (err) {
       if (cancelledRef.current) return;
       setGenPhase("idle");
-      setError(err instanceof Error ? err.message : "Generation failed");
+      const message = err instanceof Error ? err.message : "Generation failed";
+      if (
+        (isGuest || !user) &&
+        /free limit|resource-exhausted|RESOURCE_EXHAUSTED|Too many guest/i.test(
+          message,
+        )
+      ) {
+        setGuestSignupReason("exhausted");
+        setShowGuestSignup(true);
+        return;
+      }
+      flashBottomToast(message);
     } finally {
       if (!cancelledRef.current) {
         setBusy(false);
@@ -931,6 +1018,11 @@ function GenerateInner() {
   }
 
   function onOpenGeneratedNotes() {
+    if (isGuest || !user) {
+      setGuestSignupReason("save");
+      setShowGuestSignup(true);
+      return;
+    }
     if (completedNoteId) {
       // Quizzes open the live interactive player; other modes open the note detail.
       if (studyMode === "Quiz") {
@@ -941,6 +1033,18 @@ function GenerateInner() {
       return;
     }
     setGenPhase("idle");
+  }
+
+  function onSaveToLibrary() {
+    setGuestSignupReason("save");
+    setShowGuestSignup(true);
+  }
+
+  function onViewGuestPreview() {
+    setGenPhase("idle");
+    window.setTimeout(() => {
+      guestPreviewRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 0);
   }
 
   function onReplayGeneration() {
@@ -979,15 +1083,19 @@ function GenerateInner() {
               studyMode !== "Flashcards" &&
               studyMode !== "Exam Focus" &&
               studyMode !== "Quiz",
-            isGuest: false,
+            isGuest: isGuest || !user,
           }}
           onCancel={onCancelGeneration}
           onOpenNotes={onOpenGeneratedNotes}
           onReplay={onReplayGeneration}
+          onSaveToLibrary={
+            isGuest || !user ? onSaveToLibrary : undefined
+          }
+          onViewPreview={isGuest || !user ? onViewGuestPreview : undefined}
         />
       ) : null}
-      {!isGuest && loading ? (
-        <LoadingBlock label="Loading your plan…" />
+      {loading ? (
+        <LoadingBlock label="Loading your credits…" />
       ) : (
         <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8">
           <div className="min-w-0 space-y-5">
@@ -1004,32 +1112,39 @@ function GenerateInner() {
                     className="size-1.5 shrink-0 rounded-full bg-[#FF2D8A]"
                     aria-hidden
                   />
-                  {isGuest
-                    ? `${FREE_TOTAL_GENERATION_LIMIT} free after sign up`
-                    : `${creditsLeft} credit${creditsLeft === 1 ? "" : "s"} left`}
+                  {isGuest && !credits
+                    ? "…"
+                    : isGuest
+                      ? `${creditsLeft} free credit${creditsLeft === 1 ? "" : "s"} left`
+                      : isPremium
+                        ? `${creditsLeft} generation${creditsLeft === 1 ? "" : "s"} left`
+                        : `${creditsLeft} credit${creditsLeft === 1 ? "" : "s"} left`}
                 </span>
               </div>
             </header>
 
-            {isGuest ? (
+            {isGuest && credits && creditsLeft > 0 ? (
               <Alert tone="info">
-                You can explore the generator here.{" "}
+                You have {creditsLeft} free credit{creditsLeft === 1 ? "" : "s"}{" "}
+                left on this device — previews are not saved until you{" "}
                 <Link href="/signup" className="font-semibold underline">
-                  Sign up free
+                  sign up
                 </Link>{" "}
                 or{" "}
                 <Link href="/login" className="font-semibold underline">
                   sign in
-                </Link>{" "}
-                to use your 5 free generations and save to My Library.
+                </Link>
+                .
               </Alert>
             ) : null}
+            {isGuest && creditsLoadError && !credits ? (
+              <Alert>{creditsLoadError}</Alert>
+            ) : null}
 
-            {error ? <Alert>{error}</Alert> : null}
-            {atLimit ? (
+            {atLimit && !isGuest && isPremium ? (
               <Alert>
-                No free generations left. Upgrade on Pricing, or wait if you
-                expect reward credits.
+                No subscription generations left this period. Upgrade or wait
+                for your next billing cycle.
               </Alert>
             ) : null}
 
@@ -1743,7 +1858,7 @@ function GenerateInner() {
               <div className="space-y-2">
                 <button
                   type="submit"
-                  disabled={busy || atLimit || modeLocked}
+                  disabled={busy || modeLocked}
                   className={`inline-flex w-full items-center justify-center gap-2 px-4 py-3.5 text-sm font-extrabold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60 ${
                     studyMode === "Flashcards" ? "rounded-full" : "rounded-2xl"
                   }`}
@@ -1771,6 +1886,59 @@ function GenerateInner() {
               </div>
             </form>
 
+            {guestPreview ? (
+              <div ref={guestPreviewRef} className="space-y-4">
+                <section
+                  className="overflow-hidden rounded-[28px] px-6 py-7 text-white shadow-[0_16px_40px_rgba(79,53,242,0.28)] sm:px-8 sm:py-8"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #4F35F2 0%, #5B4BF0 42%, #7C6CF0 78%, #A78BFA 100%)",
+                  }}
+                >
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="min-w-0">
+                      <p
+                        className="inline-flex rounded-full px-3 py-1 text-[11px] font-bold tracking-[0.08em] uppercase"
+                        style={{ background: "#FF2D8A" }}
+                      >
+                        {studyMode}
+                      </p>
+                      <h2 className="mt-3 font-heading text-2xl font-extrabold tracking-tight">
+                        {topic.trim() || "Your topic"}
+                      </h2>
+                      <p className="mt-2 text-sm text-white/90">
+                        {[subjectRawLabel, difficulty, gradeLabel]
+                          .filter(Boolean)
+                          .join(" · ")}
+                      </p>
+                      <p className="mt-2 text-xs text-white/75">
+                        Preview only — sign in to save to your library.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setGuestSignupReason("save");
+                        setShowGuestSignup(true);
+                      }}
+                      className="shrink-0 self-start rounded-full bg-[#E8FF2F] px-4 py-2.5 text-xs font-extrabold text-[#4F35F2] transition hover:brightness-105"
+                    >
+                      Save to library
+                    </button>
+                  </div>
+                </section>
+                <GeneratedStudyContent
+                  note={{
+                    studyMode,
+                    subject: subjectRawLabel || "Subject",
+                    topic: topic.trim() || "Topic",
+                    difficulty,
+                    notes: guestPreview,
+                  }}
+                />
+              </div>
+            ) : null}
+
             {!leaf && !loading ? (
               <EmptyState
                 title="Pick a grade with subjects"
@@ -1784,9 +1952,16 @@ function GenerateInner() {
       )}
       {showGuestSignup ? (
         <GuestUpgradeDialog
+          reason={guestSignupReason}
           studyMode={studyMode}
+          guestCreditsTotal={credits?.total}
           onClose={() => setShowGuestSignup(false)}
         />
+      ) : null}
+      {bottomToast ? (
+        <div className="fixed bottom-20 left-1/2 z-50 max-w-[min(100vw-2rem,28rem)] -translate-x-1/2 rounded-2xl bg-[#111827] px-4 py-3 text-center text-sm font-medium text-white shadow-lg sm:bottom-6">
+          {bottomToast}
+        </div>
       ) : null}
     </div>
   );

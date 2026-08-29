@@ -38,7 +38,7 @@ export const STUDY_MODES: StudyModeOption[] = [
   { name: "Summary Notes", locked: false, isPremium: false },
   { name: "Flashcards", locked: false, isPremium: false },
   { name: "Quiz", locked: false, isPremium: false },
-  { name: "Exam Focus", locked: true, isPremium: true },
+  { name: "Exam Focus", locked: false, isPremium: false },
   { name: "Common Mistakes", locked: true, isPremium: true },
   { name: "Examples", locked: true, isPremium: true },
 ];

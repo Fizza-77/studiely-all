@@ -267,14 +267,14 @@ export const Footer = (_props: FooterProps = {}) => {
             </div>
 
             {/* Download + QR */}
-            <div className="shrink-0 border-white/15 lg:border-l lg:pl-3 xl:pl-4">
+            <div className="flex shrink-0 flex-col items-center border-white/15 lg:border-l lg:pl-3 xl:pl-4">
               <p
-                className="mb-2 font-sans text-[10px] font-semibold uppercase tracking-[0.12em]"
+                className="mb-2 w-full text-center font-sans text-[10px] font-semibold uppercase tracking-[0.12em]"
                 style={{ color: LIME }}
               >
                 Download The App
               </p>
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-start justify-center gap-2.5">
                 <div className="flex flex-col gap-1.5">
                   <a
                     href={APP_STORE_IOS}
@@ -315,19 +315,19 @@ export const Footer = (_props: FooterProps = {}) => {
                     </span>
                   </a>
                 </div>
-                <div className="flex flex-col items-center gap-1">
-                  <div className="size-[64px] overflow-hidden rounded-[3px] bg-white">
+                <div className="flex w-[76px] shrink-0 flex-col items-center gap-1 sm:w-[80px]">
+                  <div className="relative size-[76px] overflow-hidden rounded-[3px] bg-white sm:size-[80px]">
                     <Image
                       src="/QR.jpeg"
                       alt="QR code to download Studiely"
-                      width={64}
-                      height={64}
+                      width={80}
+                      height={80}
                       unoptimized
                       className="h-full w-full object-cover"
                     />
                   </div>
                   <p
-                    className="mb-0 max-w-[72px] text-center font-sans text-[8px] leading-snug"
+                    className="mb-0 w-full text-center font-sans text-[8px] leading-snug"
                     style={{ color: LIME }}
                   >
                     Scan to download Studiely

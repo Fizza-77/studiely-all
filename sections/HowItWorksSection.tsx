@@ -106,13 +106,32 @@ export const HowItWorksSection = ({ sectionRef }: HowItWorksSectionProps) => (
       </div>
 
       <div className="mx-auto flex w-full max-w-[56rem] flex-nowrap items-stretch justify-center gap-2 sm:gap-3 md:max-w-[68rem] md:gap-5 lg:max-w-[78rem] lg:gap-7 xl:max-w-[88rem] xl:gap-8">
-        {STEPS.map(({ n, title, desc, src, width, height, light }) => (
+        {STEPS.map(({ n, title, desc, src, width, height, light }) => {
+          const growsWithRow = n === "1";
+
+          return (
           <article
             key={n}
             className="group relative flex w-0 min-w-0 flex-1 flex-col"
           >
-            {/* Identical frame size for all three SVGs (tallest card aspect) */}
-            <div className="@container relative aspect-[357/412] w-full overflow-visible shadow-[0_14px_32px_rgba(30,27,75,0)] transition-[translate,filter] duration-300 ease-out will-change-[translate] group-hover:z-10 group-hover:-translate-y-1.5 group-hover:drop-shadow-[0_20px_40px_rgba(30,27,75,0.18)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+            <div
+              className={`@container relative w-full overflow-visible shadow-[0_14px_32px_rgba(30,27,75,0)] transition-[translate,filter] duration-300 ease-out will-change-[translate] group-hover:z-10 group-hover:-translate-y-1.5 group-hover:drop-shadow-[0_20px_40px_rgba(30,27,75,0.18)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 ${
+                growsWithRow
+                  ? "flex h-full min-h-0 flex-1 items-end justify-center"
+                  : ""
+              }`}
+              style={
+                growsWithRow
+                  ? undefined
+                  : { aspectRatio: `${width} / ${height}` }
+              }
+            >
+              <div
+                className={`relative ${
+                  growsWithRow ? "h-full w-auto max-w-full" : "h-full w-full"
+                }`}
+                style={{ aspectRatio: `${width} / ${height}` }}
+              >
               <Image
                 src={src}
                 alt={`Step ${n}: ${title}`}
@@ -140,9 +159,11 @@ export const HowItWorksSection = ({ sectionRef }: HowItWorksSectionProps) => (
                   {desc}
                 </p>
               </div>
+              </div>
             </div>
           </article>
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>

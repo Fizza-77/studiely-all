@@ -62,14 +62,16 @@ const CardLandmark = ({
   alt,
   className = "",
   fit = "cover",
+  position = "center",
 }: {
   src: string;
   alt: string;
   className?: string;
   fit?: "cover" | "contain";
+  position?: "center" | "right-bottom";
 }) => (
   <div
-    className={`relative min-h-[140px] overflow-hidden rounded-[22px] ${className}`}
+    className={`relative h-full min-h-[140px] overflow-hidden rounded-[22px] ${className}`}
   >
     <Image
       src={src}
@@ -79,7 +81,9 @@ const CardLandmark = ({
       sizes="(max-width: 768px) 90vw, 45vw"
       className={
         fit === "contain"
-          ? "object-contain object-center"
+          ? position === "right-bottom"
+            ? "object-contain object-right-bottom"
+            : "object-contain object-center"
           : "object-cover object-center"
       }
     />
@@ -262,20 +266,19 @@ export const SupportedCountriesSection = ({
           <div className="grid grid-cols-1 items-stretch gap-4 md:gap-5 lg:grid-cols-[minmax(0,1.72fr)_minmax(0,1fr)] lg:gap-5">
             {/* United Kingdom */}
             <article
-              className={`relative flex h-full flex-col overflow-hidden rounded-[28px] p-6 sm:p-8 ${CARD_HOVER_BORDER}`}
+              className={`relative flex h-full flex-col overflow-hidden rounded-[28px] p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
               style={{ backgroundColor: BLUE }}
             >
-              <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
-                <CardFlag src="/UK-flag.webp" />
-                <h3 className="mb-1 mt-2 whitespace-nowrap font-heading text-[clamp(1.35rem,2.4vw,1.85rem)] font-extrabold leading-[1.05] tracking-[-0.02em] text-white">
-                  United Kingdom
-                </h3>
-                <p className="mb-3 font-heading text-[13px] font-bold text-white/90 sm:text-[14px]">
-                  Secondary to A Level
-                </p>
-
-                <div className="flex min-h-0 flex-1 flex-col gap-4 sm:flex-row sm:items-stretch sm:gap-5">
-                  <ul className="relative z-[1] m-0 flex min-w-0 shrink-0 list-none flex-col gap-3 p-0 sm:max-w-[55%]">
+              <div className="grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-stretch gap-2.5 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] sm:gap-4">
+                <div className="relative z-[1] flex min-w-0 flex-col gap-2.5 self-start">
+                  <CardFlag src="/UK-flag.webp" />
+                  <h3 className="m-0 whitespace-nowrap font-heading text-[clamp(1.25rem,2.2vw,1.75rem)] font-extrabold leading-[1.05] tracking-[-0.02em] text-white">
+                    United Kingdom
+                  </h3>
+                  <p className="m-0 font-heading text-[12px] font-bold leading-snug text-white/90 sm:text-[13px]">
+                    Secondary to A Level
+                  </p>
+                  <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
                     {[
                       "Cambridge IGCSE, AS, A Level",
                       "Edexcel IGCSE, AS, A Level",
@@ -283,18 +286,23 @@ export const SupportedCountriesSection = ({
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2.5">
                         <LimeCheck />
-                        <span className="font-sans text-[13px] leading-snug text-white/90 sm:text-[14px]">
+                        <span className="font-sans text-[12px] leading-snug text-white/90 sm:text-[13px]">
                           {item}
                         </span>
                       </li>
                     ))}
                   </ul>
+                </div>
 
-                  <CardLandmark
+                <div className="relative flex w-[5.5rem] max-w-[36%] shrink-0 items-end justify-end self-stretch overflow-hidden rounded-[22px] sm:w-full sm:max-w-none">
+                  <Image
                     src="/UK.webp"
                     alt="Palace of Westminster and Big Ben at night"
-                    fit="cover"
-                    className="min-h-[150px] w-full flex-1 sm:min-h-[160px] sm:min-w-[42%]"
+                    width={480}
+                    height={860}
+                    unoptimized
+                    sizes="(max-width: 640px) 28vw, (max-width: 1280px) 40vw, 35vw"
+                    className="h-auto w-full object-contain object-right-bottom"
                   />
                 </div>
               </div>
@@ -302,9 +310,9 @@ export const SupportedCountriesSection = ({
 
             {/* United States */}
             <article
-              className={`relative overflow-hidden rounded-[28px] bg-white p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
+              className={`relative flex h-full flex-col overflow-hidden rounded-[28px] bg-white p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
             >
-              <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] sm:gap-4">
+              <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] sm:gap-4">
                 <div className="relative z-[1] min-w-0">
                   <CardTitle subtitle="Kindergarten to College Admissions">
                     <CardFlag src="/USA-flag.webp" />
@@ -345,7 +353,7 @@ export const SupportedCountriesSection = ({
                     ))}
                   </ul>
                 </div>
-                <div className="relative w-full overflow-hidden rounded-[22px]">
+                <div className="relative flex w-full items-center justify-center self-center overflow-hidden rounded-[22px]">
                   <Image
                     src="/US.webp"
                     alt="Statue of Liberty at night"
@@ -365,7 +373,7 @@ export const SupportedCountriesSection = ({
             <article
               className={`overflow-hidden rounded-[28px] bg-white p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
             >
-              <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+              <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
                 <div className="relative z-[1] min-w-0">
                   <CardTitle subtitle="Primary to Diploma Programme">
                     <CardFlag src="/USA-flag.webp" />
@@ -381,7 +389,7 @@ export const SupportedCountriesSection = ({
                     <NumberedRow n={3}>Diploma Programme (DP)</NumberedRow>
                   </ul>
                 </div>
-                <div className="relative w-full overflow-hidden rounded-[22px]">
+                <div className="relative flex w-full items-center justify-center self-center overflow-hidden rounded-[22px]">
                   <Image
                     src="/IB.webp"
                     alt="Washington Monument at night"
@@ -470,7 +478,7 @@ export const SupportedCountriesSection = ({
               transition={expandTransition}
               className={`overflow-hidden rounded-[28px] bg-white p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
             >
-              <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+              <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
                 <div className="relative z-[1] min-w-0">
                   <CardTitle subtitle="Primary to High School Graduation">
                     <CardFlag src="/Canada.png" />
@@ -510,7 +518,7 @@ export const SupportedCountriesSection = ({
                     onToggle={() => setCanadaExpanded((v) => !v)}
                   />
                 </div>
-                <div className="relative w-full overflow-hidden rounded-[22px]">
+                <div className="relative flex w-full items-center justify-center self-center overflow-hidden rounded-[22px]">
                   <Image
                     src="/Canada.webp"
                     alt="CN Tower and Toronto skyline at night"
