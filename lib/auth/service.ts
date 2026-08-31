@@ -31,6 +31,10 @@ import { callFunction } from "@/lib/firebase/functions";
 import { COLLECTIONS } from "@/lib/config/constants";
 import { guestIds, guestMode } from "@/lib/auth/guest";
 import {
+  mergeWebTrialOnSignIn,
+  sealWebTrialIpOnServer,
+} from "@/lib/trial/trial-api.client";
+import {
   calculateAge,
   MINIMUM_AGE,
   type StudentDocSummary,
@@ -145,6 +149,15 @@ export async function mergeGuestProfileOnLogin(): Promise<void> {
   } catch {
     /* best-effort — don't block sign-in */
   }
+  await mergeWebTrialOnSignIn(guestIds.getDeviceId());
+}
+
+/** Drop anonymous guest session before creating a real account (IP usage already on ledger). */
+async function clearAnonymousBeforeCredentialAuth(): Promise<void> {
+  const auth = getFirebaseAuth();
+  if (auth.currentUser?.isAnonymous) {
+    await signOut(auth);
+  }
 }
 
 function preferOAuthRedirect(): boolean {
@@ -214,6 +227,7 @@ async function signInWithAuthProvider(
   provider: AuthProvider,
 ): Promise<User | null> {
   const auth = getFirebaseAuth();
+  await clearAnonymousBeforeCredentialAuth();
 
   if (preferOAuthRedirect()) {
     await signInWithRedirect(auth, provider);
@@ -332,6 +346,7 @@ async function finishOAuthSession(
 }
 
 export async function loginWithEmail(email: string, password: string) {
+  await clearAnonymousBeforeCredentialAuth();
   const cred = await signInWithEmailAndPassword(
     getFirebaseAuth(),
     email.trim(),
@@ -424,6 +439,7 @@ export async function signUpAdult(input: AdultSignupInput): Promise<User> {
     throw new Error("Use the under-13 flow for this date of birth.");
   }
 
+  await clearAnonymousBeforeCredentialAuth();
   const auth = getFirebaseAuth();
   const cred = await createUserWithEmailAndPassword(
     auth,
@@ -472,6 +488,7 @@ export async function signUpUnder13(
     throw new Error("This flow is only for under-13 accounts.");
   }
 
+  await clearAnonymousBeforeCredentialAuth();
   const auth = getFirebaseAuth();
   const cred = await createUserWithEmailAndPassword(
     auth,
@@ -546,6 +563,7 @@ export async function signUpParental(
     throw new Error("Child must be under 13 for parental sign-up.");
   }
 
+  await clearAnonymousBeforeCredentialAuth();
   const auth = getFirebaseAuth();
   const db = getFirebaseDb();
 
@@ -662,7 +680,14 @@ export async function signUpParental(
 }
 
 export async function signOutUser() {
-  await signOut(getFirebaseAuth());
+  const auth = getFirebaseAuth();
+  const user = auth.currentUser;
+  if (user && !user.isAnonymous) {
+    await sealWebTrialIpOnServer();
+  }
+  if (user) {
+    await signOut(auth);
+  }
   guestMode.enable();
 }
 

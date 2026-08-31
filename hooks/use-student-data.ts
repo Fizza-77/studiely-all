@@ -15,6 +15,10 @@ import {
   recordFreeGenerationUsed,
   type StudyCredits,
 } from "@/lib/student/study-credits";
+import {
+  fetchGuestWebTrialCredits,
+} from "@/lib/trial/guest-trial-cache";
+import { initGuestWebTrialSession } from "@/lib/trial/guest-trial-session";
 import type {
   DashboardStats,
   GeneratedNote,
@@ -33,13 +37,13 @@ type StudentDataState = {
   stats: DashboardStats | null;
   credits: StudyCredits | null;
   refresh: (options?: RefreshOptions) => Promise<void>;
-  /** Persist + optimistically apply one free generation used on this device. */
+  /** Optimistically apply one generation used (signed-in) or refetch IP trial (guest). */
   bumpCreditsUsed: () => void;
 };
 
 export function useStudentData(): StudentDataState {
   const { phase, user } = useAuth();
-  const isGuest = phase === "guest" && !user;
+  const isGuest = phase === "guest";
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [profile, setProfile] = useState<StudentProfile | null>(null);
@@ -59,7 +63,12 @@ export function useStudentData(): StudentDataState {
       if (!silent) setLoading(true);
       setError(null);
       try {
-        const c = await fetchStudyCredits({ guest: true });
+        let c: StudyCredits;
+        try {
+          c = await initGuestWebTrialSession();
+        } catch {
+          c = await fetchGuestWebTrialCredits();
+        }
         setCredits(c);
       } catch (err) {
         setCredits(null);
@@ -72,7 +81,7 @@ export function useStudentData(): StudentDataState {
       return;
     }
 
-    if (phase === "guest" || !user) {
+    if (!user || user.isAnonymous) {
       setProfile(null);
       setNotes([]);
       setAttempts([]);
@@ -105,6 +114,12 @@ export function useStudentData(): StudentDataState {
   }, [phase, user, isGuest]);
 
   const bumpCreditsUsed = useCallback(() => {
+    if (isGuest) {
+      void fetchGuestWebTrialCredits()
+        .then(setCredits)
+        .catch(() => {});
+      return;
+    }
     recordFreeGenerationUsed();
     setCredits((prev) => {
       if (!prev || prev.isPremium) return prev;
@@ -118,7 +133,7 @@ export function useStudentData(): StudentDataState {
         remaining,
       };
     });
-  }, []);
+  }, [isGuest]);
 
   useEffect(() => {
     void refresh();

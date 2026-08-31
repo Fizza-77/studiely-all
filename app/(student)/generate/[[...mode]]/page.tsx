@@ -532,7 +532,7 @@ function GenerateInner() {
   const params = useParams<{ mode?: string | string[] }>();
   const searchParams = useSearchParams();
   const { phase, user, student } = useAuth();
-  const isGuest = phase === "guest" && !user;
+  const isGuest = phase === "guest";
   const { loading, stats, credits, refresh, bumpCreditsUsed, error: creditsLoadError } = useStudentData();
 
   const modeSegment = Array.isArray(params.mode) ? params.mode[0] : params.mode;

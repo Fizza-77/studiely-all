@@ -87,6 +87,11 @@ async function resolvePhase(user: User | null): Promise<{
     return { phase: "guest", student: null };
   }
 
+  if (user.isAnonymous) {
+    guestMode.enable();
+    return { phase: "guest", student: null };
+  }
+
   const {
     fetchStudentDoc,
     hasParentalConsent,
@@ -270,12 +275,37 @@ export function AuthProvider({
   }, [applyUser]);
 
   const enterGuestMode = useCallback(() => {
-    guestMode.enable();
-    setUser(null);
-    setStudent(null);
-    setPhase("guest");
-    setError(null);
+    void (async () => {
+      try {
+        const { initGuestWebTrialSession } = await import(
+          "@/lib/trial/guest-trial-session"
+        );
+        guestMode.enable();
+        setStudent(null);
+        setPhase("guest");
+        setError(null);
+        await initGuestWebTrialSession();
+        const { getFirebaseAuth } = await import("@/lib/firebase/client");
+        setUser(getFirebaseAuth().currentUser);
+      } catch {
+        guestMode.enable();
+        setUser(null);
+        setStudent(null);
+        setPhase("guest");
+        setError(null);
+      }
+    })();
   }, []);
+
+  useEffect(() => {
+    if (phase !== "guest") return;
+    const onVisible = () => {
+      if (document.visibilityState !== "visible") return;
+      void refreshPhase();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
+  }, [phase, refreshPhase]);
 
   const value = useMemo(
     () => ({

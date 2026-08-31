@@ -1,5 +1,6 @@
 import { callFunction } from "@/lib/firebase/functions";
 import { guestIds } from "@/lib/auth/guest";
+import { consumeGuestTrialCreditBeforeGenerate } from "@/lib/trial/guest-trial-session";
 import type { Difficulty } from "@/lib/curriculum/types";
 import {
   buildSystemPrompt,
@@ -28,7 +29,7 @@ export type GenerateParams = {
 
 /**
  * Generate via Firebase callables.
- * Guests: callOpenAIGuest (server quota, preview only — not saved to library).
+ * Web guests: consumeWebTrial (studiely-web) → callOpenAIGuest (EduPlayce, existing OpenAI key).
  * Signed-in: callOpenAI (saved to library).
  */
 export async function generateStudyContent(
@@ -41,6 +42,13 @@ export async function generateStudyContent(
   const studyMode = params.studyMode;
 
   if (isGuest) {
+    const consumed = await consumeGuestTrialCreditBeforeGenerate();
+    if (!consumed) {
+      throw new Error(
+        "You've reached your free limit on this network. Sign in or upgrade to continue.",
+      );
+    }
+
     const result = await callFunction<
       {
         deviceId: string;
@@ -82,7 +90,6 @@ export async function generateStudyContent(
     },
     { requireAuth: true },
   );
-
   const content = result?.content;
   if (!content) throw new Error("Invalid response from notes generation");
   return content;

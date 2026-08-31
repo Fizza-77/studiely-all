@@ -28,6 +28,12 @@ const ALLOWED_CALLABLES = new Set([
   "createPayPalProAccessOrder",
   "finalizePayPalProAccessOrder",
   "mergeGuestProfileOnLogin",
+  // Studiely web-only functions (codebase: studiely-web — deploy from studiely_web/functions)
+  "getWebTrialStatus",
+  "bootstrapWebTrial",
+  "consumeWebTrial",
+  "sealWebTrialIp",
+  "mergeWebTrialOnSignIn",
 ]);
 
 const AUTH_REQUIRED = new Set([
@@ -40,6 +46,10 @@ const AUTH_REQUIRED = new Set([
   "createPayPalProAccessOrder",
   "finalizePayPalProAccessOrder",
   "mergeGuestProfileOnLogin",
+  "bootstrapWebTrial",
+  "consumeWebTrial",
+  "sealWebTrialIp",
+  "mergeWebTrialOnSignIn",
   "sendPasswordChangedEmail",
   "sendVerificationOTP",
   "verifyEmailOTP",
@@ -51,7 +61,9 @@ const HOUR_MS = 60 * 60 * 1000;
 /** Per-callable hourly limits (read-light callables get higher caps). */
 const CALLABLE_HOURLY_LIMITS: Record<string, number> = {
   getStudyCredits: 300,
+  getWebTrialStatus: 300,
   callOpenAIGuest: 40,
+  consumeWebTrial: 40,
   sendPasswordReset: 15,
 };
 

@@ -1,0 +1,10 @@
+// Add these match blocks to your Firebase project's firestore.rules
+// (Admin SDK / Cloud Functions only — clients must not read/write trial data)
+
+match /webTrialIpUsage/{ipHash} {
+  allow read, write: if false;
+}
+
+match /WebGuestSessions/{uid} {
+  allow read, write: if false;
+}

@@ -15,6 +15,24 @@ type Cache = {
 let cache: Cache | null = null;
 const CACHE_TTL_MS = 5 * 60 * 1000;
 
+/** Deployed from studiely_web/functions (codebase studiely-web). Set run.app URLs after first deploy. */
+const STUDIELY_WEB_CALLABLES = new Set([
+  "getWebTrialStatus",
+  "bootstrapWebTrial",
+  "consumeWebTrial",
+  "sealWebTrialIp",
+  "mergeWebTrialOnSignIn",
+]);
+
+/** Cloud Run URLs for studiely-web codebase (us-central1, same suffix as callOpenAI). */
+const STUDIELY_WEB_FALLBACKS: Record<string, string> = {
+  getWebTrialStatus: "https://getwebtrialstatus-tgu7j2etxq-uc.a.run.app",
+  bootstrapWebTrial: "https://bootstrapwebtrial-tgu7j2etxq-uc.a.run.app",
+  consumeWebTrial: "https://consumewebtrial-tgu7j2etxq-uc.a.run.app",
+  sealWebTrialIp: "https://sealwebtrialip-tgu7j2etxq-uc.a.run.app",
+  mergeWebTrialOnSignIn: "https://mergewebtrialonsignin-tgu7j2etxq-uc.a.run.app",
+};
+
 /** Fallbacks when RC has no key (verified live against Cloud Run). */
 const HARDCODED_FALLBACKS: Record<string, string> = {
   sendVerificationOTP:
@@ -100,6 +118,12 @@ export async function resolveCallableUpstreamUrl(
   const map = await getUrlMap();
   const fromRc = map[functionName]?.trim();
   if (fromRc) return fromRc.replace(/\/+$/, "");
+
+  if (STUDIELY_WEB_CALLABLES.has(functionName)) {
+    const webFallback = STUDIELY_WEB_FALLBACKS[functionName];
+    if (webFallback) return webFallback;
+    return cloudfunctionsNetUrl(functionName);
+  }
 
   const hardcoded = HARDCODED_FALLBACKS[functionName];
   if (hardcoded) return hardcoded;

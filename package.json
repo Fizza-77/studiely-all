@@ -10,7 +10,9 @@
     "test:security": "node --experimental-strip-types --test scripts/security.test.ts",
     "deploy:firebase:merge": "node scripts/merge-firebase-deploy.mjs",
     "predeploy:firebase": "npm run build && npm run deploy:firebase:merge",
-    "deploy:firebase": "npm run predeploy:firebase && npx firebase deploy --only hosting"
+    "deploy:firebase": "npm run predeploy:firebase && npx firebase deploy --only hosting",
+    "deploy:functions": "cd functions && npm install && cd .. && firebase deploy --only functions:studiely-web",
+    "deploy:functions:trial": "cd functions && npm install && cd .. && firebase deploy --only functions:studiely-web:getWebTrialStatus,functions:studiely-web:bootstrapWebTrial,functions:studiely-web:consumeWebTrial,functions:studiely-web:sealWebTrialIp,functions:studiely-web:mergeWebTrialOnSignIn"
   },
   "dependencies": {
     "@multiavatar/multiavatar": "^1.0.7",
