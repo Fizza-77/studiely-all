@@ -18,6 +18,8 @@ const NAV = [
   { href: "/profile", label: "Profile" },
 ] as const;
 
+const GUEST_NAV_HREFS = new Set(["/home", "/library"]);
+
 /** Fixed rem sizes — never shrink with viewport. Rounded yellow bar (marketing parity). */
 const NAV_BAR =
   "flex h-14 min-h-14 items-center justify-between gap-3 rounded-[24px] bg-[#E8FF2F] px-3 sm:px-4 md:rounded-[32px] md:px-5 lg:px-6";
@@ -46,7 +48,10 @@ export function AppShell({
 }) {
   const pathname = usePathname();
   const { phase, user, student, error: authError } = useAuth();
-  const isGuest = phase === "guest" && !user;
+  const isExploring = phase === "guest";
+  const navItems = isExploring
+    ? NAV.filter((item) => GUEST_NAV_HREFS.has(item.href))
+    : NAV;
   const { install, showInstallUi } = usePwaInstall();
 
   const [open, setOpen] = useState(false);
@@ -152,7 +157,7 @@ export function AppShell({
               className="hidden items-center gap-1 lg:flex xl:gap-2"
               aria-label="Main"
             >
-              {NAV.map((item) => {
+              {navItems.map((item) => {
                 const active = isActive(item.href);
                 return (
                   <Link
@@ -182,7 +187,7 @@ export function AppShell({
                 </button>
               ) : null}
 
-              {!isGuest && user ? (
+              {!isExploring && user ? (
                 <div className="md:hidden">
                   <NotificationsBell uid={user.uid} />
                 </div>
@@ -198,7 +203,7 @@ export function AppShell({
                     Install App
                   </button>
                 ) : null}
-                {isGuest ? (
+                {isExploring ? (
                   <>
                     <Link
                       href="/login"
@@ -292,7 +297,7 @@ export function AppShell({
           role="dialog"
           aria-label="Mobile navigation"
         >
-          {NAV.map((item) => {
+          {navItems.map((item) => {
             const active = isActive(item.href);
             return (
               <Link
@@ -322,7 +327,7 @@ export function AppShell({
                 Install App
               </button>
             ) : null}
-            {isGuest ? (
+            {isExploring ? (
               <>
                 <Link
                   href="/login"
