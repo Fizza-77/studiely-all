@@ -1,4 +1,4 @@
-const GA_MEASUREMENT_ID = "G-NXQX4TMW7X";
+const GA_MEASUREMENT_ID = "G-MJE49N8QRH";
 const ADS_MEASUREMENT_ID = "AW-17975031252";
 
 let analyticsLoadStarted = false;
