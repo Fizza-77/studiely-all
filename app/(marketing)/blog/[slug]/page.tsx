@@ -212,14 +212,14 @@ export default async function BlogPostPage({ params }: PageProps) {
             )}
 
             {blog.cover_image_url ? (
-              <figure className="not-prose mt-10 overflow-hidden rounded-[20px] shadow-[0_12px_32px_rgba(30,27,75,0.1)] sm:rounded-[24px]">
+              <figure className="not-prose mx-auto mt-10 max-w-[min(100%,520px)] overflow-hidden rounded-[16px] shadow-[0_8px_24px_rgba(30,27,75,0.08)] sm:max-w-[560px] sm:rounded-[20px]">
                 <Image
                   src={blog.cover_image_url}
                   alt={blog.title}
-                  width={1200}
-                  height={675}
+                  width={560}
+                  height={315}
                   unoptimized
-                  sizes="(max-width: 1200px) 100vw, 1200px"
+                  sizes="(max-width: 640px) 100vw, 560px"
                   className="block h-auto w-full max-w-full"
                 />
               </figure>
