@@ -156,64 +156,39 @@ export default async function BlogPostPage({ params }: PageProps) {
         }}
       />
       <main className="min-h-screen overflow-x-clip bg-bg-base font-jakarta">
-        <section className="pb-[clamp(2rem,4vw,3rem)] pt-[clamp(0.75rem,2vw,1.25rem)]">
+        <section className="pb-[clamp(1.25rem,3vw,2rem)] pt-[clamp(0.75rem,2vw,1.25rem)]">
           <div className="wrap">
             <div
-              className="relative overflow-hidden rounded-[32px] px-6 py-8 sm:rounded-[40px] sm:px-10 sm:py-10 md:px-12 lg:px-14"
+              className="relative overflow-hidden rounded-[28px] px-5 py-5 text-center sm:rounded-[32px] sm:px-8 sm:py-6 md:px-10"
               style={{ backgroundColor: BLUE }}
             >
-              <div className="relative z-[1] grid min-w-0 items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(300px,0.95fr)] lg:gap-10 xl:gap-14">
-                <div className="min-w-0">
-                  <div className="mb-5 flex flex-wrap items-center gap-3">
-                    <span
-                      className="inline-flex rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#1E1B4B] sm:text-[11px]"
-                      style={{ backgroundColor: LIME }}
-                    >
-                      {blog.category?.name || "Studiely Blog"}
+              <div className="relative z-[1] w-full">
+                <div className="mb-3 flex flex-wrap items-center justify-center gap-3">
+                  <span
+                    className="inline-flex rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#1E1B4B] sm:text-[11px]"
+                    style={{ backgroundColor: LIME }}
+                  >
+                    {blog.category?.name || "Studiely Blog"}
+                  </span>
+                  {published && (
+                    <span className="text-[12px] font-semibold text-white/70 sm:text-[13px]">
+                      {published}
                     </span>
-                    {published && (
-                      <span className="text-[12px] font-semibold text-white/70 sm:text-[13px]">
-                        {published}
-                      </span>
-                    )}
-                  </div>
+                  )}
+                </div>
 
-                  <h1 className="mb-5 font-hanken text-[clamp(2rem,4.7vw,3.65rem)] font-extrabold leading-[1.05] tracking-[-0.035em] text-white">
-                    {blog.title}
-                  </h1>
-                  <p className="m-0 max-w-[620px] text-[14px] leading-[1.75] text-white/85 sm:text-[15px] md:text-[16px]">
-                    {blog.description ||
-                      "A Studiely blog article on smarter studying, exam strategies, and AI-powered learning."}
+                <h1 className="mx-auto mb-3 w-full max-w-none font-hanken text-[clamp(1.65rem,4vw,2.75rem)] font-extrabold leading-[1.1] tracking-[-0.035em] text-white">
+                  {blog.title}
+                </h1>
+                <p className="mx-auto m-0 max-w-3xl text-[13px] leading-[1.65] text-white/85 sm:text-[14px]">
+                  {blog.description ||
+                    "A Studiely blog article on smarter studying, exam strategies, and AI-powered learning."}
+                </p>
+                {blog.author_name && (
+                  <p className="mb-0 mt-3 text-[12px] font-semibold text-white/65 sm:text-[13px]">
+                    By {blog.author_name}
                   </p>
-                  {blog.author_name && (
-                    <p className="mb-0 mt-5 text-[12px] font-semibold text-white/65 sm:text-[13px]">
-                      By {blog.author_name}
-                    </p>
-                  )}
-                </div>
-
-                <div className="relative aspect-[16/11] min-w-0 overflow-hidden rounded-[24px] bg-white/10 shadow-[0_18px_44px_rgba(20,16,70,0.3)] sm:rounded-[28px]">
-                  {blog.cover_image_url ? (
-                    <Image
-                      src={blog.cover_image_url}
-                      alt={blog.title}
-                      fill
-                      priority
-                      unoptimized
-                      sizes="(max-width: 1024px) 100vw, 42vw"
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center bg-white/10">
-                      <span
-                        className="rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#1E1B4B]"
-                        style={{ backgroundColor: LIME }}
-                      >
-                        Studiely Blog
-                      </span>
-                    </div>
-                  )}
-                </div>
+                )}
               </div>
             </div>
           </div>
@@ -233,6 +208,21 @@ export default async function BlogPostPage({ params }: PageProps) {
                 Content for this article has not been added yet.
               </p>
             )}
+
+            {blog.cover_image_url ? (
+              <figure className="not-prose mt-10 overflow-hidden rounded-[20px] shadow-[0_12px_32px_rgba(30,27,75,0.1)] sm:rounded-[24px]">
+                <Image
+                  src={blog.cover_image_url}
+                  alt={blog.title}
+                  width={1200}
+                  height={675}
+                  unoptimized
+                  sizes="(max-width: 1200px) 100vw, 1200px"
+                  className="block h-auto w-full max-w-full"
+                />
+              </figure>
+            ) : null}
+
             <nav
               className="not-prose mt-10 border-t border-[#ECEEF6] pt-8"
               aria-label="Related pages"
