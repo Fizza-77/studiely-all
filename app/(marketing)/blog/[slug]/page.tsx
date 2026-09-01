@@ -180,17 +180,15 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <h1 className="mx-auto mb-3 w-full max-w-none font-hanken text-[clamp(1.65rem,4vw,2.75rem)] font-extrabold leading-[1.1] tracking-[-0.035em] text-white">
                   {blog.title}
                 </h1>
-                <div className="mt-3 flex w-full items-start justify-between gap-6">
-                  <p className="m-0 flex-1 text-left text-[13px] leading-[1.65] text-white/85 sm:text-[14px]">
-                    {blog.description ||
-                      "A Studiely blog article on smarter studying, exam strategies, and AI-powered learning."}
+                <p className="mx-auto m-0 mt-3 max-w-3xl text-center text-[13px] leading-[1.65] text-white/85 sm:text-[14px]">
+                  {blog.description ||
+                    "A Studiely blog article on smarter studying, exam strategies, and AI-powered learning."}
+                </p>
+                {blog.author_name && (
+                  <p className="mb-0 mt-3 text-right text-[12px] font-semibold text-white/65 sm:text-[13px]">
+                    By {blog.author_name}
                   </p>
-                  {blog.author_name && (
-                    <p className="mb-0 shrink-0 whitespace-nowrap text-right text-[12px] font-semibold text-white/65 sm:text-[13px]">
-                      By {blog.author_name}
-                    </p>
-                  )}
-                </div>
+                )}
               </div>
             </div>
           </div>
@@ -211,32 +209,33 @@ export default async function BlogPostPage({ params }: PageProps) {
               </p>
             )}
 
-            {blog.cover_image_url ? (
-              <figure className="not-prose mx-auto mt-10 max-w-[min(100%,520px)] overflow-hidden rounded-[16px] shadow-[0_8px_24px_rgba(30,27,75,0.08)] sm:max-w-[560px] sm:rounded-[20px]">
-                <Image
-                  src={blog.cover_image_url}
-                  alt={blog.title}
-                  width={560}
-                  height={315}
-                  unoptimized
-                  sizes="(max-width: 640px) 100vw, 560px"
-                  className="block h-auto w-full max-w-full"
-                />
-              </figure>
-            ) : null}
+            <footer className="not-prose mt-10 border-t border-[#ECEEF6] pt-8">
+              <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+                <nav aria-label="Related pages">
+                  <Link
+                    href="/blog"
+                    className="funky-button inline-flex items-center justify-center rounded-full px-5 py-3 text-[13px] font-bold text-white sm:text-[14px]"
+                    style={{ backgroundColor: BLUE }}
+                  >
+                    ← Back to all articles
+                  </Link>
+                </nav>
 
-            <nav
-              className="not-prose mt-10 border-t border-[#ECEEF6] pt-8"
-              aria-label="Related pages"
-            >
-              <Link
-                href="/blog"
-                className="funky-button inline-flex items-center justify-center rounded-full px-5 py-3 text-[13px] font-bold text-white sm:text-[14px]"
-                style={{ backgroundColor: BLUE }}
-              >
-                ← Back to all articles
-              </Link>
-            </nav>
+                {blog.cover_image_url ? (
+                  <figure className="ml-auto max-w-[min(100%,280px)] overflow-hidden rounded-[14px] shadow-[0_8px_24px_rgba(30,27,75,0.08)] sm:max-w-[320px] sm:rounded-[16px]">
+                    <Image
+                      src={blog.cover_image_url}
+                      alt={blog.title}
+                      width={320}
+                      height={180}
+                      unoptimized
+                      sizes="320px"
+                      className="block h-auto w-full max-w-full"
+                    />
+                  </figure>
+                ) : null}
+              </div>
+            </footer>
           </article>
         </div>
       </main>
