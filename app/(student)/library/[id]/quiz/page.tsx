@@ -140,9 +140,6 @@ export default function InteractiveQuizPage() {
             <article className="rounded-[24px] border-[5px] border-[#F3F7A8] bg-white p-6 shadow-[0_8px_24px_rgba(17,24,39,0.04)] sm:p-8 md:p-10 lg:p-12">
               {quiz.questions.length > 0 ? (
                 <div className="space-y-6">
-                  <p className="text-center text-sm font-medium text-[#6B7280]">
-                    Answers stay hidden until you finish the interactive quiz.
-                  </p>
                   {quiz.questions.map((q) => (
                     <div
                       key={q.questionNumber}

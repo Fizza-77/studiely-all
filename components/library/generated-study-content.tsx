@@ -278,9 +278,6 @@ export function GeneratedStudyContent({
 function QuizQuestionsPreview({ quiz }: { quiz: Quiz }) {
   return (
     <div className="space-y-6">
-      <p className="text-center text-sm font-medium text-[#6B7280]">
-        Answers stay hidden until you finish the interactive quiz.
-      </p>
       {quiz.questions.map((q) => (
         <div
           key={q.questionNumber}
