@@ -163,15 +163,15 @@ export default async function BlogPostPage({ params }: PageProps) {
               style={{ backgroundColor: BLUE }}
             >
               <div className="relative z-[1] w-full">
-                <div className="mb-3 flex flex-wrap items-center justify-center gap-3">
+                <div className="mb-3 flex w-full items-center justify-between gap-4">
                   <span
-                    className="inline-flex rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#1E1B4B] sm:text-[11px]"
+                    className="inline-flex shrink-0 rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#1E1B4B] sm:text-[11px]"
                     style={{ backgroundColor: LIME }}
                   >
                     {blog.category?.name || "Studiely Blog"}
                   </span>
                   {published && (
-                    <span className="text-[12px] font-semibold text-white/70 sm:text-[13px]">
+                    <span className="shrink-0 text-right text-[12px] font-semibold text-white/70 sm:text-[13px]">
                       {published}
                     </span>
                   )}
@@ -180,15 +180,17 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <h1 className="mx-auto mb-3 w-full max-w-none font-hanken text-[clamp(1.65rem,4vw,2.75rem)] font-extrabold leading-[1.1] tracking-[-0.035em] text-white">
                   {blog.title}
                 </h1>
-                <p className="mx-auto m-0 max-w-3xl text-[13px] leading-[1.65] text-white/85 sm:text-[14px]">
-                  {blog.description ||
-                    "A Studiely blog article on smarter studying, exam strategies, and AI-powered learning."}
-                </p>
-                {blog.author_name && (
-                  <p className="mb-0 mt-3 text-[12px] font-semibold text-white/65 sm:text-[13px]">
-                    By {blog.author_name}
+                <div className="mt-3 flex w-full items-start justify-between gap-6">
+                  <p className="m-0 flex-1 text-left text-[13px] leading-[1.65] text-white/85 sm:text-[14px]">
+                    {blog.description ||
+                      "A Studiely blog article on smarter studying, exam strategies, and AI-powered learning."}
                   </p>
-                )}
+                  {blog.author_name && (
+                    <p className="mb-0 shrink-0 whitespace-nowrap text-right text-[12px] font-semibold text-white/65 sm:text-[13px]">
+                      By {blog.author_name}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
