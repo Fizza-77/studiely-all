@@ -5,8 +5,8 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useAuth } from "@/components/providers/auth-provider";
 import {
   Alert,
-  AuthCard,
-  AuthShell,
+  AuthLandscapeCard,
+  AuthLoginShell,
   Field,
   PrimaryButton,
   SecondaryButton,
@@ -75,22 +75,24 @@ export default function VerifyEmailPage() {
   }
 
   return (
-    <AuthShell>
-      <AuthCard
+    <AuthLoginShell>
+      <AuthLandscapeCard
         title="Verify your email"
-        subtitle={`Enter the 6-digit code we sent to ${user?.email ?? "your email"}. Codes expire in 15 minutes. Unverified accounts are removed after 24 hours.`}
+        subtitle={`Enter the 6-digit code sent to ${user?.email ?? "your email"}. Codes expire in 15 minutes. Unverified accounts are removed after 24 hours.`}
       >
         {error ? <Alert>{error}</Alert> : null}
         {info ? <Alert tone="success">{info}</Alert> : null}
 
         <form onSubmit={(e) => void onVerify(e)}>
-          <Field label="Verification code">
+          <Field label="Verification code" className="mb-2">
             <TextInput
               inputMode="numeric"
               autoComplete="one-time-code"
               maxLength={6}
               value={otp}
-              onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
+              onChange={(e) =>
+                setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
+              }
               placeholder="123456"
               required
             />
@@ -100,7 +102,7 @@ export default function VerifyEmailPage() {
           </PrimaryButton>
         </form>
 
-        <div className="mt-3 flex flex-col gap-2">
+        <div className="mt-2 grid grid-cols-2 gap-1.5">
           <SecondaryButton
             type="button"
             disabled={cooldown > 0}
@@ -112,13 +114,15 @@ export default function VerifyEmailPage() {
             type="button"
             onClick={() => void recheckEmailVerification()}
           >
-            I&apos;ve already verified
+            Already verified
           </SecondaryButton>
+        </div>
+        <div className="mt-1.5">
           <SecondaryButton type="button" onClick={() => void signOutUser()}>
             Sign out
           </SecondaryButton>
         </div>
-      </AuthCard>
-    </AuthShell>
+      </AuthLandscapeCard>
+    </AuthLoginShell>
   );
 }

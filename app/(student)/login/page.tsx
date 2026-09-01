@@ -7,8 +7,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/components/providers/auth-provider";
 import {
   Alert,
-  AuthCard,
-  AuthShell,
+  AuthLandscapeCard,
+  AuthLoginShell,
   Field,
   PrimaryButton,
   SecondaryButton,
@@ -79,7 +79,7 @@ function LoginInner() {
     setLoading(true);
     try {
       const user = await loginWithGoogle();
-      if (!user) return; // redirect flow
+      if (!user) return;
       await refreshPhase();
       router.replace(nextPath);
     } catch (err) {
@@ -134,16 +134,27 @@ function LoginInner() {
   }
 
   return (
-    <AuthShell>
-      <AuthCard
+    <AuthLoginShell>
+      <AuthLandscapeCard
         title="Welcome back"
-        subtitle="Sign in to continue studying with curriculum-aligned notes, quizzes, and more."
+        subtitle="Sign in for curriculum-aligned notes, quizzes, flashcards, and more."
+        asideFooter={
+          <>
+            <a href={LEGAL_URLS.privacy} target="_blank" rel="noreferrer" className="hover:text-white">
+              Privacy
+            </a>
+            {" · "}
+            <a href={LEGAL_URLS.terms} target="_blank" rel="noreferrer" className="hover:text-white">
+              Terms
+            </a>
+          </>
+        }
       >
         {error ? <Alert>{error}</Alert> : null}
         {info ? <Alert tone="success">{info}</Alert> : null}
 
         <form onSubmit={onSubmit}>
-          <Field label="Email">
+          <Field label="Email" className="mb-1.5">
             <TextInput
               type="email"
               autoComplete="email"
@@ -152,7 +163,7 @@ function LoginInner() {
               required
             />
           </Field>
-          <Field label="Password">
+          <Field label="Password" className="mb-1">
             <PasswordInput
               autoComplete="current-password"
               value={password}
@@ -164,7 +175,7 @@ function LoginInner() {
 
           <button
             type="button"
-            className="mb-4 text-sm font-medium text-[var(--color-vivid-cyan)]"
+            className="mb-2 text-xs font-medium text-[var(--color-vivid-cyan)] sm:text-sm"
             onClick={() => {
               setResetOpen(true);
               setResetEmail(email);
@@ -178,47 +189,42 @@ function LoginInner() {
           </PrimaryButton>
         </form>
 
-        <div className="mt-4">
+        <div className="mt-2">
           <SocialAuthButtons
             busy={loading}
             onGoogle={() => void onGoogle()}
             onApple={() => void onApple()}
-            googleLabel="Sign in with Google"
-            appleLabel="Sign in with Apple"
+            googleLabel="Google"
+            appleLabel="Apple"
+            compact
           />
         </div>
 
-        <div className="mt-3">
+        <div className="mt-2">
           <SecondaryButton type="button" onClick={continueAsGuest}>
             Continue as Guest
           </SecondaryButton>
         </div>
 
-        <p className="mt-6 text-center text-sm text-[var(--color-gray-text)]">
-          No account?{" "}
-          <Link href="/signup" className="font-semibold text-[var(--color-vivid-cyan)]">
-            Sign up
-          </Link>
-        </p>
-        <p className="mt-2 text-center text-sm text-[var(--color-gray-text)]">
-          Under 13?{" "}
-          <Link
-            href="/signup/parental"
-            className="font-semibold text-[var(--color-vivid-cyan)]"
-          >
-            Parent sign-up
-          </Link>
-        </p>
-
-        <footer className="mt-8 flex flex-wrap justify-center gap-3 text-xs text-[var(--color-gray-text)]">
-          <a href={LEGAL_URLS.privacy} target="_blank" rel="noreferrer">
-            Privacy
-          </a>
-          <a href={LEGAL_URLS.terms} target="_blank" rel="noreferrer">
-            Terms
-          </a>
-        </footer>
-      </AuthCard>
+        <div className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-0.5 text-xs text-[var(--color-gray-text)] sm:text-sm">
+          <span>
+            No account?{" "}
+            <Link href="/signup" className="font-semibold text-[var(--color-vivid-cyan)]">
+              Sign up
+            </Link>
+          </span>
+          <span className="hidden text-[var(--color-border)] sm:inline">·</span>
+          <span>
+            Under 13?{" "}
+            <Link
+              href="/signup/parental"
+              className="font-semibold text-[var(--color-vivid-cyan)]"
+            >
+              Parent sign-up
+            </Link>
+          </span>
+        </div>
+      </AuthLandscapeCard>
 
       {resetOpen ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--color-overlay)] p-4">
@@ -253,7 +259,7 @@ function LoginInner() {
           </div>
         </div>
       ) : null}
-    </AuthShell>
+    </AuthLoginShell>
   );
 }
 
@@ -261,11 +267,11 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <AuthShell>
-          <AuthCard title="Welcome back" subtitle="Loading…">
+        <AuthLoginShell>
+          <AuthLandscapeCard title="Welcome back" subtitle="Loading…">
             <p className="text-sm text-[var(--color-text-muted)]">Please wait…</p>
-          </AuthCard>
-        </AuthShell>
+          </AuthLandscapeCard>
+        </AuthLoginShell>
       }
     >
       <LoginInner />

@@ -190,7 +190,7 @@ export function Alert({
         : "border-[var(--color-vivid-cyan)]/30 bg-[var(--color-vivid-cyan)]/10 text-[var(--color-text)]";
 
   return (
-    <div className={`mb-4 rounded-xl border px-3.5 py-2.5 text-sm ${styles}`}>
+    <div className={`mb-2 rounded-xl border px-3 py-2 text-xs sm:text-sm auth-alert ${styles}`}>
       {children}
     </div>
   );
@@ -203,6 +203,84 @@ export function AuthShell({ children }: { children: ReactNode }) {
         Studiely
       </p>
       {children}
+    </div>
+  );
+}
+
+/** Full-viewport shell for landscape auth — fixed, no page scroll. */
+export function AuthLoginShell({ children }: { children: ReactNode }) {
+  return (
+    <div className="fixed inset-0 z-[300] flex items-center justify-center overflow-hidden bg-[var(--color-bg,#FFFBEF)] px-2 py-2 sm:px-4">
+      {children}
+    </div>
+  );
+}
+
+const AUTH_FORM_COL =
+  "auth-compact-fields flex min-h-0 flex-col justify-center overflow-hidden px-4 py-3 sm:px-5 sm:py-4 md:px-6 [&_label.block]:mb-1.5 [&_label.block>span:first-child]:mb-0.5 [&_label.block>span:first-child]:text-xs [&_input]:py-1.5 [&_input]:text-sm [&_button]:py-2 [&_button]:text-sm [&_button]:min-h-0";
+
+/** Two-column auth card: branding left, form right — fits one viewport, no scroll. */
+export function AuthLandscapeCard({
+  title,
+  subtitle,
+  children,
+  className,
+  wide = false,
+  asideFooter,
+}: {
+  title: string;
+  subtitle?: string;
+  children: ReactNode;
+  className?: string;
+  /** Wider card for multi-section forms (e.g. parental sign-up). */
+  wide?: boolean;
+  /** Optional links/text pinned to the bottom of the left panel. */
+  asideFooter?: ReactNode;
+}) {
+  return (
+    <div
+      className={`mx-auto flex h-[calc(100dvh-1rem)] max-h-[calc(100dvh-1rem)] w-full flex-col overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[0_16px_48px_rgba(79,53,242,0.14)] dark:shadow-[0_16px_48px_rgba(0,0,0,0.35)] sm:rounded-[28px] ${wide ? "max-w-6xl" : "max-w-4xl"} ${className ?? ""}`}
+    >
+      <div className="grid min-h-0 flex-1 grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+        <aside className="relative flex min-h-0 flex-col justify-center bg-gradient-to-br from-[#4F35F2] via-[#4528E8] to-[#3B24C4] px-5 py-4 text-white sm:px-6 sm:py-5 md:px-8">
+          <div
+            className="pointer-events-none absolute -right-10 -top-10 size-32 rounded-full bg-[#E8FF2F]/15 blur-2xl"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -bottom-10 -left-8 size-36 rounded-full bg-[#FF2D8A]/20 blur-3xl"
+            aria-hidden
+          />
+          <div className="relative min-h-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo-group.svg?v=blue"
+              alt="Studiely"
+              width={140}
+              height={32}
+              className="h-7 w-auto brightness-0 invert sm:h-8"
+            />
+            <p className="mt-3 text-[10px] font-bold tracking-[0.14em] text-white/70 uppercase sm:mt-4">
+              Studiely
+            </p>
+            <h1 className="mt-1 font-[family-name:var(--font-display)] text-xl font-extrabold tracking-[-0.02em] sm:text-2xl md:text-[1.65rem]">
+              {title}
+            </h1>
+            {subtitle ? (
+              <p className="mt-2 max-w-xs text-xs leading-snug text-white/85 sm:text-[0.8125rem]">
+                {subtitle}
+              </p>
+            ) : null}
+          </div>
+          {asideFooter ? (
+            <div className="relative mt-auto hidden pt-4 text-xs text-white/70 sm:block">
+              {asideFooter}
+            </div>
+          ) : null}
+        </aside>
+
+        <div className={AUTH_FORM_COL}>{children}</div>
+      </div>
     </div>
   );
 }

@@ -32,7 +32,7 @@ function AppleMark() {
 }
 
 const btnClass =
-  "inline-flex w-full items-center justify-center gap-2.5 rounded-full border-2 border-[var(--color-border)] bg-[var(--color-card)] px-4 py-2.5 text-sm font-bold text-[var(--color-text)] transition hover:bg-[var(--color-indigo-soft)] disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex w-full items-center justify-center gap-1.5 rounded-full border-2 border-[var(--color-border)] bg-[var(--color-card)] px-3 py-2 text-xs font-bold text-[var(--color-text)] transition hover:bg-[var(--color-indigo-soft)] disabled:cursor-not-allowed disabled:opacity-60 sm:gap-2 sm:px-4 sm:text-sm";
 
 export function SocialAuthButtons({
   onGoogle,
@@ -40,40 +40,45 @@ export function SocialAuthButtons({
   busy,
   googleLabel = "Continue with Google",
   appleLabel = "Continue with Apple",
+  compact = false,
 }: {
   onGoogle: () => void;
   onApple: () => void;
   busy?: boolean;
   googleLabel?: string;
   appleLabel?: string;
+  /** Side-by-side buttons for compact landscape auth layouts. */
+  compact?: boolean;
 }) {
   return (
-    <div className="space-y-2.5">
-      <div className="relative my-1 flex items-center gap-3">
+    <div className={compact ? "space-y-1.5" : "space-y-2.5"}>
+      <div className={`relative flex items-center gap-2 ${compact ? "my-0" : "my-1"}`}>
         <div className="h-px flex-1 bg-[var(--color-border)]" />
         <span className="text-xs font-medium tracking-wide text-[var(--color-text-muted)] uppercase">
           Or
         </span>
         <div className="h-px flex-1 bg-[var(--color-border)]" />
       </div>
-      <button
-        type="button"
-        className={btnClass}
-        disabled={busy}
-        onClick={onGoogle}
-      >
-        <GoogleMark />
-        {googleLabel}
-      </button>
-      <button
-        type="button"
-        className={btnClass}
-        disabled={busy}
-        onClick={onApple}
-      >
-        <AppleMark />
-        {appleLabel}
-      </button>
+      <div className={compact ? "grid grid-cols-2 gap-2" : "space-y-2.5"}>
+        <button
+          type="button"
+          className={btnClass}
+          disabled={busy}
+          onClick={onGoogle}
+        >
+          <GoogleMark />
+          {googleLabel}
+        </button>
+        <button
+          type="button"
+          className={btnClass}
+          disabled={busy}
+          onClick={onApple}
+        >
+          <AppleMark />
+          {appleLabel}
+        </button>
+      </div>
     </div>
   );
 }

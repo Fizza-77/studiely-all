@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 
 import {
   Alert,
-  AuthCard,
-  AuthShell,
+  AuthLandscapeCard,
+  AuthLoginShell,
   Field,
   PrimaryButton,
   SecondaryButton,
@@ -197,17 +197,16 @@ export default function SignupPage() {
   }
 
   return (
-    <AuthShell>
-      <AuthCard
+    <AuthLoginShell>
+      <AuthLandscapeCard
         title="Create your account"
         subtitle="Free plan includes study notes, flashcards, and quizzes."
-        className="max-w-md sm:max-w-2xl"
       >
         {error ? <Alert>{error}</Alert> : null}
 
         <form onSubmit={(e) => void onSubmit(e)}>
-          <div className="sm:grid sm:grid-cols-2 sm:gap-x-5">
-            <Field label="Full name" className="sm:mb-5">
+          <div className="grid grid-cols-2 gap-x-3">
+            <Field label="Full name" className="mb-1.5">
               <TextInput
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -215,7 +214,7 @@ export default function SignupPage() {
                 required
               />
             </Field>
-            <Field label="Email" className="sm:mb-5">
+            <Field label="Email" className="mb-1.5">
               <TextInput
                 type="email"
                 value={email}
@@ -224,7 +223,7 @@ export default function SignupPage() {
                 required
               />
             </Field>
-            <Field label="Date of birth" className="sm:col-span-2 sm:mb-5">
+            <Field label="Date of birth" className="mb-1.5">
               <TextInput
                 type="date"
                 value={dob}
@@ -234,7 +233,7 @@ export default function SignupPage() {
                 required
               />
             </Field>
-            <Field label="Password" className="sm:mb-5">
+            <Field label="Password" className="mb-1.5">
               <PasswordInput
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -243,7 +242,7 @@ export default function SignupPage() {
                 required
               />
             </Field>
-            <Field label="Confirm password" className="sm:mb-5">
+            <Field label="Confirm password" className="mb-1.5">
               <PasswordInput
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
@@ -254,10 +253,10 @@ export default function SignupPage() {
             </Field>
           </div>
 
-          <label className="mb-4 flex items-start gap-2 text-sm text-[var(--color-gray-text)]">
+          <label className="mb-2 flex items-start gap-2 text-xs text-[var(--color-gray-text)]">
             <input
               type="checkbox"
-              className="mt-1"
+              className="mt-0.5"
               checked={agree}
               onChange={(e) => setAgree(e.target.checked)}
             />
@@ -289,32 +288,36 @@ export default function SignupPage() {
           </PrimaryButton>
         </form>
 
-        <div className="mt-4">
+        <div className="mt-2">
           <SocialAuthButtons
             busy={loading}
             onGoogle={() => void onGoogleSignUp()}
             onApple={() => void onAppleSignUp()}
-            googleLabel="Sign up with Google"
-            appleLabel="Sign up with Apple"
+            googleLabel="Google"
+            appleLabel="Apple"
+            compact
           />
         </div>
 
-        <p className="mt-6 text-center text-sm text-[var(--color-gray-text)]">
-          Already have an account?{" "}
-          <Link href="/login" className="font-semibold text-[var(--color-vivid-cyan)]">
-            Sign in
-          </Link>
-        </p>
-        <p className="mt-2 text-center text-sm text-[var(--color-gray-text)]">
-          Parent creating a child account?{" "}
-          <Link
-            href="/signup/parental"
-            className="font-semibold text-[var(--color-vivid-cyan)]"
-          >
-            Parental sign-up
-          </Link>
-        </p>
-      </AuthCard>
+        <div className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-0.5 text-xs text-[var(--color-gray-text)] sm:text-sm">
+          <span>
+            Already have an account?{" "}
+            <Link href="/login" className="font-semibold text-[var(--color-vivid-cyan)]">
+              Sign in
+            </Link>
+          </span>
+          <span className="hidden text-[var(--color-border)] sm:inline">·</span>
+          <span>
+            Parent sign-up?{" "}
+            <Link
+              href="/signup/parental"
+              className="font-semibold text-[var(--color-vivid-cyan)]"
+            >
+              Parental sign-up
+            </Link>
+          </span>
+        </div>
+      </AuthLandscapeCard>
 
       {parentDialog ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--color-overlay)] p-4">
@@ -362,6 +365,6 @@ export default function SignupPage() {
           </div>
         </div>
       ) : null}
-    </AuthShell>
+    </AuthLoginShell>
   );
 }

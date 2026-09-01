@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 
 import {
   Alert,
-  AuthCard,
-  AuthShell,
+  AuthLandscapeCard,
+  AuthLoginShell,
   Field,
   PrimaryButton,
   TextInput,
@@ -29,7 +29,7 @@ export default function ParentalSignupPage() {
   const [parentEmail, setParentEmail] = useState("");
   const [parentPassword, setParentPassword] = useState("");
   const [parentConfirm, setParentConfirm] = useState("");
-  const [relationship, setRelationship] = useState("Parent");
+  const [relationship] = useState("Parent");
   const [childName, setChildName] = useState("");
   const [childEmail, setChildEmail] = useState("");
   const [childPassword, setChildPassword] = useState("");
@@ -98,27 +98,27 @@ export default function ParentalSignupPage() {
   }
 
   return (
-    <AuthShell>
-      <AuthCard
+    <AuthLoginShell>
+      <AuthLandscapeCard
         title="Parent sign-up"
         subtitle="Create a parent account and a linked child account (under 13)."
-        className="max-w-md sm:max-w-2xl"
+        wide
       >
         {error ? <Alert>{error}</Alert> : null}
 
-        <form onSubmit={(e) => void onSubmit(e)} className="space-y-1">
-          <h2 className="mb-3 text-sm font-semibold tracking-wide text-[var(--color-core-blue)] uppercase">
+        <form onSubmit={(e) => void onSubmit(e)}>
+          <p className="mb-1 text-[10px] font-semibold tracking-wide text-[var(--color-core-blue)] uppercase">
             Parent
-          </h2>
-          <div className="sm:grid sm:grid-cols-2 sm:gap-x-5">
-            <Field label="Parent full name" className="sm:mb-5">
+          </p>
+          <div className="mb-2 grid grid-cols-2 gap-x-3">
+            <Field label="Full name" className="mb-1.5">
               <TextInput
                 value={parentName}
                 onChange={(e) => setParentName(e.target.value)}
                 required
               />
             </Field>
-            <Field label="Parent email" className="sm:mb-5">
+            <Field label="Email" className="mb-1.5">
               <TextInput
                 type="email"
                 value={parentEmail}
@@ -126,14 +126,7 @@ export default function ParentalSignupPage() {
                 required
               />
             </Field>
-            <Field label="Relationship" className="sm:col-span-2 sm:mb-5">
-              <TextInput
-                value={relationship}
-                onChange={(e) => setRelationship(e.target.value)}
-                placeholder="Parent"
-              />
-            </Field>
-            <Field label="Parent password" className="sm:mb-5">
+            <Field label="Password" className="mb-1.5">
               <PasswordInput
                 value={parentPassword}
                 onChange={(e) => setParentPassword(e.target.value)}
@@ -141,7 +134,7 @@ export default function ParentalSignupPage() {
                 required
               />
             </Field>
-            <Field label="Confirm parent password" className="sm:mb-5">
+            <Field label="Confirm password" className="mb-1.5">
               <PasswordInput
                 value={parentConfirm}
                 onChange={(e) => setParentConfirm(e.target.value)}
@@ -151,18 +144,18 @@ export default function ParentalSignupPage() {
             </Field>
           </div>
 
-          <h2 className="mt-6 mb-3 text-sm font-semibold tracking-wide text-[var(--color-core-blue)] uppercase">
+          <p className="mb-1 text-[10px] font-semibold tracking-wide text-[var(--color-core-blue)] uppercase">
             Child
-          </h2>
-          <div className="sm:grid sm:grid-cols-2 sm:gap-x-5">
-            <Field label="Child full name" className="sm:mb-5">
+          </p>
+          <div className="grid grid-cols-2 gap-x-3">
+            <Field label="Full name" className="mb-1.5">
               <TextInput
                 value={childName}
                 onChange={(e) => setChildName(e.target.value)}
                 required
               />
             </Field>
-            <Field label="Child email" className="sm:mb-5">
+            <Field label="Email" className="mb-1.5">
               <TextInput
                 type="email"
                 value={childEmail}
@@ -170,7 +163,7 @@ export default function ParentalSignupPage() {
                 required
               />
             </Field>
-            <Field label="Child date of birth" className="sm:col-span-2 sm:mb-5">
+            <Field label="Date of birth" className="mb-1.5">
               <TextInput
                 type="date"
                 value={childDob}
@@ -180,7 +173,7 @@ export default function ParentalSignupPage() {
                 required
               />
             </Field>
-            <Field label="Child password" className="sm:mb-5">
+            <Field label="Password" className="mb-1.5">
               <PasswordInput
                 value={childPassword}
                 onChange={(e) => setChildPassword(e.target.value)}
@@ -188,7 +181,7 @@ export default function ParentalSignupPage() {
                 required
               />
             </Field>
-            <Field label="Confirm child password" className="sm:mb-5">
+            <Field label="Confirm password" className="mb-1.5">
               <PasswordInput
                 value={childConfirm}
                 onChange={(e) => setChildConfirm(e.target.value)}
@@ -198,50 +191,51 @@ export default function ParentalSignupPage() {
             </Field>
           </div>
 
-          <label className="mb-3 flex items-start gap-2 text-sm text-[var(--color-gray-text)]">
-            <input
-              type="checkbox"
-              className="mt-1"
-              checked={consent}
-              onChange={(e) => setConsent(e.target.checked)}
-            />
-            <span>
-              I am the parent/guardian and I consent to this child using Studiely
-              (COPPA).
-            </span>
-          </label>
-          <label className="mb-4 flex items-start gap-2 text-sm text-[var(--color-gray-text)]">
-            <input
-              type="checkbox"
-              className="mt-1"
-              checked={terms}
-              onChange={(e) => setTerms(e.target.checked)}
-            />
-            <span>
-              I agree to the{" "}
-              <a
-                href={LEGAL_URLS.terms}
-                target="_blank"
-                rel="noreferrer"
-                className="font-medium text-[var(--color-vivid-cyan)]"
-              >
-                Terms
-              </a>
-              .
-            </span>
-          </label>
+          <div className="mt-1 grid grid-cols-1 gap-1 sm:grid-cols-2">
+            <label className="flex items-start gap-1.5 text-[11px] leading-snug text-[var(--color-gray-text)]">
+              <input
+                type="checkbox"
+                className="mt-0.5"
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+              />
+              <span>I consent to my child using Studiely (COPPA).</span>
+            </label>
+            <label className="flex items-start gap-1.5 text-[11px] leading-snug text-[var(--color-gray-text)]">
+              <input
+                type="checkbox"
+                className="mt-0.5"
+                checked={terms}
+                onChange={(e) => setTerms(e.target.checked)}
+              />
+              <span>
+                I agree to the{" "}
+                <a
+                  href={LEGAL_URLS.terms}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium text-[var(--color-vivid-cyan)]"
+                >
+                  Terms
+                </a>
+                .
+              </span>
+            </label>
+          </div>
 
-          <PrimaryButton type="submit" loading={loading}>
-            Create parent & child accounts
-          </PrimaryButton>
+          <div className="mt-2">
+            <PrimaryButton type="submit" loading={loading}>
+              Create parent & child accounts
+            </PrimaryButton>
+          </div>
         </form>
 
-        <p className="mt-6 text-center text-sm text-[var(--color-gray-text)]">
+        <p className="mt-2 text-center text-xs text-[var(--color-gray-text)] sm:text-sm">
           <Link href="/login" className="font-semibold text-[var(--color-vivid-cyan)]">
             Back to sign in
           </Link>
         </p>
-      </AuthCard>
-    </AuthShell>
+      </AuthLandscapeCard>
+    </AuthLoginShell>
   );
 }

@@ -5,8 +5,8 @@ import { useState } from "react";
 import { useAuth } from "@/components/providers/auth-provider";
 import {
   Alert,
-  AuthCard,
-  AuthShell,
+  AuthLandscapeCard,
+  AuthLoginShell,
   PrimaryButton,
   SecondaryButton,
 } from "@/components/ui/auth-form";
@@ -49,25 +49,25 @@ export default function ParentConsentPage() {
   }
 
   return (
-    <AuthShell>
-      <AuthCard
+    <AuthLoginShell>
+      <AuthLandscapeCard
         title="Waiting for parent consent"
         subtitle="Your account is locked until a parent or guardian approves via the email link."
       >
         {error ? <Alert>{error}</Alert> : null}
         {info ? <Alert tone="success">{info}</Alert> : null}
 
-        <div className="mb-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card-muted)] px-4 py-3 text-sm text-[var(--color-text)]">
+        <div className="mb-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-card-muted)] px-3 py-2 text-xs text-[var(--color-text)] sm:text-sm">
           <p>
             Parent email:{" "}
             <strong>{student?.parentEmail ?? "—"}</strong>
           </p>
-          <p className="mt-2 text-[var(--color-text-muted)]">
-            After they approve, sign in again (or refresh) to continue.
+          <p className="mt-1 text-[var(--color-text-muted)]">
+            After they approve, sign in again or tap Check status.
           </p>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5">
           <PrimaryButton
             type="button"
             loading={loading}
@@ -82,7 +82,7 @@ export default function ParentConsentPage() {
             Sign out
           </SecondaryButton>
         </div>
-      </AuthCard>
-    </AuthShell>
+      </AuthLandscapeCard>
+    </AuthLoginShell>
   );
 }
