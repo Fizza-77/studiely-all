@@ -53,11 +53,29 @@ export function AuthGate({ children }: { children: ReactNode }) {
 
   if (phase === "initializing") {
     return (
-      <div className="flex flex-1 items-center justify-center py-24">
-        <div className="flex flex-col items-center gap-3">
-          <div className="size-8 animate-spin rounded-full border-2 border-[var(--color-vivid-cyan)] border-t-transparent" />
-          <p className="text-sm text-[var(--color-text-muted)]">Starting Studiely…</p>
-        </div>
+      <div
+        className="fixed inset-0 z-[500] flex items-center justify-center bg-[#FFFBEF]"
+        aria-busy="true"
+        aria-label="Loading Studiely"
+      >
+        <style>{`
+          @keyframes studiely-boot-logo {
+            0%, 100% { transform: scale(1); opacity: 0.82; }
+            50% { transform: scale(1.08); opacity: 1; }
+          }
+        `}</style>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/logo-group.svg?v=blue"
+          alt="Studiely"
+          width={320}
+          height={98}
+          className="h-auto w-[min(78vw,22rem)] select-none sm:w-[24rem] md:w-[26rem]"
+          style={{
+            animation: "studiely-boot-logo 1.5s ease-in-out infinite",
+          }}
+          draggable={false}
+        />
       </div>
     );
   }

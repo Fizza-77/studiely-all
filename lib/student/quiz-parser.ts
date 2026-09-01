@@ -268,6 +268,51 @@ function toMcQuestion(
 }
 
 /**
+ * Hide answer keys and inline correct markers so preview markdown does not spoil the quiz.
+ * Interactive quiz scoring still uses the full original notes via parseQuizFromMarkdown.
+ */
+export function stripQuizAnswersForDisplay(notes: string): string {
+  const body = extractQuizBody(notes);
+  const split = findAnswersSplit(body);
+  let text = split?.questionsText ?? body;
+
+  const out: string[] = [];
+  for (const raw of text.split("\n")) {
+    const line = stripLeadingTrailingAsterisks(raw.trim());
+    if (!line) {
+      out.push(raw);
+      continue;
+    }
+    if (CORRECT_INLINE.test(line)) continue;
+    if (
+      /^(?:#{1,6}\s*)?\*{0,2}\s*(?:answer\s*key|answer\s*section|answers)\s*\*{0,2}\s*:?\s*$/i.test(
+        line,
+      )
+    ) {
+      continue;
+    }
+
+    const opt = line.match(OPTION_LINE) || line.match(OPTION_LINE_LOOSE);
+    if (opt) {
+      let optionText = opt[2]
+        .trim()
+        .replace(/\s*(?:✓|✔|\(correct\))\s*$/i, "")
+        .replace(/\*+$/g, "")
+        .trim();
+      out.push(`${opt[1].toUpperCase()}. ${optionText}`);
+      continue;
+    }
+
+    out.push(raw);
+  }
+
+  return out
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+/**
  * Port of Flutter QuizParserService — MCQ-focused interactive quizzes.
  * Also handles unnumbered AI quizzes with A)/B) options and "Correct Answer: D".
  */

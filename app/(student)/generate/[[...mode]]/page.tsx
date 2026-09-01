@@ -604,9 +604,7 @@ function GenerateInner() {
   const subjectBrowseRef = useRef<HTMLDivElement>(null);
   const browseAllRef = useRef<HTMLDivElement>(null);
   const [busy, setBusy] = useState(false);
-  const [genPhase, setGenPhase] = useState<"idle" | "generating" | "complete">(
-    "idle",
-  );
+  const [genPhase, setGenPhase] = useState<"idle" | "generating">("idle");
   const [completedNoteId, setCompletedNoteId] = useState<string | null>(null);
   const cancelledRef = useRef(false);
   const [guestPreview, setGuestPreview] = useState<string | null>(null);
@@ -961,8 +959,14 @@ function GenerateInner() {
 
       if (isGuest || !user) {
         setGuestPreview(content);
-        setGenPhase("complete");
+        setGenPhase("idle");
         await refresh({ silent: true });
+        window.setTimeout(() => {
+          guestPreviewRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 0);
         return;
       }
 
@@ -988,7 +992,12 @@ function GenerateInner() {
 
       setCompletedNoteId(noteId);
       await refresh({ silent: true });
-      setGenPhase("complete");
+      setGenPhase("idle");
+      if (studyMode === "Quiz") {
+        router.push(`/library/${noteId}/quiz`);
+      } else {
+        router.push(`/library/${noteId}`);
+      }
     } catch (err) {
       if (cancelledRef.current) return;
       setGenPhase("idle");
@@ -1063,14 +1072,13 @@ function GenerateInner() {
     grades.find((g) => g.id === gradeId)?.name ?? "Select year";
   const subjectRawLabel =
     subject === "__custom__" ? customSubject.trim() : subject.trim();
-  const showProgress =
-    genPhase === "generating" || genPhase === "complete";
+  const showProgress = genPhase === "generating";
 
   return (
     <div className="mx-auto w-full max-w-none">
       {showProgress ? (
         <GenerationProgressScreen
-          phase={genPhase === "complete" ? "complete" : "generating"}
+          phase="generating"
           meta={{
             studyMode,
             subject: subjectRawLabel || "Subject",

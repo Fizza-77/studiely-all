@@ -183,7 +183,7 @@ export function AppShell({
                   onClick={() => void onInstallApp()}
                   className={`${INSTALL_BTN} md:hidden`}
                 >
-                  Install
+                  Install Desktop Version
                 </button>
               ) : null}
 
@@ -200,7 +200,7 @@ export function AppShell({
                     onClick={() => void onInstallApp()}
                     className={INSTALL_BTN}
                   >
-                    Install App
+                    Install Desktop Version
                   </button>
                 ) : null}
                 {isExploring ? (
@@ -324,7 +324,7 @@ export function AppShell({
                 }}
                 className="funky-button inline-flex flex-1 items-center justify-center rounded-full border border-[#1E1B4B]/30 bg-[#E8FF2F] px-4 py-3 text-sm font-semibold text-[#1E1B4B]"
               >
-                Install App
+                Install Desktop Version
               </button>
             ) : null}
             {isExploring ? (

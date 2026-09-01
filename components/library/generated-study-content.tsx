@@ -6,7 +6,11 @@ import { PrimaryButton, SecondaryButton } from "@/components/ui/auth-form";
 import { InteractiveQuiz } from "@/components/ui/interactive-quiz";
 import { MarkdownMathView } from "@/components/ui/markdown-math-view";
 import { parseFlashcardsFromMarkdown } from "@/lib/student/flashcard-parser";
-import { parseQuizFromMarkdown } from "@/lib/student/quiz-parser";
+import {
+  parseQuizFromMarkdown,
+  stripQuizAnswersForDisplay,
+  type Quiz,
+} from "@/lib/student/quiz-parser";
 
 export type StudyContentInput = {
   studyMode: string;
@@ -246,10 +250,16 @@ export function GeneratedStudyContent({
               ) : null}
             </div>
             <article className="mx-auto w-full max-w-5xl xl:max-w-6xl">
-              <MarkdownMathView
-                size="reading"
-                content={note.notes || "No content."}
-              />
+              {quiz && quiz.questions.length > 0 ? (
+                <QuizQuestionsPreview quiz={quiz} />
+              ) : (
+                <MarkdownMathView
+                  size="reading"
+                  content={
+                    stripQuizAnswersForDisplay(note.notes) || "No content."
+                  }
+                />
+              )}
             </article>
           </>
         )}
@@ -261,5 +271,41 @@ export function GeneratedStudyContent({
     <article className={CONTENT_CARD_CLASS}>
       <MarkdownMathView size="reading" content={note.notes || "No content."} />
     </article>
+  );
+}
+
+/** Questions + options only — no correct answers until interactive results. */
+function QuizQuestionsPreview({ quiz }: { quiz: Quiz }) {
+  return (
+    <div className="space-y-6">
+      <p className="text-center text-sm font-medium text-[#6B7280]">
+        Answers stay hidden until you finish the interactive quiz.
+      </p>
+      {quiz.questions.map((q) => (
+        <div
+          key={q.questionNumber}
+          className="rounded-2xl border border-[#E8E6F0] bg-[#FAFAFC] p-4 sm:p-5 md:p-6"
+        >
+          <p className="text-xs font-semibold tracking-wide text-[#6B7280] uppercase">
+            Question {q.questionNumber}
+          </p>
+          <p className="mt-2 text-base font-medium text-[#111827] sm:text-lg">
+            {q.questionText}
+          </p>
+          {q.options.length > 0 ? (
+            <ul className="mt-3 space-y-2">
+              {q.options.map((opt) => (
+                <li
+                  key={opt}
+                  className="rounded-xl border border-[#E8E6F0] bg-white px-3 py-2.5 text-sm text-[#111827] sm:px-4 sm:py-3 sm:text-base"
+                >
+                  {opt}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+      ))}
+    </div>
   );
 }
