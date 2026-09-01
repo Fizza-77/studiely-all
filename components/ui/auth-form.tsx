@@ -242,7 +242,7 @@ export function AuthLandscapeCard({
       className={`mx-auto flex h-[calc(100dvh-1rem)] max-h-[calc(100dvh-1rem)] w-full flex-col overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-card)] shadow-[0_16px_48px_rgba(79,53,242,0.14)] dark:shadow-[0_16px_48px_rgba(0,0,0,0.35)] sm:rounded-[28px] ${wide ? "max-w-6xl" : "max-w-4xl"} ${className ?? ""}`}
     >
       <div className="grid min-h-0 flex-1 grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
-        <aside className="relative flex min-h-0 flex-col justify-center bg-gradient-to-br from-[#4F35F2] via-[#4528E8] to-[#3B24C4] px-5 py-4 text-white sm:px-6 sm:py-5 md:px-8">
+        <aside className="relative flex min-h-0 flex-col bg-gradient-to-br from-[#4F35F2] via-[#4528E8] to-[#3B24C4] px-5 text-white sm:px-6 md:px-8">
           <div
             className="pointer-events-none absolute -right-10 -top-10 size-32 rounded-full bg-[#E8FF2F]/15 blur-2xl"
             aria-hidden
@@ -251,7 +251,7 @@ export function AuthLandscapeCard({
             className="pointer-events-none absolute -bottom-10 -left-8 size-36 rounded-full bg-[#FF2D8A]/20 blur-3xl"
             aria-hidden
           />
-          <div className="relative min-h-0">
+          <div className="relative flex min-h-0 flex-1 flex-col justify-center py-4 sm:py-5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logo-group.svg?v=blue"
@@ -260,10 +260,7 @@ export function AuthLandscapeCard({
               height={32}
               className="h-7 w-auto brightness-0 invert sm:h-8"
             />
-            <p className="mt-3 text-[10px] font-bold tracking-[0.14em] text-white/70 uppercase sm:mt-4">
-              Studiely
-            </p>
-            <h1 className="mt-1 font-[family-name:var(--font-display)] text-xl font-extrabold tracking-[-0.02em] sm:text-2xl md:text-[1.65rem]">
+            <h1 className="mt-4 font-[family-name:var(--font-display)] text-xl font-extrabold tracking-[-0.02em] sm:mt-5 sm:text-2xl md:text-[1.65rem]">
               {title}
             </h1>
             {subtitle ? (
@@ -273,7 +270,7 @@ export function AuthLandscapeCard({
             ) : null}
           </div>
           {asideFooter ? (
-            <div className="relative mt-auto hidden pt-4 text-xs text-white/70 sm:block">
+            <div className="relative shrink-0 pb-4 text-xs text-white/70">
               {asideFooter}
             </div>
           ) : null}
