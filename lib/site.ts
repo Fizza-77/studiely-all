@@ -3,4 +3,4 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://studiely.com";
 
 /** Fallback when a page has no dedicated social image (1200×630 recommended) */
-export const DEFAULT_OG_IMAGE_PATH = "/og-image.jpg";
+export const DEFAULT_OG_IMAGE_PATH = "/og-image.png";
