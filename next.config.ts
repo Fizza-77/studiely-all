@@ -110,11 +110,6 @@ const nextConfig: NextConfig = {
       // Retired /legal hub → marketing legal pages
       { source: "/legal", destination: "/privacy-policy", permanent: true },
       {
-        source: "/legal/privacy-policy",
-        destination: "/privacy-policy",
-        permanent: true,
-      },
-      {
         source: "/legal/terms-of-service",
         destination: "/terms-of-service",
         permanent: true,
@@ -147,11 +142,6 @@ const nextConfig: NextConfig = {
       {
         source: "/refund-policy",
         destination: "/terms-of-service",
-        permanent: true,
-      },
-      {
-        source: "/legal/:doc",
-        destination: "/:doc",
         permanent: true,
       },
     ];

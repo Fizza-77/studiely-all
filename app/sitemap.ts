@@ -6,6 +6,11 @@ export const dynamic = "force-static";
 
 type StaticEntry = {
   path: string;
+  {
+    path: "/legal/privacy-policy",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
   priority: number;
 };
