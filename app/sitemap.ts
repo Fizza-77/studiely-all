@@ -6,11 +6,6 @@ export const dynamic = "force-static";
 
 type StaticEntry = {
   path: string;
-  {
-    path: "/legal/privacy-policy",
-    changeFrequency: "monthly",
-    priority: 0.6,
-  },
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
   priority: number;
 };
@@ -1225,6 +1220,11 @@ const STATIC_PAGES: StaticEntry[] = [
   { path: "/nyla", changeFrequency: "monthly", priority: 0.8 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
   { path: "/privacy-policy", changeFrequency: "monthly", priority: 0.6 },
+  {
+    path: "/legal/privacy-policy",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
   { path: "/terms-of-service", changeFrequency: "monthly", priority: 0.6 },
   { path: "/cookie-policy", changeFrequency: "monthly", priority: 0.5 },
   { path: "/acceptable-use", changeFrequency: "monthly", priority: 0.5 },
