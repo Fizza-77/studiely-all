@@ -30,6 +30,7 @@ const PATHWAY_DESCRIPTIONS: Record<string, string> = {
   MYP: "International Baccalaureate Middle Years",
   DP: "International Baccalaureate Diploma Programme",
   "Any State": "Foundation through Year 10",
+  "Common Subject": "Shared subjects across Australian senior pathways",
   "NSW → HSC": "New South Wales senior secondary pathway",
   "VIC → VCE": "Victoria senior secondary pathway",
   "QLD → QCE": "Queensland senior secondary pathway",
@@ -67,21 +68,26 @@ const SUBJECTS = [
   { title: "Computing", detail: "Open subject page" },
   { title: "Creative Arts", detail: "Open subject page" },
   { title: "Dance", detail: "Open subject page" },
+  { title: "Design and Technologies", detail: "Open subject page" },
   { title: "Digital Solutions", detail: "Open subject page" },
   { title: "Digital Technologies", detail: "Open subject page" },
   { title: "Drama", detail: "Open subject page" },
   { title: "Earth and Environmental Science", detail: "Open subject page" },
   { title: "Economics", detail: "Open subject page" },
+  { title: "Economics and Business", detail: "Open subject page" },
   { title: "Environmental Science", detail: "Open subject page" },
   { title: "French", detail: "Open subject page" },
   { title: "General Mathematics", detail: "Open subject page" },
   { title: "Geography", detail: "Open subject page" },
   { title: "Health", detail: "Open subject page" },
+  { title: "Health and Physical Education (HPE)", detail: "Open subject page" },
   { title: "Health and Human Development", detail: "Open subject page" },
   { title: "History", detail: "Open subject page" },
+  { title: "Humanities and Social Sciences (HASS)", detail: "Open subject page" },
   { title: "Information and Communication Technology", detail: "Open subject page" },
   { title: "Information Processing", detail: "Open subject page" },
   { title: "Scientific Studies", detail: "Open subject page" },
+  { title: "Science", detail: "Open subject page" },
   { title: "Information Processing and Publishing", detail: "Open subject page" },
   { title: "Information Processes and Technology", detail: "Open subject page" },
   { title: "Information Technology", detail: "Open subject page" },
@@ -109,6 +115,7 @@ const SUBJECTS = [
   { title: "Sociology", detail: "Open subject page" },
   { title: "Spanish", detail: "Open subject page" },
   { title: "Specialist Mathematics", detail: "Open subject page" },
+  { title: "The Arts", detail: "Open subject page" },
   { title: "Visual Art", detail: "Open subject page" },
   { title: "Visual Arts", detail: "Open subject page" },
   { title: "Visual Communication Design", detail: "Open subject page" },
@@ -132,15 +139,15 @@ const CardArrow = () => (
 );
 
 const cardClass = (selected: boolean) =>
-  `group flex min-h-[72px] w-full items-center justify-between gap-3 rounded-[20px] bg-white px-4 py-3 text-left transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(79,53,242,0.16)] active:translate-y-0 active:scale-[0.985] ${
+  `group flex min-h-[72px] w-full items-center justify-between gap-3 rounded-[20px] border-2 bg-white px-4 py-3 text-left transition-[transform,border-color] duration-200 ease-out hover:-translate-y-1 active:translate-y-0 active:scale-[0.985] ${
     selected
-      ? "shadow-[0_10px_26px_rgba(79,53,242,0.18)] ring-2 ring-[#4F35F2]"
-      : "shadow-[0_7px_20px_rgba(30,27,75,0.07)] ring-1 ring-transparent"
+      ? "border-[#4F35F2]"
+      : "border-transparent"
   }`;
 
 /** ~5 cards (72px min-height) + 4 gaps (12px) visible; rest scrolls. */
 const SCROLL_LIST_MAX =
-  "mt-3 max-h-[calc(5*72px+4*0.75rem)] space-y-3 overflow-y-auto overscroll-contain pr-1 [scrollbar-gutter:stable] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#4F35F2]/35 [&::-webkit-scrollbar-track]:bg-transparent";
+  "mt-3 max-h-[calc(5*72px+4*0.75rem)] space-y-3 overflow-y-auto overscroll-contain px-1 [scrollbar-gutter:stable] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#4F35F2]/35 [&::-webkit-scrollbar-track]:bg-transparent";
 
 type StepHeaderProps = {
   step: string;
@@ -193,7 +200,8 @@ export const CurriculumPathwayBuilder = () => {
 
   const filteredSubjects = SUBJECTS.filter((item) =>
     item.title.toLowerCase().includes(query.toLowerCase()),
-  ).map((item) => {
+  )
+    .map((item) => {
     const href = year
       ? resolveSubjectPageHref({
           curriculum,
@@ -211,7 +219,8 @@ export const CurriculumPathwayBuilder = () => {
           ? "Open subject page"
           : "Subject page coming soon",
     };
-  });
+    })
+    .filter((item) => curriculum !== "Australian Curriculum" || Boolean(item.href));
 
   const selectCurriculum = (name: string) => {
     const nextPathway = Object.keys(CUR_DATA[name])[0];
@@ -359,7 +368,7 @@ export const CurriculumPathwayBuilder = () => {
                   }}
                   disabled={!year}
                   aria-pressed={subject === item.title}
-                  className={`${cardClass(subject === item.title)} disabled:cursor-not-allowed disabled:opacity-55 disabled:hover:translate-y-0 disabled:hover:shadow-[0_7px_20px_rgba(30,27,75,0.07)]`}
+                  className={`${cardClass(subject === item.title)} disabled:cursor-not-allowed disabled:opacity-55 disabled:hover:translate-y-0`}
                 >
                   <span>
                     <span className="block font-jakarta text-[13px] font-extrabold leading-snug text-[#1E1B4B]">

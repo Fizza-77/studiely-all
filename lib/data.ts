@@ -93,6 +93,7 @@ export const CUR_DATA: Record<string, Record<string, string[]>> = {
       "Year 9",
       "Year 10",
     ],
+    "Common Subject": ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
     "NSW → HSC": ["Year 11 (HSC)", "Year 12 (HSC)"],
     "VIC → VCE": ["Year 11 (VCE)", "Year 12 (VCE)"],
     "QLD → QCE": ["Year 11 (QCE)", "Year 12 (QCE)"],

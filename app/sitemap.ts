@@ -13,6 +13,111 @@ type StaticEntry = {
 /** Public marketing URLs (canonical paths used in nav / footer). */
 const STATIC_PAGES: StaticEntry[] = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
+  {
+    path: "/australian-curriculum/subjects/biology",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/chemistry",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/civics-and-citizenship",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/dance",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/design-and-technologies",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/economics-and-business",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/english",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/french",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/geography",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/media-arts",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/music",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/physics",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/science",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/spanish",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/the-arts",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/visual-arts",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/health-and-physical-education-hpe",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/history",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/humanities-and-social-sciences-hass",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/mandarin",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/australian-curriculum/subjects/mathematics",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
   { path: "/pricing", changeFrequency: "monthly", priority: 0.9 },
   { path: "/curriculum", changeFrequency: "monthly", priority: 0.85 },
   {

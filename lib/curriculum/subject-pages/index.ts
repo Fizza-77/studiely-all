@@ -167,6 +167,27 @@ import { WACE_ANCIENT_HISTORY } from "./wace-ancient-history";
 import { WACE_APPLIED_INFORMATION_TECHNOLOGY } from "./wace-applied-information-technology";
 import { WACE_BIOLOGY } from "./wace-biology";
 import { WACE_BUSINESS_MANAGEMENT_AND_ENTERPRISE } from "./wace-business-management-and-enterprise";
+import { COMMON_BIOLOGY } from "./common-biology";
+import { COMMON_CHEMISTRY } from "./common-chemistry";
+import { COMMON_CIVICS_AND_CITIZENSHIP } from "./common-civics-and-citizenship";
+import { COMMON_DANCE } from "./common-dance";
+import { COMMON_DESIGN_AND_TECHNOLOGIES } from "./common-design-and-technologies";
+import { COMMON_ECONOMICS_AND_BUSINESS } from "./common-economics-and-business";
+import { COMMON_ENGLISH } from "./common-english";
+import { COMMON_FRENCH } from "./common-french";
+import { COMMON_GEOGRAPHY } from "./common-geography";
+import { COMMON_HEALTH_AND_PHYSICAL_EDUCATION_HPE } from "./common-health-and-physical-education-hpe";
+import { COMMON_HISTORY } from "./common-history";
+import { COMMON_HUMANITIES_AND_SOCIAL_SCIENCES_HASS } from "./common-humanities-and-social-sciences-hass";
+import { COMMON_MANDARIN } from "./common-mandarin";
+import { COMMON_MATHEMATICS } from "./common-mathematics";
+import { COMMON_MEDIA_ARTS } from "./common-media-arts";
+import { COMMON_MUSIC } from "./common-music";
+import { COMMON_PHYSICS } from "./common-physics";
+import { COMMON_SCIENCE } from "./common-science";
+import { COMMON_SPANISH } from "./common-spanish";
+import { COMMON_THE_ARTS } from "./common-the-arts";
+import { COMMON_VISUAL_ARTS } from "./common-visual-arts";
 import { QCE_ANCIENT_HISTORY } from "./qce-ancient-history";
 import { QCE_BIOLOGY } from "./qce-biology";
 import { QCE_BUSINESS } from "./qce-business";
@@ -201,6 +222,27 @@ import type { SubjectLandingContent, SubjectPageMatch } from "./types";
 export type { SubjectLandingContent, SubjectFaq, SubjectToolBlock, SubjectSupportRow, SubjectPageMatch } from "./types";
 
 export const SUBJECT_LANDING_PAGES: SubjectLandingContent[] = [
+  COMMON_BIOLOGY,
+  COMMON_CHEMISTRY,
+  COMMON_CIVICS_AND_CITIZENSHIP,
+  COMMON_DANCE,
+  COMMON_DESIGN_AND_TECHNOLOGIES,
+  COMMON_ECONOMICS_AND_BUSINESS,
+  COMMON_ENGLISH,
+  COMMON_FRENCH,
+  COMMON_GEOGRAPHY,
+  COMMON_HEALTH_AND_PHYSICAL_EDUCATION_HPE,
+  COMMON_HISTORY,
+  COMMON_HUMANITIES_AND_SOCIAL_SCIENCES_HASS,
+  COMMON_MANDARIN,
+  COMMON_MATHEMATICS,
+  COMMON_MEDIA_ARTS,
+  COMMON_MUSIC,
+  COMMON_PHYSICS,
+  COMMON_SCIENCE,
+  COMMON_SPANISH,
+  COMMON_THE_ARTS,
+  COMMON_VISUAL_ARTS,
   HSC_ANCIENT_HISTORY,
   HSC_BIOLOGY,
   HSC_BUSINESS_STUDIES,
@@ -1788,6 +1830,153 @@ export const SUBJECT_PAGE_MATCHES: SubjectPageMatch[] = [
     years: ["Year 11 (WACE)", "Year 12 (WACE)"],
     subject: "Business Management and Enterprise",
     path: WACE_BUSINESS_MANAGEMENT_AND_ENTERPRISE.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Biology",
+    path: COMMON_BIOLOGY.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Chemistry",
+    path: COMMON_CHEMISTRY.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Civics and Citizenship",
+    path: COMMON_CIVICS_AND_CITIZENSHIP.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Dance",
+    path: COMMON_DANCE.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Design and Technologies",
+    path: COMMON_DESIGN_AND_TECHNOLOGIES.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Economics and Business",
+    path: COMMON_ECONOMICS_AND_BUSINESS.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "English",
+    path: COMMON_ENGLISH.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "French",
+    path: COMMON_FRENCH.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Geography",
+    path: COMMON_GEOGRAPHY.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Health and Physical Education (HPE)",
+    path: COMMON_HEALTH_AND_PHYSICAL_EDUCATION_HPE.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "History",
+    path: COMMON_HISTORY.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Humanities and Social Sciences (HASS)",
+    path: COMMON_HUMANITIES_AND_SOCIAL_SCIENCES_HASS.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Mandarin",
+    path: COMMON_MANDARIN.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Mathematics",
+    path: COMMON_MATHEMATICS.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Media Arts",
+    path: COMMON_MEDIA_ARTS.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Music",
+    path: COMMON_MUSIC.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Physics",
+    path: COMMON_PHYSICS.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Science",
+    path: COMMON_SCIENCE.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Spanish",
+    path: COMMON_SPANISH.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "The Arts",
+    path: COMMON_THE_ARTS.path,
+  },
+  {
+    curriculum: "Australian Curriculum",
+    pathway: "Common Subject",
+    years: ["Year 11 (Common Subject)", "Year 12 (Common Subject)"],
+    subject: "Visual Arts",
+    path: COMMON_VISUAL_ARTS.path,
   },
 ];
 
