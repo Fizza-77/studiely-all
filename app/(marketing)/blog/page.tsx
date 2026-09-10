@@ -23,11 +23,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: { canonical: `${SITE_URL}/blog` },
+    alternates: { canonical: `${SITE_URL}/blogs` },
     openGraph: {
       title,
       description,
-      url: `${SITE_URL}/blog`,
+      url: `${SITE_URL}/blogs`,
       siteName: "Studiely",
       type: "website",
       images: [{ url: DEFAULT_OG_IMAGE_PATH, alt: "Studiely" }],
@@ -44,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function BlogPage({ searchParams }: BlogPageProps) {
   const indexData = await getBlogIndexDataForStudiely();
   const { posts, categories, seo } = indexData;
-  const breadcrumbSchema = buildBreadcrumbSchema("Blog", "/blog");
+  const breadcrumbSchema = buildBreadcrumbSchema("Blog", "/blogs");
   const resolvedSearchParams = await searchParams;
 
   const activeCategory = resolvedSearchParams?.category?.trim() || "";

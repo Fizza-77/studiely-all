@@ -45,7 +45,7 @@ import {
   hasActiveSubscriptions,
 } from "@/lib/student/account-deletion";
 
-const SMART_LINK = "https://www.studiely.com/smartlink";
+const SMART_LINK = "https://studiely.com/smartlink";
 const SHARE_TEXT = `Study smarter with Studiely. Download/open here: ${SMART_LINK}`;
 
 const THEME_OPTIONS: { id: ThemePreference; label: string }[] = [

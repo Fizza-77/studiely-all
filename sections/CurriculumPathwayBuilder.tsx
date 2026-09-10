@@ -1,8 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { ChevronRight, Search } from "lucide-react";
 import { CUR_DATA } from "@/lib/data";
+import { resolveSubjectPageHref } from "@/lib/curriculum/subject-pages";
 
 const BLUE = "#4F35F2";
 const LIME = "#E8FF2F";
@@ -30,20 +32,86 @@ const PATHWAY_DESCRIPTIONS: Record<string, string> = {
   "Any State": "Foundation through Year 10",
   "NSW → HSC": "New South Wales senior secondary pathway",
   "VIC → VCE": "Victoria senior secondary pathway",
+  "QLD → QCE": "Queensland senior secondary pathway",
+  "WA → WACE": "Western Australia senior secondary pathway",
+  "SA → SACE": "South Australia senior secondary pathway",
+  "TAS → TCE": "Tasmania senior secondary pathway",
+  "ACT → ACT SSC": "Australian Capital Territory senior secondary pathway",
+  "NT → NTCET": "Northern Territory senior secondary pathway",
   "Any Province": "Kindergarten through Grade 10",
   "Ontario → OSSD": "Ontario Secondary School Diploma",
   "BC → BC Grad": "British Columbia graduation pathway",
 };
 
 const SUBJECTS = [
+  { title: "Ancient History", detail: "Open subject page" },
+  { title: "English", detail: "Open subject page" },
+  { title: "English Advanced", detail: "Open subject page" },
+  { title: "English Extension 1", detail: "Open subject page" },
+  { title: "English Extension 2", detail: "Open subject page" },
   { title: "English Language", detail: "Open subject page" },
+  { title: "English Literary Studies", detail: "Open subject page" },
+  { title: "English Standard", detail: "Open subject page" },
   { title: "First Language English (0500)", detail: "Open subject page" },
   { title: "English as a Second Language (0510)", detail: "Open subject page" },
   { title: "English Literature", detail: "Open subject page" },
   { title: "Mathematics (0580)", detail: "Open subject page" },
   { title: "Biology", detail: "Open subject page" },
+  { title: "Business", detail: "Open subject page" },
+  { title: "Business Innovation", detail: "Open subject page" },
+  { title: "Business Management", detail: "Open subject page" },
+  { title: "Business Management and Enterprise", detail: "Open subject page" },
+  { title: "Business Studies", detail: "Open subject page" },
   { title: "Chemistry", detail: "Open subject page" },
+  { title: "Computer Science", detail: "Open subject page" },
+  { title: "Computing", detail: "Open subject page" },
+  { title: "Creative Arts", detail: "Open subject page" },
+  { title: "Dance", detail: "Open subject page" },
+  { title: "Digital Solutions", detail: "Open subject page" },
+  { title: "Digital Technologies", detail: "Open subject page" },
+  { title: "Drama", detail: "Open subject page" },
+  { title: "Earth and Environmental Science", detail: "Open subject page" },
+  { title: "Economics", detail: "Open subject page" },
+  { title: "Environmental Science", detail: "Open subject page" },
+  { title: "French", detail: "Open subject page" },
+  { title: "General Mathematics", detail: "Open subject page" },
+  { title: "Geography", detail: "Open subject page" },
+  { title: "Health", detail: "Open subject page" },
+  { title: "Health and Human Development", detail: "Open subject page" },
+  { title: "History", detail: "Open subject page" },
+  { title: "Information and Communication Technology", detail: "Open subject page" },
+  { title: "Information Processing", detail: "Open subject page" },
+  { title: "Scientific Studies", detail: "Open subject page" },
+  { title: "Information Processing and Publishing", detail: "Open subject page" },
+  { title: "Information Processes and Technology", detail: "Open subject page" },
+  { title: "Information Technology", detail: "Open subject page" },
+  { title: "Applied Information Technology", detail: "Open subject page" },
+  { title: "Legal Studies", detail: "Open subject page" },
+  { title: "Mandarin", detail: "Open subject page" },
+  { title: "Mathematical Methods", detail: "Open subject page" },
+  { title: "Mathematics", detail: "Open subject page" },
+  { title: "Mathematics Advanced", detail: "Open subject page" },
+  { title: "Mathematics Extension 1", detail: "Open subject page" },
+  { title: "Mathematics Extension 2", detail: "Open subject page" },
+  { title: "Mathematics Standard", detail: "Open subject page" },
+  { title: "Media", detail: "Open subject page" },
+  { title: "Media Arts", detail: "Open subject page" },
+  { title: "Media Production", detail: "Open subject page" },
+  { title: "Modern History", detail: "Open subject page" },
+  { title: "Music", detail: "Open subject page" },
+  { title: "PDHPE", detail: "Open subject page" },
+  { title: "Physical Education", detail: "Open subject page" },
   { title: "Physics", detail: "Open subject page" },
+  { title: "Psychology", detail: "Open subject page" },
+  { title: "Society and Culture", detail: "Open subject page" },
+  { title: "Software Design and Development", detail: "Open subject page" },
+  { title: "Software Development", detail: "Open subject page" },
+  { title: "Sociology", detail: "Open subject page" },
+  { title: "Spanish", detail: "Open subject page" },
+  { title: "Specialist Mathematics", detail: "Open subject page" },
+  { title: "Visual Art", detail: "Open subject page" },
+  { title: "Visual Arts", detail: "Open subject page" },
+  { title: "Visual Communication Design", detail: "Open subject page" },
 ] as const;
 
 const DEFAULT_YEAR_GROUPS = [
@@ -70,6 +138,10 @@ const cardClass = (selected: boolean) =>
       : "shadow-[0_7px_20px_rgba(30,27,75,0.07)] ring-1 ring-transparent"
   }`;
 
+/** ~5 cards (72px min-height) + 4 gaps (12px) visible; rest scrolls. */
+const SCROLL_LIST_MAX =
+  "mt-3 max-h-[calc(5*72px+4*0.75rem)] space-y-3 overflow-y-auto overscroll-contain pr-1 [scrollbar-gutter:stable] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#4F35F2]/35 [&::-webkit-scrollbar-track]:bg-transparent";
+
 type StepHeaderProps = {
   step: string;
   label: string;
@@ -92,6 +164,7 @@ const StepHeader = ({ step, label, background, dark = false }: StepHeaderProps) 
 );
 
 export const CurriculumPathwayBuilder = () => {
+  const router = useRouter();
   const curriculumNames = Object.keys(CUR_DATA);
   const [curriculum, setCurriculum] = useState("British Curriculum");
   const [pathway, setPathway] = useState("UK National Curriculum");
@@ -120,7 +193,25 @@ export const CurriculumPathwayBuilder = () => {
 
   const filteredSubjects = SUBJECTS.filter((item) =>
     item.title.toLowerCase().includes(query.toLowerCase()),
-  );
+  ).map((item) => {
+    const href = year
+      ? resolveSubjectPageHref({
+          curriculum,
+          pathway,
+          year,
+          subject: item.title,
+        })
+      : null;
+    return {
+      ...item,
+      href,
+      detail: !year
+        ? "Select a year or grade first"
+        : href
+          ? "Open subject page"
+          : "Subject page coming soon",
+    };
+  });
 
   const selectCurriculum = (name: string) => {
     const nextPathway = Object.keys(CUR_DATA[name])[0];
@@ -180,7 +271,7 @@ export const CurriculumPathwayBuilder = () => {
               label="Choose Pathway"
               background={BLUE}
             />
-            <div className="mt-3 space-y-3">
+            <div className={SCROLL_LIST_MAX}>
               {pathways.map((name) => (
                 <button
                   key={name}
@@ -257,12 +348,15 @@ export const CurriculumPathwayBuilder = () => {
                 className="h-11 w-full rounded-full border border-[#1E1B4B]/55 bg-white pl-10 pr-4 font-jakarta text-[12px] text-[#1E1B4B] outline-none placeholder:text-[#8B8D9A] focus:border-[#4F35F2]"
               />
             </label>
-            <div className="mt-3 space-y-3">
+            <div className={SCROLL_LIST_MAX}>
               {filteredSubjects.map((item) => (
                 <button
                   key={item.title}
                   type="button"
-                  onClick={() => setSubject(item.title)}
+                  onClick={() => {
+                    setSubject(item.title);
+                    if (item.href) router.push(item.href);
+                  }}
                   disabled={!year}
                   aria-pressed={subject === item.title}
                   className={`${cardClass(subject === item.title)} disabled:cursor-not-allowed disabled:opacity-55 disabled:hover:translate-y-0 disabled:hover:shadow-[0_7px_20px_rgba(30,27,75,0.07)]`}
@@ -272,7 +366,7 @@ export const CurriculumPathwayBuilder = () => {
                       {item.title}
                     </span>
                     <span className="mt-1 block font-jakarta text-[10px] leading-snug text-[#5B5A6A]">
-                      {year ? item.detail : "Select a year or grade first"}
+                      {item.detail}
                     </span>
                   </span>
                   <CardArrow />

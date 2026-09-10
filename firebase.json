@@ -23,7 +23,37 @@
     "redirects": [
       {
         "source": "/blog/full/:slug",
-        "destination": "/blog/:slug",
+        "destination": "/blogs/:slug",
+        "type": 301
+      },
+      {
+        "source": "/blog",
+        "destination": "/blogs",
+        "type": 301
+      },
+      {
+        "source": "/blog/:slug",
+        "destination": "/blogs/:slug",
+        "type": 301
+      },
+      {
+        "source": "/contact-us",
+        "destination": "/contact",
+        "type": 301
+      },
+      {
+        "source": "/nyla-ai",
+        "destination": "/nyla",
+        "type": 301
+      },
+      {
+        "source": "/start-free",
+        "destination": "/signup",
+        "type": 301
+      },
+      {
+        "source": "/reset-password",
+        "destination": "/login",
         "type": 301
       },
       {
@@ -49,6 +79,11 @@
       {
         "source": "/app/signup",
         "destination": "/signup",
+        "type": 301
+      },
+      {
+        "source": "/app/nyla",
+        "destination": "/smartlink",
         "type": 301
       },
       {

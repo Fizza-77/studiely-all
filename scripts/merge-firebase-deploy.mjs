@@ -7,6 +7,7 @@ import { syncRootPreservedFromLive } from "./sync-root-preserved-from-live.mjs";
 const root = join(fileURLToPath(new URL(".", import.meta.url)), "..");
 const deploy = join(root, "deploy");
 const outDir = join(root, "out");
+const appAdsFile = join(root, "public", "app-ads.txt");
 const flutterDir = process.env.FLUTTER_WEB_BUILD || join(root, "flutter-web-build");
 
 if (!existsSync(outDir)) {
@@ -17,6 +18,11 @@ if (!existsSync(outDir)) {
 rmSync(deploy, { recursive: true, force: true });
 mkdirSync(deploy, { recursive: true });
 cpSync(outDir, deploy, { recursive: true });
+
+if (existsSync(appAdsFile)) {
+  cpSync(appAdsFile, join(deploy, "app-ads.txt"));
+  console.log("Copied app-ads.txt → deploy root");
+}
 
 if (existsSync(flutterDir)) {
   const appDest = join(deploy, "app");

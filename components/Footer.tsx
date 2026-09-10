@@ -23,7 +23,7 @@ const SITEMAP = [
   { label: "Nyla", href: "/nyla", icon: "nyla" },
   { label: "Pricing", href: "/pricing", icon: "pricing" },
   { label: "FAQs", href: "/faqs", icon: "faq" },
-  { label: "Blog", href: "/blog", icon: "blog" },
+  { label: "Blog", href: "/blogs", icon: "blog" },
   { label: "Contact Us", href: "/contact", icon: "contact" },
 ] as const;
 

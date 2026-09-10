@@ -1,0 +1,109 @@
+import Link from "next/link";
+import type { ReactNode } from "react";
+
+/** Marketing feature pages (Navbar Features dropdown). */
+export const SUBJECT_FEATURE_HREFS = {
+  notes: "/features/notes-generator",
+  flashcards: "/features/flashcard-maker",
+  quiz: "/features/quiz-generator",
+  examFocus: "/features/exam-focus",
+  home: "/",
+} as const;
+
+/** Map subject tool card ids → feature marketing pages. */
+export const SUBJECT_TOOL_FEATURE_HREF: Record<string, string> = {
+  notes: SUBJECT_FEATURE_HREFS.notes,
+  flashcards: SUBJECT_FEATURE_HREFS.flashcards,
+  quiz: SUBJECT_FEATURE_HREFS.quiz,
+  "exam-focus": SUBJECT_FEATURE_HREFS.examFocus,
+};
+
+type LinkRule = {
+  /** Case-insensitive phrase to match (already escaped for RegExp). */
+  phrase: string;
+  href: string;
+  /** Link only the first match in this string (e.g. brand → home). */
+  once?: boolean;
+};
+
+/**
+ * Longer phrases first so "revision notes" wins over a bare "notes" rule
+ * (we intentionally do not link bare "notes" — too many false positives).
+ */
+const RULES: LinkRule[] = [
+  { phrase: "notes generator", href: SUBJECT_FEATURE_HREFS.notes },
+  { phrase: "revision notes", href: SUBJECT_FEATURE_HREFS.notes },
+  { phrase: "summary notes", href: SUBJECT_FEATURE_HREFS.notes },
+  { phrase: "study notes", href: SUBJECT_FEATURE_HREFS.notes },
+  { phrase: "flashcard maker", href: SUBJECT_FEATURE_HREFS.flashcards },
+  { phrase: "quiz generator", href: SUBJECT_FEATURE_HREFS.quiz },
+  { phrase: "quiz practice", href: SUBJECT_FEATURE_HREFS.quiz },
+  { phrase: "exam focus", href: SUBJECT_FEATURE_HREFS.examFocus },
+  { phrase: "flashcards", href: SUBJECT_FEATURE_HREFS.flashcards },
+  { phrase: "flashcard", href: SUBJECT_FEATURE_HREFS.flashcards },
+  { phrase: "quizzes", href: SUBJECT_FEATURE_HREFS.quiz },
+  { phrase: "quiz", href: SUBJECT_FEATURE_HREFS.quiz },
+  { phrase: "Studiely", href: SUBJECT_FEATURE_HREFS.home, once: true },
+];
+
+const COMBINED = new RegExp(
+  `\\b(${RULES.map((r) => r.phrase).join("|")})\\b`,
+  "gi",
+);
+
+function ruleForMatch(matched: string): LinkRule | undefined {
+  const lower = matched.toLowerCase();
+  return RULES.find((r) => r.phrase.toLowerCase() === lower);
+}
+
+export type LinkifySubjectCopyOptions = {
+  /** Extra classes on inline feature/home links */
+  className?: string;
+};
+
+/**
+ * Turn feature / brand phrases in plain subject copy into internal links.
+ * Safe for plain text only (no HTML in content strings).
+ */
+export function linkifySubjectCopy(
+  text: string,
+  options: LinkifySubjectCopyOptions = {},
+): ReactNode {
+  const className =
+    options.className ??
+    "font-semibold underline decoration-current/40 underline-offset-[3px] transition-colors hover:decoration-current";
+
+  const onceUsed = new Set<string>();
+  const nodes: ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
+
+  COMBINED.lastIndex = 0;
+  while ((match = COMBINED.exec(text)) !== null) {
+    const matched = match[1] ?? match[0];
+    const rule = ruleForMatch(matched);
+    if (!rule) continue;
+
+    if (rule.once) {
+      const onceKey = rule.phrase.toLowerCase();
+      if (onceUsed.has(onceKey)) continue;
+      onceUsed.add(onceKey);
+    }
+
+    if (match.index > lastIndex) {
+      nodes.push(text.slice(lastIndex, match.index));
+    }
+
+    nodes.push(
+      <Link key={`sl-${key++}`} href={rule.href} className={className}>
+        {matched}
+      </Link>,
+    );
+    lastIndex = match.index + matched.length;
+  }
+
+  if (lastIndex === 0) return text;
+  if (lastIndex < text.length) nodes.push(text.slice(lastIndex));
+  return nodes;
+}

@@ -53,7 +53,7 @@ export async function generateMetadata({
     blog.description ||
     "A Studiely blog article about smarter studying and AI-powered learning.";
 
-  const canonical = `${SITE_URL}/blog/${blog.slug}`;
+  const canonical = `${SITE_URL}/blogs/${blog.slug}`;
   const ogImage = blog.cover_image_url
     ? [{ url: blog.cover_image_url, alt: blog.title }]
     : [{ url: DEFAULT_OG_IMAGE_PATH, alt: "Studiely" }];
@@ -93,7 +93,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const blog = await getStudielyBlogBySlug(slug);
   if (!blog) {
     if (slug !== "coming-soon") return notFound();
-    const breadcrumbSchema = buildBreadcrumbSchema("Coming soon", "/blog/coming-soon");
+    const breadcrumbSchema = buildBreadcrumbSchema("Coming soon", "/blogs/coming-soon");
     return (
       <>
         <script
@@ -127,7 +127,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="wrap pb-12">
             <article className="mx-auto max-w-[900px] rounded-[28px] bg-white p-6 shadow-[0_12px_36px_rgba(30,27,75,0.08)] sm:rounded-[32px] md:p-10">
               <p className="text-[#5B5A6A]">We’re working on new content. Check back soon.</p>
-              <Link href="/blog" className="funky-link font-bold text-[#4F35F2]">
+              <Link href="/blogs" className="funky-link font-bold text-[#4F35F2]">
                 View all articles →
               </Link>
             </article>
@@ -138,7 +138,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
 
   const jsonLd = buildBlogPostingJsonLd(blog);
-  const breadcrumbSchema = buildBreadcrumbSchema(blog.title, `/blog/${blog.slug}`);
+  const breadcrumbSchema = buildBreadcrumbSchema(blog.title, `/blogs/${blog.slug}`);
   const published = formatDate(blog.date_published);
 
   return (
@@ -213,7 +213,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
                 <nav aria-label="Related pages">
                   <Link
-                    href="/blog"
+                    href="/blogs"
                     className="funky-button inline-flex items-center justify-center rounded-full px-5 py-3 text-[13px] font-bold text-white sm:text-[14px]"
                     style={{ backgroundColor: BLUE }}
                   >

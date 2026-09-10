@@ -95,6 +95,12 @@ export const CUR_DATA: Record<string, Record<string, string[]>> = {
     ],
     "NSW → HSC": ["Year 11 (HSC)", "Year 12 (HSC)"],
     "VIC → VCE": ["Year 11 (VCE)", "Year 12 (VCE)"],
+    "QLD → QCE": ["Year 11 (QCE)", "Year 12 (QCE)"],
+    "WA → WACE": ["Year 11 (WACE)", "Year 12 (WACE)"],
+    "SA → SACE": ["Year 11 (SACE)", "Year 12 (SACE)"],
+    "TAS → TCE": ["Year 11 (TCE)", "Year 12 (TCE)"],
+    "ACT → ACT SSC": ["Year 11 (ACT SSC)", "Year 12 (ACT SSC)"],
+    "NT → NTCET": ["Year 11 (NTCET)", "Year 12 (NTCET)"],
   },
   "Canadian Curriculum": {
     "Any Province": [

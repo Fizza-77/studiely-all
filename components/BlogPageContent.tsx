@@ -111,7 +111,7 @@ export const BlogPageContent = ({
             return (
               <Link
                 key={post.slug}
-                href={`/blog/${post.slug}`}
+                href={`/blogs/${post.slug}`}
                 className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F35F2]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base"
                 aria-label={`Read more about ${post.title}`}
               >

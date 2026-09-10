@@ -6,25 +6,25 @@ Studiely supports major school pathways including IGCSE, GCSE, IB, A-Level, AP, 
 
 ## Main
 
-- [Home](https://www.studiely.com/): Overview of Studiely study tools and how the platform works
-- [Pricing](https://www.studiely.com/pricing): Free plan and Premium subscription options
-- [Curriculum](https://www.studiely.com/curriculum): Supported curricula, subjects and study pathways
-- [Nyla AI Tutor](https://www.studiely.com/nyla): Product page for Studiely’s AI study tutor
-- [FAQs](https://www.studiely.com/faqs): Common questions about Studiely, plans and study tools
-- [Blog](https://www.studiely.com/blogs): Study tips, product updates and education articles
-- [Contact](https://www.studiely.com/contact): Support and contact options for Studiely
+- [Home](https://studiely.com/): Overview of Studiely study tools and how the platform works
+- [Pricing](https://studiely.com/pricing): Free plan and Premium subscription options
+- [Curriculum](https://studiely.com/curriculum): Supported curricula, subjects and study pathways
+- [Nyla AI Tutor](https://studiely.com/nyla): Product page for Studiely’s AI study tutor
+- [FAQs](https://studiely.com/faqs): Common questions about Studiely, plans and study tools
+- [Blog](https://studiely.com/blogs): Study tips, product updates and education articles
+- [Contact](https://studiely.com/contact): Support and contact options for Studiely
 
 ## Legal
 
-- [Privacy Policy](https://www.studiely.com/privacy-policy): How Studiely collects and protects personal data
-- [Terms of Service](https://www.studiely.com/terms-of-service): Terms for using Studiely
-- [Acceptable Use Policy](https://www.studiely.com/acceptable-use): Allowed and prohibited use of the platform
-- [Cookie Policy](https://www.studiely.com/cookie-policy): Cookie and tracking information
-- [Disclaimer](https://www.studiely.com/disclaimer): Important limitations and educational-use notices
+- [Privacy Policy](https://studiely.com/privacy-policy): How Studiely collects and protects personal data
+- [Terms of Service](https://studiely.com/terms-of-service): Terms for using Studiely
+- [Acceptable Use Policy](https://studiely.com/acceptable-use): Allowed and prohibited use of the platform
+- [Cookie Policy](https://studiely.com/cookie-policy): Cookie and tracking information
+- [Disclaimer](https://studiely.com/disclaimer): Important limitations and educational-use notices
 
 ## Optional
 
-- [Sitemap](https://www.studiely.com/sitemap.xml): Machine-readable list of public site URLs
+- [Sitemap](https://studiely.com/sitemap.xml): Machine-readable list of public site URLs
 - [Make My Lesson](https://makemylesson.ai): Sister platform for teachers
 - [Linguatude](https://linguatude.com): Sister language-learning platform
 - [Worksheeta](https://worksheeta.com): Sister worksheet platform

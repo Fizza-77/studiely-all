@@ -269,10 +269,10 @@ export const SupportedCountriesSection = ({
               className={`relative flex h-full flex-col overflow-hidden rounded-[28px] p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
               style={{ backgroundColor: BLUE }}
             >
-              <div className="grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-stretch gap-2.5 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] sm:gap-4">
+              <div className="grid min-h-0 flex-1 grid-cols-1 items-stretch gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] sm:gap-4">
                 <div className="relative z-[1] flex min-w-0 flex-col gap-2.5 self-start">
                   <CardFlag src="/UK-flag.webp" />
-                  <h3 className="m-0 whitespace-nowrap font-heading text-[clamp(1.25rem,2.2vw,1.75rem)] font-extrabold leading-[1.05] tracking-[-0.02em] text-white">
+                  <h3 className="m-0 font-heading text-[clamp(1.25rem,2.2vw,1.75rem)] font-extrabold leading-[1.05] tracking-[-0.02em] text-white sm:whitespace-nowrap">
                     United Kingdom
                   </h3>
                   <p className="m-0 font-heading text-[12px] font-bold leading-snug text-white/90 sm:text-[13px]">
@@ -294,15 +294,15 @@ export const SupportedCountriesSection = ({
                   </ul>
                 </div>
 
-                <div className="relative flex w-[5.5rem] max-w-[36%] shrink-0 items-end justify-end self-stretch overflow-hidden rounded-[22px] sm:w-full sm:max-w-none">
+                <div className="relative flex w-full items-end justify-center overflow-hidden rounded-[22px] sm:justify-end sm:self-stretch">
                   <Image
                     src="/UK.webp"
                     alt="Palace of Westminster and Big Ben at night"
                     width={480}
                     height={860}
                     unoptimized
-                    sizes="(max-width: 640px) 28vw, (max-width: 1280px) 40vw, 35vw"
-                    className="h-auto w-full object-contain object-right-bottom"
+                    sizes="(max-width: 640px) 90vw, (max-width: 1280px) 40vw, 35vw"
+                    className="h-auto w-full max-h-[220px] object-contain object-bottom sm:max-h-none sm:object-right-bottom"
                   />
                 </div>
               </div>
@@ -312,7 +312,7 @@ export const SupportedCountriesSection = ({
             <article
               className={`relative flex h-full flex-col overflow-hidden rounded-[28px] bg-white p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
             >
-              <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] sm:gap-4">
+              <div className="flex flex-col gap-4 sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] sm:items-center sm:gap-4">
                 <div className="relative z-[1] min-w-0">
                   <CardTitle subtitle="Kindergarten to College Admissions">
                     <CardFlag src="/USA-flag.webp" />
@@ -353,7 +353,7 @@ export const SupportedCountriesSection = ({
                     ))}
                   </ul>
                 </div>
-                <div className="relative flex w-full items-center justify-center self-center overflow-hidden rounded-[22px]">
+                <div className="relative flex w-full shrink-0 items-center justify-center overflow-hidden rounded-[22px]">
                   <Image
                     src="/US.webp"
                     alt="Statue of Liberty at night"
@@ -361,7 +361,7 @@ export const SupportedCountriesSection = ({
                     height={860}
                     unoptimized
                     sizes="(max-width: 768px) 90vw, 40vw"
-                    className="h-auto w-full object-contain object-center"
+                    className="h-auto w-full max-h-[220px] object-contain object-center sm:max-h-none"
                   />
                 </div>
               </div>
@@ -373,7 +373,7 @@ export const SupportedCountriesSection = ({
             <article
               className={`overflow-hidden rounded-[28px] bg-white p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
             >
-              <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+              <div className="flex flex-col gap-4 sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] sm:items-center">
                 <div className="relative z-[1] min-w-0">
                   <CardTitle subtitle="Primary to Diploma Programme">
                     <CardFlag src="/USA-flag.webp" />
@@ -389,7 +389,7 @@ export const SupportedCountriesSection = ({
                     <NumberedRow n={3}>Diploma Programme (DP)</NumberedRow>
                   </ul>
                 </div>
-                <div className="relative flex w-full items-center justify-center self-center overflow-hidden rounded-[22px]">
+                <div className="relative flex w-full shrink-0 items-center justify-center overflow-hidden rounded-[22px]">
                   <Image
                     src="/IB.webp"
                     alt="Washington Monument at night"
@@ -397,7 +397,7 @@ export const SupportedCountriesSection = ({
                     height={860}
                     unoptimized
                     sizes="(max-width: 768px) 90vw, 30vw"
-                    className="h-auto w-full object-contain object-center"
+                    className="h-auto w-full max-h-[220px] object-contain object-center sm:max-h-none"
                   />
                 </div>
               </div>
@@ -422,7 +422,7 @@ export const SupportedCountriesSection = ({
                     src="/Australia.webp"
                     alt="Sydney Opera House at night"
                     fit="cover"
-                    className="aspect-[16/10] w-full min-h-[120px] shrink-0 self-start sm:w-[min(48%,12rem)] sm:min-w-[10rem] sm:flex-1 sm:aspect-auto sm:min-h-[140px]"
+                    className="hidden aspect-[16/10] w-full min-h-[120px] shrink-0 self-start sm:block sm:w-[min(48%,12rem)] sm:min-w-[10rem] sm:flex-1 sm:aspect-auto sm:min-h-[140px]"
                   />
                 </div>
 
@@ -469,6 +469,13 @@ export const SupportedCountriesSection = ({
                     onToggle={() => setAusExpanded((v) => !v)}
                   />
                 </div>
+
+                <CardLandmark
+                  src="/Australia.webp"
+                  alt="Sydney Opera House at night"
+                  fit="cover"
+                  className="aspect-[16/10] w-full min-h-[140px] sm:hidden"
+                />
               </div>
             </motion.article>
 
@@ -478,7 +485,7 @@ export const SupportedCountriesSection = ({
               transition={expandTransition}
               className={`overflow-hidden rounded-[28px] bg-white p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
             >
-              <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+              <div className="flex flex-col gap-4 sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] sm:items-center">
                 <div className="relative z-[1] min-w-0">
                   <CardTitle subtitle="Primary to High School Graduation">
                     <CardFlag src="/Canada.png" />
@@ -518,7 +525,7 @@ export const SupportedCountriesSection = ({
                     onToggle={() => setCanadaExpanded((v) => !v)}
                   />
                 </div>
-                <div className="relative flex w-full items-center justify-center self-center overflow-hidden rounded-[22px]">
+                <div className="relative flex w-full shrink-0 items-center justify-center overflow-hidden rounded-[22px]">
                   <Image
                     src="/Canada.webp"
                     alt="CN Tower and Toronto skyline at night"
@@ -526,7 +533,7 @@ export const SupportedCountriesSection = ({
                     height={860}
                     unoptimized
                     sizes="(max-width: 768px) 90vw, 30vw"
-                    className="h-auto w-full object-contain object-center"
+                    className="h-auto w-full max-h-[220px] object-contain object-center sm:max-h-none"
                   />
                 </div>
               </div>

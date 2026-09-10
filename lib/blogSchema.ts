@@ -39,7 +39,7 @@ function buildMainEntityOfPage(
     };
   }
 
-  const url = `${SITE_URL}/blog/${blog.slug}`;
+  const url = `${SITE_URL}/blogs/${blog.slug}`;
   return {
     "@type": "WebPage",
     "@id": url,
@@ -51,7 +51,7 @@ function buildMainEntityOfPage(
  * datePublished, dateModified, mainEntityOfPage, image, keywords, articleSection).
  */
 export function buildBlogPostingJsonLd(blog: BlogPostForJsonLd): Record<string, unknown> {
-  const url = `${SITE_URL}/blog/${blog.slug}`;
+  const url = `${SITE_URL}/blogs/${blog.slug}`;
   const headline = blog.meta_title?.trim() || blog.title;
   const description =
     blog.meta_description?.trim() ||

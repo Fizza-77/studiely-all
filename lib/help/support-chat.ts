@@ -20,7 +20,7 @@ Behaviour rules:
 - If details are missing, say what is known from FAQ and give a safe next step.
 - If the user asks for customer support or human support, always include:
   - Email: support@studiely.com
-  - Contact page: https://www.studiely.com/contact
+  - Contact page: https://studiely.com/contact
 
 Conversation style:
 - Be warm, encouraging, and professional.
@@ -28,7 +28,7 @@ Conversation style:
 - Use markdown where useful, especially **bold** for key points.
 - Wherever possible, end with a practical next step inside Studiely.`;
 
-const PRICING_PAGE_URL = "https://www.studiely.com/pricing";
+const PRICING_PAGE_URL = "https://studiely.com/pricing";
 
 function isPricingQuestion(message: string): boolean {
   const q = message.toLowerCase();

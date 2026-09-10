@@ -100,7 +100,7 @@ export const NylaWhySection = () => {
                   pricing
                 </a>
                 , or browse study tips on the{" "}
-                <Link href="/blog" className={linkClass} style={{ color: BLUE }}>
+                <Link href="/blogs" className={linkClass} style={{ color: BLUE }}>
                   blog
                 </Link>
                 . You can always return to the{" "}
