@@ -1,6 +1,6 @@
 /* Minimal service worker — installability + offline fallback. */
 const CACHE = "studiely-pwa-v5";
-const PRECACHE = ["/offline.html", "/logo-group.svg", "/icons/pwa-192.png"];
+const PRECACHE = ["/offline.html", "/logo-group.svg", "/icons/pwa-192.png", "/hero-img.webp"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

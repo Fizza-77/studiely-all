@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Head from "next/head";
 import { HomePageContent } from "@/components/HomePageContent";
 import { DEFAULT_OG_IMAGE_PATH, SITE_URL } from "@/lib/site";
 import { HeroSection } from "@/sections/HeroSection";
@@ -69,13 +70,17 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <link
-        rel="preload"
-        as="image"
-        href="/hero-img.webp"
-        type="image/webp"
-        fetchPriority="high"
-      />
+      {/* Preload LCP hero image in <Head> for proper priority */}
+      <Head>
+        <link
+          rel="preload"
+          as="image"
+          href="/hero-img.webp"
+          type="image/webp"
+          fetchPriority="high"
+          crossOrigin="anonymous"
+        />
+      </Head>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
