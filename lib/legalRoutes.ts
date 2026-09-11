@@ -6,7 +6,9 @@ export const LEGAL_ROUTES = {
   termsOfService: "/terms-of-service",
   cookiePolicy: "/cookie-policy",
   acceptableUse: "/acceptable-use",
+  acceptableUsePolicy: "/acceptable-use-policy",
   disclaimer: "/disclaimer",
+  refundPaymentsPolicy: "/refund-payments-policy",
 } as const;
 
 export const complianceLinkClass =

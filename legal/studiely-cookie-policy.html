@@ -111,6 +111,7 @@
     color: var(--text-secondary);
     line-height: 1.75;
   }
+  .intro-block p + p { margin-top: 0.75rem; }
 
   .section {
     margin-bottom: 2rem;
@@ -141,33 +142,30 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    letter-spacing: 0;
   }
   .section-title {
     font-size: 14px;
     font-weight: 600;
     color: var(--text-primary);
     letter-spacing: 0.01em;
-    text-transform: uppercase;
-    font-family: 'DM Mono', monospace;
-    letter-spacing: 0.08em;
-    font-size: 11px;
   }
 
   .section-body {
     padding: 1.5rem 1.75rem;
   }
-
-  .section-body p {
+  .section-body > p {
     color: var(--text-secondary);
     margin-bottom: 1rem;
     font-size: 14.5px;
   }
-  .section-body p:last-child { margin-bottom: 0; }
+  .section-body > p:last-child {
+    margin-bottom: 0;
+  }
 
   .subsection {
     margin: 1.25rem 0;
   }
+  .subsection:first-child { margin-top: 0; }
   .subsection-title {
     font-size: 13px;
     font-weight: 600;
@@ -202,60 +200,15 @@
     margin-top: 7px;
   }
 
-  .info-grid {
-    display: grid;
-    gap: 1px;
-    background: var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 0.75rem 0;
-    border: 0.5px solid var(--border);
-  }
-  .info-row {
-    display: flex;
-    background: var(--white);
-  }
-  .info-row:first-child { border-radius: 10px 10px 0 0; }
-  .info-row:last-child { border-radius: 0 0 10px 10px; }
-  .info-label {
-    width: 180px;
-    flex-shrink: 0;
-    padding: 10px 14px;
-    font-size: 11px;
-    font-weight: 600;
-    font-family: 'DM Mono', monospace;
-    color: var(--text-muted);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    background: #fafbff;
-    border-right: 0.5px solid var(--border);
-  }
-  .info-value {
-    padding: 10px 14px;
-    font-size: 13.5px;
-    color: var(--text-primary);
-  }
-  a.email-link {
+  a.email-link, a.url-link {
     color: var(--indigo);
     text-decoration: none;
     font-family: 'DM Mono', monospace;
     font-size: 12.5px;
   }
-  a.email-link:hover { text-decoration: underline; }
-
-  .data-badge {
-    font-size: 10px;
-    font-family: 'DM Mono', monospace;
-    font-weight: 500;
-    padding: 3px 9px;
-    border-radius: 20px;
-    letter-spacing: 0.04em;
+  a.email-link:hover, a.url-link:hover {
+    text-decoration: underline;
   }
-  .badge-teal { background: rgba(0,176,155,0.1); color: #007a6b; border: 0.5px solid rgba(0,176,155,0.3); }
-  .badge-amber { background: rgba(217,123,42,0.1); color: #9a5010; border: 0.5px solid rgba(217,123,42,0.3); }
-  .badge-rose { background: rgba(201,74,114,0.1); color: #8f2550; border: 0.5px solid rgba(201,74,114,0.3); }
-  .badge-indigo { background: rgba(84,72,200,0.1); color: var(--indigo); border: 0.5px solid rgba(84,72,200,0.3); }
-  .badge-navy { background: rgba(24,25,38,0.08); color: var(--navy); border: 0.5px solid rgba(24,25,38,0.2); }
 
   footer {
     background: var(--navy);
@@ -274,17 +227,6 @@
     color: rgba(255,255,255,0.35);
     line-height: 1.6;
   }
-  footer a {
-    color: var(--teal);
-    text-decoration: none;
-  }
-
-  @media (max-width: 560px) {
-    .info-label { width: 120px; font-size: 10px; }
-    .info-value { font-size: 12.5px; }
-    .section-body { padding: 1.25rem; }
-    .section-header { padding: 1rem 1.25rem; }
-  }
 </style>
 </head>
 <body>
@@ -295,241 +237,168 @@
   </div>
   <h1>Cookie Policy</h1>
   <div class="header-meta">
-    <span class="meta-pill">Operated by <span>Qismat Ventures W.L.L</span></span>
-    <span class="meta-pill">Effective Date: <span>January 13, 2026</span></span>
-    <span class="meta-pill">Last Updated: <span>February 28, 2026</span></span>
+    <span class="meta-pill">Operated by: <span>Skyen Systems Pty Ltd</span></span>
+    <span class="meta-pill">Effective: <span>10 September 2026</span></span>
+    <span class="meta-pill">Last updated: <span>10 September 2026</span></span>
+    <span class="meta-pill">Applies to: <span>studiely.com (website)</span></span>
   </div>
 </header>
 
 <div class="container">
 
   <div class="intro-block">
-    This Cookie Policy explains what cookies and similar technologies are, how Studiely uses them across its website and web-based services, and what controls you have over them. It should be read alongside our <a href="/privacy-policy" class="email-link">Privacy Policy</a>. It should also be read alongside our <a href="/terms-of-service" class="email-link">Terms of Service</a>, <a href="/acceptable-use" class="email-link">Acceptable Use Policy</a>, and <a href="/disclaimer" class="email-link">Disclaimer</a>.<br><br>
-    Studiely is operated by Qismat Ventures W.L.L, a company registered in the Kingdom of Bahrain (Registration No. 190698-1). References to &ldquo;Studiely,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo; in this policy refer to Qismat Ventures W.L.L.
+    <p>This Cookie Policy explains how Studiely uses cookies and similar technologies across its website. It should be read alongside our Privacy Policy, Terms of Service, Acceptable Use Policy, and Disclaimer.</p>
+    <p>Studiely's website is operated by Skyen Systems Pty Ltd (ACN 701 564 730), a company registered in Victoria, Australia. References to "Studiely", "we", "us", or "our" in this policy refer to Skyen Systems Pty Ltd.</p>
   </div>
 
+  <!-- 1. What this policy covers -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">1</div>
-      <div class="section-title">What Are Cookies?</div>
+      <div class="section-title">What this policy covers</div>
     </div>
     <div class="section-body">
-      <p>Cookies are small text files placed on your device (computer, tablet, or phone) when you visit a website. They allow the website to recognise your device and remember certain information about your visit, such as your preferences or login status.</p>
-      <p>Similar technologies include:</p>
-      <ul class="policy-list">
-        <li>Local storage &mdash; data stored directly in your browser, used for saving session or preference information</li>
-        <li>Session identifiers &mdash; temporary references that allow our platform to track a single session without persisting after you close your browser</li>
-        <li>Persistent identifiers &mdash; longer-lived identifiers (such as Firebase UIDs) that allow us to recognise returning users across sessions</li>
-      </ul>
-      <p>For the purposes of this policy, we refer to all of these collectively as &ldquo;cookies.&rdquo;</p>
+      <p>This Cookie Policy explains how Studiely uses cookies and similar technologies across its website. It should be read alongside our <a href="/privacy-policy" class="email-link">Privacy Policy</a>, <a href="/terms-of-service" class="email-link">Terms of Service</a>, <a href="/acceptable-use-policy" class="email-link">Acceptable Use Policy</a>, and <a href="/disclaimer" class="email-link">Disclaimer</a>.</p>
+      <p>Studiely's website is operated by Skyen Systems Pty Ltd (ACN 701 564 730), a company registered in Victoria, Australia. References to "Studiely", "we", "us", or "our" in this policy refer to Skyen Systems Pty Ltd.</p>
     </div>
   </div>
 
+  <!-- 2. What are cookies -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">2</div>
-      <div class="section-title">How Studiely Uses Cookies</div>
+      <div class="section-title">What are cookies</div>
     </div>
     <div class="section-body">
-      <p>We use cookies strictly for the following purposes. We do not use cookies for advertising, behavioural profiling, or any purpose unrelated to providing and improving our educational platform.</p>
-
-      <div class="subsection">
-        <div class="subsection-title"><span class="data-badge badge-teal">2.1</span>&nbsp; Strictly Necessary Cookies</div>
-        <p>These cookies are essential for Studiely to function properly. Without them, certain core features would not work.</p>
-        <ul class="policy-list">
-          <li>Purpose: Authentication &mdash; Firebase Authentication uses session identifiers to keep you logged in during your session, so you do not need to re-enter your password on every page</li>
-          <li>Purpose: Security &mdash; Cookies help us detect and prevent fraudulent or abusive activity</li>
-          <li>Purpose: Platform stability &mdash; Session data is used to maintain the integrity of your interaction with the platform</li>
-        </ul>
-        <p>Strictly necessary cookies cannot be disabled without severely impacting platform functionality. We do not require your consent to set these cookies, as they are required to deliver the service you have requested.</p>
-      </div>
-
-      <div class="subsection">
-        <div class="subsection-title"><span class="data-badge badge-indigo">2.2</span>&nbsp; Functional Cookies</div>
-        <p>These cookies remember your preferences and settings so you do not have to reconfigure them each visit.</p>
-        <ul class="policy-list">
-          <li>Remembering your selected curriculum, subjects, and study mode preferences</li>
-          <li>Storing your difficulty settings and personalisation choices</li>
-          <li>Maintaining language and display preferences where applicable</li>
-        </ul>
-        <p>Functional cookies are not strictly necessary but significantly improve your experience. We will seek your consent before setting non-essential functional cookies where required by law.</p>
-      </div>
-
-      <div class="subsection">
-        <div class="subsection-title"><span class="data-badge badge-amber">2.3</span>&nbsp; Analytics Cookies</div>
-        <p>We use Firebase Analytics to understand how users interact with Studiely, which features are most used, and where we can improve the platform. This helps us make Studiely better for everyone.</p>
-        <p>Firebase Analytics may set cookies or use similar persistent identifiers to collect:</p>
-        <ul class="policy-list">
-          <li>Page views and navigation patterns</li>
-          <li>Feature usage and engagement data</li>
-          <li>Crash and error diagnostics (via Firebase Crashlytics)</li>
-          <li>Approximate location (country or region only &mdash; not precise GPS location)</li>
-        </ul>
-        <p>Analytics data is anonymised or aggregated where possible. It is not used to build personal profiles, and it is never used for advertising.</p>
-        <p>For users under the age of 13, analytics cookies are disabled by default unless verifiable parental consent is obtained in accordance with COPPA requirements and applicable law.</p>
-      </div>
+      <p>Cookies are small text files placed on your device when you visit a website. Similar technologies include local storage, session identifiers, and persistent identifiers such as Firebase UIDs, which we refer to collectively as "cookies" for this policy.</p>
     </div>
   </div>
 
+  <!-- 3. How Studiely uses cookies -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">3</div>
-      <div class="section-title">Third-Party Cookies</div>
+      <div class="section-title">How Studiely uses cookies</div>
     </div>
     <div class="section-body">
-      <p>Studiely uses Google Firebase, which may set or read its own cookies as part of the services it provides. These cookies are governed by Google&apos;s Privacy Policy and are used solely in connection with the Firebase services described in our <a href="/privacy-policy" class="email-link">Privacy Policy</a>.</p>
-      <p>Firebase Privacy Policy: <a href="https://firebase.google.com/support/privacy" class="email-link" target="_blank" rel="noopener noreferrer">https://firebase.google.com/support/privacy</a></p>
-      <p>We do not permit any third-party advertising networks, social media platforms, or data brokers to place cookies on Studiely. We do not share cookie-based data with third parties for their own purposes.</p>
+      <p>We use cookies strictly for the purposes below. We do not use cookies for advertising, behavioural profiling, or any purpose unrelated to providing and improving our educational platform.</p>
+
+      <div class="subsection">
+        <div class="subsection-title">3.1 Strictly necessary cookies</div>
+        <p>Essential for Studiely to function — Firebase Authentication uses session identifiers to keep you logged in; cookies help detect and prevent fraudulent or abusive activity; session data maintains platform stability. These cannot be disabled without severely impacting functionality, and do not require consent.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">3.2 Functional cookies</div>
+        <p>Remember your selected curriculum, subjects, study mode preferences, difficulty settings, and language or display preferences. We seek consent before setting non-essential functional cookies where required by law.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">3.3 Analytics cookies</div>
+        <p>We use Firebase Analytics to understand how users interact with Studiely — page views, navigation, feature usage, and crash diagnostics (via Firebase Crashlytics), plus approximate country or region only, never precise location. Analytics data is anonymised or aggregated where possible, is not used for advertising, and for users under 13, analytics cookies are disabled by default unless verifiable parental consent is obtained.</p>
+      </div>
     </div>
   </div>
 
+  <!-- 4. Third-party cookies -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">4</div>
-      <div class="section-title">Subscription &amp; Payment Cookies</div>
+      <div class="section-title">Third-party cookies</div>
     </div>
     <div class="section-body">
-      <p>Where Studiely processes payments directly through our website (using Paddle or equivalent payment processors), these processors may set necessary cookies to facilitate secure transaction processing. These cookies are strictly limited to payment functionality and do not collect or share data for marketing purposes.</p>
-      <p>App store purchases (via Apple or Google) are processed entirely outside of our website, and Studiely does not set or read cookies in connection with those transactions.</p>
+      <p>Studiely uses Google Firebase, which may set its own cookies as part of the services it provides, governed by Google's Privacy Policy (<a href="https://firebase.google.com/support/privacy" class="url-link" target="_blank" rel="noopener">firebase.google.com/support/privacy</a>). We do not permit third-party advertising networks, social media platforms, or data brokers to place cookies on Studiely, and we do not share cookie-based data with third parties for their own purposes.</p>
+      <p>Studiely uses Google AdMob to serve optional rewarded video ads on the Free plan. For any account identified as belonging to a child under 13, AdMob operates in non-personalised, child-directed mode — no behavioural targeting, no cross-app tracking. We do not permit any other third-party advertising network to set cookies or trackers.</p>
     </div>
   </div>
 
+  <!-- 5. Subscription and payment cookies -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">5</div>
-      <div class="section-title">Cookie Duration</div>
+      <div class="section-title">Subscription and payment cookies</div>
     </div>
     <div class="section-body">
-      <p>Cookies used by Studiely fall into two categories based on duration:</p>
-      <ul class="policy-list">
-        <li>Session Cookies: Session cookies &mdash; these expire automatically when you close your browser. They are used to maintain your login and session state during a single visit.</li>
-        <li>Persistent Cookies: Persistent cookies &mdash; these remain on your device for a set period after your visit. Firebase may use persistent identifiers to recognise returning users and maintain analytical continuity. We configure these to be retained only as long as necessary for their stated purpose.</li>
-      </ul>
+      <p>Where Studiely processes payments directly through our website, using Stripe, Stripe may set necessary cookies to facilitate secure transaction processing. These are strictly limited to payment functionality and are not used for marketing purposes.</p>
+      <p>App store purchases (via Apple or Google) are processed entirely outside our website, and Studiely does not set or read cookies in connection with those transactions.</p>
     </div>
   </div>
 
+  <!-- 6. Cookie duration -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">6</div>
-      <div class="section-title">Your Cookie Choices &amp; Controls</div>
+      <div class="section-title">Cookie duration</div>
     </div>
     <div class="section-body">
-      <p>You have several options for managing or restricting cookies when using Studiely.</p>
-
-      <div class="subsection">
-        <div class="subsection-title"><span class="data-badge badge-teal">6.1</span>&nbsp; Browser Settings</div>
-        <p>Most browsers allow you to control cookies through their settings. You can:</p>
-        <ul class="policy-list">
-          <li>Block all cookies</li>
-          <li>Delete existing cookies</li>
-          <li>Block third-party cookies specifically</li>
-          <li>Set preferences for which cookies to allow</li>
-        </ul>
-        <p>Please refer to your browser&apos;s help documentation for instructions specific to your browser. Note that blocking strictly necessary cookies will prevent Studiely from functioning correctly.</p>
-      </div>
-
-      <div class="subsection">
-        <div class="subsection-title"><span class="data-badge badge-indigo">6.2</span>&nbsp; Analytics Opt-Out</div>
-        <p>You can opt out of non-essential analytics tracking by:</p>
-        <ul class="policy-list">
-          <li>Adjusting your browser or device privacy settings to limit tracking</li>
-          <li>Contacting us at <a href="mailto:admin@qismatventures.com" class="email-link">admin@qismatventures.com</a> to request an analytics opt-out</li>
-        </ul>
-        <p>Declining analytics cookies does not affect your access to Studiely&apos;s educational features or any paid services.</p>
-      </div>
-
-      <div class="subsection">
-        <div class="subsection-title"><span class="data-badge badge-amber">6.3</span>&nbsp; Device &amp; App Settings (Mobile)</div>
-        <p>For users accessing Studiely via our mobile apps (Apple App Store or Google Play), cookies are not used in the traditional browser sense. However, Firebase may use similar device-level identifiers for analytics and crash reporting. You can manage these via:</p>
-        <ul class="policy-list">
-          <li>iOS: Settings &rarr; Privacy &amp; Security &rarr; Tracking</li>
-          <li>Android: Settings &rarr; Privacy &rarr; Ads</li>
-        </ul>
-        <p>Please refer to our <a href="/privacy-policy" class="email-link">Privacy Policy</a> (Apple App Store version or Google Play version, as applicable) for further details.</p>
-      </div>
+      <p>Session cookies expire when you close your browser. Persistent cookies remain for a set period; Firebase may use persistent identifiers to recognise returning users, retained only as long as necessary for their stated purpose.</p>
     </div>
   </div>
 
+  <!-- 7. Your cookie choices and controls -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">7</div>
-      <div class="section-title">Children&apos;s Cookie Use</div>
+      <div class="section-title">Your cookie choices and controls</div>
     </div>
     <div class="section-body">
-      <p>Studiely is committed to protecting the privacy of children. In particular:</p>
-      <ul class="policy-list">
-        <li>We do not use advertising cookies of any kind on or in connection with Studiely</li>
-        <li>For users identified as under 13, analytics cookies are disabled by default</li>
-        <li>We do not use cookies to build profiles of children</li>
-        <li>We do not allow third-party advertising networks to set cookies through our platform</li>
-      </ul>
-      <p>Parents and guardians can contact us at <a href="mailto:admin@qismatventures.com" class="email-link">admin@qismatventures.com</a> to enquire about cookies set during their child&apos;s use of the platform, or to request that cookie-based data linked to their child&apos;s account be deleted.</p>
+      <p>You can control cookies through your browser settings — blocking all cookies, deleting existing cookies, blocking third-party cookies, or setting preferences. Blocking strictly necessary cookies will prevent Studiely from functioning correctly.</p>
+      <p>You can opt out of non-essential analytics by adjusting browser or device privacy settings, or by contacting <a href="mailto:privacy@studiely.com" class="email-link">privacy@studiely.com</a>. Declining analytics does not affect access to educational features or paid services.</p>
     </div>
   </div>
 
+  <!-- 8. Children's cookie use -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">8</div>
-      <div class="section-title">Legal Basis for Cookie Use</div>
+      <div class="section-title">Children's cookie use</div>
     </div>
     <div class="section-body">
-      <p>Where applicable under GDPR, UK GDPR, or other data protection laws:</p>
-      <ul class="policy-list">
-        <li>Strictly necessary cookies are placed on the basis of our legitimate interest in delivering a functional and secure service</li>
-        <li>Non-essential cookies (functional and analytics) are placed only with your consent, which you can withdraw at any time</li>
-      </ul>
-      <p>We do not treat your continued use of the platform as implied consent for non-essential cookies. Where required, we will present a clear and affirmative consent mechanism.</p>
+      <p>We do not use advertising cookies of any kind. For users identified as under 13, analytics cookies are disabled by default. We do not use cookies to build profiles of children, and we do not allow third-party advertising networks to set cookies through our platform. Where a child chooses to watch an optional rewarded video ad to unlock an extra generation credit, that ad request is served in child-directed non-personalised mode without behavioural tracking or persistent ad identifiers. Parents and guardians can contact <a href="mailto:privacy@studiely.com" class="email-link">privacy@studiely.com</a> to enquire about or request deletion of cookie-based data linked to their child's account.</p>
     </div>
   </div>
 
+  <!-- 9. Legal basis for cookie use -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">9</div>
-      <div class="section-title">Changes to This Cookie Policy</div>
+      <div class="section-title">Legal basis for cookie use</div>
     </div>
     <div class="section-body">
-      <p>We may update this Cookie Policy from time to time to reflect changes in the technologies we use or in applicable law. We will notify users of material changes via in-app notifications or, where appropriate, by email. Continued use of Studiely after changes constitutes acceptance of the revised Cookie Policy.</p>
+      <p>Where applicable under the GDPR, UK GDPR, or other data protection laws, strictly necessary cookies are placed on the basis of our legitimate interest in delivering a functional and secure service, and non-essential cookies are placed only with your consent, which you can withdraw at any time. We do not treat continued use of the platform as implied consent for non-essential cookies.</p>
     </div>
   </div>
 
+  <!-- 10. Changes to this policy -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">10</div>
+      <div class="section-title">Changes to this policy</div>
+    </div>
+    <div class="section-body">
+      <p>We may update this Cookie Policy periodically to reflect changes in technology or law. We will notify users of material changes via website notice or email.</p>
+    </div>
+  </div>
+
+  <!-- 11. Contact -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">11</div>
       <div class="section-title">Contact</div>
     </div>
     <div class="section-body">
-      <p>For questions or concerns regarding cookies or this Cookie Policy:</p>
-      <div class="info-grid" style="margin-top: 0.75rem;">
-        <div class="info-row">
-          <div class="info-label">Email</div>
-          <div class="info-value"><a href="mailto:admin@qismatventures.com" class="email-link">admin@qismatventures.com</a></div>
-        </div>
-        <div class="info-row">
-          <div class="info-label">Fallback</div>
-          <div class="info-value"><a href="mailto:privacy@Studiely.com" class="email-link">privacy@Studiely.com</a></div>
-        </div>
-        <div class="info-row">
-          <div class="info-label">Company</div>
-          <div class="info-value">Qismat Ventures W.L.L</div>
-        </div>
-        <div class="info-row">
-          <div class="info-label">Address</div>
-          <div class="info-value">Office 501, Building 1025, Road 3621, Block 436, Al-Seef, Kingdom of Bahrain</div>
-        </div>
-        <div class="info-row">
-          <div class="info-label">Registration No.</div>
-          <div class="info-value">190698-1</div>
-        </div>
-      </div>
+      <p><strong>Skyen Systems Pty Ltd</strong> · ACN 701 564 730<br>
+      Unit 18, 285–287 Derrimut Rd, Hoppers Crossing VIC 3029, Australia<br>
+      Email: <a href="mailto:privacy@studiely.com" class="email-link">privacy@studiely.com</a> · <a href="mailto:hello@studiely.com" class="email-link">hello@studiely.com</a></p>
     </div>
   </div>
 
 </div>
+<!-- /container -->
 
 <footer>
   <div class="footer-wordmark">S T U D I E L Y</div>
-  <p>Studiely &middot; Qismat Ventures W.L.L &middot; <a href="mailto:admin@qismatventures.com">admin@qismatventures.com</a></p>
-  <p style="margin-top: 0.5rem;">Operated by Qismat Ventures W.L.L &middot; Bahrain &middot; Registration No. 190698-1</p>
+  <p>© 2026 Skyen Systems Pty Ltd. All rights reserved.</p>
 </footer>
 
 </body>

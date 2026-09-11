@@ -1228,7 +1228,13 @@ const STATIC_PAGES: StaticEntry[] = [
   { path: "/terms-of-service", changeFrequency: "monthly", priority: 0.6 },
   { path: "/cookie-policy", changeFrequency: "monthly", priority: 0.5 },
   { path: "/acceptable-use", changeFrequency: "monthly", priority: 0.5 },
+  { path: "/acceptable-use-policy", changeFrequency: "monthly", priority: 0.5 },
   { path: "/disclaimer", changeFrequency: "monthly", priority: 0.5 },
+  {
+    path: "/refund-payments-policy",
+    changeFrequency: "monthly",
+    priority: 0.5,
+  },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studiely — Refund & Payments Policy</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #181926;
+    --teal: #00B09B;
+    --indigo: #5448C8;
+    --amber: #D97B2A;
+    --rose: #C94A72;
+    --navy-soft: #1e2035;
+    --text-primary: #181926;
+    --text-secondary: #4a4d6a;
+    --text-muted: #8b8fa8;
+    --border: #e4e5ef;
+    --bg: #f8f8fc;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    background: var(--navy);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 120%, rgba(0,176,155,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .wordmark-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+    border: 0.5px solid rgba(255,255,255,0.18);
+    padding: 6px 16px;
+    border-radius: 40px;
+  }
+  header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    position: relative;
+  }
+  .meta-pill {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .meta-pill span {
+    color: var(--teal);
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  .intro-block {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-left: 3px solid var(--teal);
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 2.5rem;
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+  }
+
+  .section {
+    margin-bottom: 2rem;
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1.25rem 1.75rem;
+    border-bottom: 0.5px solid var(--border);
+    background: #fafafa;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--white);
+    background: var(--navy);
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.01em;
+  }
+
+  .section-body {
+    padding: 1.5rem 1.75rem;
+  }
+  .section-body > p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: 14.5px;
+  }
+  .section-body > p:last-child {
+    margin-bottom: 0;
+  }
+
+  ul.policy-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0.75rem 0;
+  }
+  ul.policy-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  ul.policy-list li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  .service-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 13.5px;
+  }
+  .service-table th {
+    background: #fafbff;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .service-table td {
+    padding: 10px 14px;
+    border-bottom: 0.5px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .service-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .highlight-box {
+    background: #f0eefd;
+    border: 0.5px solid rgba(84,72,200,0.25);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 0.75rem 0;
+  }
+  .highlight-box p {
+    color: #3a3080 !important;
+    font-size: 13.5px !important;
+    margin-bottom: 0 !important;
+  }
+
+  a.email-link, a.url-link {
+    color: var(--indigo);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 12.5px;
+  }
+  a.email-link:hover, a.url-link:hover {
+    text-decoration: underline;
+  }
+
+  footer {
+    background: var(--navy);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+  }
+  .footer-wordmark {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0.75rem;
+  }
+  footer p {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wordmark">
+    <span class="wordmark-badge">S T U D I E L Y</span>
+  </div>
+  <h1>Refund &amp; Payments Policy</h1>
+  <div class="header-meta">
+    <span class="meta-pill">Operated by: <span>Skyen Systems Pty Ltd</span></span>
+    <span class="meta-pill">Effective: <span>10 September 2026</span></span>
+    <span class="meta-pill">Last Updated: <span>10 September 2026</span></span>
+    <span class="meta-pill">Applies to: <span>studiely.com (website)</span></span>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="intro-block">
+    <p>This Refund &amp; Payments Policy governs subscriptions and payments made on studiely.com. It forms part of our Terms of Service. It does not govern purchases made inside our iOS or Android apps, which are subject to Apple's or Google's own refund policies.</p>
+  </div>
+
+  <!-- 1. Introduction -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Introduction</div>
+    </div>
+    <div class="section-body">
+      <p>This Refund &amp; Payments Policy governs subscriptions and payments made on studiely.com. It forms part of our Terms of Service. It does not govern purchases made inside our iOS or Android apps, which are subject to Apple's or Google's own refund policies.</p>
+    </div>
+  </div>
+
+  <!-- 2. Who you are buying from -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Who you are buying from</div>
+    </div>
+    <div class="section-body">
+      <p>Subscriptions purchased on studiely.com are sold by Skyen Systems Pty Ltd (ACN 701 564 730) and processed by Stripe. We do not receive or store your full card number. Where an account belongs to a child, the parent or guardian who created the account is the billing party responsible for payment and for any refund request.</p>
+    </div>
+  </div>
+
+  <!-- 3. Plans and pricing -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Plans and pricing</div>
+    </div>
+    <div class="section-body">
+      <p>Studiely offers the following plans on our website, at the price shown at checkout:</p>
+      <table class="service-table">
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Generations</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Free — forever free</strong></td>
+            <td>5</td>
+            <td>$0</td>
+          </tr>
+          <tr>
+            <td><strong>Monthly</strong></td>
+            <td>100</td>
+            <td>$9.99 USD</td>
+          </tr>
+          <tr>
+            <td><strong>3 Months</strong></td>
+            <td>300</td>
+            <td>$26.99 USD</td>
+          </tr>
+          <tr>
+            <td><strong>6 Months</strong></td>
+            <td>600</td>
+            <td>$49.99 USD</td>
+          </tr>
+          <tr>
+            <td><strong>Annual</strong></td>
+            <td>1,200</td>
+            <td>$89.99 USD</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>All prices are in US dollars. Your card issuer may convert to your local currency and may apply its own conversion fee. Applicable taxes, where required, are added at checkout.</p>
+    </div>
+  </div>
+
+  <!-- 4. How generation credits work -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">How generation credits work</div>
+    </div>
+    <div class="section-body">
+      <p>Credits are pooled for your plan period rather than released monthly, and you may use them at any time within that period. Credits do not carry over — any unused credits expire when the period ends. Every feature is available on every paid plan; only the number of credits and the price differ.</p>
+    </div>
+  </div>
+
+  <!-- 5. Exam Practice add-on -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">Exam Practice add-on</div>
+    </div>
+    <div class="section-body">
+      <p>Exam Practice is a separate subscription from the main plan, priced at $29.99 USD per month. It can be added regardless of which main plan you hold, and is billed and renews independently of your main subscription. Cancelling your main plan does not cancel Exam Practice, and cancelling Exam Practice does not cancel your main plan — each is managed separately from your account page.</p>
+    </div>
+  </div>
+
+  <!-- 6. Auto-renewal -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">Auto-renewal</div>
+    </div>
+    <div class="section-body">
+      <p>Paid plans and the Exam Practice add-on renew automatically at the end of each billing cycle, at the then-current price, unless cancelled before the renewal date. You consent to this recurring charge when you subscribe. For plans with a term longer than one month, we will email a reminder at least 7 days before renewal, stating the renewal date, amount, and how to cancel.</p>
+    </div>
+  </div>
+
+  <!-- 7. Cancelling -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">Cancelling</div>
+    </div>
+    <div class="section-body">
+      <p>Cancel any subscription at any time from your account page, or by emailing <a href="mailto:support@studiely.com" class="email-link">support@studiely.com</a>. Cancellation stops future billing; your plan and any remaining credits stay available until the end of the period already paid for.</p>
+    </div>
+  </div>
+
+  <!-- 8. Refunds -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div class="section-title">Refunds</div>
+    </div>
+    <div class="section-body">
+      <p>Every new account receives 5 free generation credits with no card required, so you can evaluate the platform before paying. Because of that, once a billing period has begun, the fee for that period is not refundable.</p>
+      <p>Where circumstances warrant it, we may offer a partial refund or an account credit at our discretion. Contact <a href="mailto:support@studiely.com" class="email-link">support@studiely.com</a> and we will consider your situation.</p>
+      <div class="highlight-box">
+        <p>This policy does not limit your rights under the Australian Consumer Law. If our service is not supplied with due care and skill, or is not as described, you may be entitled to a remedy under that law regardless of anything in this policy.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. Failed payments -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <div class="section-title">Failed payments</div>
+    </div>
+    <div class="section-body">
+      <p>If a payment fails at renewal, we will attempt to notify you and may retry the charge. If payment is not collected, your account moves to the Free plan and any saved learning materials are retained.</p>
+    </div>
+  </div>
+
+  <!-- 10. Purchases made in the app -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <div class="section-title">Purchases made in the app</div>
+    </div>
+    <div class="section-body">
+      <p>Purchases made inside our iOS or Android apps are billed by Apple or Google, not by Skyen Systems Pty Ltd. Refunds for those purchases are governed entirely by Apple's or Google's own policies — contact them directly. We cannot issue a refund for an app-store purchase from this website.</p>
+    </div>
+  </div>
+
+  <!-- 11. Billing disputes -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">11</div>
+      <div class="section-title">Billing disputes</div>
+    </div>
+    <div class="section-body">
+      <p>Contact <a href="mailto:support@studiely.com" class="email-link">support@studiely.com</a> with your account email, transaction details, and a description of the issue. We aim to respond within 5 business days.</p>
+    </div>
+  </div>
+
+  <!-- 12. Changes to this policy -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">12</div>
+      <div class="section-title">Changes to this policy</div>
+    </div>
+    <div class="section-body">
+      <p>We may update this policy periodically. The current version is always published on this page with the date it was last updated.</p>
+    </div>
+  </div>
+
+  <!-- 13. Contact -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">13</div>
+      <div class="section-title">Contact</div>
+    </div>
+    <div class="section-body">
+      <p><strong>Skyen Systems Pty Ltd</strong> · ACN 701 564 730 · ABN 19 701 564 730<br>
+      Unit 18, 285–287 Derrimut Rd, Hoppers Crossing VIC 3029, Australia<br>
+      Email: <a href="mailto:support@studiely.com" class="email-link">support@studiely.com</a> · <a href="mailto:hello@studiely.com" class="email-link">hello@studiely.com</a></p>
+    </div>
+  </div>
+
+</div>
+<!-- /container -->
+
+<footer>
+  <div class="footer-wordmark">S T U D I E L Y</div>
+  <p>© 2026 Skyen Systems Pty Ltd · All rights reserved.</p>
+</footer>
+
+</body>
+</html>

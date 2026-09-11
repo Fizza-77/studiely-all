@@ -36,6 +36,7 @@ export default function ParentalSignupPage() {
   const [childConfirm, setChildConfirm] = useState("");
   const [childDob, setChildDob] = useState(defaultChildDob);
   const [consent, setConsent] = useState(false);
+  const [adConsent, setAdConsent] = useState(false);
   const [terms, setTerms] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -72,6 +73,10 @@ export default function ParentalSignupPage() {
       setError(`Child must be under ${MINIMUM_AGE} for parental sign-up.`);
       return;
     }
+    if (!adConsent) {
+      setError("Please acknowledge and consent to the rewarded video ads disclosure.");
+      return;
+    }
     if (!consent || !terms) {
       setError("Please confirm parental consent and accept the Terms.");
       return;
@@ -88,6 +93,7 @@ export default function ParentalSignupPage() {
         childEmail,
         childPassword,
         childDateOfBirth: new Date(childDob),
+        rewardedAdsConsent: adConsent,
       });
       router.replace("/verify-email");
     } catch (err) {
@@ -191,7 +197,27 @@ export default function ParentalSignupPage() {
             </Field>
           </div>
 
-          <div className="mt-1 grid grid-cols-1 gap-1 sm:grid-cols-2">
+          {/* Distinct disclosure for rewarded video ads / extra generations */}
+          <div className="mt-2.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-card-muted)] p-3 text-xs">
+            <p className="mb-1 text-[11px] font-semibold tracking-wide text-[var(--color-text)] uppercase">
+              Rewarded Video Ads &amp; Generations
+            </p>
+            <p className="text-[11.5px] leading-relaxed text-[var(--color-text-muted)]">
+              &ldquo;On the Free plan, your child may choose to watch a short video ad to unlock one extra generation. These ads are non-personalised and contextual only &mdash; we never use advertising identifiers to target ads to your child, and no behavioural profiling is used. This is entirely optional and never affects your child&apos;s access to anything already available on the account.&rdquo;
+            </p>
+            <label className="mt-2 flex cursor-pointer items-start gap-2 border-t border-[var(--color-border)] pt-2 text-[11.5px] font-medium text-[var(--color-text)]">
+              <input
+                type="checkbox"
+                className="mt-0.5"
+                checked={adConsent}
+                onChange={(e) => setAdConsent(e.target.checked)}
+                required
+              />
+              <span>I understand and consent to this.</span>
+            </label>
+          </div>
+
+          <div className="mt-2 grid grid-cols-1 gap-1 sm:grid-cols-2">
             <label className="flex items-start gap-1.5 text-[11px] leading-snug text-[var(--color-gray-text)]">
               <input
                 type="checkbox"

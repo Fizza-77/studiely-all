@@ -100,7 +100,7 @@
     padding: 3rem 1.5rem 5rem;
   }
 
-  /* ── Intro block ── */
+  /* ── Intro ── */
   .intro-block {
     background: var(--white);
     border: 0.5px solid var(--border);
@@ -112,8 +112,7 @@
     color: var(--text-secondary);
     line-height: 1.75;
   }
-  .intro-block p { margin-bottom: 0.85rem; }
-  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block p + p { margin-top: 0.75rem; }
 
   /* ── Sections ── */
   .section {
@@ -137,23 +136,19 @@
     font-weight: 500;
     color: var(--white);
     background: var(--navy);
-    min-width: 22px;
+    width: 22px;
     height: 22px;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    letter-spacing: 0;
-    padding: 0 5px;
   }
   .section-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--text-primary);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.01em;
   }
   .section-body {
     padding: 1.5rem 1.75rem;
@@ -163,7 +158,9 @@
     margin-bottom: 1rem;
     font-size: 14.5px;
   }
-  .section-body > p:last-child { margin-bottom: 0; }
+  .section-body > p:last-child {
+    margin-bottom: 0;
+  }
 
   /* ── Lists ── */
   ul.policy-list {
@@ -191,33 +188,100 @@
     margin-top: 7px;
   }
 
-  /* ── Two-column split list ── */
-  .split-list {
+  ul.split-list {
+    list-style: none;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 6px 16px;
     margin: 0.75rem 0;
   }
-  .split-list li {
+  ul.split-list li {
     display: flex;
-    align-items: flex-start;
-    gap: 9px;
-    font-size: 14px;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
     color: var(--text-secondary);
-    line-height: 1.6;
-    list-style: none;
   }
-  .split-list li::before {
+  ul.split-list li::before {
     content: '';
-    width: 5px;
-    height: 5px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
-    background: var(--teal);
+    background: var(--indigo);
     flex-shrink: 0;
-    margin-top: 7px;
   }
 
-  /* ── Info grid ── */
+  /* ── Callout Boxes ── */
+  .highlight-box {
+    background: #f0eefd;
+    border: 0.5px solid rgba(84,72,200,0.25);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 0.75rem 0;
+  }
+  .highlight-box p {
+    color: #3a3080 !important;
+    font-size: 13.5px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .warning-box {
+    background: #fff8f0;
+    border: 0.5px solid rgba(217,123,42,0.25);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 0.75rem 0;
+  }
+  .warning-box p {
+    color: #7a4210 !important;
+    font-size: 13.5px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .rose-box {
+    background: #fdf0f4;
+    border: 0.5px solid rgba(201,74,114,0.25);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 0.75rem 0;
+  }
+  .rose-box p {
+    color: #7a2040 !important;
+    font-size: 13.5px !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* ── Liability / Info Grids ── */
+  .liability-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 0.75rem 0;
+  }
+  @media (max-width: 540px) {
+    .liability-grid { grid-template-columns: 1fr; }
+  }
+  .liability-cell {
+    background: #fafbff;
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  .liability-label {
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .liability-value {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
   .info-grid {
     display: grid;
     gap: 1px;
@@ -253,111 +317,14 @@
     line-height: 1.6;
   }
 
-  /* ── Liability row ── */
-  .liability-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 0.75rem 0;
-    border: 0.5px solid var(--border);
-  }
-  .liability-cell {
-    background: var(--white);
-    padding: 1rem 1.25rem;
-  }
-  .liability-cell:first-child { border-radius: 10px 0 0 10px; }
-  .liability-cell:last-child  { border-radius: 0 10px 10px 0; }
-  .liability-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 6px;
-  }
-  .liability-value {
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.55;
-  }
-
-  /* ── Callout boxes ── */
-  .highlight-box {
-    background: #f0eefd;
-    border: 0.5px solid rgba(84,72,200,0.25);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    margin: 0.75rem 0;
-  }
-  .highlight-box p {
-    color: #3a3080 !important;
-    font-size: 13.5px !important;
-    margin-bottom: 0 !important;
-  }
-  .warning-box {
-    background: rgba(217,123,42,0.07);
-    border: 0.5px solid rgba(217,123,42,0.3);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    margin: 0.75rem 0;
-  }
-  .warning-box p {
-    color: #7a3f00 !important;
-    font-size: 13.5px !important;
-    margin-bottom: 0 !important;
-  }
-  .rose-box {
-    background: rgba(201,74,114,0.06);
-    border: 0.5px solid rgba(201,74,114,0.25);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    margin: 0.75rem 0;
-  }
-  .rose-box p {
-    color: #6e1a35 !important;
-    font-size: 13.5px !important;
-    margin-bottom: 0 !important;
-  }
-
-  /* ── Data badges ── */
-  .data-badge {
-    font-size: 10px;
-    font-family: 'DM Mono', monospace;
-    font-weight: 500;
-    padding: 3px 9px;
-    border-radius: 20px;
-    letter-spacing: 0.04em;
-  }
-  .badge-teal   { background: rgba(0,176,155,0.10);  color: #007a6b; border: 0.5px solid rgba(0,176,155,0.30); }
-  .badge-indigo { background: rgba(84,72,200,0.10);  color: var(--indigo); border: 0.5px solid rgba(84,72,200,0.30); }
-  .badge-amber  { background: rgba(217,123,42,0.10); color: #9a5010; border: 0.5px solid rgba(217,123,42,0.30); }
-  .badge-rose   { background: rgba(201,74,114,0.10); color: #8f2550; border: 0.5px solid rgba(201,74,114,0.30); }
-  .badge-navy   { background: rgba(24,25,38,0.08);   color: var(--navy); border: 0.5px solid rgba(24,25,38,0.20); }
-
-  /* ── Subsections ── */
-  .subsection { margin: 1.25rem 0; }
-  .subsection:first-child { margin-top: 0; }
-  .subsection-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 0.5px solid var(--border);
-  }
-
   /* ── Links ── */
-  a.email-link {
+  a.email-link, a.url-link {
     color: var(--indigo);
     text-decoration: none;
     font-family: 'DM Mono', monospace;
     font-size: 12.5px;
   }
-  a.email-link:hover { text-decoration: underline; }
+  a.email-link:hover, a.url-link:hover { text-decoration: underline; }
 
   /* ── Footer ── */
   footer {
@@ -377,23 +344,6 @@
     color: rgba(255,255,255,0.35);
     line-height: 1.6;
   }
-
-  /* ── Responsive ── */
-  @media (max-width: 600px) {
-    .info-label        { width: 130px; font-size: 10px; }
-    .info-value        { font-size: 12.5px; }
-    .section-body      { padding: 1.25rem; }
-    .section-header    { padding: 1rem 1.25rem; }
-    .container         { padding: 2rem 1rem 4rem; }
-    .split-list        { grid-template-columns: 1fr; }
-    .liability-grid    { grid-template-columns: 1fr; }
-    .liability-cell:first-child { border-radius: 10px 10px 0 0; }
-    .liability-cell:last-child  { border-radius: 0 0 10px 10px; }
-  }
-  @media (max-width: 400px) {
-    .info-row     { flex-direction: column; }
-    .info-label   { width: 100%; border-right: none; border-bottom: 0.5px solid var(--border); }
-  }
 </style>
 </head>
 <body>
@@ -405,9 +355,10 @@
   </div>
   <h1>Terms of Service</h1>
   <div class="header-meta">
-    <span class="meta-pill">Effective Date: <span>January 13, 2026</span></span>
-    <span class="meta-pill">Last Updated: <span>February 28, 2026</span></span>
-    <span class="meta-pill">Operator: <span>Qismat Ventures W.L.L</span></span>
+    <span class="meta-pill">Operated by: <span>Skyen Systems Pty Ltd</span></span>
+    <span class="meta-pill">Effective: <span>10 September 2026</span></span>
+    <span class="meta-pill">Last updated: <span>10 September 2026</span></span>
+    <span class="meta-pill">Applies to: <span>studiely.com (website)</span></span>
   </div>
 </header>
 
@@ -416,11 +367,11 @@
 
   <!-- Introduction -->
   <div class="intro-block">
-    <p>Welcome to Studiely, an educational technology platform operated by Qismat Ventures W.L.L ("Studiely," "we," "us," or "our").</p>
-    <p>These Terms of Service ("Terms") govern access to and use of Studiely across all platforms, including mobile applications, websites, and future services.</p>
-    <p>By accessing or using Studiely, you agree to be bound by these Terms. If you are a parent, guardian, teacher, or institution, you agree on behalf of the student(s) under your supervision.</p>
-    <p>Contact: <a href="mailto:admin@qismatventures.com" class="email-link">admin@qismatventures.com</a></p>
-    <p>These Terms should be read alongside our <a href="/privacy-policy" class="email-link">Privacy Policy</a>, <a href="/acceptable-use" class="email-link">Acceptable Use Policy</a>, <a href="/cookie-policy" class="email-link">Cookie Policy</a>, and <a href="/disclaimer" class="email-link">Disclaimer</a>.</p>
+    <p>Welcome to Studiely, an educational technology platform. The website and web-based services at studiely.com are operated by Skyen Systems Pty Ltd (ACN 701 564 730), a company registered in Victoria, Australia ("Studiely", "we", "us", "our").</p>
+    <p>These Terms of Service ("Terms") govern access to and use of Studiely's website and web-based services. Our iOS and Android apps are published separately by Skyen Solutions, a trade name of Qismat Ventures W.L.L., and are governed by their own terms presented in-app.</p>
+    <p>By accessing or using the Studiely website, you agree to be bound by these Terms. If you are a parent, guardian, teacher, or institution, you agree on behalf of the student(s) under your supervision.</p>
+    <p>These Terms should be read alongside our Privacy Policy, Acceptable Use Policy, Cookie Policy, Disclaimer, and Refund &amp; Payments Policy.</p>
+    <p>Contact: <a href="mailto:hello@studiely.com" class="email-link">hello@studiely.com</a></p>
   </div>
 
   <!-- 1. Introduction -->
@@ -430,300 +381,209 @@
       <div class="section-title">Introduction</div>
     </div>
     <div class="section-body">
-      <p>Welcome to Studiely, an educational technology platform operated by Qismat Ventures W.L.L ("Studiely," "we," "us," or "our").</p>
-      <p>These Terms of Service ("Terms") govern access to and use of Studiely across all platforms, including mobile applications, websites, and future services.</p>
-      <p>By accessing or using Studiely, you agree to be bound by these Terms. If you are a parent, guardian, teacher, or institution, you agree on behalf of the student(s) under your supervision.</p>
-      <div class="info-grid">
-        <div class="info-row">
-          <div class="info-label">Contact</div>
-          <div class="info-value"><a href="mailto:admin@qismatventures.com" class="email-link">admin@qismatventures.com</a></div>
-        </div>
-      </div>
-      <p>These Terms should be read alongside our <a href="/privacy-policy" class="email-link">Privacy Policy</a>, <a href="/acceptable-use" class="email-link">Acceptable Use Policy</a>, <a href="/cookie-policy" class="email-link">Cookie Policy</a>, and <a href="/disclaimer" class="email-link">Disclaimer</a>.</p>
+      <p>Welcome to Studiely, an educational technology platform. The website and web-based services at studiely.com are operated by Skyen Systems Pty Ltd (ACN 701 564 730), a company registered in Victoria, Australia ("Studiely", "we", "us", "our").</p>
+      <p>These Terms of Service ("Terms") govern access to and use of Studiely's website and web-based services. Our iOS and Android apps are published separately by Skyen Solutions, a trade name of Qismat Ventures W.L.L., and are governed by their own terms presented in-app.</p>
+      <p>By accessing or using the Studiely website, you agree to be bound by these Terms. If you are a parent, guardian, teacher, or institution, you agree on behalf of the student(s) under your supervision.</p>
+      <p>These Terms should be read alongside our Privacy Policy, Acceptable Use Policy, Cookie Policy, Disclaimer, and Refund &amp; Payments Policy.</p>
+      <p>Contact: <a href="mailto:hello@studiely.com" class="email-link">hello@studiely.com</a></p>
     </div>
   </div>
 
-  <!-- 2. Eligibility & User Roles -->
+  <!-- 2. Eligibility & user roles -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">2</div>
-      <div class="section-title">Eligibility &amp; User Roles</div>
+      <div class="section-title">Eligibility &amp; user roles</div>
     </div>
     <div class="section-body">
-      <p>Studiely supports multiple user roles, including:</p>
-      <ul class="split-list">
-        <li>Students</li>
-        <li>Parents / Legal Guardians</li>
-        <li>Teachers / Educators</li>
-        <li>Institutions / Schools</li>
-        <li>Administrators</li>
-      </ul>
-      <p>Children may only use Studiely under supervision and with consent as required by applicable law.</p>
-      <p>You represent that:</p>
-      <ul class="policy-list">
-        <li>All information provided is accurate</li>
-        <li>You have authority to act on behalf of any child or institution you represent</li>
-      </ul>
+      <p>Studiely supports multiple user roles: Students, Parents / Legal Guardians, Teachers / Educators, Institutions / Schools, and Administrators.</p>
+      <p>Children under 13 cannot create their own account. A parent or legal guardian must create and manage the account on the child's behalf, consistent with the parental consent requirements described in our Privacy Policy.</p>
+      <p>You represent that all information you provide is accurate, and that you have authority to act on behalf of any child or institution you represent.</p>
     </div>
   </div>
 
-  <!-- 3. Account Registration & Responsibility -->
+  <!-- 3. Account registration & responsibility -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">3</div>
-      <div class="section-title">Account Registration &amp; Responsibility</div>
+      <div class="section-title">Account registration &amp; responsibility</div>
     </div>
     <div class="section-body">
-      <ul class="policy-list">
-        <li>Some features require account registration.</li>
-        <li>You are responsible for maintaining the confidentiality of login credentials.</li>
-        <li>You are responsible for all activity occurring under your account.</li>
-      </ul>
-      <p>Studiely may suspend or terminate accounts that:</p>
-      <ul class="policy-list">
-        <li>Violate these Terms</li>
-        <li>Provide false information</li>
-        <li>Pose safety or legal risks</li>
-      </ul>
+      <p>Some features require account registration. You are responsible for maintaining the confidentiality of your login credentials and for all activity occurring under your account. Where an account belongs to a child, the parent or guardian who created it is responsible for that activity.</p>
+      <p>We may suspend or terminate accounts that violate these Terms, provide false information, or pose safety or legal risks.</p>
     </div>
   </div>
 
-  <!-- 4. Educational Purpose Disclaimer -->
+  <!-- 4. Educational purpose disclaimer -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">4</div>
-      <div class="section-title">Educational Purpose Disclaimer</div>
+      <div class="section-title">Educational purpose disclaimer</div>
     </div>
     <div class="section-body">
-      <p>Studiely is designed to support learning, not replace:</p>
-      <ul class="policy-list">
-        <li>Teachers</li>
-        <li>Schools</li>
-        <li>Parental supervision</li>
-        <li>Professional educational judgment</li>
-      </ul>
-      <div class="warning-box">
-        <p>Educational content, AI-generated suggestions, or automated feedback may contain errors, should be reviewed by a qualified human, and are provided "as-is" for educational assistance only.</p>
-      </div>
+      <p>Studiely is designed to support learning, not replace teachers, schools, parental supervision, or professional educational judgment. Educational content, AI-generated suggestions (including from Nyla), or automated feedback may contain errors, should be reviewed by a qualified human, and are provided "as-is" for educational assistance only.</p>
     </div>
   </div>
 
-  <!-- 5. Acceptable Use -->
+  <!-- 5. Acceptable use -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">5</div>
-      <div class="section-title">Acceptable Use</div>
+      <div class="section-title">Acceptable use</div>
     </div>
     <div class="section-body">
-      <p>Users agree not to:</p>
-      <ul class="policy-list">
-        <li>Upload harmful, abusive, or illegal content</li>
-        <li>Harass, bully, or exploit others</li>
-        <li>Share personal or sensitive information inappropriately</li>
-        <li>Attempt to bypass security or access restricted systems</li>
-        <li>Use Studiely for non-educational or commercial exploitation</li>
-      </ul>
-      <div class="highlight-box">
-        <p>Additional rules are detailed in the <a href="/acceptable-use" class="email-link">Acceptable Use Policy</a>, which forms part of these Terms.</p>
-      </div>
+      <p>Users agree not to upload harmful, abusive, or illegal content; harass, bully, or exploit others; share personal or sensitive information inappropriately; attempt to bypass security or access restricted systems; or use Studiely for non-educational or commercial exploitation. Additional rules are set out in our <a href="/acceptable-use-policy" class="email-link">Acceptable Use Policy</a>, which forms part of these Terms.</p>
     </div>
   </div>
 
-  <!-- 6. User-Generated Content -->
+  <!-- 6. User-generated content -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">6</div>
-      <div class="section-title">User-Generated Content</div>
+      <div class="section-title">User-generated content</div>
     </div>
     <div class="section-body">
-      <p>Users may submit educational content such as responses, assignments, or creative work.</p>
-      <ul class="policy-list">
-        <li>Users retain ownership of their content.</li>
-        <li>By submitting content, you grant Studiely a limited, non-exclusive, royalty-free license to store, display, and process the content solely for platform functionality and educational purposes.</li>
-      </ul>
-      <p>Studiely reserves the right to remove content that violates policies or laws.</p>
+      <p>Users may submit educational content such as responses, notes, or quiz answers. Users retain ownership of their content. By submitting content, you grant Studiely a limited, non-exclusive, royalty-free licence to store, display, and process it solely for platform functionality and educational purposes. We may remove content that violates our policies or the law.</p>
     </div>
   </div>
 
-  <!-- 7. Intellectual Property -->
+  <!-- 7. Intellectual property -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">7</div>
-      <div class="section-title">Intellectual Property</div>
+      <div class="section-title">Intellectual property</div>
     </div>
     <div class="section-body">
-      <p>All Studiely software, design, content, branding, and materials are owned by or licensed to Qismat Ventures W.L.L.</p>
-      <p>Users may not:</p>
-      <ul class="policy-list">
-        <li>Copy, distribute, or modify platform materials</li>
-        <li>Reverse engineer or exploit platform technology</li>
-        <li>Use branding without written permission</li>
-      </ul>
+      <p>All Studiely software, design, content, branding, and materials are owned by or licensed to Skyen Systems Pty Ltd. Users may not copy, distribute, or modify platform materials, reverse engineer or exploit platform technology, or use our branding without written permission.</p>
     </div>
   </div>
 
-  <!-- 8. Payments & Subscriptions -->
+  <!-- 8. Payments and subscriptions -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">8</div>
-      <div class="section-title">Payments &amp; Subscriptions</div>
+      <div class="section-title">Payments and subscriptions</div>
     </div>
     <div class="section-body">
-      <p>Some features may require payment.</p>
-      <ul class="policy-list">
-        <li>Pricing, billing cycles, and renewal terms are disclosed at the point of purchase.</li>
-        <li>Refunds are governed by the Refund &amp; Payments Policy.</li>
-        <li>App store purchases are subject to third-party platform rules.</li>
-      </ul>
+      <p>Studiely offers a free plan and paid subscription plans providing a monthly allowance of generation credits, plus a separate Exam Practice add-on subscription. Pricing, billing cycles, and renewal terms are set out at the point of purchase and in our <a href="/refund-payments-policy" class="email-link">Refund &amp; Payments Policy</a>, which forms part of these Terms.</p>
+      <p>On the Free plan, you may optionally watch a short video advertisement, served by Google AdMob, to unlock one additional generation credit. This feature is provided at our discretion; we do not guarantee ad availability at all times, and may modify or discontinue it.</p>
+      <p>Payments made on studiely.com are processed by Stripe. Purchases made inside our iOS or Android apps are processed by Apple or Google and are subject to their own terms — our Refund &amp; Payments Policy does not govern those purchases.</p>
       <div class="warning-box">
         <p>Failure to pay may result in suspension of paid features.</p>
       </div>
     </div>
   </div>
 
-  <!-- 9. Suspension & Termination -->
+  <!-- 9. Suspension & termination -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">9</div>
-      <div class="section-title">Suspension &amp; Termination</div>
+      <div class="section-title">Suspension &amp; termination</div>
     </div>
     <div class="section-body">
-      <p>Studiely may suspend or terminate access:</p>
-      <ul class="policy-list">
-        <li>For violations of these Terms</li>
-        <li>To protect users, children, or platform integrity</li>
-        <li>To comply with legal obligations</li>
-      </ul>
-      <p>Users may stop using Studiely at any time. Certain obligations survive termination.</p>
+      <p>We may suspend or terminate access for violations of these Terms, to protect users (including children) or platform integrity, or to comply with legal obligations. You may stop using Studiely at any time. Certain obligations survive termination.</p>
     </div>
   </div>
 
-  <!-- 10. Third-Party Services -->
+  <!-- 10. Third-party services -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">10</div>
-      <div class="section-title">Third-Party Services</div>
+      <div class="section-title">Third-party services</div>
     </div>
     <div class="section-body">
-      <p>Studiely may integrate third-party tools or links.</p>
-      <ul class="policy-list">
-        <li>Studiely is not responsible for third-party services</li>
-        <li>Use of third-party services is subject to their terms</li>
-      </ul>
+      <p>Studiely integrates third-party services, including Google Firebase and Stripe. We are not responsible for third-party services, and your use of them is subject to their own terms.</p>
     </div>
   </div>
 
-  <!-- 11. Disclaimer of Warranties -->
+  <!-- 11. Disclaimer of warranties -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">11</div>
-      <div class="section-title">Disclaimer of Warranties</div>
+      <div class="section-title">Disclaimer of warranties</div>
     </div>
     <div class="section-body">
-      <p>Studiely is provided "as is" and "as available."</p>
-      <p>We do not guarantee:</p>
-      <ul class="policy-list">
-        <li>Uninterrupted service</li>
-        <li>Error-free content</li>
-        <li>Specific educational outcomes</li>
-      </ul>
-      <div class="rose-box">
-        <p>Use of Studiely is at your own risk, to the extent permitted by law.</p>
-      </div>
+      <p>Studiely is provided "as is" and "as available." We do not guarantee uninterrupted service, error-free content, or specific educational outcomes. Use of Studiely is at your own risk, to the extent permitted by law.</p>
     </div>
   </div>
 
-  <!-- 12. Limitation of Liability -->
+  <!-- 12. Australian Consumer Law -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">12</div>
-      <div class="section-title">Limitation of Liability</div>
+      <div class="section-title">Australian Consumer Law</div>
     </div>
     <div class="section-body">
-      <p>To the maximum extent permitted by law:</p>
-      <div class="liability-grid">
-        <div class="liability-cell">
-          <div class="liability-label">Excluded Damages</div>
-          <div class="liability-value">Studiely is not liable for indirect, incidental, or consequential damages.</div>
-        </div>
-        <div class="liability-cell">
-          <div class="liability-label">Liability Cap</div>
-          <div class="liability-value">Total liability shall not exceed the amount paid in the preceding 12 months, or USD 100, whichever is greater.</div>
-        </div>
+      <div class="highlight-box">
+        <p>Our services come with guarantees that cannot be excluded under the Australian Consumer Law. Nothing in these Terms excludes, restricts or modifies any guarantee, right or remedy you have under that law or any other law that cannot lawfully be excluded.</p>
       </div>
     </div>
   </div>
 
-  <!-- 13. Indemnification -->
+  <!-- 13. Limitation of liability -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">13</div>
-      <div class="section-title">Indemnification</div>
+      <div class="section-title">Limitation of liability</div>
     </div>
     <div class="section-body">
-      <p>You agree to indemnify and hold harmless Studiely and Qismat Ventures W.L.L from claims arising from:</p>
-      <ul class="policy-list">
-        <li>Your use of the platform</li>
-        <li>Violation of these Terms</li>
-        <li>Misuse of content or data</li>
-      </ul>
+      <p>Subject to section 12, and to the maximum extent permitted by law: Studiely is not liable for indirect, incidental, or consequential damages. Our total liability shall not exceed the greater of the amount you paid us in the 12 months preceding the claim, or USD 100.</p>
     </div>
   </div>
 
-  <!-- 14. Governing Law & Jurisdiction -->
+  <!-- 14. Indemnification -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">14</div>
-      <div class="section-title">Governing Law &amp; Jurisdiction</div>
+      <div class="section-title">Indemnification</div>
     </div>
     <div class="section-body">
-      <div class="info-grid">
-        <div class="info-row">
-          <div class="info-label">Governing Law</div>
-          <div class="info-value">Kingdom of Bahrain</div>
-        </div>
-        <div class="info-row">
-          <div class="info-label">Conflict of Law</div>
-          <div class="info-value">Conflict of law principles do not apply</div>
-        </div>
-      </div>
+      <p>You agree to indemnify and hold harmless Studiely and Skyen Systems Pty Ltd from claims arising from your use of the platform, violation of these Terms, or misuse of content or data.</p>
     </div>
   </div>
 
-  <!-- 15. Changes to These Terms -->
+  <!-- 15. Governing law & jurisdiction -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">15</div>
-      <div class="section-title">Changes to These Terms</div>
+      <div class="section-title">Governing law &amp; jurisdiction</div>
     </div>
     <div class="section-body">
-      <p>We may update these Terms periodically. Continued use of Studiely after changes constitutes acceptance.</p>
+      <p>These Terms are governed by the laws of the State of Victoria, Australia. Nothing in this clause limits any right you have to bring a claim in your own country's courts under mandatory consumer-protection law that applies to you.</p>
     </div>
   </div>
 
-  <!-- 16. Contact Information -->
+  <!-- 16. Changes to these Terms -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">16</div>
-      <div class="section-title">Contact Information</div>
+      <div class="section-title">Changes to these Terms</div>
     </div>
     <div class="section-body">
-      <p>For questions or concerns regarding these Terms:</p>
-      <div class="info-grid">
-        <div class="info-row">
-          <div class="info-label">Contact</div>
-          <div class="info-value"><a href="mailto:admin@qismatventures.com" class="email-link">admin@qismatventures.com</a></div>
-        </div>
-      </div>
+      <p>We may update these Terms periodically. Where a change materially affects your use of a paid plan, we will give you reasonable advance notice. Continued use of Studiely after changes take effect constitutes acceptance.</p>
     </div>
   </div>
 
-</div><!-- /container -->
+  <!-- 17. Contact -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">17</div>
+      <div class="section-title">Contact</div>
+    </div>
+    <div class="section-body">
+      <p><strong>Skyen Systems Pty Ltd</strong> · ACN 701 564 730 · ABN 19 701 564 730<br>
+      Unit 18, 285–287 Derrimut Rd, Hoppers Crossing VIC 3029, Australia<br>
+      Email: <a href="mailto:hello@studiely.com" class="email-link">hello@studiely.com</a> · <a href="mailto:support@studiely.com" class="email-link">support@studiely.com</a></p>
+    </div>
+  </div>
+
+</div>
+<!-- /container -->
 
 <!-- ── Footer ── -->
 <footer>
   <div class="footer-wordmark">S T U D I E L Y</div>
-  <p>© Qismat Ventures W.L.L. All rights reserved.</p>
+  <p>© 2026 Skyen Systems Pty Ltd. All rights reserved.</p>
 </footer>
 
 </body>

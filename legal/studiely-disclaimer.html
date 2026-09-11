@@ -111,6 +111,7 @@
     color: var(--text-secondary);
     line-height: 1.75;
   }
+  .intro-block p + p { margin-top: 0.75rem; }
 
   .section {
     margin-bottom: 2rem;
@@ -141,29 +142,25 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    letter-spacing: 0;
   }
   .section-title {
     font-size: 14px;
     font-weight: 600;
     color: var(--text-primary);
     letter-spacing: 0.01em;
-    text-transform: uppercase;
-    font-family: 'DM Mono', monospace;
-    letter-spacing: 0.08em;
-    font-size: 11px;
   }
 
   .section-body {
     padding: 1.5rem 1.75rem;
   }
-
-  .section-body p {
+  .section-body > p {
     color: var(--text-secondary);
     margin-bottom: 1rem;
     font-size: 14.5px;
   }
-  .section-body p:last-child { margin-bottom: 0; }
+  .section-body > p:last-child {
+    margin-bottom: 0;
+  }
 
   ul.policy-list {
     list-style: none;
@@ -190,46 +187,28 @@
     margin-top: 7px;
   }
 
-  .info-grid {
-    display: grid;
-    gap: 1px;
-    background: var(--border);
+  .highlight-box {
+    background: #f0eefd;
+    border: 0.5px solid rgba(84,72,200,0.25);
     border-radius: 10px;
-    overflow: hidden;
+    padding: 1rem 1.25rem;
     margin: 0.75rem 0;
-    border: 0.5px solid var(--border);
   }
-  .info-row {
-    display: flex;
-    background: var(--white);
+  .highlight-box p {
+    color: #3a3080 !important;
+    font-size: 13.5px !important;
+    margin-bottom: 0 !important;
   }
-  .info-row:first-child { border-radius: 10px 10px 0 0; }
-  .info-row:last-child { border-radius: 0 0 10px 10px; }
-  .info-label {
-    width: 180px;
-    flex-shrink: 0;
-    padding: 10px 14px;
-    font-size: 11px;
-    font-weight: 600;
-    font-family: 'DM Mono', monospace;
-    color: var(--text-muted);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    background: #fafbff;
-    border-right: 0.5px solid var(--border);
-  }
-  .info-value {
-    padding: 10px 14px;
-    font-size: 13.5px;
-    color: var(--text-primary);
-  }
-  a.email-link {
+
+  a.email-link, a.url-link {
     color: var(--indigo);
     text-decoration: none;
     font-family: 'DM Mono', monospace;
     font-size: 12.5px;
   }
-  a.email-link:hover { text-decoration: underline; }
+  a.email-link:hover, a.url-link:hover {
+    text-decoration: underline;
+  }
 
   footer {
     background: var(--navy);
@@ -248,17 +227,6 @@
     color: rgba(255,255,255,0.35);
     line-height: 1.6;
   }
-  footer a {
-    color: var(--teal);
-    text-decoration: none;
-  }
-
-  @media (max-width: 560px) {
-    .info-label { width: 120px; font-size: 10px; }
-    .info-value { font-size: 12.5px; }
-    .section-body { padding: 1.25rem; }
-    .section-header { padding: 1rem 1.25rem; }
-  }
 </style>
 </head>
 <body>
@@ -269,195 +237,175 @@
   </div>
   <h1>Disclaimer</h1>
   <div class="header-meta">
-    <span class="meta-pill">Operated by <span>Qismat Ventures W.L.L</span></span>
-    <span class="meta-pill">Effective Date: <span>January 13, 2026</span></span>
-    <span class="meta-pill">Last Updated: <span>February 28, 2026</span></span>
+    <span class="meta-pill">Operated by: <span>Skyen Systems Pty Ltd</span></span>
+    <span class="meta-pill">Effective: <span>10 September 2026</span></span>
+    <span class="meta-pill">Last updated: <span>10 September 2026</span></span>
+    <span class="meta-pill">Applies to: <span>studiely.com (website)</span></span>
   </div>
 </header>
 
 <div class="container">
 
   <div class="intro-block">
-    This Disclaimer governs your access to and use of Studiely across all platforms operated by Qismat Ventures W.L.L, including the Studiely website, mobile applications (Apple App Store and Google Play), and any associated services. Please read it carefully. By using Studiely, you acknowledge and accept the terms set out below.<br><br>
-    This Disclaimer forms part of and should be read in conjunction with the Studiely <a href="/terms-of-service" class="email-link">Terms of Service</a>, <a href="/privacy-policy" class="email-link">Privacy Policy</a>, <a href="/acceptable-use" class="email-link">Acceptable Use Policy</a>, and <a href="/cookie-policy" class="email-link">Cookie Policy</a>.
+    <p>Studiely is an educational technology platform designed to support and supplement learning. It is not a substitute for formal school, college, or university education; qualified teachers, tutors, or educational professionals; parental or guardian supervision; or accredited curricula, assessments, or qualifications.</p>
+    <p>Educational content, AI-generated materials, quizzes, summaries, and other outputs are provided for general educational assistance only and are not authoritative, accredited, or guaranteed to be fully accurate, complete, or current.</p>
   </div>
 
+  <!-- 1. General platform disclaimer -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">1</div>
-      <div class="section-title">General Platform Disclaimer</div>
+      <div class="section-title">General platform disclaimer</div>
     </div>
     <div class="section-body">
-      <p>Studiely is an educational technology platform designed to support and supplement learning. It is not intended to be, and should not be treated as, a substitute for:</p>
-      <ul class="policy-list">
-        <li>Formal school, college, or university education</li>
-        <li>Qualified teachers, tutors, or educational professionals</li>
-        <li>Parental or guardian supervision of a student&apos;s academic development</li>
-        <li>Accredited curricula, assessments, or qualifications</li>
-      </ul>
-      <p>The educational content, AI-generated materials, quizzes, summaries, and any other outputs generated by or through Studiely are provided for general educational assistance only. They are not authoritative, accredited, or guaranteed to be fully accurate, complete, or current.</p>
+      <p>Studiely is an educational technology platform designed to support and supplement learning. It is not a substitute for formal school, college, or university education; qualified teachers, tutors, or educational professionals; parental or guardian supervision; or accredited curricula, assessments, or qualifications.</p>
+      <p>Educational content, AI-generated materials, quizzes, summaries, and other outputs are provided for general educational assistance only and are not authoritative, accredited, or guaranteed to be fully accurate, complete, or current.</p>
     </div>
   </div>
 
+  <!-- 2. AI-generated content disclaimer -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">2</div>
-      <div class="section-title">AI-Generated Content Disclaimer</div>
+      <div class="section-title">AI-generated content disclaimer</div>
     </div>
     <div class="section-body">
-      <p>Studiely incorporates artificial intelligence to generate personalised learning content, including study notes, quiz questions, summaries, and explanations. Users should be aware that:</p>
-      <ul class="policy-list">
-        <li>AI-generated content may contain errors, inaccuracies, oversimplifications, or outdated information</li>
-        <li>AI-generated content should be reviewed and verified by a qualified teacher, educator, or appropriate professional before being relied upon for any formal academic purpose</li>
-        <li>Studiely does not guarantee that AI-generated content will meet the requirements of any specific curriculum, examination board, or educational standard</li>
-        <li>AI-generated suggestions are provided &ldquo;as is&rdquo; for educational assistance purposes only and are not to be treated as professional academic advice</li>
-      </ul>
-      <p>We continuously work to improve the accuracy and quality of our AI systems; however, no AI model can guarantee perfect outputs. Users are encouraged to cross-reference Studiely content with authoritative sources and their own teachers or educators.</p>
+      <p>Studiely incorporates artificial intelligence, including Nyla, to generate personalised learning content. AI-generated content may contain errors, inaccuracies, oversimplifications, or outdated information; should be reviewed and verified by a qualified teacher or educator before being relied upon for any formal academic purpose; and is not guaranteed to meet the requirements of any specific curriculum, examination board, or standard.</p>
     </div>
   </div>
 
+  <!-- 3. No guarantee of educational outcomes -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">3</div>
-      <div class="section-title">No Guarantee of Educational Outcomes</div>
+      <div class="section-title">No guarantee of educational outcomes</div>
     </div>
     <div class="section-body">
-      <p>Studiely makes no representations or warranties &mdash; express or implied &mdash; that use of the platform will result in any particular educational outcome, grade, examination result, or academic achievement. Learning outcomes depend on many individual factors, including the effort, dedication, and circumstances of each learner, which are beyond Studiely&apos;s control.</p>
+      <p>Studiely makes no representation or warranty that use of the platform will result in any particular educational outcome, grade, examination result, or academic achievement.</p>
     </div>
   </div>
 
+  <!-- 4. Platform availability -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">4</div>
-      <div class="section-title">Platform Availability</div>
+      <div class="section-title">Platform availability</div>
     </div>
     <div class="section-body">
-      <p>Studiely is provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis. We do not guarantee:</p>
-      <ul class="policy-list">
-        <li>That the platform will be available at all times, without interruption or delay</li>
-        <li>That the platform will be free from technical errors, bugs, or defects</li>
-        <li>That any particular feature will remain available in future versions of the platform</li>
-      </ul>
-      <p>We will endeavour to notify users of planned maintenance or service disruptions in advance where possible; however, unscheduled downtime may occur. Studiely shall not be liable for any loss or inconvenience arising from temporary unavailability of the platform.</p>
+      <p>Studiely is provided "as is" and "as available." We do not guarantee uninterrupted availability, freedom from technical errors, or that any particular feature will remain available in future versions.</p>
     </div>
   </div>
 
+  <!-- 5. Third-party services -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">5</div>
-      <div class="section-title">Third-Party Services</div>
+      <div class="section-title">Third-party services</div>
     </div>
     <div class="section-body">
-      <p>Studiely uses third-party services &mdash; including but not limited to Google Firebase for data storage, authentication, analytics, and crash reporting, and Paddle (or equivalent) for direct payment processing. We also link to external educational resources and platforms from time to time.</p>
-      <p>Studiely does not control, endorse, or assume responsibility for the content, privacy practices, availability, or accuracy of any third-party service or website. Your use of third-party services is subject entirely to their own terms, conditions, and privacy policies.</p>
-      <p>The inclusion of any link, integration, or reference to a third-party service does not constitute an endorsement by Studiely or Qismat Ventures W.L.L.</p>
+      <p>Studiely uses third-party services, including Google Firebase for data storage, authentication, analytics, and crash reporting, third-party AI model providers, and Stripe for payment processing on our website. We do not control, endorse, or assume responsibility for the content, privacy practices, availability, or accuracy of any third-party service.</p>
+      <p>We are not responsible for the content of advertisements served through Google AdMob. Advertisers, not Studiely, are responsible for the accuracy and appropriateness of their ad content, subject to the content filtering applied to child-directed ad requests described in our Privacy Policy.</p>
     </div>
   </div>
 
+  <!-- 6. Intellectual property -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">6</div>
-      <div class="section-title">Intellectual Property</div>
+      <div class="section-title">Intellectual property</div>
     </div>
     <div class="section-body">
-      <p>All content, software, branding, design, and platform materials created by or for Studiely are the intellectual property of Qismat Ventures W.L.L or its licensors. Nothing in these documents or on the platform grants users any licence or right to use, copy, modify, distribute, or exploit any such intellectual property without express written authorisation.</p>
-      <p>User-generated content (such as study notes or quiz responses submitted by users) remains the intellectual property of the user. Studiely&apos;s right to use user-generated content is limited to platform functionality purposes, as described in the <a href="/terms-of-service" class="email-link">Terms of Service</a>.</p>
+      <p>All content, software, branding, design, and platform materials created by or for Studiely are the intellectual property of Skyen Systems Pty Ltd or its licensors. User-generated content remains the property of the user, subject to the limited licence described in our <a href="/terms-of-service" class="email-link">Terms of Service</a>.</p>
     </div>
   </div>
 
+  <!-- 7. Australian Consumer Law -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">7</div>
-      <div class="section-title">Limitation of Liability</div>
+      <div class="section-title">Australian Consumer Law</div>
     </div>
     <div class="section-body">
-      <p>To the fullest extent permitted by applicable law, Qismat Ventures W.L.L and its directors, officers, employees, affiliates, and agents shall not be liable for:</p>
-      <ul class="policy-list">
-        <li>Any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of Studiely</li>
-        <li>Loss of data, learning progress, or access to educational content arising from technical issues</li>
-        <li>Decisions made on the basis of AI-generated content</li>
-        <li>Any loss arising from use of third-party services integrated with or linked from Studiely</li>
-      </ul>
-      <p>In any event, Studiely&apos;s total liability to you shall not exceed the greater of (a) the amount paid by you to Studiely in the 12 months preceding the event giving rise to the claim, or (b) USD 100.</p>
-      <p>Nothing in this Disclaimer excludes or limits liability for death or personal injury caused by negligence, fraud, or any other liability that cannot be excluded or limited under applicable law.</p>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">8</div>
-      <div class="section-title">No Professional Advice</div>
-    </div>
-    <div class="section-body">
-      <p>Nothing on Studiely constitutes legal, financial, medical, psychological, or any other form of professional advice. All content is provided solely for general educational purposes. If you require professional advice in any field, you should consult a qualified and appropriately licensed professional.</p>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">9</div>
-      <div class="section-title">Children &amp; Parental Supervision</div>
-    </div>
-    <div class="section-body">
-      <p>While Studiely applies robust protections for child users &mdash; including compliance with COPPA, GDPR, the UK Age-Appropriate Design Code, and Apple and Google Families Policies &mdash; parents and guardians retain ultimate responsibility for supervising their children&apos;s use of digital platforms, including Studiely.</p>
-      <p>Studiely does not guarantee that all content encountered on the platform will be suitable for every age group. Parents and guardians are encouraged to remain involved in and aware of their child&apos;s learning activities on Studiely.</p>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">10</div>
-      <div class="section-title">Governing Law</div>
-    </div>
-    <div class="section-body">
-      <p>This Disclaimer is governed by and construed in accordance with the laws of the Kingdom of Bahrain, without regard to its conflict of law provisions. Any disputes arising in connection with this Disclaimer shall be subject to the jurisdiction of the courts of the Kingdom of Bahrain, unless otherwise required by applicable consumer protection law in your jurisdiction.</p>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">11</div>
-      <div class="section-title">Changes to This Disclaimer</div>
-    </div>
-    <div class="section-body">
-      <p>Studiely may update or amend this Disclaimer from time to time. Material changes will be communicated via in-app notifications or email where applicable. Continued use of Studiely after any changes constitutes your acceptance of the revised Disclaimer.</p>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">12</div>
-      <div class="section-title">Contact</div>
-    </div>
-    <div class="section-body">
-      <p>If you have any questions about this Disclaimer, please contact:</p>
-      <div class="info-grid" style="margin-top: 0.75rem;">
-        <div class="info-row">
-          <div class="info-label">Email</div>
-          <div class="info-value"><a href="mailto:admin@qismatventures.com" class="email-link">admin@qismatventures.com</a></div>
-        </div>
-        <div class="info-row">
-          <div class="info-label">Company</div>
-          <div class="info-value">Qismat Ventures W.L.L</div>
-        </div>
-        <div class="info-row">
-          <div class="info-label">Address</div>
-          <div class="info-value">Office 501, Building 1025, Road 3621, Block 436, Al-Seef, Kingdom of Bahrain</div>
-        </div>
-        <div class="info-row">
-          <div class="info-label">Registration No.</div>
-          <div class="info-value">190698-1</div>
-        </div>
+      <div class="highlight-box">
+        <p>Nothing in this Disclaimer excludes, restricts or modifies any guarantee, condition, warranty, right or remedy that you have under the Australian Consumer Law or any other law that cannot lawfully be excluded, restricted or modified.</p>
       </div>
     </div>
   </div>
 
+  <!-- 8. Limitation of liability -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div class="section-title">Limitation of liability</div>
+    </div>
+    <div class="section-body">
+      <p>Subject to section 7, and to the fullest extent permitted by law, Skyen Systems Pty Ltd and its directors, officers, employees and agents shall not be liable for indirect, incidental, special, consequential, or punitive damages; loss of data, learning progress, or access to educational content arising from technical issues; decisions made on the basis of AI-generated content; or loss arising from third-party services. Our total liability shall not exceed the greater of the amount you paid in the 12 months preceding the claim, or USD 100.</p>
+    </div>
+  </div>
+
+  <!-- 9. No professional advice -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <div class="section-title">No professional advice</div>
+    </div>
+    <div class="section-body">
+      <p>Nothing on Studiely constitutes legal, financial, medical, psychological, or other professional advice. If you require professional advice, consult a qualified, appropriately licensed professional.</p>
+    </div>
+  </div>
+
+  <!-- 10. Children and parental supervision -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <div class="section-title">Children and parental supervision</div>
+    </div>
+    <div class="section-body">
+      <p>While Studiely applies robust protections for child users — including compliance with COPPA, the GDPR, the UK Age-Appropriate Design Code, and Apple and Google Families Policies — parents and guardians retain ultimate responsibility for supervising their children's use of digital platforms. Studiely does not guarantee that all content will be suitable for every age group.</p>
+    </div>
+  </div>
+
+  <!-- 11. Governing law -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">11</div>
+      <div class="section-title">Governing law</div>
+    </div>
+    <div class="section-body">
+      <p>This Disclaimer is governed by the laws of the State of Victoria, Australia. Nothing in this clause limits any right you have under mandatory consumer-protection law in your own jurisdiction.</p>
+    </div>
+  </div>
+
+  <!-- 12. Changes to this Disclaimer -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">12</div>
+      <div class="section-title">Changes to this Disclaimer</div>
+    </div>
+    <div class="section-body">
+      <p>We may update this Disclaimer periodically. Material changes will be communicated via website notice or email where applicable.</p>
+    </div>
+  </div>
+
+  <!-- 13. Contact -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">13</div>
+      <div class="section-title">Contact</div>
+    </div>
+    <div class="section-body">
+      <p><strong>Skyen Systems Pty Ltd</strong> · ACN 701 564 730<br>
+      Unit 18, 285–287 Derrimut Rd, Hoppers Crossing VIC 3029, Australia<br>
+      Email: <a href="mailto:hello@studiely.com" class="email-link">hello@studiely.com</a></p>
+    </div>
+  </div>
+
 </div>
+<!-- /container -->
 
 <footer>
   <div class="footer-wordmark">S T U D I E L Y</div>
-  <p>Studiely &middot; Qismat Ventures W.L.L &middot; <a href="mailto:admin@qismatventures.com">admin@qismatventures.com</a></p>
-  <p style="margin-top: 0.5rem;">Operated by Qismat Ventures W.L.L &middot; Bahrain &middot; Registration No. 190698-1</p>
+  <p>© 2026 Skyen Systems Pty Ltd. All rights reserved.</p>
 </footer>
 
 </body>

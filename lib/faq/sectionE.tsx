@@ -74,5 +74,38 @@ export const sectionE: FaqSection = {
         </>
       ),
     },
+    {
+      question: "Do my credits reset every month?",
+      schemaText:
+        "No. Credits are pooled for your whole plan period and can be used at any point within it — spend them all at once or spread them out. They do not carry over once the period ends.",
+      answer: (
+        <p>
+          No. Credits are pooled for your whole plan period and can be used at any point within it — spend them all
+          at once or spread them out. They do not carry over once the period ends.
+        </p>
+      ),
+    },
+    {
+      question: "What happens if I run out of credits?",
+      schemaText:
+        "Generation is paused until your plan renews, or you can purchase a new plan or the Exam Practice add-on separately.",
+      answer: (
+        <p>
+          Generation is paused until your plan renews, or you can purchase a new plan or the Exam Practice add-on
+          separately.
+        </p>
+      ),
+    },
+    {
+      question: "Can I get more generations without paying?",
+      schemaText:
+        "Yes. On the Free plan, you can watch a short video ad to unlock one additional generation, any time you run out of free credits. This is entirely optional.",
+      answer: (
+        <p>
+          Yes. On the Free plan, you can watch a short video ad to unlock one additional generation, any time you run
+          out of free credits. This is entirely optional.
+        </p>
+      ),
+    },
   ],
 };

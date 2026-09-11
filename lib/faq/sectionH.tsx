@@ -101,5 +101,55 @@ export const sectionH: FaqSection = {
         </>
       ),
     },
+    {
+      question: "Can my child use Studiely on their own?",
+      schemaText:
+        "No. Children under 13 cannot create their own account — a parent or legal guardian must create and manage the account on their behalf.",
+      answer: (
+        <p>
+          No. Children under 13 cannot create their own account — a parent or legal guardian must create and
+          manage the account on their behalf.
+        </p>
+      ),
+    },
+    {
+      question: "How do I delete my account or my child's data?",
+      schemaText:
+        "Email privacy@studiely.com. We verify the request and delete account data within 30 days, except where we're required to keep certain records by law.",
+      answer: (
+        <p>
+          Email{" "}
+          <a href="mailto:privacy@studiely.com" className={complianceLinkClass}>
+            privacy@studiely.com
+          </a>
+          . We verify the request and delete account data within 30 days, except where we&apos;re required to keep
+          certain records by law.
+        </p>
+      ),
+    },
+    {
+      question: "Does Studiely show ads to my child?",
+      schemaText:
+        "No. Studiely does not use advertising or behavioural tracking for any user, and applies additional protections for users under 13, including disabling analytics by default unless verifiable parental consent is given.",
+      answer: (
+        <p>
+          No. Studiely does not use advertising or behavioural tracking for any user, and applies additional
+          protections for users under 13, including disabling analytics by default unless verifiable parental consent
+          is given.
+        </p>
+      ),
+    },
+    {
+      question: "Will my child see ads?",
+      schemaText:
+        "Only if they choose to — watching an ad to unlock an extra generation is always optional. These ads are non-personalised and contextual only: we do not use advertising identifiers to target ads to children, and no behavioural profiling is used.",
+      answer: (
+        <p>
+          Only if they choose to — watching an ad to unlock an extra generation is always optional. These ads are
+          non-personalised and contextual only: we do not use advertising identifiers to target ads to children, and
+          no behavioural profiling is used.
+        </p>
+      ),
+    },
   ],
 };

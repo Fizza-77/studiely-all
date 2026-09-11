@@ -112,6 +112,8 @@
     color: var(--text-secondary);
     line-height: 1.75;
   }
+  .intro-block p { margin-bottom: 1rem; }
+  .intro-block p:last-child { margin-bottom: 0; }
 
   /* ── Sections ── */
   .section {
@@ -135,13 +137,14 @@
     font-weight: 500;
     color: var(--white);
     background: var(--navy);
-    width: 22px;
+    min-width: 22px;
     height: 22px;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    padding: 0 5px;
     letter-spacing: 0;
   }
   .section-title {
@@ -155,15 +158,16 @@
   .section-body {
     padding: 1.5rem 1.75rem;
   }
-  .section-body p {
+  .section-body > p {
     color: var(--text-secondary);
     margin-bottom: 1rem;
     font-size: 14.5px;
   }
-  .section-body p:last-child { margin-bottom: 0; }
+  .section-body > p:last-child { margin-bottom: 0; }
 
   /* ── Subsections ── */
   .subsection { margin: 1.25rem 0; }
+  .subsection:first-child { margin-top: 0; }
   .subsection-title {
     font-size: 13px;
     font-weight: 600;
@@ -232,6 +236,7 @@
     padding: 10px 14px;
     font-size: 13.5px;
     color: var(--text-primary);
+    line-height: 1.6;
   }
 
   /* ── Service table ── */
@@ -257,6 +262,7 @@
     border-bottom: 0.5px solid var(--border);
     color: var(--text-secondary);
     vertical-align: top;
+    font-size: 13.5px;
   }
   .service-table tr:last-child td { border-bottom: none; }
   .service-table td:first-child {
@@ -340,18 +346,6 @@
     font-size: 13.5px !important;
     margin-bottom: 0 !important;
   }
-  .warning-box {
-    background: rgba(217,123,42,0.07);
-    border: 0.5px solid rgba(217,123,42,0.3);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    margin: 0.75rem 0;
-  }
-  .warning-box p {
-    color: #7a3f00 !important;
-    font-size: 13.5px !important;
-    margin-bottom: 0 !important;
-  }
 
   /* ── Links ── */
   a.email-link, a.url-link {
@@ -408,7 +402,7 @@
   <h1>Privacy Policy</h1>
   <div class="header-meta">
     <span class="meta-pill">Effective Date: <span>January 15, 2026</span></span>
-    <span class="meta-pill">Last Updated: <span>September 10, 2026</span></span>
+    <span class="meta-pill">Last Updated: <span>September 11, 2026</span></span>
     <span class="meta-pill">Version: <span>1.5</span></span>
     <span class="meta-pill">Platform: <span>Google Play Store</span></span>
   </div>
@@ -419,10 +413,10 @@
 
   <!-- Introduction -->
   <div class="intro-block">
-    Studiely is an educational technology platform operated by Qismat Ventures W.L.L ("we," "us," or "our"). We are committed to protecting the privacy, safety, and rights of all users, including students, parents, teachers, institutions, and administrators—particularly children.<br><br>
-    This Privacy Policy applies to users who download and use Studiely via the Google Play Store. It explains what information we collect, how we use it, with whom we share it, how long we keep it, and the rights you have regarding your personal data.<br><br>
-    It should be read alongside our <a href="/terms-of-service" class="email-link">Terms of Service</a>, <a href="/acceptable-use" class="email-link">Acceptable Use Policy</a>, <a href="/cookie-policy" class="email-link">Cookie Policy</a>, and <a href="/disclaimer" class="email-link">Disclaimer</a>.<br><br>
-    Studiely is designed for educational purposes and may be used in school or home learning environments.
+    <p>Studiely is an educational technology platform operated by Qismat Ventures W.L.L ("we," "us," or "our"). We are committed to protecting the privacy, safety, and rights of all users, including students, parents, teachers, institutions, and administrators—particularly children.</p>
+    <p>This Privacy Policy applies to users who download and use Studiely via the Google Play Store. It explains what information we collect, how we use it, with whom we share it, how long we keep it, and the rights you have regarding your personal data.</p>
+    <p>It should be read alongside our <a href="/terms-of-service" class="email-link">Terms of Service</a>, <a href="/acceptable-use" class="email-link">Acceptable Use Policy</a>, <a href="/cookie-policy" class="email-link">Cookie Policy</a>, and <a href="/disclaimer" class="email-link">Disclaimer</a>.</p>
+    <p>Studiely is designed for educational purposes and may be used in school or home learning environments.</p>
   </div>
 
   <!-- 1. Company Information -->
@@ -482,14 +476,14 @@
     </div>
   </div>
 
-  <!-- 3. Third-Party Services & Firebase -->
+  <!-- 3. Third-Party Services & Firebase Disclosure -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">3</div>
       <div class="section-title">Third-Party Services &amp; Firebase Disclosure</div>
     </div>
     <div class="section-body">
-      <p>Studiely uses the following Google Firebase services:</p>
+      <p>Studiely uses the following Google services:</p>
       <table class="service-table">
         <thead>
           <tr>
@@ -503,11 +497,15 @@
           <tr><td>Firebase Analytics</td><td>Anonymous usage analytics</td></tr>
           <tr><td>Firebase Crashlytics</td><td>Crash reporting</td></tr>
           <tr><td>Firebase Remote Config</td><td>Feature configuration</td></tr>
+          <tr><td>Google AdMob</td><td>Third-party advertising (users aged 13 and over only)</td></tr>
         </tbody>
       </table>
       <p>Firebase processes analytics and crash information as our service provider. Where GDPR applies, Firebase acts as a data processor and we act as the data controller.</p>
+      <p>Google AdMob is a separate advertising service provided by Google LLC. In relation to advertising data, Google acts as an independent controller and processes that data under its own privacy policy. AdMob is described in full in Section 15 (Advertising).</p>
       <p>Firebase Privacy Policy: <a href="https://firebase.google.com/policies/privacy" class="url-link" target="_blank" rel="noopener">https://firebase.google.com/policies/privacy</a></p>
-      <p>No Firebase services are used for advertising or profiling children.</p>
+      <p>Google Privacy Policy (AdMob): <a href="https://policies.google.com/privacy" class="url-link" target="_blank" rel="noopener">https://policies.google.com/privacy</a></p>
+      <p>How Google uses information from apps that use its services: <a href="https://policies.google.com/technologies/partner-sites" class="url-link" target="_blank" rel="noopener">https://policies.google.com/technologies/partner-sites</a></p>
+      <p><strong>Important:</strong> No Firebase service is used for advertising. No advertising is served to users under 13, and no advertising identifiers are collected from them. Advertising is never personalised for, or targeted at, children.</p>
     </div>
   </div>
 
@@ -518,7 +516,7 @@
       <div class="section-title">Data We Collect</div>
     </div>
     <div class="section-body">
-      <p>We collect only the data necessary for educational functionality, app improvement, and legal compliance. We do not use personal data for advertising or behavioral targeting.</p>
+      <p>We collect only the data necessary for educational functionality, app improvement, advertising on the free tier, and legal compliance. We do not use educational content or learning data for advertising or behavioral targeting.</p>
 
       <div class="subsection">
         <div class="subsection-title"><span class="data-badge badge-teal">4.1</span>&nbsp; Account &amp; Identifiers</div>
@@ -575,12 +573,26 @@
       </div>
 
       <div class="subsection">
-        <div class="subsection-title"><span class="data-badge badge-rose">4.6</span>&nbsp; Data We Do Not Collect</div>
+        <div class="subsection-title"><span class="data-badge badge-amber">4.6</span>&nbsp; Advertising Data (via Google AdMob)</div>
+        <p>This section applies only to users aged 13 and over who are shown advertising. When an ad is requested or displayed, Google AdMob and its ad partners may collect:</p>
+        <ul class="policy-list">
+          <li>Your device advertising identifier (Google Advertising ID on Android; Identifier for Advertisers (IDFA) on iOS, only where you have permitted tracking)</li>
+          <li>Approximate location derived from IP address (country/region level only)</li>
+          <li>Device and app information required to render an ad (device model, operating system version, app version, screen size, language)</li>
+          <li>Ad interaction data, such as impressions, clicks, and whether an ad was dismissed</li>
+          <li>Limited signals used for frequency capping, ad measurement, and fraud prevention</li>
+        </ul>
+        <p style="font-size:13.5px; color: var(--text-secondary); margin-top: 8px;">This data is collected and processed by Google under its own privacy policy. We do not receive your advertising identifier, and we do not combine advertising data with your study notes, quiz results, or learning progress.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title"><span class="data-badge badge-rose">4.7</span>&nbsp; Data We Do Not Collect</div>
         <p>Studiely does not collect:</p>
         <ul class="policy-list">
           <li>Precise GPS location</li>
           <li>Phone numbers</li>
-          <li>Advertising identifiers for behavioral ads</li>
+          <li>Advertising identifiers from users under 13</li>
+          <li>Advertising identifiers used to build behavioral profiles of children</li>
           <li>Sensitive identifiers restricted under Google Play Families Policies</li>
           <li>Biometric identifiers</li>
         </ul>
@@ -588,7 +600,7 @@
     </div>
   </div>
 
-  <!-- 5. Children & Families -->
+  <!-- 5. Children & Families Policy Compliance -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">5</div>
@@ -597,7 +609,7 @@
     <div class="section-body">
       <p>Studiely may be used by children, including those under the age of 13. We adhere to the following principles:</p>
       <ul class="policy-list">
-        <li>No advertising to children</li>
+        <li>No advertising is served to users under 13 — advertising is disabled entirely for these accounts</li>
         <li>No behavioral tracking</li>
         <li>Data collection limited to educational use</li>
         <li>Parental/legal guardian consent required under COPPA for children under 13</li>
@@ -615,6 +627,7 @@
           <li>Age validation is performed in real-time</li>
           <li>Age data is stored securely in Firestore</li>
           <li>Clear messaging explains parental consent requirements</li>
+          <li>Age is used to determine whether advertising is enabled — accounts identified as under 13 never receive ad requests</li>
         </ul>
         <div class="highlight-box">
           <p>Under-13 accounts are only permitted with verifiable parental consent.</p>
@@ -623,14 +636,14 @@
     </div>
   </div>
 
-  <!-- 6. Cookies -->
+  <!-- 6. Cookies & Similar Technologies -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">6</div>
       <div class="section-title">Cookies &amp; Similar Technologies</div>
     </div>
     <div class="section-body">
-      <p>Firebase Analytics may use cookies or similar identifiers for analytics. You may disable analytics in device settings. Some crash diagnostics may be necessary for application stability.</p>
+      <p>Firebase Analytics may use cookies or similar identifiers for analytics. Google AdMob and its ad partners may use cookies, mobile advertising identifiers, tracking pixels, or similar technologies to deliver and measure advertising to users aged 13 and over, as described in Section 15. You may disable analytics in device settings and control advertising identifiers through your device controls. Some crash diagnostics may be necessary for application stability.</p>
     </div>
   </div>
 
@@ -649,10 +662,11 @@
         <li>Track progress and deliver feedback</li>
         <li>Analyze app usage for improvement</li>
         <li>Deliver subscription services via Google Play Billing</li>
+        <li>Serve and measure third-party advertising to users aged 13 and over on the free tier</li>
         <li>Identify and resolve crashes or errors</li>
         <li>Comply with legal obligations and audit requirements</li>
       </ul>
-      <p>We do not use data for advertising purposes.</p>
+      <p>We do not use your educational content, study notes, quiz results, or learning progress for advertising purposes, and we do not use any data for advertising to children.</p>
     </div>
   </div>
 
@@ -667,20 +681,21 @@
       <p>Data is shared only:</p>
       <ul class="policy-list">
         <li>With Google/Firebase as necessary for service operation</li>
+        <li>With Google AdMob and its ad partners, limited to the advertising data described in Section 4.6, and only for users aged 13 and over</li>
         <li>With authorities when legally required</li>
         <li>During mergers/acquisitions (with notice where possible)</li>
       </ul>
     </div>
   </div>
 
-  <!-- 9. International Transfers -->
+  <!-- 9. International Transfers & Data Storage -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">9</div>
       <div class="section-title">International Transfers &amp; Data Storage</div>
     </div>
     <div class="section-body">
-      <p>Data is stored on Google Firebase servers, which may be located outside your country (including the United States).</p>
+      <p>Data is stored on Google Firebase servers, which may be located outside your country (including the United States). Advertising data is processed by Google on its global infrastructure.</p>
       <p>International data transfers rely on:</p>
       <ul class="policy-list">
         <li>Standard Contractual Clauses (SCCs)</li>
@@ -718,6 +733,11 @@
         <div class="retention-label">Subscription/accounting records</div>
         <div class="retention-period">Tax/accounting compliance</div>
       </div>
+      <div class="retention-row">
+        <div class="retention-dot" style="background: var(--navy);"></div>
+        <div class="retention-label">Advertising data</div>
+        <div class="retention-period">Retained by Google in line with its own retention policies</div>
+      </div>
       <p style="margin-top: 1rem;">Retention periods may vary by jurisdiction.</p>
     </div>
   </div>
@@ -735,6 +755,7 @@
         <li>Correction of inaccurate data</li>
         <li>Deletion of your data</li>
         <li>Portability of your data</li>
+        <li>Withdrawal of consent to personalised advertising at any time</li>
       </ul>
       <p>Parents/legal guardians may exercise these rights for children under 13.</p>
       <p>Requests should include the registered email address and may be sent to: <a href="mailto:admin@qismatventures.com" class="email-link">admin@qismatventures.com</a></p>
@@ -781,7 +802,7 @@
     </div>
   </div>
 
-  <!-- 14. Children's Privacy -->
+  <!-- 14. Children's Privacy – Special Protections -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">14</div>
@@ -790,19 +811,76 @@
     <div class="section-body">
       <p>Studiely applies heightened protections for minors:</p>
       <ul class="policy-list">
-        <li>No advertising</li>
+        <li>No advertising of any kind to users under 13</li>
         <li>No behavioral tracking</li>
         <li>No sale of personal data</li>
+        <li>No collection of advertising identifiers from children</li>
         <li>Parental consent required for under-13</li>
         <li>Full parental control over access, deletion, and consent</li>
       </ul>
     </div>
   </div>
 
-  <!-- 15. Changes -->
+  <!-- 15. Advertising -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">15</div>
+      <div class="section-title">Advertising</div>
+    </div>
+    <div class="section-body">
+      <p>Studiely displays third-party advertisements through Google AdMob, a service provided by Google LLC. Advertising allows us to keep the free tier of Studiely available at no cost. Advertising is not shown to paid subscribers where their plan removes ads, and is never shown to users under 13.</p>
+
+      <div class="subsection">
+        <div class="subsection-title"><span class="data-badge badge-teal">15.1</span>&nbsp; Who Serves the Ads</div>
+        <p>Ads are served by Google AdMob and its authorised ad partners. In relation to advertising, Google acts as an independent data controller and processes data under its own privacy policy. We do not control which specific ads are shown to you, and we do not receive your advertising identifier.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title"><span class="data-badge badge-indigo">15.2</span>&nbsp; What Advertising Data Is Collected</div>
+        <p>The advertising data collected is set out in Section 4.6. In summary: a device advertising identifier, approximate (country/region) location derived from IP address, basic device and app information needed to render an ad, and ad interaction data such as impressions and clicks.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title"><span class="data-badge badge-amber">15.3</span>&nbsp; Personalised and Non-Personalised Ads</div>
+        <p>Where required by law — including in the European Economic Area, the United Kingdom, and Switzerland — we present a consent prompt using Google's User Messaging Platform (UMP) before any ads are loaded.</p>
+        <ul class="policy-list">
+          <li>If you decline, only non-personalised ads are served. Non-personalised ads are based on contextual signals such as the general content of the screen and approximate location, together with a limited identifier used for frequency capping, ad measurement, and fraud prevention.</li>
+          <li>If you consent, ads may be personalised using information Google holds about you across its services and partner apps.</li>
+        </ul>
+        <p style="margin-top: 0.75rem;">You may change or withdraw your choice at any time through the privacy options available in the app settings, or by contacting <a href="mailto:admin@qismatventures.com" class="email-link">admin@qismatventures.com</a>.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title"><span class="data-badge badge-rose">15.4</span>&nbsp; Advertising and Children</div>
+        <p>Studiely does not serve advertising to users under 13 under any circumstances. Advertising requests are disabled for these accounts, no advertising identifier is collected, and no data from a child's account is shared with any ad network. This applies regardless of whether parental consent has been given for other purposes.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title"><span class="data-badge badge-navy">15.5</span>&nbsp; Your Device Controls</div>
+        <p>You can limit ad personalisation directly on your device:</p>
+        <ul class="policy-list">
+          <li>Android: Settings &rarr; Privacy &rarr; Ads &rarr; Delete or reset your advertising ID</li>
+          <li>iOS: Settings &rarr; Privacy &amp; Security &rarr; Tracking &rarr; turn off "Allow Apps to Request to Track"</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title"><span class="data-badge badge-teal">15.6</span>&nbsp; What We Do Not Do</div>
+        <ul class="policy-list">
+          <li>We do not share your study notes, generated materials, quiz results, or learning progress with advertisers</li>
+          <li>We do not sell your personal data</li>
+          <li>We do not allow ad networks to build behavioral profiles of children</li>
+          <li>We do not use sensitive personal data for advertising</li>
+        </ul>
+        <p style="margin-top: 0.75rem;">For more information, see Google's Privacy Policy at <a href="https://policies.google.com/privacy" class="url-link" target="_blank" rel="noopener">https://policies.google.com/privacy</a> and how Google uses information from apps that use its services at <a href="https://policies.google.com/technologies/partner-sites" class="url-link" target="_blank" rel="noopener">https://policies.google.com/technologies/partner-sites</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16. Changes to This Privacy Policy -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">16</div>
       <div class="section-title">Changes to This Privacy Policy</div>
     </div>
     <div class="section-body">
@@ -810,10 +888,10 @@
     </div>
   </div>
 
-  <!-- 16. Contact Us -->
+  <!-- 17. Contact Us -->
   <div class="section">
     <div class="section-header">
-      <div class="section-num">16</div>
+      <div class="section-num">17</div>
       <div class="section-title">Contact Us</div>
     </div>
     <div class="section-body">
@@ -826,6 +904,10 @@
         <div class="info-row">
           <div class="info-label">Fallback Privacy</div>
           <div class="info-value"><a href="mailto:privacy@studiely.com" class="email-link">privacy@studiely.com</a></div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">Operated by</div>
+          <div class="info-value">Qismat Ventures W.L.L — Kingdom of Bahrain</div>
         </div>
       </div>
     </div>

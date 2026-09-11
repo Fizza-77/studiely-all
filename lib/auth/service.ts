@@ -549,6 +549,7 @@ export type ParentalSignupInput = {
   childEmail: string;
   childPassword: string;
   childDateOfBirth: Date;
+  rewardedAdsConsent?: boolean;
 };
 
 /**
@@ -617,6 +618,8 @@ export async function signUpParental(
         parental_consent_given: true,
         parental_consent_date: serverTimestamp(),
         parental_consent_version: 1,
+        rewarded_ads_consent_given: input.rewardedAdsConsent ?? true,
+        rewarded_ads_consent_date: serverTimestamp(),
         createdAt: serverTimestamp(),
         coppa_compliant: true,
       });
@@ -641,6 +644,8 @@ export async function signUpParental(
           consent_given: true,
           consent_date: serverTimestamp(),
           consent_version: 1,
+          rewarded_ads_consent_given: input.rewardedAdsConsent ?? true,
+          rewarded_ads_consent_date: serverTimestamp(),
           parent_email: input.parentEmail.trim(),
         },
       );

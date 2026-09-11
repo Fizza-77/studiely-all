@@ -33,6 +33,7 @@ const LEGAL_LINKS = [
   { label: "Acceptable Use Policy", href: LEGAL_ROUTES.acceptableUse },
   { label: "Cookie Policy", href: LEGAL_ROUTES.cookiePolicy },
   { label: "Disclaimer", href: LEGAL_ROUTES.disclaimer },
+  { label: "Refund & Payments Policy", href: LEGAL_ROUTES.refundPaymentsPolicy },
 ] as const;
 
 const accentLinkClass =
@@ -363,60 +364,14 @@ export const Footer = (_props: FooterProps = {}) => {
         {/* Section 3 — company */}
         <div className="border-b border-white/15 py-4 sm:py-5">
           <p className="mb-0 text-center font-sans text-[12px] leading-relaxed text-white/80 sm:text-[13px]">
-            Studiely is a product of{" "}
+            Studiely&apos;s website is operated by Skyen Systems Pty Ltd (ACN 701 564 730), Unit 18, 285–287 Derrimut Rd, Hoppers Crossing VIC 3029, Australia. Support:{" "}
             <a
-              href="https://skyensolutions.com"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:hello@studiely.com"
               className={accentLinkClass}
               style={{ color: LIME }}
             >
-              Skyen Solutions
+              hello@studiely.com
             </a>
-            , a trade name of Qismat Ventures W.L.L. (CR 190698-1) — located at
-            Office 501, Building 1025, Road 3621, Block 436, Al Seef, Bahrain —
-            and is a sister product of{" "}
-            <a
-              href="https://makemylesson.ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={accentLinkClass}
-              style={{ color: LIME }}
-            >
-              Make My Lesson
-            </a>
-            ,{" "}
-            <a
-              href="https://linguatude.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={accentLinkClass}
-              style={{ color: LIME }}
-            >
-              Linguatude
-            </a>
-            , and{" "}
-            <a
-              href="https://worksheeta.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={accentLinkClass}
-              style={{ color: LIME }}
-            >
-              Worksheeta
-            </a>
-            . For educational technology platforms, please
-            contact{" "}
-            <a
-              href="https://skyensolutions.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={accentLinkClass}
-              style={{ color: LIME }}
-            >
-              Skyen Solutions
-            </a>
-            .
           </p>
         </div>
 
@@ -430,7 +385,7 @@ export const Footer = (_props: FooterProps = {}) => {
           <div className="flex items-center gap-3 sm:gap-4">
             <span className="hidden h-4 w-px bg-white/25 sm:block" aria-hidden />
             <p className="mb-0 font-sans text-[12px] text-white/70 sm:text-[13px]">
-              © 2026 Qismat Ventures W.L.L. All rights reserved.
+              © 2026 Skyen Systems Pty Ltd. All rights reserved.
             </p>
           </div>
         </div>
