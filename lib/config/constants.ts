@@ -36,10 +36,13 @@ export const COLLECTIONS = {
 /** Marketing legal pages only (same-origin). */
 export const LEGAL_URLS = {
   privacy: "/privacy-policy",
+  privacyApple: "/legal/privacy-policy-apple",
+  privacyGoogle: "/legal/privacy-policy",
   terms: "/terms-of-service",
   cookie: "/cookie-policy",
   acceptableUse: "/acceptable-use",
   disclaimer: "/disclaimer",
+  refund: "/refund-payments-policy",
 } as const;
 
 export const SUPPORT_SUBJECTS = [

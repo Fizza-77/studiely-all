@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import { ThemedLegalDocument } from "@/components/ThemedLegalDocument";
+import { websiteLegalPageMetadata } from "@/lib/legal/legalPageMetadata";
 import { loadLegalHtmlFromRoot } from "@/lib/legal/loadLegalHtmlFromRoot";
 import { buildBreadcrumbSchema } from "@/lib/seo";
 
-const breadcrumbSchema = buildBreadcrumbSchema("Acceptable Use Policy", "/acceptable-use");
+const PATH = "/acceptable-use";
+
+export const metadata: Metadata = websiteLegalPageMetadata(
+  "studiely-acceptable-use-policy.html",
+  PATH,
+  "Acceptable Use Policy for the Studiely website, operated by Skyen Systems Pty Ltd.",
+);
+
+const breadcrumbSchema = buildBreadcrumbSchema("Acceptable Use Policy", PATH);
 
 export default function AcceptableUsePolicy() {
   const html = loadLegalHtmlFromRoot("studiely-acceptable-use-policy.html");
@@ -15,7 +25,7 @@ export default function AcceptableUsePolicy() {
           __html: JSON.stringify(breadcrumbSchema),
         }}
       />
-      <ThemedLegalDocument html={html} badge="Legal & Policies" />
+      <ThemedLegalDocument html={html} badge="Website · Legal & Policies" />
     </>
   );
 }

@@ -145,10 +145,12 @@ export function isPwaBrowserOnlyPath(pathname: string): boolean {
     matchesPrefix(path, "/curriculum") ||
     matchesPrefix(path, "/nyla") ||
     matchesPrefix(path, "/privacy-policy") ||
+    path.startsWith("/legal/privacy-policy") ||
     matchesPrefix(path, "/terms-of-service") ||
     matchesPrefix(path, "/cookie-policy") ||
     matchesPrefix(path, "/disclaimer") ||
-    matchesPrefix(path, "/acceptable-use")
+    matchesPrefix(path, "/acceptable-use") ||
+    matchesPrefix(path, "/refund-payments-policy")
   );
 }
 

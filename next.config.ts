@@ -114,14 +114,16 @@ const nextConfig: NextConfig = {
         destination: "/terms-of-service",
         permanent: true,
       },
+      // /legal/privacy-policy-apple is a real page (iOS App Store policy —
+      // Skyen Solutions / Qismat Ventures). Do not redirect it to the website policy.
       {
-        source: "/legal/privacy-policy-apple",
+        source: "/legal/delete-account-and-data",
         destination: "/privacy-policy",
         permanent: true,
       },
       {
-        source: "/legal/delete-account-and-data",
-        destination: "/privacy-policy",
+        source: "/legal/privacy-policy-google",
+        destination: "/legal/privacy-policy",
         permanent: true,
       },
       {
@@ -131,7 +133,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/legal/web/refund-policy",
-        destination: "/terms-of-service",
+        destination: "/refund-payments-policy",
         permanent: true,
       },
       {
@@ -141,7 +143,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/refund-policy",
-        destination: "/terms-of-service",
+        destination: "/refund-payments-policy",
         permanent: true,
       },
     ];

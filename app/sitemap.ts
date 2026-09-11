@@ -1223,7 +1223,12 @@ const STATIC_PAGES: StaticEntry[] = [
   {
     path: "/legal/privacy-policy",
     changeFrequency: "monthly",
-    priority: 0.6,
+    priority: 0.5,
+  },
+  {
+    path: "/legal/privacy-policy-apple",
+    changeFrequency: "monthly",
+    priority: 0.5,
   },
   { path: "/terms-of-service", changeFrequency: "monthly", priority: 0.6 },
   { path: "/cookie-policy", changeFrequency: "monthly", priority: 0.5 },

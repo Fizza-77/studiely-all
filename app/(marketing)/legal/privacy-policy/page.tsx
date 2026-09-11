@@ -1,13 +1,19 @@
+import type { Metadata } from "next";
 import { ThemedLegalDocument } from "@/components/ThemedLegalDocument";
+import { legalPageMetadata } from "@/lib/legal/legalPageMetadata";
 import { loadLegalHtmlFromContent } from "@/lib/legal/loadLegalHtmlFromRoot";
 import { buildBreadcrumbSchema } from "@/lib/seo";
 
+const PATH = "/legal/privacy-policy";
+
+export const metadata: Metadata = legalPageMetadata("privacy-policy.html", PATH);
+
 const breadcrumbSchema = buildBreadcrumbSchema(
-  "Privacy Policy",
-  "/legal/privacy-policy",
+  "Privacy Policy (Google Play Store)",
+  PATH,
 );
 
-export default function LegalPrivacyPolicyPage() {
+export default function GooglePrivacyPolicyPage() {
   const html = loadLegalHtmlFromContent("privacy-policy.html");
 
   return (
@@ -20,9 +26,9 @@ export default function LegalPrivacyPolicyPage() {
       />
       <ThemedLegalDocument
         html={html}
-        badge="Legal & Privacy"
-        backHref="/legal/privacy-policy"
-        backLabel="Privacy Policy"
+        badge="Play Store · Android"
+        backHref="/"
+        backLabel="← Home"
       />
     </>
   );

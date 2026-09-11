@@ -96,12 +96,13 @@ export const sectionC: FaqSection = {
     {
       question: "What is the Exam Practice add-on?",
       schemaText:
-        "Exam Practice is a dedicated exam simulation feature available as a separate add-on for both Free and Premium Studiely users. It is purchased independently of the main subscription. The add-on provides exam-style questions structured around your specific exam board's format, AI-powered feedback on responses and a higher-intensity preparation mode. The add-on comes as a pack of 50 Exam Practice generations. These do not expire. Exam Practice generations are completely separate from the monthly Premium allowance and do not count toward it. Exam Practice covers the full breadth of Studiely's curriculum systems. Within each curriculum, students can select by paper, component, or task type. For Cambridge A Level, Pearson Edexcel A Level and selected IB DP Internal Assessment components, the Exam Practice feature operates in practice mode only for coursework-based tasks.",
+        "Exam Practice is a dedicated exam simulation feature available as a separate $29.99 USD per month subscription for both Free and Premium Studiely users. It is billed and cancelled independently of the main subscription. The add-on provides exam-style questions structured around your specific exam board's format, AI-powered feedback on responses and a higher-intensity preparation mode. Exam Practice generations are completely separate from main-plan credits and do not count toward them. Exam Practice covers the full breadth of Studiely's curriculum systems.",
       answer: (
         <>
           <p>
-            Exam Practice is a dedicated exam simulation feature available as a separate add-on for both Free and
-            Premium Studiely users. It is purchased independently of the main subscription.
+            Exam Practice is a dedicated exam simulation feature available as a separate $29.99 USD per month
+            subscription for both Free and Premium Studiely users. It is billed and cancelled independently of the
+            main subscription.
           </p>
           <p>The Exam Practice add-on provides</p>
           <ul>
@@ -110,9 +111,8 @@ export const sectionC: FaqSection = {
             <li>A higher-intensity preparation mode for students approaching high-stakes assessments</li>
           </ul>
           <p>
-            The add-on comes as a pack of 50 Exam Practice generations. These do not expire — you use them at your own
-            pace. Once finished, you can purchase another pack. Exam Practice generations are completely separate from
-            the monthly Premium allowance and do not count toward it.
+            Exam Practice is billed independently of your main plan. Using Exam Practice does not use main-plan
+            credits, and running out of main-plan credits does not affect Exam Practice.
           </p>
           <p>
             Exam Practice covers the full breadth of Studiely&apos;s curriculum systems:{" "}

@@ -235,7 +235,7 @@ export function CookieConsentBanner() {
               </Link>
               , and the policies above.{" "}
               <span className="text-[#5B5A6A]">
-                Qismat Ventures W.L.L · Bahrain
+                Skyen Systems Pty Ltd · Australia
               </span>
             </p>
             <div className="order-1 flex w-full flex-col gap-2 sm:order-2 sm:w-auto sm:shrink-0 sm:flex-row">
