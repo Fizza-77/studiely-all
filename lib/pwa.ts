@@ -154,12 +154,15 @@ export function isPwaBrowserOnlyPath(pathname: string): boolean {
   );
 }
 
-/** PayPal / plan deep-links must still run on /pricing even if opened in PWA. */
+/** Stripe / PayPal / plan deep-links must still run on /pricing even if opened in PWA. */
 export function isPricingCheckoutReturn(search: string): boolean {
   const q = new URLSearchParams(
     search.startsWith("?") ? search.slice(1) : search,
   );
   return (
+    q.has("stripe_sub_done") ||
+    q.has("stripe_cancel") ||
+    q.has("session_id") ||
     q.has("paypal_sub_done") ||
     q.has("paypal_cancel") ||
     q.has("plan") ||

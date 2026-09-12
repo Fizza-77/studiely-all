@@ -9,9 +9,9 @@ import { PricingCheckoutBridge } from "@/sections/PricingCheckoutBridge";
 import { HomePricingSection } from "@/sections/HomePricingSection";
 import { PricingExtrasSection } from "@/sections/PricingExtrasSection";
 
-const pricingTitle = "Studiely Pricing — Plans & PayPal Checkout";
+const pricingTitle = "Studiely Pricing — Plans & Stripe Checkout";
 const pricingDescription =
-  "Studiely Pro subscriptions for the web app. Compare Free and Pro plans and pay securely with PayPal.";
+  "Studiely Pro subscriptions for the web app. Compare Free and Pro plans and pay securely with Stripe.";
 
 export const metadata: Metadata = {
   title: pricingTitle,

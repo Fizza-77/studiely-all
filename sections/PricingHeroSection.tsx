@@ -152,7 +152,7 @@ export const PricingHeroSection = () => {
 
               <p className="m-0 max-w-[520px] font-jakarta text-[13px] leading-[1.7] text-white/92 sm:text-[14px] md:text-[15px]">
                 Studiely Pro subscriptions for the web app. Pay securely with
-                PayPal. You must be signed in to your Studiely account to check
+                Stripe. You must be signed in to your Studiely account to check
                 out.
               </p>
             </div>
@@ -190,7 +190,7 @@ export const PricingHeroSection = () => {
                     <span className="font-bold">{user.email}</span>
                   </>
                 ) : null}
-                . Choose a plan below to check out with PayPal.
+                . Choose a plan below to check out with Stripe.
               </p>
             </div>
           ) : (
@@ -237,7 +237,7 @@ export const PricingHeroSection = () => {
         </div>
 
         <p className="mx-auto mb-1 mt-4 max-w-3xl text-center font-jakarta text-[11px] leading-relaxed text-[#9A99A8] sm:mt-5 sm:text-[12px]">
-          All prices in USD ($14.99/month). PayPal may show your local currency at
+          All prices in USD ($9.99/month). Stripe may show your local currency at
           checkout. Exam Practice add-on is $29.99 USD worldwide. Taxes may be
           added at checkout.
         </p>

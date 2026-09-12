@@ -24,5 +24,5 @@ export const STUDIELY_APP = {
   quiz: appPath("/generate/quiz"),
   examFocus: appPath("/generate/exam-focus"),
   nyla: appPath("/smartlink"),
-  pricing: appPath("/pricing"), // marketing pricing page (navbar + PayPal checkout)
+  pricing: appPath("/pricing"), // marketing pricing page (navbar + Stripe checkout)
 } as const;

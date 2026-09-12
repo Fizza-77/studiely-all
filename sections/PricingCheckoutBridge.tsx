@@ -5,11 +5,11 @@ import { useEffect, useRef, useState } from "react";
 
 import { useAuth } from "@/components/providers/auth-provider";
 import {
-  createPayPalProAccessOrder,
-  finalizePayPalProAccessOrder,
-  paypalCheckoutUrls,
+  createStripeProAccessCheckout,
+  finalizeStripeProAccessCheckout,
+  stripeCheckoutUrls,
   type PlanKey,
-} from "@/lib/billing/paypal";
+} from "@/lib/billing/stripe";
 
 const PLAN_KEYS: PlanKey[] = [
   "monthly",
@@ -18,7 +18,7 @@ const PLAN_KEYS: PlanKey[] = [
   "yearly",
 ];
 
-/** Handles PayPal return finalize + `?plan=` auto-checkout on marketing /pricing. */
+/** Handles Stripe return finalize + `?plan=` auto-checkout on marketing /pricing. */
 export function PricingCheckoutBridge() {
   const { user } = useAuth();
   const search = useSearchParams();
@@ -29,22 +29,22 @@ export function PricingCheckoutBridge() {
   const planAutoStarted = useRef(false);
 
   useEffect(() => {
-    if (search.get("paypal_cancel") === "1") {
+    if (search.get("stripe_cancel") === "1") {
       setInfo("Checkout cancelled — no charge was made.");
     }
   }, [search]);
 
   useEffect(() => {
-    const paypalDone = search.get("paypal_sub_done") === "1";
-    const orderToken = search.get("token");
-    if (!paypalDone || !orderToken || !user || finalizeStarted.current) return;
+    const stripeDone = search.get("stripe_sub_done") === "1";
+    const sessionId = search.get("session_id");
+    if (!stripeDone || !sessionId || !user || finalizeStarted.current) return;
     finalizeStarted.current = true;
     setInfo("Confirming your Pro access…");
     setError(null);
 
     void (async () => {
       try {
-        await finalizePayPalProAccessOrder(orderToken);
+        await finalizeStripeProAccessCheckout(sessionId);
         setInfo("Pro access is active for this billing period.");
         router.replace("/pricing");
       } catch (err) {
@@ -62,22 +62,23 @@ export function PricingCheckoutBridge() {
     const plan = search.get("plan");
     if (planAutoStarted.current || !user || !plan) return;
     if (!PLAN_KEYS.includes(plan as PlanKey)) return;
+    if (search.get("stripe_sub_done") === "1") return;
     planAutoStarted.current = true;
-    setInfo("Opening PayPal checkout…");
+    setInfo("Opening Stripe checkout…");
     setError(null);
 
     void (async () => {
       try {
-        const { returnUrl, cancelUrl } = paypalCheckoutUrls(
+        const { successUrl, cancelUrl } = stripeCheckoutUrls(
           window.location.origin,
         );
-        const { approvalUrl } = await createPayPalProAccessOrder({
+        const { checkoutUrl } = await createStripeProAccessCheckout({
           planKey: plan as PlanKey,
-          returnUrl,
+          successUrl,
           cancelUrl,
         });
-        if (!approvalUrl) throw new Error("No PayPal approval URL returned.");
-        window.location.href = approvalUrl;
+        if (!checkoutUrl) throw new Error("No Stripe checkout URL returned.");
+        window.location.href = checkoutUrl;
       } catch (err) {
         setError(
           err instanceof Error

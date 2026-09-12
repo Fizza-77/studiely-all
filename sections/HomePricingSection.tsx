@@ -7,12 +7,12 @@ import { useAuth } from "@/components/providers/auth-provider";
 import { STUDIELY_APP } from "@/lib/appUrls";
 import {
   FALLBACK_QUOTE,
-  createPayPalProAccessOrder,
+  createStripeProAccessCheckout,
   getWebProPricingQuote,
-  paypalCheckoutUrls,
+  stripeCheckoutUrls,
   type PlanKey,
   type PricingQuote,
-} from "@/lib/billing/paypal";
+} from "@/lib/billing/stripe";
 
 const LIME = "#E8FF2F";
 const INDIGO = "#4F35F2";
@@ -216,16 +216,16 @@ export const HomePricingSection = ({
 
     setBusy(planKey);
     try {
-      const { returnUrl, cancelUrl } = paypalCheckoutUrls(
+      const { successUrl, cancelUrl } = stripeCheckoutUrls(
         window.location.origin,
       );
-      const { approvalUrl } = await createPayPalProAccessOrder({
+      const { checkoutUrl } = await createStripeProAccessCheckout({
         planKey,
-        returnUrl,
+        successUrl,
         cancelUrl,
       });
-      if (!approvalUrl) throw new Error("No PayPal approval URL returned.");
-      window.location.href = approvalUrl;
+      if (!checkoutUrl) throw new Error("No Stripe checkout URL returned.");
+      window.location.href = checkoutUrl;
     } catch (err) {
       setError(
         err instanceof Error
@@ -388,7 +388,7 @@ export const HomePricingSection = ({
           {PAID_PLANS.map((plan) => {
             const isBusy = busy === plan.planKey;
             const ctaLabel = isBusy
-              ? "Redirecting to PayPal…"
+              ? "Redirecting to Stripe…"
               : user
                 ? plan.cta
                 : "Sign in to buy";

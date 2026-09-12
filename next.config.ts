@@ -23,14 +23,14 @@ const nextConfig: NextConfig = {
       "base-uri 'self'",
       "object-src 'none'",
       "frame-ancestors 'self'",
-      "form-action 'self'",
+      "form-action 'self' https://checkout.stripe.com https://js.stripe.com",
       "img-src 'self' data: blob: https:",
       "font-src 'self' data: https://fonts.gstatic.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      // Next/Firebase/Turnstile/PayPal require script flexibility; tighten further with nonces later.
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com https://www.gstatic.com https://apis.google.com https://appleid.cdn-apple.com https://www.paypal.com https://www.sandbox.paypal.com https://securepubads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.googletagservices.com https://www.google.com https://www.googleadservices.com https://tpc.googlesyndication.com https://*.googlesyndication.com https://*.doubleclick.net https://*.adtrafficquality.google",
+      // Next/Firebase/Turnstile/PayPal/Stripe require script flexibility; tighten further with nonces later.
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com https://www.gstatic.com https://apis.google.com https://appleid.cdn-apple.com https://js.stripe.com https://www.paypal.com https://www.sandbox.paypal.com https://securepubads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.googletagservices.com https://www.google.com https://www.googleadservices.com https://tpc.googlesyndication.com https://*.googlesyndication.com https://*.doubleclick.net https://*.adtrafficquality.google",
       "connect-src 'self' https: wss:",
-      "frame-src 'self' https://challenges.cloudflare.com https://*.firebaseapp.com https://accounts.google.com https://appleid.apple.com https://www.paypal.com https://www.sandbox.paypal.com https://*.doubleclick.net https://*.googlesyndication.com https://*.adtrafficquality.google https://www.google.com",
+      "frame-src 'self' https://challenges.cloudflare.com https://*.firebaseapp.com https://accounts.google.com https://appleid.apple.com https://js.stripe.com https://checkout.stripe.com https://www.paypal.com https://www.sandbox.paypal.com https://*.doubleclick.net https://*.googlesyndication.com https://*.adtrafficquality.google https://www.google.com",
       "media-src 'self' blob: https:",
       "worker-src 'self' blob:",
       "upgrade-insecure-requests",
@@ -44,7 +44,7 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           {
             key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=(), payment=(self)",
+            value: "camera=(), microphone=(), geolocation=(), payment=(self \"https://checkout.stripe.com\" \"https://js.stripe.com\")",
           },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           {
