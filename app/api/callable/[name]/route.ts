@@ -24,6 +24,7 @@ const ALLOWED_CALLABLES = new Set([
   "getWritingExamSimulationFeedback",
   "verifyAndGrantSubscription",
   "getStudyCredits",
+  "grantRewardedAdCredit",
   "getWebProPricingQuote",
   "createPayPalProAccessOrder",
   "finalizePayPalProAccessOrder",
@@ -54,6 +55,7 @@ const AUTH_REQUIRED = new Set([
   "sendVerificationOTP",
   "verifyEmailOTP",
   "sendParentConsentEmail",
+  "grantRewardedAdCredit",
 ]);
 
 const HOUR_MS = 60 * 60 * 1000;
@@ -65,6 +67,7 @@ const CALLABLE_HOURLY_LIMITS: Record<string, number> = {
   callOpenAIGuest: 40,
   consumeWebTrial: 40,
   sendPasswordReset: 15,
+  grantRewardedAdCredit: 20,
 };
 
 const DEFAULT_CALLABLE_HOURLY_LIMIT = 60;

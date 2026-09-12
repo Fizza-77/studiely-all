@@ -48,6 +48,8 @@ const HARDCODED_FALLBACKS: Record<string, string> = {
   callOpenAIGuest: "https://callopenaiguest-tgu7j2etxq-uc.a.run.app",
   callGemini: "https://callgemini-tgu7j2etxq-uc.a.run.app",
   callNylaSupport: "https://callnylasupport-tgu7j2etxq-uc.a.run.app",
+  grantRewardedAdCredit:
+    "https://grantrewardedadcredit-tgu7j2etxq-uc.a.run.app",
 };
 
 function cloudfunctionsNetUrl(functionName: string): string {

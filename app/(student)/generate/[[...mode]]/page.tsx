@@ -20,6 +20,7 @@ import {
   type GenerateTip,
 } from "@/components/generate/generate-sidebar";
 import { GenerationProgressScreen } from "@/components/generate/generation-progress-screen";
+import { WatchAdCreditDialog } from "@/components/generate/watch-ad-credit-dialog";
 import { GeneratedStudyContent } from "@/components/library/generated-study-content";
 import { useAuth } from "@/components/providers/auth-provider";
 import {
@@ -610,6 +611,7 @@ function GenerateInner() {
   const [guestPreview, setGuestPreview] = useState<string | null>(null);
   const guestPreviewRef = useRef<HTMLDivElement>(null);
   const [showGuestSignup, setShowGuestSignup] = useState(false);
+  const [showWatchAd, setShowWatchAd] = useState(false);
   const [guestSignupReason, setGuestSignupReason] =
     useState<GuestUpgradeReason>("save");
   const [bottomToast, setBottomToast] = useState<ReactNode | null>(null);
@@ -817,17 +819,12 @@ function GenerateInner() {
     }, durationMs);
   }
 
-  function flashSignedInLimitToast() {
-    flashBottomToast(
-      <>
-        No free generations left on this device. Upgrade on{" "}
-        <Link href="/pricing" className="font-semibold underline">
-          Pricing
-        </Link>
-        , or wait if you expect reward credits.
-      </>,
-      3000,
-    );
+  function openWatchAdDialog() {
+    if (!user?.uid) return;
+    window.gtag?.("event", "watch_ad_credit_dialog_shown", {
+      user_id: user.uid,
+    });
+    setShowWatchAd(true);
   }
 
   const selectedMode = STUDY_MODES.find((m) => m.name === studyMode);
@@ -882,6 +879,10 @@ function GenerateInner() {
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
+    await startGeneration();
+  }
+
+  async function startGeneration(options?: { skipCreditLimit?: boolean }) {
     setCompletedNoteId(null);
     setGuestPreview(null);
 
@@ -907,13 +908,13 @@ function GenerateInner() {
       flashBottomToast("That study mode requires Pro. Upgrade or pick a free mode.");
       return;
     }
-    if (atLimit) {
+    if (atLimit && !options?.skipCreditLimit) {
       if (isGuest || !user) {
         setGuestSignupReason("exhausted");
         setShowGuestSignup(true);
         return;
       }
-      flashSignedInLimitToast();
+      openWatchAdDialog();
       return;
     }
 
@@ -1154,6 +1155,19 @@ function GenerateInner() {
                 No subscription generations left this period. Upgrade or wait
                 for your next billing cycle.
               </Alert>
+            ) : null}
+
+            {atLimit && !isGuest && !isPremium ? (
+              <button
+                type="button"
+                onClick={openWatchAdDialog}
+                className="inline-flex items-center gap-2 rounded-lg border border-[#10B981]/30 bg-[#10B981]/12 px-3 py-2 text-left text-sm font-bold text-[#10B981] transition hover:bg-[#10B981]/18"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm-1.75 14.2V7.8L16.5 12Z" />
+                </svg>
+                Watch Ad to Generate
+              </button>
             ) : null}
 
             <div
@@ -1964,6 +1978,21 @@ function GenerateInner() {
           studyMode={studyMode}
           guestCreditsTotal={credits?.total}
           onClose={() => setShowGuestSignup(false)}
+        />
+      ) : null}
+      {showWatchAd && user?.uid ? (
+        <WatchAdCreditDialog
+          userId={user.uid}
+          onClose={() => setShowWatchAd(false)}
+          onCreditEarned={async () => {
+            setShowWatchAd(false);
+            flashBottomToast(
+              "Success! You earned +1 generation credit.",
+              4000,
+            );
+            await refresh({ silent: true });
+            await startGeneration({ skipCreditLimit: true });
+          }}
         />
       ) : null}
       {bottomToast ? (
