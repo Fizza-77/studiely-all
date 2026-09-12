@@ -28,7 +28,7 @@ const nextConfig: NextConfig = {
       "font-src 'self' data: https://fonts.gstatic.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       // Next/Firebase/Turnstile/PayPal require script flexibility; tighten further with nonces later.
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com https://www.gstatic.com https://apis.google.com https://appleid.cdn-apple.com https://www.paypal.com https://www.sandbox.paypal.com https://securepubads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.googletagservices.com https://www.google.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com https://www.gstatic.com https://apis.google.com https://appleid.cdn-apple.com https://www.paypal.com https://www.sandbox.paypal.com https://securepubads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.googletagservices.com https://www.google.com https://www.googleadservices.com https://tpc.googlesyndication.com https://*.googlesyndication.com https://*.doubleclick.net https://*.adtrafficquality.google",
       "connect-src 'self' https: wss:",
       "frame-src 'self' https://challenges.cloudflare.com https://*.firebaseapp.com https://accounts.google.com https://appleid.apple.com https://www.paypal.com https://www.sandbox.paypal.com https://*.doubleclick.net https://*.googlesyndication.com https://*.adtrafficquality.google https://www.google.com",
       "media-src 'self' blob: https:",

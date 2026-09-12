@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { watchAdAndGrantCredit } from "@/lib/ads/rewarded-ad";
+import {
+  preloadRewardedAd,
+  watchAdAndGrantCredit,
+} from "@/lib/ads/rewarded-ad";
 
 type WatchAdCreditDialogProps = {
   userId: string;
@@ -24,12 +27,20 @@ export function WatchAdCreditDialog({
   const [loadingAd, setLoadingAd] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    preloadRewardedAd();
+  }, []);
+
   async function onWatchAd() {
     if (loadingAd) return;
+    if (!userId.trim()) {
+      setError("Please sign in to earn generation credits.");
+      return;
+    }
     setLoadingAd(true);
     setError(null);
     try {
-      await watchAdAndGrantCredit();
+      await watchAdAndGrantCredit(userId);
       logEvent("rewarded_ad_completed", { user_id: userId });
       await onCreditEarned();
     } catch (err) {
