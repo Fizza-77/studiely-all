@@ -126,7 +126,7 @@ export const QCE_EARTH_AND_ENVIRONMENTAL_SCIENCE: SubjectLandingContent = {
       body: "Practice turns revision into performance. Students need chances to apply ideas, plan responses, make mistakes, review feedback and try again. This is where understanding becomes more reliable. Studiely supports exam-style practice through data-response questions, case-study explanations, environmental scenarios and applied science tasks. These practice tasks help students connect what they know with how they need to respond under time and assessment pressure.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

@@ -123,7 +123,7 @@ export const VCE_PHYSICAL_EDUCATION: SubjectLandingContent = {
       body: "VCE Physical Education Exam Practice turns revision into application. Practice helps students build timing, accuracy, confidence and familiarity with the kinds of tasks they may face. With Studiely, students can prepare through short-answer questions, graph tasks, scenario prompts, and exam-style PE application questions. This helps them move from recognition to performance, which is where strong study habits become visible.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

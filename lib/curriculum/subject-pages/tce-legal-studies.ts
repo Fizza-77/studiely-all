@@ -125,7 +125,7 @@ export const TCE_LEGAL_STUDIES: SubjectLandingContent = {
       body: "Practice works best when students do it before the final rush. Studiely helps students create short practice tasks, response prompts and revision checks that build confidence gradually. Strong practice in Legal Studies uses scenario questions, case prompts and extended-response outlines.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

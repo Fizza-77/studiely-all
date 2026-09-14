@@ -124,7 +124,7 @@ export const TCE_COMPUTER_SCIENCE: SubjectLandingContent = {
       body: "Practice works best when students do it before the final rush. Studiely helps students create short practice tasks, response prompts and revision checks that build confidence gradually. Strong practice in Computer Science uses algorithm drills, pseudocode prompts and applied computing scenarios.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

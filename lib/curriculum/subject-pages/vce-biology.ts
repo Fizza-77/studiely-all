@@ -122,7 +122,7 @@ export const VCE_BIOLOGY: SubjectLandingContent = {
       body: "VCE Biology Exam Practice turns revision into application. Practice helps students build timing, accuracy, confidence and familiarity with the kinds of tasks they may face. With Studiely, students can prepare through short-answer questions, experimental design tasks, data response practice, and exam-style application questions. This helps them move from recognition to performance, which is where strong study habits become visible.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

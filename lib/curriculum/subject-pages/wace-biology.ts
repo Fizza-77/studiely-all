@@ -119,7 +119,7 @@ export const WACE_BIOLOGY: SubjectLandingContent = {
       body: "Practice becomes more useful when students review how they reached an answer, not only whether the final response looks complete. Studiely supports exam-style preparation by helping students generate practice prompts, organise response plans and revisit weaker areas after a quiz or written attempt. For biology, exam-style practice may involve data interpretation, process explanation, terminology accuracy and applied biological reasoning. Students can use Studiely to build a steady routine that moves from understanding to recall, from recall to application and from application to improvement.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

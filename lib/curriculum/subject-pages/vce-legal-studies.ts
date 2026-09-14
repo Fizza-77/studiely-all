@@ -124,7 +124,7 @@ export const VCE_LEGAL_STUDIES: SubjectLandingContent = {
       body: "VCE Legal Studies Exam Practice turns revision into application. Practice helps students build timing, accuracy, confidence and familiarity with the kinds of tasks they may face. With Studiely, students can prepare through short-answer questions, evaluate prompts, case application drills, and timed exam-style responses. This helps them move from recognition to performance, which is where strong study habits become visible.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

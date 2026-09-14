@@ -96,7 +96,7 @@ export const ACT_SENIOR_SOCIOLOGY: SubjectLandingContent = {
       body: "Practice becomes more valuable when it feels close to the kinds of thinking students need in real assessment conditions. For sociology, students should practise applying knowledge, not just remembering it. With Studiely, students can analyse social scenarios, compare perspectives and write concept-rich responses. Over time, this builds a more reliable revision cycle: study the idea, recall it, test it, apply it, then improve the response.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

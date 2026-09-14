@@ -123,7 +123,7 @@ export const QCE_MODERN_HISTORY: SubjectLandingContent = {
       body: "Practice turns revision into performance. Students need chances to apply ideas, plan responses, make mistakes, review feedback and try again. This is where understanding becomes more reliable. Studiely supports exam-style practice through source responses, essay plans, extended responses and timed historical arguments. These practice tasks help students connect what they know with how they need to respond under time and assessment pressure.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

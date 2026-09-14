@@ -96,7 +96,7 @@ export const ACT_SENIOR_MATHEMATICAL_METHODS: SubjectLandingContent = {
       body: "Practice becomes more valuable when it feels close to the kinds of thinking students need in real assessment conditions. For mathematical methods, students should practise applying knowledge, not just remembering it. With Studiely, students can work through exam-style function, calculus and probability questions with careful working. Over time, this builds a more reliable revision cycle: study the idea, recall it, test it, apply it, then improve the response.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

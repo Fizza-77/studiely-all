@@ -96,7 +96,7 @@ export const ACT_SENIOR_FRENCH: SubjectLandingContent = {
       body: "Practice becomes more valuable when it feels close to the kinds of thinking students need in real assessment conditions. For french, students should practise applying knowledge, not just remembering it. With Studiely, students can write short responses, build speaking prompts and practise interpreting authentic-style texts. Over time, this builds a more reliable revision cycle: study the idea, recall it, test it, apply it, then improve the response.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

@@ -125,7 +125,7 @@ export const TCE_ENVIRONMENTAL_SCIENCE: SubjectLandingContent = {
       body: "Practice works best when students do it before the final rush. Studiely helps students create short practice tasks, response prompts and revision checks that build confidence gradually. Strong practice in Environmental Science uses data prompts, short responses and scenario-based decisions.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

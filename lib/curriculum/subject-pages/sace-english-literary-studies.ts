@@ -115,7 +115,7 @@ export const SACE_ENGLISH_LITERARY_STUDIES: SubjectLandingContent = {
       body: "Practice matters because students need to use knowledge under task conditions. Studiely supports exam-style and assessment-style preparation by helping students create prompts, review response plans and practise applying ideas in a structured way. Strong practice for this subject can include annotation routines, evidence maps, literary technique recall, analytical paragraph planning, and extended-response practice. The point is not to complete random questions. The point is to practise the same thinking patterns students need in SACE tasks: understand the focus, choose relevant knowledge, explain clearly and improve after review.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

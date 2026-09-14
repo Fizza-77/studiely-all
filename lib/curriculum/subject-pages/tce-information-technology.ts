@@ -126,7 +126,7 @@ export const TCE_INFORMATION_TECHNOLOGY: SubjectLandingContent = {
       body: "Practice works best when students do it before the final rush. Studiely helps students create short practice tasks, response prompts and revision checks that build confidence gradually. Strong practice in Information Technology uses applied scenarios, planning tasks and short technical responses.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

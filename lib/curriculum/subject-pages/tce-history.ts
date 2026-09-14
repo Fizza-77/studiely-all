@@ -124,7 +124,7 @@ export const TCE_HISTORY: SubjectLandingContent = {
       body: "Practice works best when students do it before the final rush. Studiely helps students create short practice tasks, response prompts and revision checks that build confidence gradually. Strong practice in History uses source prompts, essay outlines and short-response tasks.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

@@ -124,7 +124,7 @@ export const VCE_ENVIRONMENTAL_SCIENCE: SubjectLandingContent = {
       body: "VCE Environmental Science Exam Practice turns revision into application. Practice helps students build timing, accuracy, confidence and familiarity with the kinds of tasks they may face. With Studiely, students can prepare through case-study prompts, graph questions, short-answer practice, and applied environmental scenarios. This helps them move from recognition to performance, which is where strong study habits become visible.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

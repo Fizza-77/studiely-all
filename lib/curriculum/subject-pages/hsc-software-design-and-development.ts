@@ -129,7 +129,7 @@ export const HSC_SOFTWARE_DESIGN_AND_DEVELOPMENT: SubjectLandingContent = {
       body: "Practice turns revision into performance. For HSC Software Design and Development, students can use Studiely to support algorithm questions, scenarios, data design tasks and development process explanations. This gives students a way to move beyond passive reading and into the kind of thinking they need for school assessments and HSC preparation. The strongest practice routine combines short checks with longer tasks. Students can review a concept, test it with flashcards or quizzes, then apply it in a practice response or problem. That sequence helps build confidence without turning study into last-minute cramming.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

@@ -125,7 +125,7 @@ export const QCE_ENGLISH_LITERATURE: SubjectLandingContent = {
       body: "Practice turns revision into performance. Students need chances to apply ideas, plan responses, make mistakes, review feedback and try again. This is where understanding becomes more reliable. Studiely supports exam-style practice through close-analysis paragraphs, essay plans, thematic responses and timed literary argument. These practice tasks help students connect what they know with how they need to respond under time and assessment pressure.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

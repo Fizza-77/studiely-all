@@ -22,15 +22,6 @@ export const CurriculumClosingSection = () => {
               Expert Tutoring for Global Exams
             </p>
 
-            <a
-              href={STUDIELY_APP.examPractice}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute bottom-8 left-7 z-[2] inline-flex items-center justify-center rounded-full px-6 py-3 font-jakarta text-[13px] font-bold text-[#1E1B4B] transition-transform hover:scale-[1.02] sm:bottom-9 sm:left-9 sm:px-7 sm:text-[14px]"
-              style={{ backgroundColor: LIME }}
-            >
-              Explore Prep Tools
-            </a>
 
             <Image
               src="/flower.webp"

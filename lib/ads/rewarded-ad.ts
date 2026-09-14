@@ -74,7 +74,7 @@ function ensureGpt(): Gpt {
   }
   const existing = window.googletag;
   if (existing?.cmd) return existing;
-  const googletag: Gpt = { cmd: [] } as Gpt;
+  const googletag = { cmd: [] } as unknown as Gpt;
   window.googletag = googletag;
   return googletag;
 }

@@ -123,7 +123,7 @@ export const VCE_ECONOMICS: SubjectLandingContent = {
       body: "VCE Economics Exam Practice turns revision into application. Practice helps students build timing, accuracy, confidence and familiarity with the kinds of tasks they may face. With Studiely, students can prepare through short-answer questions, diagram prompts, data response tasks, and extended evaluation practice. This helps them move from recognition to performance, which is where strong study habits become visible.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

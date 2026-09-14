@@ -104,7 +104,7 @@ export const WACE_COMPUTER_SCIENCE: SubjectLandingContent = {
       body: "Practice becomes more useful when students review how they reached an answer, not only whether the final response looks complete. Studiely supports exam-style preparation by helping students generate practice prompts, organise response plans and revisit weaker areas after a quiz or written attempt. For computer science, exam-style practice may involve algorithm tracing, design justification, systems questions, data reasoning and technical short responses. Students can use Studiely to build a steady routine that moves from understanding to recall, from recall to application and from application to improvement.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

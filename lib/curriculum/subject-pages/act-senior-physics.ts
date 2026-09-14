@@ -96,7 +96,7 @@ export const ACT_SENIOR_PHYSICS: SubjectLandingContent = {
       body: "Practice becomes more valuable when it feels close to the kinds of thinking students need in real assessment conditions. For physics, students should practise applying knowledge, not just remembering it. With Studiely, students can solve numerical problems, describe practical situations and connect calculations with physical meaning. Over time, this builds a more reliable revision cycle: study the idea, recall it, test it, apply it, then improve the response.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

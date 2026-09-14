@@ -123,7 +123,7 @@ export const VCE_DANCE: SubjectLandingContent = {
       body: "VCE Dance Exam Practice turns revision into application. Practice helps students build timing, accuracy, confidence and familiarity with the kinds of tasks they may face. With Studiely, students can prepare through analysis prompts, reflection tasks, terminology checks, and exam-style dance response practice. This helps them move from recognition to performance, which is where strong study habits become visible.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

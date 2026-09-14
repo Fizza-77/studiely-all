@@ -96,7 +96,7 @@ export const ACT_SENIOR_ENVIRONMENTAL_SCIENCE: SubjectLandingContent = {
       body: "Practice becomes more valuable when it feels close to the kinds of thinking students need in real assessment conditions. For environmental science, students should practise applying knowledge, not just remembering it. With Studiely, students can analyse graphs, compare strategies and write evidence-based responses to environmental problems. Over time, this builds a more reliable revision cycle: study the idea, recall it, test it, apply it, then improve the response.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

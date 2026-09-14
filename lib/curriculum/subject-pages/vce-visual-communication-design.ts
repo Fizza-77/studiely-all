@@ -124,7 +124,7 @@ export const VCE_VISUAL_COMMUNICATION_DESIGN: SubjectLandingContent = {
       body: "VCE Visual Communication Design Exam Practice turns revision into application. Practice helps students build timing, accuracy, confidence and familiarity with the kinds of tasks they may face. With Studiely, students can prepare through short analysis tasks, design-brief prompts, visual terminology drills, and exam-style response practice. This helps them move from recognition to performance, which is where strong study habits become visible.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

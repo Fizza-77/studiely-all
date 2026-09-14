@@ -96,7 +96,7 @@ export const ACT_SENIOR_MATHEMATICS: SubjectLandingContent = {
       body: "Practice becomes more valuable when it feels close to the kinds of thinking students need in real assessment conditions. For mathematics, students should practise applying knowledge, not just remembering it. With Studiely, students can solve staged problems, compare methods and build accuracy through timed sets. Over time, this builds a more reliable revision cycle: study the idea, recall it, test it, apply it, then improve the response.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

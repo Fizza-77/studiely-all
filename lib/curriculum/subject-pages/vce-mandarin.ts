@@ -126,7 +126,7 @@ export const VCE_MANDARIN: SubjectLandingContent = {
       body: "VCE Mandarin Exam Practice turns revision into application. Practice helps students build timing, accuracy, confidence and familiarity with the kinds of tasks they may face. With Studiely, students can prepare through character drills, oral prompts, writing practice, comprehension tasks, and exam-style Mandarin questions. This helps them move from recognition to performance, which is where strong study habits become visible.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

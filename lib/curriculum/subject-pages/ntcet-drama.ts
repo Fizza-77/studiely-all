@@ -94,7 +94,7 @@ export const NTCET_DRAMA: SubjectLandingContent = {
       body: "Practice turns revision into performance. Students need chances to apply knowledge to prompts that feel closer to assessment conditions. That may mean explaining a concept, solving a problem, analysing evidence, planning an argument or evaluating a decision. Studiely supports practice through rehearsal reflection prompts, terminology cards, scene analysis, performance planning and short response drills. Students can use these tasks to build speed, accuracy and confidence. They can also review mistakes after each attempt, which is where a large part of improvement happens.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

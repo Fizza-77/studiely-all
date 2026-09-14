@@ -122,7 +122,7 @@ export const WACE_BUSINESS_MANAGEMENT_AND_ENTERPRISE: SubjectLandingContent = {
       body: "Practice becomes more useful when students review how they reached an answer, not only whether the final response looks complete. Studiely supports exam-style preparation by helping students generate practice prompts, organise response plans and revisit weaker areas after a quiz or written attempt. For business management and enterprise, exam-style practice may involve case analysis, recommendation writing, evaluation, terminology accuracy and scenario-based responses. Students can use Studiely to build a steady routine that moves from understanding to recall, from recall to application and from application to improvement.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

@@ -127,7 +127,7 @@ export const WACE_APPLIED_INFORMATION_TECHNOLOGY: SubjectLandingContent = {
         "Practice becomes more useful when students review how they reached an answer, not only whether the final response looks complete. Studiely supports exam-style preparation by helping students generate practice prompts, organise response plans and revisit weaker areas after a quiz or written attempt. For applied information technology, exam-style practice may involve scenario analysis, digital-solution decisions, terminology, project reflection and applied technology questions.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

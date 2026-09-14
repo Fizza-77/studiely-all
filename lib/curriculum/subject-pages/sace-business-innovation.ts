@@ -115,7 +115,7 @@ export const SACE_BUSINESS_INNOVATION: SubjectLandingContent = {
       body: "Practice matters because students need to use knowledge under task conditions. Studiely supports exam-style and assessment-style preparation by helping students create prompts, review response plans and practise applying ideas in a structured way. Strong practice for this subject can include business-model summaries, decision matrices, customer-profile cards, case-study questions, and evaluation prompts. The point is not to complete random questions. The point is to practise the same thinking patterns students need in SACE tasks: understand the focus, choose relevant knowledge, explain clearly and improve after review.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

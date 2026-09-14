@@ -125,7 +125,7 @@ export const VCE_HEALTH_AND_HUMAN_DEVELOPMENT: SubjectLandingContent = {
       body: "VCE Health and Human Development Exam Practice turns revision into application. Practice helps students build timing, accuracy, confidence and familiarity with the kinds of tasks they may face. With Studiely, students can prepare through short-answer drills, data-response questions, program evaluation prompts, and timed HHD exam practice. This helps them move from recognition to performance, which is where strong study habits become visible.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],

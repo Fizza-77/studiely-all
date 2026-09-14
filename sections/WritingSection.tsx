@@ -169,70 +169,12 @@ export const WritingSection = ({ sectionRef }: WritingSectionProps) => {
                     </span>
                   </div>
 
-                  <a href={STUDIELY_APP.examPractice} className="block">
-                    <span className="flex w-full p-2.5 bg-navy text-white text-[13px] font-medium rounded-lg items-center justify-center hover:bg-navy/90 transition-colors">
-                      Submit for AI Feedback →
-                    </span>
-                  </a>
                 </div>
               </div>
             </Reveal>
           </div>
         </div>
 
-       {/* BIG SEO CTA BUTTON */}
-<Reveal delay={0.4}>
-  <div className="mt-12 sm:mt-14 md:mt-16 flex justify-center">
-    <motion.a
-      href={STUDIELY_APP.examPractice}
-      aria-label="Start AI exam practice mode"
-      whileHover={{
-        scale: 1.025,
-        boxShadow: "0 16px 48px rgba(217,123,42,.35)",
-      }}
-      whileTap={{ scale: 0.97 }}
-      className="flex items-center justify-center gap-3 sm:gap-4 text-white border-none rounded-[14px] text-[18px] sm:text-[20px] md:text-[22px] font-semibold shrink-0 transition-all duration-300 w-full max-w-[480px] h-[72px] sm:h-[84px] overflow-hidden cursor-pointer px-4 sm:px-5"
-      style={{
-        background: "linear-gradient(135deg,#d97b2a 0%,#b86420 100%)",
-        boxShadow: "0 8px 28px rgba(217,123,42,.28)",
-      }}
-    >
-      {/* SVG icon */}
-      <svg
-        width="42"
-        height="32"
-        viewBox="0 0 90 68"
-        fill="none"
-        className="shrink-0 transition-opacity duration-300"
-      >
-        <rect x="2" y="52" width="62" height="8" rx="2.5" fill="currentColor" opacity=".9" />
-        <rect x="8" y="60" width="8" height="6" rx="1.5" fill="currentColor" opacity=".7" />
-        <rect x="30" y="60" width="8" height="6" rx="1.5" fill="currentColor" opacity=".7" />
-        <rect x="8" y="14" width="14" height="38" rx="2" fill="currentColor" opacity=".85" />
-        <rect x="10" y="19" width="10" height="6" rx="1" fill="white" opacity=".25" />
-        <rect x="10" y="32" width="10" height="3" rx="1" fill="white" opacity=".18" />
-        <rect x="10" y="37" width="7" height="3" rx="1" fill="white" opacity=".18" />
-        <rect x="24" y="20" width="13" height="32" rx="2" fill="currentColor" opacity=".7" />
-        <rect x="26" y="25" width="9" height="5" rx="1" fill="white" opacity=".25" />
-        <g transform="rotate(-12 42 52)">
-          <rect x="36" y="18" width="12" height="34" rx="2" fill="currentColor" opacity=".55" />
-          <rect x="38" y="23" width="8" height="4" rx="1" fill="white" opacity=".22" />
-          <rect x="38" y="30" width="6" height="3" rx="1" fill="white" opacity=".18" />
-        </g>
-        <path d="M62 28 L80 22 L62 16 L44 22 Z" fill="currentColor" opacity=".9" />
-        <path d="M53 25 L53 38 Q53 42 62 44 Q71 42 71 38 L71 25" fill="currentColor" opacity=".6" />
-        <line x1="80" y1="22" x2="80" y2="34" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity=".8" />
-        <circle cx="80" cy="36" r="2.8" fill="currentColor" opacity=".8" />
-        <line x1="80" y1="38" x2="78" y2="44" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity=".6" />
-        <line x1="80" y1="38" x2="80" y2="45" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity=".6" />
-        <line x1="80" y1="38" x2="82" y2="44" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity=".6" />
-      </svg>
-
-      {/* Button text */}
-      Start Exam Practice
-    </motion.a>
-  </div>
-</Reveal>
       </div>
     </section>
   );

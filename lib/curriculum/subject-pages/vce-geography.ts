@@ -124,7 +124,7 @@ export const VCE_GEOGRAPHY: SubjectLandingContent = {
       body: "VCE Geography Exam Practice turns revision into application. Practice helps students build timing, accuracy, confidence and familiarity with the kinds of tasks they may face. With Studiely, students can prepare through map questions, data response tasks, fieldwork-style prompts, and exam-style explanation questions. This helps them move from recognition to performance, which is where strong study habits become visible.",
       icon: "/icons/exam.svg",
       accent: BLUE,
-      href: STUDIELY_APP.examPractice,
+      href: "#",
       cta: "Practise exam-style",
     },
   ],
