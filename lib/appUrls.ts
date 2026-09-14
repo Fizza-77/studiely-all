@@ -17,7 +17,6 @@ export const STUDIELY_APP = {
   login: appPath("/login"),
   signUp: appPath("/signup"),
   library: appPath("/library"),
-  examPractice: appPath("/practice/writing"),
   notes: appPath("/generate/notes"),
   summaryNotes: appPath("/generate/notes"),
   flashcards: appPath("/generate/flashcards"),

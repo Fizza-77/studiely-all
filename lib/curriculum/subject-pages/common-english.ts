@@ -12,7 +12,7 @@ export const COMMON_ENGLISH = createCommonSubjectContent({
   flashcards: "Studiely flashcards connect terms such as tone, audience, metaphor, modality, theme and paragraph structure with simple examples.",
   quiz: "Studiely can create quiz-style prompts that check comprehension, language choices, text purpose, spelling patterns, punctuation and response planning.",
   examFocus: "Studiely helps students notice what a question asks them to do before they start writing.",
-  examPractice: "Studiely supports paragraph planning, text response, short answer practice and timed writing routines.",
+
   recall: "reading, writing, grammar, speaking tasks, literature response, persuasive writing and multimodal analysis",
   cta: "Use Studiely to turn Australian Curriculum English topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum English", "English resources Australia", "English revision notes", "English flashcards", "English quiz", "English exam practice"],

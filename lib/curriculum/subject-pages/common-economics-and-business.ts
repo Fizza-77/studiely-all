@@ -12,7 +12,7 @@ export const COMMON_ECONOMICS_AND_BUSINESS = createCommonSubjectContent({
   flashcards: "Studiely flashcards support recall of terms such as scarcity, market, consumer, producer, cost, benefit and enterprise.",
   quiz: "Studiely can create quiz-style prompts that check concept meaning, scenario analysis, vocabulary and decision reasoning.",
   examFocus: "Studiely helps students explain why choices have costs, benefits and consequences.",
-  examPractice: "Studiely supports case studies, short answers, business idea analysis and economic explanations.",
+
   recall: "markets, business ideas, consumer decisions, resources, work, enterprise and financial reasoning",
   cta: "Use Studiely to turn Australian Curriculum Economics and Business topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum Economics and Business", "Economics and Business resources Australia", "Economics and Business revision notes", "Economics and Business flashcards", "Economics and Business quiz", "Economics and Business exam practice"],

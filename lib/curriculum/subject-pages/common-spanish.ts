@@ -12,7 +12,7 @@ export const COMMON_SPANISH = createCommonSubjectContent({
   flashcards: "Studiely flashcards support recall of verbs, adjectives, phrases, question words and topic vocabulary.",
   quiz: "Studiely can create quiz-style prompts that check sentence meaning, grammar choice, vocabulary recall and short-response accuracy.",
   examFocus: "Studiely helps students prepare for listening, reading, speaking and writing tasks with clearer topic language.",
-  examPractice: "Studiely supports conversation prompts, translation, reading response and paragraph writing.",
+
   recall: "vocabulary, verbs, listening, speaking, reading, writing and cultural understanding",
   cta: "Use Studiely to turn Australian Curriculum Spanish topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum Spanish", "Spanish resources Australia", "Spanish revision notes", "Spanish flashcards", "Spanish quiz", "Spanish exam practice"],

@@ -12,7 +12,7 @@ export const COMMON_PHYSICS = createCommonSubjectContent({
   flashcards: "Studiely flashcards support recall of symbols, units, laws, vocabulary and diagram labels.",
   quiz: "Studiely can create quiz-style prompts that check concept selection, unit knowledge, graph reading and cause-and-effect reasoning.",
   examFocus: "Studiely helps students identify what a question is asking before calculating or explaining.",
-  examPractice: "Studiely supports formula use, graph interpretation, circuit questions and short explanations.",
+
   recall: "forces, energy, motion, waves, electricity, graph interpretation and practical reasoning",
   cta: "Use Studiely to turn Australian Curriculum Physics topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum Physics", "Physics resources Australia", "Physics revision notes", "Physics flashcards", "Physics quiz", "Physics exam practice"],

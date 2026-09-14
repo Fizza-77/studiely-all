@@ -12,7 +12,7 @@ export const COMMON_MEDIA_ARTS = createCommonSubjectContent({
   flashcards: "Studiely flashcards support recall of terms such as shot type, angle, editing, framing, sound, genre and audience.",
   quiz: "Studiely can create quiz-style prompts that check media vocabulary, production reasoning, audience understanding and representation analysis.",
   examFocus: "Studiely helps students explain how technical choices influence message and viewer response.",
-  examPractice: "Studiely supports storyboard planning, media analysis, production reflection and short response tasks.",
+
   recall: "media analysis, production planning, storyboarding, audience studies and representation topics",
   cta: "Use Studiely to turn Australian Curriculum Media Arts topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum Media Arts", "Media Arts resources Australia", "Media Arts revision notes", "Media Arts flashcards", "Media Arts quiz", "Media Arts exam practice"],

@@ -13,7 +13,7 @@ const webAppSchema = {
   operatingSystem: "iOS, Android, Web",
   description:
     "AI study assistant and student tools: curriculum-aligned summary notes, flashcards, " +
-    "AI learning, quizzes and exam practice for IGCSE, GCSE, IB, A-Level, SAT, HSC and more.",
+    "AI learning, quizzes and exam focus support for IGCSE, GCSE, IB, A-Level, SAT, HSC and more.",
   offers: {
     "@type": "Offer",
     price: "0",
@@ -26,10 +26,9 @@ const webAppSchema = {
     "AI summary notes",
     "Spaced-repetition flashcards",
     "Quiz generator",
-    "Exam practice with AI feedback",
+    "Exam Focus support",
     "AI tutor Nyla",
     "Mnemonics generator",
-    "Exam practice mode",
     "Study streaks and rewards",
   ],
   audience: {
@@ -43,9 +42,9 @@ const webAppSchema = {
   },
 };
 
-const homeTitle = "Studiely — AI Study Assistant, IGCSE Tutor & Exam Practice";
+const homeTitle = "Studiely — AI Study Assistant, IGCSE Tutor & Exam Focus";
 const homeDescription =
-  "Studiely is your AI study assistant for real exams: AI learning, flashcards, quizzes, and exam practice " +
+  "Studiely is your AI study assistant for real exams: AI learning, flashcards, quizzes, and exam focus support " +
   "for IGCSE, IB, GCSE, A-Level, SAT & more. Student tools aligned to your board — start free.";
 
 export const metadata: Metadata = {

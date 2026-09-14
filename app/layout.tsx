@@ -168,6 +168,10 @@ export default function RootLayout({
           name="facebook-domain-verification"
           content="ixoxjly0raima1favd2auxjangpbg5"
         />
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-8561023104814029"
+        />
       </head>
       <body className="site-funky antialiased font-sans bg-bg-base text-body flex min-h-full flex-col">
         <GoogleAnalytics />

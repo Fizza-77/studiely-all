@@ -58,7 +58,7 @@ export const sectionF: FaqSection = {
   id: "faq-pricing",
   title: "F. Pricing, Plans & Subscriptions",
   intro:
-    "Premium plan pricing (USD), discounts, cancellation, renewals, refunds and Exam Practice.",
+    "Premium plan pricing (USD), discounts, cancellation, renewals and refunds.",
   items: [
     {
       question: "What plans does Studiely offer?",
@@ -88,7 +88,7 @@ export const sectionF: FaqSection = {
     {
       question: "How much does Studiely cost?",
       schemaText:
-        "Studiely offers a free plan and several Premium subscription options. The free plan includes five complete generations at no cost — no credit card required. Premium plans are available on monthly, three-month, six-month and annual billing cycles: Monthly $9.99 / 100 credits, 3 Months $26.99 / 300, 6 Months $49.99 / 600, Annual $89.99 / 1,200. The Exam Practice add-on is a separate $29.99 USD per month subscription, billed independently of your main plan.",
+        "Studiely offers a free plan and several Premium subscription options. The free plan includes five complete generations at no cost — no credit card required. Premium plans are available on monthly, three-month, six-month and annual billing cycles: Monthly $9.99 / 100 credits, 3 Months $26.99 / 300, 6 Months $49.99 / 600, Annual $89.99 / 1,200.",
       answer: (
         <>
           <p>
@@ -105,10 +105,6 @@ export const sectionF: FaqSection = {
           </p>
           <p>
             To see current pricing, visit the {pricingLink} at studiely.com.
-          </p>
-          <p>
-            The Exam Practice add-on is a separate subscription, priced at $29.99 USD per month, and is billed
-            independently of your main plan.
           </p>
         </>
       ),
@@ -131,40 +127,6 @@ export const sectionF: FaqSection = {
           <p>
             Current pricing and plan comparisons are shown on the {pricingLink}, where you can see all available
             options in your region.
-          </p>
-        </>
-      ),
-    },
-    {
-      question: "What is the Exam Practice add-on?",
-      schemaText:
-        "A separate subscription, priced at $29.99 USD per month, available alongside any main plan. It's billed and cancelled independently of your main plan.",
-      answer: (
-        <p>
-          A separate subscription, priced at $29.99 USD per month, available alongside any main plan. It&apos;s billed
-          and cancelled independently of your main plan.
-        </p>
-      ),
-    },
-    {
-      question: "How does the Exam Practice add-on work?",
-      schemaText:
-        "Exam Practice is a separate $29.99 USD per month subscription from the main plan. It can be added regardless of which main plan you hold, and is billed and renews independently. Cancelling your main plan does not cancel Exam Practice, and cancelling Exam Practice does not cancel your main plan — each is managed separately from your account page. The add-on covers every curriculum system Studiely supports.",
-      answer: (
-        <>
-          <p>
-            Exam Practice is a separate subscription from the main plan, priced at $29.99 USD per month. It can be
-            added regardless of which main plan you hold, and is billed and renews independently of your main
-            subscription.
-          </p>
-          <p>
-            Cancelling your main plan does not cancel Exam Practice, and cancelling Exam Practice does not cancel your
-            main plan — each is managed separately from your account page.
-          </p>
-          <p>
-            The add-on covers every curriculum system Studiely supports: Cambridge (Checkpoint through A Level),
-            Pearson Edexcel (GCSE through A Level), IB (MYP Year 4 and 5, Diploma Programme SL and HL), US High
-            School and Digital SAT, all Canadian provinces and territories and all Australian states and territories.
           </p>
         </>
       ),
@@ -208,12 +170,12 @@ export const sectionF: FaqSection = {
     {
       question: "Do subscriptions renew automatically?",
       schemaText:
-        "Yes. Paid plans and the Exam Practice add-on renew automatically at the end of each billing cycle, at the then-current price, unless cancelled before the renewal date. For plans with a term longer than one month, we email a reminder at least 7 days before renewal.",
+        "Yes. Paid plans renew automatically at the end of each billing cycle, at the then-current price, unless cancelled before the renewal date. For plans with a term longer than one month, we email a reminder at least 7 days before renewal.",
       answer: (
         <>
           <p>
-            Yes. Paid plans and the Exam Practice add-on renew automatically at the end of each billing cycle, at the
-            then-current price, unless cancelled before the renewal date.
+            Yes. Paid plans renew automatically at the end of each billing cycle, at the then-current price, unless
+            cancelled before the renewal date.
           </p>
           <p>
             For plans with a term longer than one month, we will email a reminder at least 7 days before renewal,

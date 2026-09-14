@@ -12,7 +12,7 @@ export const COMMON_THE_ARTS = createCommonSubjectContent({
   flashcards: "Studiely flashcards help recall terms for colour, sound, movement, character, composition, audience and media choices.",
   quiz: "Studiely can create quiz-style prompts that check arts vocabulary, process knowledge, interpretation and responding skills.",
   examFocus: "Studiely helps students prepare to explain creative decisions and analyse how artworks communicate ideas.",
-  examPractice: "Studiely supports reflection paragraphs, artist statements, response questions and performance planning.",
+
   recall: "creative practice, responding tasks, performance reflection and terminology across visual arts, music, drama, dance and media",
   cta: "Use Studiely to turn Australian Curriculum The Arts topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum The Arts", "The Arts resources Australia", "The Arts revision notes", "The Arts flashcards", "The Arts quiz", "The Arts exam practice"],

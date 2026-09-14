@@ -12,7 +12,7 @@ export const COMMON_MANDARIN = createCommonSubjectContent({
   flashcards: "Studiely flashcards support recall of characters, meanings, tones, phrases and grammar patterns.",
   quiz: "Studiely can create quiz-style prompts that check vocabulary recognition, tone awareness, sentence meaning and reading comprehension.",
   examFocus: "Studiely helps students prepare for listening, speaking, reading and writing tasks with precise language recall.",
-  examPractice: "Studiely supports character recognition, short written responses, conversation prompts and translation practice.",
+
   recall: "tones, pinyin, characters, vocabulary, grammar, listening, speaking, reading, writing and cultural understanding",
   cta: "Use Studiely to turn Australian Curriculum Mandarin topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum Mandarin", "Mandarin resources Australia", "Mandarin revision notes", "Mandarin flashcards", "Mandarin quiz", "Mandarin exam practice"],

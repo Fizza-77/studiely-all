@@ -115,7 +115,7 @@ export const sectionA: FaqSection = {
     {
       question: "What is the difference between the Free plan and Premium?",
       schemaText:
-        "The Free plan gives students five complete generations to explore the platform. This is enough to generate revision materials for five topics across any of Studiely's study tools — which gives a genuine feel for the platform's quality. Premium unlocks ongoing access with generation credits pooled for your plan period (100 on Monthly; more on longer plans). For most students following a structured revision schedule, this provides substantial capacity across multiple subjects throughout the academic year. Premium users also get: Full access to all four core study tools (Summary Notes, Flashcards, Quiz, Exam Style Questions); PDF export option for offline revision; Anki-compatible flashcard downloads for spaced repetition study; Ability to regenerate and refine any output; Full access to Nyla, Studiely's built-in AI study tutor; Complete Achievements, Rewards and Refer & Earn programme access. The Exam Practice add-on is a separate $29.99 USD per month subscription for both Free and Premium users — it provides exam simulation with AI feedback and is billed independently of the main plan.",
+        "The Free plan gives students five complete generations to explore the platform. This is enough to generate revision materials for five topics across any of Studiely's study tools — which gives a genuine feel for the platform's quality. Premium unlocks ongoing access with generation credits pooled for your plan period (100 on Monthly; more on longer plans). For most students following a structured revision schedule, this provides substantial capacity across multiple subjects throughout the academic year. Premium users also get: Full access to all four core study tools (Summary Notes, Flashcards, Quiz, Exam Focus); PDF export option for offline revision; Anki-compatible flashcard downloads for spaced repetition study; Ability to regenerate and refine any output; Full access to Nyla, Studiely's built-in AI study tutor; Complete Achievements, Rewards and Refer & Earn programme access.",
       answer: (
         <>
           <p>
@@ -130,17 +130,13 @@ export const sectionA: FaqSection = {
           </p>
           <p>Premium users also get</p>
           <ul>
-            <li>Full access to all four core study tools (Summary Notes, Flashcards, Quiz, Exam Style Questions)</li>
+            <li>Full access to all four core study tools (Summary Notes, Flashcards, Quiz, Exam Focus)</li>
             <li>PDF export option for offline revision</li>
             <li>Anki-compatible flashcard downloads for spaced repetition study</li>
             <li>Ability to regenerate and refine any output</li>
             <li>Full access to Nyla, Studiely&apos;s built-in AI study tutor</li>
             <li>Complete Achievements, Rewards and Refer &amp; Earn programme access</li>
           </ul>
-          <p>
-            The Exam Practice add-on is a separate $29.99 USD per month subscription for both Free and Premium
-            users — it provides exam simulation with AI feedback and is billed independently of the main plan.
-          </p>
           <p>
             For students revising across multiple subjects in the lead-up to exams, Premium offers the consistent,
             structured study support that makes a measurable difference over time.

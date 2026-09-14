@@ -18,7 +18,6 @@ type CommonSubjectConfig = {
   flashcards: string;
   quiz: string;
   examFocus: string;
-  examPractice: string;
   recall: string;
   cta: string;
   keywords: string[];
@@ -66,7 +65,6 @@ export function createCommonSubjectContent(config: CommonSubjectConfig): Subject
       { id: "flashcards", title: `${name} Flashcards`, body: `Flashcards for this subject are useful when students need fast recall before a lesson, quiz or assessment. ${config.flashcards} A useful ${name} flashcard set turns heavy content into small prompts that students can revisit across the week.`, icon: "/icons/flashcards.svg", accent: PINK, href: STUDIELY_APP.flashcards, cta: "Build flashcards" },
       { id: "quiz", title: `${name} Quiz Practice`, body: `The Australian Curriculum ${name} quiz tool helps students check understanding before they assume they are ready. ${config.quiz} Quizzes give ${name} students a low-pressure way to find gaps before those gaps appear in a marked task.`, icon: "/icons/quiz.svg", accent: CORAL, href: STUDIELY_APP.quiz, cta: "Start a quiz" },
       { id: "exam-focus", title: `Exam Focus for ${name}`, body: `Exam focus support helps students prepare for assessment by looking at the task, not just the topic. ${config.examFocus} Focused preparation helps students avoid vague answers and choose the skill the question is testing.`, icon: "/icons/exam-focus.svg", accent: LIME, href: STUDIELY_APP.examFocus, cta: "Open exam focus" },
-      { id: "exam-practice", title: `${name} Exam Practice`, body: `Exam practice gives students space to apply knowledge in a more realistic way. ${config.examPractice} Applied ${name} practice builds stronger habits because students have to choose, explain, calculate, create or justify rather than just review.`, icon: "/icons/exam.svg", accent: BLUE, href: STUDIELY_APP.examPractice, cta: "Practise exam-style" },
     ],
     whyTitle: `Why Students Use Studiely for ${name}`,
     whyParagraphs: [`${name} becomes stronger when students can connect lesson content, terminology and application. Studiely supports that process by giving students one organised place to create notes, review terms, complete quizzes and practise responses.`, "The page works best beside teacher guidance because learning still depends on class tasks, feedback and school expectations."],

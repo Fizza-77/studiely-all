@@ -12,7 +12,7 @@ export const COMMON_SCIENCE = createCommonSubjectContent({
   flashcards: "Studiely flashcards help recall vocabulary, labelled diagrams, variables, units and key cause-and-effect relationships.",
   quiz: "Studiely can create quiz-style prompts that test concept links, scientific language, data interpretation and experimental reasoning.",
   examFocus: "Studiely helps students read practical questions carefully and explain evidence in precise language.",
-  examPractice: "Studiely supports short responses, labelled diagrams, graph interpretation and investigation-style questions.",
+
   recall: "biology, chemistry, physics, Earth science, space science, practical investigations and scientific report preparation",
   cta: "Use Studiely to turn Australian Curriculum Science topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum Science", "Science resources Australia", "Science revision notes", "Science flashcards", "Science quiz", "Science exam practice"],

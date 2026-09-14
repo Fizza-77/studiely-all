@@ -50,6 +50,12 @@ const HARDCODED_FALLBACKS: Record<string, string> = {
   callNylaSupport: "https://callnylasupport-tgu7j2etxq-uc.a.run.app",
   grantRewardedAdCredit:
     "https://grantrewardedadcredit-tgu7j2etxq-uc.a.run.app",
+  getWebProPricingQuote:
+    "https://getwebpropricingquote-tgu7j2etxq-uc.a.run.app",
+  createPayPalProAccessOrder:
+    "https://createpaypalproaccessorder-tgu7j2etxq-uc.a.run.app",
+  finalizePayPalProAccessOrder:
+    "https://finalizepaypalproaccessorder-tgu7j2etxq-uc.a.run.app",
 };
 
 function cloudfunctionsNetUrl(functionName: string): string {
@@ -117,18 +123,21 @@ async function getUrlMap(): Promise<Record<string, string>> {
 export async function resolveCallableUpstreamUrl(
   functionName: string,
 ): Promise<string> {
+  if (STUDIELY_WEB_CALLABLES.has(functionName)) {
+    const webFallback = STUDIELY_WEB_FALLBACKS[functionName];
+    if (webFallback) return webFallback;
+  }
+
+  const hardcoded = HARDCODED_FALLBACKS[functionName];
+  if (hardcoded) return hardcoded;
+
   const map = await getUrlMap();
   const fromRc = map[functionName]?.trim();
   if (fromRc) return fromRc.replace(/\/+$/, "");
 
   if (STUDIELY_WEB_CALLABLES.has(functionName)) {
-    const webFallback = STUDIELY_WEB_FALLBACKS[functionName];
-    if (webFallback) return webFallback;
     return cloudfunctionsNetUrl(functionName);
   }
-
-  const hardcoded = HARDCODED_FALLBACKS[functionName];
-  if (hardcoded) return hardcoded;
 
   return cloudfunctionsNetUrl(functionName);
 }

@@ -238,8 +238,7 @@ export const PricingHeroSection = () => {
 
         <p className="mx-auto mb-1 mt-4 max-w-3xl text-center font-jakarta text-[11px] leading-relaxed text-[#9A99A8] sm:mt-5 sm:text-[12px]">
           All prices in USD ($9.99/month). Stripe may show your local currency at
-          checkout. Exam Practice add-on is $29.99 USD worldwide. Taxes may be
-          added at checkout.
+          checkout. Taxes may be added at checkout.
         </p>
       </div>
     </section>

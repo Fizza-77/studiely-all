@@ -12,7 +12,7 @@ export const COMMON_HUMANITIES_AND_SOCIAL_SCIENCES_HASS = createCommonSubjectCon
   flashcards: "Studiely flashcards build quick recall for key terms, dates, places, rights, responsibilities, economic ideas and geographic features.",
   quiz: "Studiely can create quiz-style prompts that check source understanding, map skills, inquiry vocabulary and concept connections.",
   examFocus: "Studiely helps students interpret command words and organise evidence before writing.",
-  examPractice: "Studiely supports short responses, source questions, explanation paragraphs and inquiry planning.",
+
   recall: "History, Geography, Civics and Citizenship, and Economics and Business, especially for inquiry tasks and assessment preparation",
   cta: "Use Studiely to turn Australian Curriculum Humanities and Social Sciences (HASS) topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum Humanities and Social Sciences (HASS)", "Humanities and Social Sciences (HASS) resources Australia", "Humanities and Social Sciences (HASS) revision notes", "Humanities and Social Sciences (HASS) flashcards", "Humanities and Social Sciences (HASS) quiz", "Humanities and Social Sciences (HASS) exam practice"],

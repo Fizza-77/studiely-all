@@ -12,7 +12,7 @@ export const COMMON_HEALTH_AND_PHYSICAL_EDUCATION_HPE = createCommonSubjectConte
   flashcards: "Studiely flashcards support recall of body systems, movement vocabulary, decision-making steps and wellbeing terms.",
   quiz: "Studiely can create quiz-style prompts that check health concepts, scenario interpretation, movement knowledge and safe-choice reasoning.",
   examFocus: "Studiely helps students connect examples to health outcomes, participation, relationships or movement performance.",
-  examPractice: "Studiely supports scenario responses, reflection tasks, short answers and practical-theory links.",
+
   recall: "health topics, movement concepts, wellbeing, safety, relationships and physical activity theory",
   cta: "Use Studiely to turn Australian Curriculum Health and Physical Education (HPE) topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum Health and Physical Education (HPE)", "Health and Physical Education (HPE) resources Australia", "Health and Physical Education (HPE) revision notes", "Health and Physical Education (HPE) flashcards", "Health and Physical Education (HPE) quiz", "Health and Physical Education (HPE) exam practice"],

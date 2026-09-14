@@ -8,12 +8,12 @@ export const sectionE: FaqSection = {
     {
       question: "What does '100 generations per month' mean?",
       schemaText:
-        "A generation is counted each time content is created or regenerated using Studiely's main Study Tools — Summary Notes, Flashcards, Quiz, or Exam Style Questions. Each request, including each regeneration, counts as one generation from your plan's credit pool. The Monthly plan includes 100 credits for the plan period as a shared pool across all Study Tools combined — this is not 100 per tool, but 100 total. Longer plans include more credits (300 / 600 / 1,200) pooled for the whole period. The Free plan includes five generations in total. Exam Practice is a separate subscription and does not use main-plan credits.",
+        "A generation is counted each time content is created or regenerated using Studiely's main Study Tools — Summary Notes, Flashcards, Quiz, or Exam Focus. Each request, including each regeneration, counts as one generation from your plan's credit pool. The Monthly plan includes 100 credits for the plan period as a shared pool across all Study Tools combined — this is not 100 per tool, but 100 total. Longer plans include more credits (300 / 600 / 1,200) pooled for the whole period. The Free plan includes five generations in total.",
       answer: (
         <>
           <p>
             A generation is counted each time content is created or regenerated using Studiely&apos;s main Study
-            Tools — Summary Notes, Flashcards, Quiz, or Exam Style Questions. Each request, including each
+            Tools — Summary Notes, Flashcards, Quiz, or Exam Focus. Each request, including each
             regeneration, counts as one generation from your plan&apos;s credit pool.
           </p>
           <p>
@@ -27,8 +27,7 @@ export const sectionE: FaqSection = {
             credits for a structured revision schedule.
           </p>
           <p>
-            The Free plan includes five generations in total. Exam Practice is a separate subscription and does not
-            use main-plan credits.
+            The Free plan includes five generations in total.
           </p>
         </>
       ),
@@ -36,21 +35,17 @@ export const sectionE: FaqSection = {
     {
       question: "What happens when I reach my monthly generation limit?",
       schemaText:
-        "If you run out of credits, generation is paused until your plan renews, or you can purchase a new plan or the Exam Practice add-on separately. All previously generated content remains fully accessible — only new generation is paused. Exam Practice is billed independently and is not affected by main-plan credits.",
+        "If you run out of credits, generation is paused until your plan renews, or you can purchase a new plan. All previously generated content remains fully accessible — only new generation is paused.",
       answer: (
         <>
           <p>
-            If you run out of credits, generation is paused until your plan renews, or you can purchase a new plan or
-            the Exam Practice add-on separately. All previously generated content remains fully accessible — only new
-            generation is paused.
+            If you run out of credits, generation is paused until your plan renews, or you can purchase a new plan.
+            All previously generated content remains fully accessible — only new generation is paused.
           </p>
           <p>
             For most students following a consistent revision schedule, the Monthly plan&apos;s 100 credits are more
             than sufficient. During intensive exam preparation periods, spreading usage across the plan period is more
             effective than concentrating generations at the end.
-          </p>
-          <p>
-            Exam Practice is billed independently and is not affected by main-plan credits.
           </p>
         </>
       ),
@@ -88,11 +83,10 @@ export const sectionE: FaqSection = {
     {
       question: "What happens if I run out of credits?",
       schemaText:
-        "Generation is paused until your plan renews, or you can purchase a new plan or the Exam Practice add-on separately.",
+        "Generation is paused until your plan renews, or you can purchase a new plan.",
       answer: (
         <p>
-          Generation is paused until your plan renews, or you can purchase a new plan or the Exam Practice add-on
-          separately.
+          Generation is paused until your plan renews, or you can purchase a new plan.
         </p>
       ),
     },

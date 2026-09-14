@@ -12,7 +12,7 @@ export const COMMON_VISUAL_ARTS = createCommonSubjectContent({
   flashcards: "Studiely flashcards support recall of terms such as line, colour, contrast, composition, texture, symbolism and perspective.",
   quiz: "Studiely can create quiz-style prompts that check terminology, visual analysis, process knowledge and interpretation.",
   examFocus: "Studiely helps students explain how visual choices create meaning for an audience.",
-  examPractice: "Studiely supports artwork analysis, artist statements, portfolio reflection and response paragraphs.",
+
   recall: "art analysis, visual conventions, artist research, portfolio reflection and written responses",
   cta: "Use Studiely to turn Australian Curriculum Visual Arts topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum Visual Arts", "Visual Arts resources Australia", "Visual Arts revision notes", "Visual Arts flashcards", "Visual Arts quiz", "Visual Arts exam practice"],

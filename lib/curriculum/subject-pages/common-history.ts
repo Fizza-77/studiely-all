@@ -12,7 +12,7 @@ export const COMMON_HISTORY = createCommonSubjectContent({
   flashcards: "Studiely flashcards support recall of dates, people, places, vocabulary and source-analysis prompts.",
   quiz: "Studiely can create quiz-style prompts that check chronology, evidence, perspectives and cause-and-effect reasoning.",
   examFocus: "Studiely helps students separate description from explanation and prepare stronger source-based answers.",
-  examPractice: "Studiely supports short-answer source questions, extended responses and paragraph planning.",
+
   recall: "ancient, medieval, modern and local history topics, including source analysis and historical explanation",
   cta: "Use Studiely to turn Australian Curriculum History topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum History", "History resources Australia", "History revision notes", "History flashcards", "History quiz", "History exam practice"],

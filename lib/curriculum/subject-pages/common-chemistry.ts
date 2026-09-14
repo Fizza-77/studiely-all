@@ -12,7 +12,7 @@ export const COMMON_CHEMISTRY = createCommonSubjectContent({
   flashcards: "Studiely flashcards support recall of symbols, terms, reaction clues, equipment and process vocabulary.",
   quiz: "Studiely can create quiz-style prompts that check concept accuracy, observation interpretation, chemical language and simple calculations.",
   examFocus: "Studiely helps students connect observations to explanations and choose precise scientific terms.",
-  examPractice: "Studiely supports reaction questions, practical write-ups, data tables and explanation paragraphs.",
+
   recall: "matter, particles, mixtures, reactions, materials, lab skills and scientific explanations",
   cta: "Use Studiely to turn Australian Curriculum Chemistry topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum Chemistry", "Chemistry resources Australia", "Chemistry revision notes", "Chemistry flashcards", "Chemistry quiz", "Chemistry exam practice"],

@@ -12,7 +12,7 @@ export const COMMON_CIVICS_AND_CITIZENSHIP = createCommonSubjectContent({
   flashcards: "Studiely flashcards support recall of terms, definitions, examples and government structures.",
   quiz: "Studiely can create quiz-style prompts that check understanding of laws, rights, participation and decision-making processes.",
   examFocus: "Studiely helps students explain civic ideas with examples instead of giving broad statements.",
-  examPractice: "Studiely supports scenario responses, short answers, concept explanations and inquiry tasks.",
+
   recall: "democracy, government, law, rights, responsibilities, participation and civic inquiry",
   cta: "Use Studiely to turn Australian Curriculum Civics and Citizenship topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum Civics and Citizenship", "Civics and Citizenship resources Australia", "Civics and Citizenship revision notes", "Civics and Citizenship flashcards", "Civics and Citizenship quiz", "Civics and Citizenship exam practice"],

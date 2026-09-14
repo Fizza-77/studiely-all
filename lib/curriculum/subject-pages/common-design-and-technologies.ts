@@ -12,7 +12,7 @@ export const COMMON_DESIGN_AND_TECHNOLOGIES = createCommonSubjectContent({
   flashcards: "Studiely flashcards support recall of terms for needs, constraints, prototypes, materials, systems and evaluation.",
   quiz: "Studiely can create quiz-style prompts that check design vocabulary, process order, material choices and reasoning behind decisions.",
   examFocus: "Studiely helps students connect a design brief to user needs, constraints and testing evidence.",
-  examPractice: "Studiely supports design explanations, evaluation paragraphs, prototype notes and process reflection.",
+
   recall: "design briefs, product evaluation, materials knowledge, sustainability and technology-process explanations",
   cta: "Use Studiely to turn Australian Curriculum Design and Technologies topics into clearer notes, sharper flashcards, quick quizzes, focused assessment preparation and practical response practice.",
   keywords: ["Australian Curriculum Design and Technologies", "Design and Technologies resources Australia", "Design and Technologies revision notes", "Design and Technologies flashcards", "Design and Technologies quiz", "Design and Technologies exam practice"],
