@@ -46,3 +46,4 @@ export function isFirebaseConfigured(): boolean {
       process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   );
 }
+  
