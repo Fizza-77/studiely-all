@@ -20,7 +20,7 @@ const PLAN_KEYS: PlanKey[] = [
 
 /** Handles Stripe return finalize + `?plan=` auto-checkout on marketing /pricing. */
 export function PricingCheckoutBridge() {
-  const { user } = useAuth();
+  const { phase, user } = useAuth();
   const search = useSearchParams();
   const router = useRouter();
   const [info, setInfo] = useState<string | null>(null);
@@ -60,7 +60,15 @@ export function PricingCheckoutBridge() {
 
   useEffect(() => {
     const plan = search.get("plan");
-    if (planAutoStarted.current || !user || !plan) return;
+    if (
+      planAutoStarted.current ||
+      phase !== "student" ||
+      !user ||
+      user.isAnonymous ||
+      !plan
+    ) {
+      return;
+    }
     if (!PLAN_KEYS.includes(plan as PlanKey)) return;
     if (search.get("stripe_sub_done") === "1") return;
     planAutoStarted.current = true;
@@ -88,7 +96,7 @@ export function PricingCheckoutBridge() {
         setInfo(null);
       }
     })();
-  }, [search, user]);
+  }, [phase, search, user]);
 
   if (!info && !error) return null;
 

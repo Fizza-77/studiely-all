@@ -200,6 +200,7 @@ export const HomePricingSection = ({
   const [info, setInfo] = useState<string | null>(null);
   const [freeExpanded, setFreeExpanded] = useState(false);
   const isPage = variant === "page";
+  const canCheckout = phase === "student" && Boolean(user) && !user?.isAnonymous;
 
   useEffect(() => {
     void getWebProPricingQuote().then(setQuote);
@@ -209,7 +210,7 @@ export const HomePricingSection = ({
     setError(null);
     setInfo(null);
 
-    if (!user) {
+    if (!canCheckout) {
       window.location.href = `${STUDIELY_APP.login}?next=${encodeURIComponent(`/pricing?plan=${planKey}`)}`;
       return;
     }
@@ -389,7 +390,7 @@ export const HomePricingSection = ({
             const isBusy = busy === plan.planKey;
             const ctaLabel = isBusy
               ? "Redirecting to Stripe…"
-              : user
+              : canCheckout
                 ? plan.cta
                 : "Sign in to buy";
 
