@@ -192,6 +192,17 @@ export function AuthProvider({
     let idleId: number | undefined;
     let deferTimer = 0;
 
+    const failStart = async (err: unknown) => {
+      if (cancelled) return;
+      const message = await friendlyStorageError(
+        err instanceof Error ? err.message : "Auth failed to initialize",
+      );
+      guestMode.enable();
+      setFirebaseReady(true);
+      setPhase("guest");
+      setError(message);
+    };
+
     const start = async () => {
       if (cancelled) return;
       const [{ onAuthStateChanged }, { getFirebaseAuth }, { completeOAuthRedirectLogin }] =
@@ -237,16 +248,17 @@ export function AuthProvider({
       // Paint marketing LCP first; treat as guest until Auth catches up.
       guestMode.enable();
       setPhase("guest");
-      const load = () => {
-        void start();
-      };
       if (typeof window.requestIdleCallback === "function") {
-        idleId = window.requestIdleCallback(load, { timeout: 4000 });
+        idleId = window.requestIdleCallback(() => {
+          void start().catch(failStart);
+        }, { timeout: 4000 });
       } else {
-        deferTimer = window.setTimeout(load, 2500);
+        deferTimer = window.setTimeout(() => {
+          void start().catch(failStart);
+        }, 2500);
       }
     } else {
-      void start();
+      void start().catch(failStart);
     }
 
     return () => {

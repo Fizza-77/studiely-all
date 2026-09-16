@@ -1,5 +1,4 @@
-const GA_MEASUREMENT_ID = "G-MJE49N8QRH";
-const ADS_MEASUREMENT_ID = "AW-17975031252";
+export const GA_MEASUREMENT_ID = "G-MJE49N8QRH";
 
 let analyticsLoadStarted = false;
 
@@ -10,9 +9,16 @@ declare global {
   }
 }
 
-/** Load GA4 + Google Ads only after cookie consent (or prior consent in localStorage). */
+/**
+ * Official Google tag (gtag.js) for G-MJE49N8QRH.
+ * Safe to call more than once — the layout snippet already loads this on every page.
+ */
 export function loadGoogleAnalytics(): void {
   if (typeof window === "undefined" || analyticsLoadStarted) return;
+  if (document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"]`)) {
+    analyticsLoadStarted = true;
+    return;
+  }
   analyticsLoadStarted = true;
 
   window.dataLayer = window.dataLayer || [];
@@ -21,10 +27,9 @@ export function loadGoogleAnalytics(): void {
   };
   window.gtag("js", new Date());
   window.gtag("config", GA_MEASUREMENT_ID);
-  window.gtag("config", ADS_MEASUREMENT_ID);
 
   const script = document.createElement("script");
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
   script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
   document.head.appendChild(script);
 }
