@@ -4,7 +4,10 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronRight, Search } from "lucide-react";
 import { CUR_DATA } from "@/lib/data";
-import { resolveSubjectPageHref } from "@/lib/curriculum/subject-pages";
+import {
+  getIbSelectorSubjectsWithPages,
+  resolveSubjectPageHref,
+} from "@/lib/curriculum/subject-pages";
 
 const BLUE = "#4F35F2";
 const LIME = "#E8FF2F";
@@ -58,9 +61,12 @@ const SUBJECTS = [
   { title: "English Literature", detail: "Open subject page" },
   { title: "Mathematics (0580)", detail: "Open subject page" },
   { title: "Biology", detail: "Open subject page" },
+  { title: "Biology HL", detail: "Open subject page" },
+  { title: "Biology SL", detail: "Open subject page" },
   { title: "Business", detail: "Open subject page" },
   { title: "Business Innovation", detail: "Open subject page" },
   { title: "Business Management", detail: "Open subject page" },
+  { title: "Business Management HL", detail: "Open subject page" },
   { title: "Business Management and Enterprise", detail: "Open subject page" },
   { title: "Business Studies", detail: "Open subject page" },
   { title: "Chemistry", detail: "Open subject page" },
@@ -198,9 +204,14 @@ export const CurriculumPathwayBuilder = () => {
     }));
   }, [curriculum, pathway, rawYears]);
 
-  const filteredSubjects = SUBJECTS.filter((item) =>
-    item.title.toLowerCase().includes(query.toLowerCase()),
+  const filteredSubjects = (
+    curriculum === "IB"
+      ? getIbSelectorSubjectsWithPages(pathway)
+      : SUBJECTS
   )
+    .filter((item) =>
+      item.title.toLowerCase().includes(query.toLowerCase()),
+    )
     .map((item) => {
     const href = year
       ? resolveSubjectPageHref({
@@ -220,7 +231,11 @@ export const CurriculumPathwayBuilder = () => {
           : "Subject page coming soon",
     };
     })
-    .filter((item) => curriculum !== "Australian Curriculum" || Boolean(item.href));
+    .filter(
+      (item) =>
+        (curriculum !== "Australian Curriculum" && curriculum !== "IB") ||
+        Boolean(item.href),
+    );
 
   const selectCurriculum = (name: string) => {
     const nextPathway = Object.keys(CUR_DATA[name])[0];

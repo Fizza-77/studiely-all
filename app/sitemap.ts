@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getBlogSlugsForConfiguredSite } from "@/lib/blogs";
+import { getIbSitemapPaths } from "@/lib/curriculum/subject-pages";
 import { SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -1252,10 +1253,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: page.priority,
   }));
 
+  const ibRoutes: MetadataRoute.Sitemap = getIbSitemapPaths().map((path) => ({
+    url: `${SITE_URL}${path}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   const blogs = await getBlogSlugsForConfiguredSite();
 
   if (!blogs?.length) {
-    return staticRoutes;
+    return [...staticRoutes, ...ibRoutes];
   }
 
   const blogEntries: MetadataRoute.Sitemap = blogs.map((b) => ({
@@ -1269,5 +1277,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.75,
   }));
 
-  return [...staticRoutes, ...blogEntries];
+  return [...staticRoutes, ...ibRoutes, ...blogEntries];
 }

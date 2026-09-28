@@ -217,9 +217,29 @@ import { QCE_SOCIOLOGY } from "./qce-sociology";
 import { QCE_SPANISH } from "./qce-spanish";
 import { QCE_SPECIALIST_MATHEMATICS } from "./qce-specialist-mathematics";
 import { QCE_VISUAL_ART } from "./qce-visual-art";
+import {
+  getAllIbContents,
+  getIbSubjectPageMatches,
+} from "./ib/registry";
 import type { SubjectLandingContent, SubjectPageMatch } from "./types";
 
-export type { SubjectLandingContent, SubjectFaq, SubjectToolBlock, SubjectSupportRow, SubjectPageMatch } from "./types";
+export type {
+  SubjectLandingContent,
+  SubjectFaq,
+  SubjectToolBlock,
+  SubjectSupportRow,
+  SubjectPageMatch,
+  SubjectWorkflowStep,
+  SubjectContentSection,
+} from "./types";
+
+export {
+  getIbContent,
+  getIbStaticParams,
+  getIbSitemapPaths,
+  getIbSelectorSubjectsWithPages,
+  IB_CONTENT_REGISTRY,
+} from "./ib/registry";
 
 export const SUBJECT_LANDING_PAGES: SubjectLandingContent[] = [
   COMMON_BIOLOGY,
@@ -441,6 +461,7 @@ export const SUBJECT_LANDING_PAGES: SubjectLandingContent[] = [
   ACT_SENIOR_SPANISH,
   ACT_SENIOR_SPECIALIST_MATHEMATICS,
   ACT_SENIOR_VISUAL_ARTS,
+  ...getAllIbContents(),
 ];
 
 /** Maps curriculum builder selections → subject landing URLs. */
@@ -1978,6 +1999,7 @@ export const SUBJECT_PAGE_MATCHES: SubjectPageMatch[] = [
     subject: "Visual Arts",
     path: COMMON_VISUAL_ARTS.path,
   },
+  ...getIbSubjectPageMatches(),
 ];
 
 export function getSubjectLandingByPath(

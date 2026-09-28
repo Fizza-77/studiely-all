@@ -19,10 +19,8 @@ export const SUBJECT_TOOL_FEATURE_HREF: Record<string, string> = {
 };
 
 type LinkRule = {
-  /** Case-insensitive phrase to match (already escaped for RegExp). */
   phrase: string;
   href: string;
-  /** Link only the first match in this string (e.g. brand → home). */
   once?: boolean;
 };
 
@@ -39,6 +37,7 @@ const RULES: LinkRule[] = [
   { phrase: "quiz generator", href: SUBJECT_FEATURE_HREFS.quiz },
   { phrase: "quiz practice", href: SUBJECT_FEATURE_HREFS.quiz },
   { phrase: "exam focus", href: SUBJECT_FEATURE_HREFS.examFocus },
+  { phrase: "assessment focus", href: SUBJECT_FEATURE_HREFS.examFocus },
   { phrase: "flashcards", href: SUBJECT_FEATURE_HREFS.flashcards },
   { phrase: "flashcard", href: SUBJECT_FEATURE_HREFS.flashcards },
   { phrase: "quizzes", href: SUBJECT_FEATURE_HREFS.quiz },
@@ -56,8 +55,24 @@ function ruleForMatch(matched: string): LinkRule | undefined {
   return RULES.find((r) => r.phrase.toLowerCase() === lower);
 }
 
+/** Active during a single SubjectLandingPage render (sync). */
+let activePageHrefBudget: Map<string, number> | null = null;
+const DEFAULT_MAX_PER_FEATURE_HREF = 2;
+
+/**
+ * Run a subject-page render with a shared feature-link budget
+ * (max 2 inline links per feature URL across the whole page).
+ */
+export function withSubjectFeatureLinkBudget<T>(render: () => T): T {
+  activePageHrefBudget = new Map();
+  try {
+    return render();
+  } finally {
+    activePageHrefBudget = null;
+  }
+}
+
 export type LinkifySubjectCopyOptions = {
-  /** Extra classes on inline feature/home links */
   className?: string;
 };
 
@@ -91,8 +106,26 @@ export function linkifySubjectCopy(
       onceUsed.add(onceKey);
     }
 
+    if (
+      activePageHrefBudget &&
+      rule.href !== SUBJECT_FEATURE_HREFS.home
+    ) {
+      const used = activePageHrefBudget.get(rule.href) ?? 0;
+      if (used >= DEFAULT_MAX_PER_FEATURE_HREF) continue;
+    }
+
     if (match.index > lastIndex) {
       nodes.push(text.slice(lastIndex, match.index));
+    }
+
+    if (
+      activePageHrefBudget &&
+      rule.href !== SUBJECT_FEATURE_HREFS.home
+    ) {
+      activePageHrefBudget.set(
+        rule.href,
+        (activePageHrefBudget.get(rule.href) ?? 0) + 1,
+      );
     }
 
     nodes.push(

@@ -8,6 +8,7 @@ import {
   linkifySubjectCopy,
   SUBJECT_FEATURE_HREFS,
   SUBJECT_TOOL_FEATURE_HREF,
+  withSubjectFeatureLinkBudget,
 } from "@/lib/curriculum/linkifySubjectCopy";
 
 const BLUE = "#4F35F2";
@@ -25,18 +26,23 @@ type Props = {
 };
 
 export function SubjectLandingPage({ content }: Props) {
-  return (
+  return withSubjectFeatureLinkBudget(() => (
     <main className="min-h-screen overflow-x-clip bg-bg-base font-jakarta">
       <Hero content={content} />
+      <WorkflowSteps content={content} />
       <Intro content={content} />
-      <CoverTopics content={content} />
-      <Support content={content} />
+      <ExtraSections content={content} />
+      {content.showCoverTopics === false ? null : (
+        <CoverTopics content={content} />
+      )}
+      {content.showSupport === false ? null : <Support content={content} />}
       <Tools content={content} />
+      <AfterToolsSections content={content} />
       <Why content={content} />
       <Faqs content={content} />
       <Cta content={content} />
     </main>
-  );
+  ));
 }
 
 function Hero({ content }: Props) {
@@ -56,6 +62,14 @@ function Hero({ content }: Props) {
               {content.heroTitle}{" "}
               <span style={{ color: BLUE }}>{content.heroHighlight}</span>
             </h1>
+
+            {content.heroIntro ? (
+              <p className="mb-4 max-w-[38rem] font-sans text-[clamp(0.95rem,1.1vw,1.05rem)] leading-relaxed text-[#5B5A6A]">
+                {linkifySubjectCopy(content.heroIntro, {
+                  className: LINK_ON_LIGHT,
+                })}
+              </p>
+            ) : null}
 
             <p className="mb-6 max-w-[38rem] font-sans text-[clamp(0.95rem,1.1vw,1.05rem)] leading-relaxed text-[#5B5A6A]">
               {linkifySubjectCopy(content.lead, { className: LINK_ON_LIGHT })}
@@ -144,6 +158,99 @@ function Hero({ content }: Props) {
               </div>
             </div>
           </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WorkflowSteps({ content }: Props) {
+  if (!content.workflowSteps?.length) return null;
+
+  return (
+    <section
+      aria-label="Study workflow"
+      className="bg-bg-base pb-[clamp(1.5rem,4vw,2.5rem)]"
+    >
+      <div className="wrap">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+          {content.workflowSteps.map((step, i) => (
+            <Reveal key={step.title} delay={i * 0.05} y={20}>
+              <article
+                className="funky-card h-full rounded-[22px] bg-white px-5 py-5 shadow-[0_10px_28px_rgba(30,27,75,0.08)] sm:rounded-[24px]"
+                style={{
+                  borderTop: `4px solid ${i % 2 === 0 ? BLUE : PINK}`,
+                }}
+              >
+                <h2 className="mb-2 font-jakarta text-[1.05rem] font-extrabold text-[#1E1B4B] sm:text-[1.15rem]">
+                  {step.title}
+                </h2>
+                <p className="m-0 font-sans text-[14px] leading-relaxed text-[#5B5A6A] sm:text-[15px]">
+                  {linkifySubjectCopy(step.body, { className: LINK_ON_LIGHT })}
+                </p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ExtraSections({ content }: Props) {
+  return <ContentSectionList sections={content.extraSections} />;
+}
+
+function AfterToolsSections({ content }: Props) {
+  return <ContentSectionList sections={content.afterToolsSections} />;
+}
+
+function ContentSectionList({
+  sections,
+}: {
+  sections: SubjectLandingContent["extraSections"];
+}) {
+  if (!sections?.length) return null;
+
+  return (
+    <section
+      aria-label="Subject guidance"
+      className="bg-bg-base pb-[clamp(1.5rem,4vw,2.5rem)]"
+    >
+      <div className="wrap">
+        <div className="mx-auto flex max-w-3xl flex-col gap-5">
+          {sections.map((section, i) => (
+            <Reveal key={section.title} delay={i * 0.04} y={20}>
+              <article className="rounded-[28px] bg-white px-5 py-7 shadow-[0_12px_36px_rgba(30,27,75,0.08)] sm:rounded-[32px] sm:px-9 sm:py-9">
+                <h2 className="mb-4 font-heading text-[clamp(1.35rem,2.8vw,1.9rem)] font-extrabold tracking-[-0.02em] text-[#1E1B4B]">
+                  {section.title}
+                </h2>
+                <div className="space-y-4">
+                  {section.paragraphs.map((paragraph) => (
+                    <p
+                      key={paragraph.slice(0, 48)}
+                      className="m-0 font-sans text-[15px] leading-[1.75] text-[#5B5A6A] sm:text-[16px]"
+                    >
+                      {linkifySubjectCopy(paragraph, {
+                        className: LINK_ON_LIGHT,
+                      })}
+                    </p>
+                  ))}
+                </div>
+                {section.bullets && section.bullets.length > 0 ? (
+                  <ul className="mt-5 list-disc space-y-2 pl-5 font-sans text-[15px] leading-[1.75] text-[#5B5A6A] sm:text-[16px]">
+                    {section.bullets.map((bullet) => (
+                      <li key={bullet}>
+                        {linkifySubjectCopy(bullet, {
+                          className: LINK_ON_LIGHT,
+                        })}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </article>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -458,6 +565,21 @@ function Why({ content }: Props) {
                   </li>
                 ))}
               </ul>
+            ) : null}
+            {content.whyAfterParagraphs &&
+            content.whyAfterParagraphs.length > 0 ? (
+              <div className="mt-5 space-y-3">
+                {content.whyAfterParagraphs.map((paragraph) => (
+                  <p
+                    key={paragraph.slice(0, 40)}
+                    className="m-0 font-sans text-[14px] leading-[1.7] text-[#5B5A6A] sm:text-[15px]"
+                  >
+                    {linkifySubjectCopy(paragraph, {
+                      className: LINK_ON_LIGHT,
+                    })}
+                  </p>
+                ))}
+              </div>
             ) : null}
           </article>
         </Reveal>
