@@ -56,11 +56,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    // No title.template — subject/page seoTitles already end with "| Studiely".
-    // A template here caused duplicates like "... | Studiely | Studiely".
-    default: "Studiely — AI Study App for GCSE, IB, SAT & All Curricula",
-  },
+  // Plain string (no template) — subject seoTitles already end with "| Studiely".
+  title: "Studiely — AI Study App for GCSE, IB, SAT & All Curricula",
   description:
     "Generate summary notes, flashcards, quizzes and exam practice " +
     "aligned to your exact curriculum and exam board. " +
