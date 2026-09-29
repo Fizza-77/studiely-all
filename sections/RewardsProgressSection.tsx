@@ -66,11 +66,10 @@ export const RewardsProgressSection = ({
             >
               <Image
                 src="/reward-flower.png"
-                alt=""
+                alt="Decorative flower accent"
                 width={220}
                 height={220}
                 unoptimized
-                aria-hidden
                 className="pointer-events-none absolute right-0 top-0 z-[2] h-auto w-[clamp(5.5rem,12vw,8rem)] max-w-none translate-x-[42%] -translate-y-[48%] scale-90 select-none opacity-0 transition-[opacity,transform] duration-500 ease-out group-hover:translate-x-[42%] group-hover:-translate-y-[48%] group-hover:scale-100 group-hover:opacity-100 motion-reduce:transition-none sm:w-[clamp(6rem,13vw,8.5rem)]"
                 draggable={false}
               />
@@ -78,12 +77,11 @@ export const RewardsProgressSection = ({
               <span className="relative z-[1] mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/20">
                 <Image
                   src={icon}
-                  alt=""
+                  alt={`${title} icon`}
                   width={22}
                   height={22}
                   unoptimized
                   className="h-[22px] w-[22px] object-contain brightness-0 invert"
-                  aria-hidden
                 />
               </span>
 

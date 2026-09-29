@@ -246,11 +246,10 @@ export const ReviewsSection = ({ sectionRef }: ReviewsSectionProps) => {
           >
             <Image
               src="/review-star.png"
-              alt=""
+              alt="Decorative review star"
               width={200}
               height={200}
               unoptimized
-              aria-hidden
               className="pointer-events-none absolute left-0 top-1/2 z-[1] h-auto w-[clamp(4.5rem,10vw,7.5rem)] max-w-none -translate-x-[72%] -translate-y-[62%] select-none mix-blend-screen"
               draggable={false}
             />

@@ -44,15 +44,14 @@ const NumBadge = ({ n }: { n: number }) => (
   </span>
 );
 
-const CardFlag = ({ src }: { src: string }) => (
+const CardFlag = ({ src, label }: { src: string; label: string }) => (
   <Image
     src={src}
-    alt=""
+    alt={`${label} flag`}
     width={64}
     height={44}
     unoptimized
     className="h-10 w-[3.5rem] object-contain sm:h-11 sm:w-16"
-    aria-hidden
   />
 );
 
@@ -245,11 +244,10 @@ export const SupportedCountriesSection = ({
                 UK, US, IB, Australia &amp; Canada
                 <Image
                   src="/finger.webp"
-                  alt=""
+                  alt="Decorative pointing hand accent"
                   width={800}
                   height={800}
                   unoptimized
-                  aria-hidden
                   className="pointer-events-none absolute right-0 top-1/2 z-[2] h-auto w-[min(28vw,19rem)] max-w-none translate-x-[34%] -translate-y-[52%] select-none mix-blend-screen sm:w-[min(28vw,21rem)] sm:-translate-x-[22%] md:w-[min(25vw,24rem)] md:-translate-y-[62%] lg:-translate-y-[68%]"
                   draggable={false}
                 />
@@ -271,7 +269,7 @@ export const SupportedCountriesSection = ({
             >
               <div className="grid min-h-0 flex-1 grid-cols-1 items-stretch gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] sm:gap-4">
                 <div className="relative z-[1] flex min-w-0 flex-col gap-2.5 self-start">
-                  <CardFlag src="/UK-flag.webp" />
+                  <CardFlag src="/UK-flag.webp" label="United Kingdom" />
                   <h3 className="m-0 font-heading text-[clamp(1.25rem,2.2vw,1.75rem)] font-extrabold leading-[1.05] tracking-[-0.02em] text-white sm:whitespace-nowrap">
                     United Kingdom
                   </h3>
@@ -315,7 +313,7 @@ export const SupportedCountriesSection = ({
               <div className="flex flex-col gap-4 sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] sm:items-center sm:gap-4">
                 <div className="relative z-[1] min-w-0">
                   <CardTitle subtitle="Kindergarten to College Admissions">
-                    <CardFlag src="/USA-flag.webp" />
+                    <CardFlag src="/USA-flag.webp" label="United States" />
                     <CountryHeading>United States</CountryHeading>
                   </CardTitle>
 
@@ -376,7 +374,7 @@ export const SupportedCountriesSection = ({
               <div className="flex flex-col gap-4 sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] sm:items-center">
                 <div className="relative z-[1] min-w-0">
                   <CardTitle subtitle="Primary to Diploma Programme">
-                    <CardFlag src="/USA-flag.webp" />
+                    <CardFlag src="/USA-flag.webp" label="United States" />
                     <CountryHeading>
                       International
                       <br />
@@ -414,7 +412,7 @@ export const SupportedCountriesSection = ({
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                   <div className="relative z-[1] min-w-0 flex-1">
                     <CardTitle subtitle="Primary to Senior Secondary">
-                      <CardFlag src="/Aus.png" />
+                      <CardFlag src="/Aus.png" label="Australia" />
                       <CountryHeading>Australia</CountryHeading>
                     </CardTitle>
                   </div>
@@ -488,7 +486,7 @@ export const SupportedCountriesSection = ({
               <div className="flex flex-col gap-4 sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] sm:items-center">
                 <div className="relative z-[1] min-w-0">
                   <CardTitle subtitle="Primary to High School Graduation">
-                    <CardFlag src="/Canada.png" />
+                    <CardFlag src="/Canada.png" label="Canada" />
                     <CountryHeading>Canada</CountryHeading>
                   </CardTitle>
                   <ul className="m-0 flex list-none flex-col gap-3 p-0">

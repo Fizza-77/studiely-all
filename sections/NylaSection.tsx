@@ -158,12 +158,11 @@ export const NylaSection = ({ sectionRef }: NylaSectionProps) => {
                           {"iconSrc" in feature ? (
                             <Image
                               src={feature.iconSrc}
-                              alt=""
+                              alt={`${feature.title} icon`}
                               width={22}
                               height={22}
                               unoptimized
                               className="h-[22px] w-[22px] object-contain"
-                              aria-hidden
                             />
                           ) : (
                             <feature.Icon />
@@ -196,12 +195,11 @@ export const NylaSection = ({ sectionRef }: NylaSectionProps) => {
                   </svg>
                   <Image
                     src="/US-student.webp"
-                    alt=""
+                    alt="Student studying with Nyla AI tutor"
                     width={480}
                     height={600}
                     unoptimized
                     className="relative z-[2] h-auto w-full max-w-[280px] select-none object-contain object-center drop-shadow-[0_18px_40px_rgba(0,0,0,0.28)] sm:max-w-[300px] lg:max-w-[340px]"
-                    aria-hidden
                     draggable={false}
                   />
                 </div>
@@ -219,23 +217,21 @@ export const NylaSection = ({ sectionRef }: NylaSectionProps) => {
               {/* Rectangle swirl glow — top right */}
               <Image
                 src="/Rectangle.svg"
-                alt=""
+                alt="Decorative background glow"
                 width={452}
                 height={452}
                 unoptimized
                 priority
-                aria-hidden
                 className="pointer-events-none absolute -right-8 -top-10 z-[1] h-[260px] w-[260px] select-none object-contain sm:-right-6 sm:-top-8 sm:h-[320px] sm:w-[320px] md:h-[380px] md:w-[380px]"
               />
 
               {/* Swirl — top right of blue card, outside chat preview */}
               <Image
                 src="/swirl.svg"
-                alt=""
+                alt="Decorative swirl accent"
                 width={320}
                 height={320}
                 unoptimized
-                aria-hidden
                 className="pointer-events-none absolute -right-6 -top-8 z-[3] h-auto w-[clamp(12rem,28vw,18rem)] select-none sm:-right-8 sm:-top-10 sm:w-[clamp(13rem,30vw,20rem)]"
                 draggable={false}
               />
@@ -259,12 +255,11 @@ export const NylaSection = ({ sectionRef }: NylaSectionProps) => {
                     >
                       <Image
                         src="/icons/ayla-yellow.svg"
-                        alt=""
+                        alt="Nyla AI tutor avatar"
                         width={32}
                         height={32}
                         unoptimized
                         className="h-full w-full object-cover"
-                        aria-hidden
                       />
                     </span>
                     <div className="min-w-0">

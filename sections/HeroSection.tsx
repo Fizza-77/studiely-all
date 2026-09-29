@@ -49,13 +49,12 @@ export const HeroSection = () => {
               />
               <Image
                 src="/hero-star.webp"
-                alt=""
+                alt="Decorative sparkle accent"
                 width={140}
                 height={140}
                 loading="lazy"
                 fetchPriority="low"
                 unoptimized
-                aria-hidden
                 className="pointer-events-none absolute left-0 top-0 z-[2] h-auto w-[clamp(3.5rem,6vw,6rem)] -translate-x-[30%] -translate-y-[18%] select-none drop-shadow-[0_0_14px_rgba(255,255,255,0.55)] sm:-translate-x-[48%] sm:-translate-y-[22%]"
                 draggable={false}
               />

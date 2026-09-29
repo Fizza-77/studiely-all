@@ -80,23 +80,21 @@ export const StudySmarterSection = () => {
               >
                 <Image
                   src="/flower.webp"
-                  alt=""
+                  alt="Decorative flower accent"
                   width={80}
                   height={80}
                   unoptimized
-                  aria-hidden
                   className="pointer-events-none absolute right-0 top-0 z-[3] h-auto w-[clamp(7rem,14vw,10rem)] max-w-none translate-x-[42%] -translate-y-[48%] scale-90 select-none opacity-0 drop-shadow-[0_4px_10px_rgba(255,54,198,0.35)] transition-[opacity,transform] duration-500 ease-out group-hover:translate-x-[42%] group-hover:-translate-y-[48%] group-hover:scale-100 group-hover:opacity-100 motion-reduce:transition-none sm:w-[clamp(8rem,15vw,11rem)]"
                   draggable={false}
                 />
                 <div className="mb-2 flex h-[clamp(2rem,2.8vw,2.75rem)] w-[clamp(2rem,2.8vw,2.75rem)] items-center justify-center">
                   <Image
                     src={icon}
-                    alt=""
+                    alt={`${title} tool icon`}
                     width={iconW}
                     height={iconH}
                     unoptimized
                     className="h-[clamp(1.65rem,2.4vw,2.35rem)] w-auto object-contain"
-                    aria-hidden
                   />
                 </div>
                 <h3 className="mb-1 font-heading text-[clamp(0.95rem,0.8rem+0.35vw,1.2rem)] font-extrabold text-white">

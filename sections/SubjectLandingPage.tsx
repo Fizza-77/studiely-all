@@ -101,21 +101,19 @@ function Hero({ content }: Props) {
           >
             <Image
               src="/hero-star.webp"
-              alt=""
+              alt="Decorative sparkle accent"
               width={180}
               height={180}
               unoptimized
-              aria-hidden
               className="pointer-events-none absolute -right-8 -top-10 z-[2] h-auto w-[clamp(5.5rem,12vw,8.5rem)] max-w-none select-none drop-shadow-[0_0_12px_rgba(255,255,255,0.45)] sm:-right-10 sm:-top-12"
               draggable={false}
             />
             <Image
               src="/learn-flower.png"
-              alt=""
+              alt="Decorative flower accent"
               width={140}
               height={140}
               unoptimized
-              aria-hidden
               className="pointer-events-none absolute -bottom-9 -left-9 z-[2] h-auto w-[clamp(5rem,12vw,8rem)] max-w-none sm:-bottom-11 sm:-left-11"
               draggable={false}
             />
@@ -142,7 +140,7 @@ function Hero({ content }: Props) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/icons/notes.svg"
-                    alt=""
+                    alt={`${content.breadcrumbName} revision notes on Studiely`}
                     width={244}
                     height={276}
                     decoding="async"
@@ -486,7 +484,7 @@ function Tools({ content }: Props) {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={tool.icon}
-                        alt=""
+                        alt={`${tool.title} icon`}
                         width={40}
                         height={40}
                         className="h-8 w-8 object-contain"
@@ -644,11 +642,10 @@ function Cta({ content }: Props) {
             >
               <Image
                 src="/flower.webp"
-                alt=""
+                alt="Decorative flower accent"
                 width={220}
                 height={220}
                 unoptimized
-                aria-hidden
                 className="pointer-events-none absolute -bottom-6 -right-4 h-auto w-[clamp(7rem,18vw,11rem)] opacity-90 drop-shadow-[0_8px_20px_rgba(255,54,198,0.3)]"
                 draggable={false}
               />
@@ -705,11 +702,10 @@ function Cta({ content }: Props) {
             >
               <Image
                 src="/FAQ-rocket.png"
-                alt=""
+                alt="Rocket icon for getting started with Studiely"
                 width={96}
                 height={96}
                 unoptimized
-                aria-hidden
                 className="funky-icon mb-4 h-16 w-16 object-contain sm:h-20 sm:w-20"
               />
               <h3 className="mb-2 font-jakarta text-[clamp(1.2rem,2vw,1.45rem)] font-extrabold text-[#1E1B4B]">

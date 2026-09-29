@@ -1260,22 +1260,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const blogs = await getBlogSlugsForConfiguredSite();
+  // Never block sitemap generation on a slow/unreachable Supabase — crawlers
+  // report "No HTTP response" when /sitemap.xml hangs.
+  let blogEntries: MetadataRoute.Sitemap = [];
+  try {
+    const blogs = await Promise.race([
+      getBlogSlugsForConfiguredSite(),
+      new Promise<null>((resolve) => {
+        setTimeout(() => resolve(null), 4_000);
+      }),
+    ]);
 
-  if (!blogs?.length) {
-    return [...staticRoutes, ...ibRoutes];
+    if (blogs?.length) {
+      blogEntries = blogs.map((b) => ({
+        url: `${SITE_URL}/blogs/${b.slug}`,
+        lastModified: b.date_modified
+          ? new Date(b.date_modified)
+          : b.date_published
+            ? new Date(b.date_published)
+            : now,
+        changeFrequency: "monthly" as const,
+        priority: 0.75,
+      }));
+    }
+  } catch (error) {
+    console.warn("[sitemap] Skipping blog URLs after fetch failure:", error);
   }
-
-  const blogEntries: MetadataRoute.Sitemap = blogs.map((b) => ({
-    url: `${SITE_URL}/blogs/${b.slug}`,
-    lastModified: b.date_modified
-      ? new Date(b.date_modified)
-      : b.date_published
-        ? new Date(b.date_published)
-        : now,
-    changeFrequency: "monthly" as const,
-    priority: 0.75,
-  }));
 
   return [...staticRoutes, ...ibRoutes, ...blogEntries];
 }

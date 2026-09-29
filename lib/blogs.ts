@@ -420,12 +420,11 @@ export async function getBlogSlugsForConfiguredSite(): Promise<
     );
     return (data ?? []) as { slug: string; date_published: string | null; date_modified: string | null }[];
   } catch (e) {
-    if (process.env.BUILD_SKIP_BLOGS_ON_SUPABASE_ERROR === "1") {
-      console.warn(
-        "[blogs] BUILD_SKIP_BLOGS_ON_SUPABASE_ERROR=1: returning no static blog slugs after Supabase failure."
-      );
-      return [];
-    }
-    throw e;
+    // Sitemap and static generation must not hang or 500 when Supabase is slow.
+    console.warn(
+      "[blogs] Returning no blog slugs after Supabase failure:",
+      e instanceof Error ? e.message : e
+    );
+    return [];
   }
 }

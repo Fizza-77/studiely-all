@@ -116,14 +116,13 @@ export const SisterSection = ({ sectionRef }: SisterSectionProps) => (
               >
                 <Image
                   src={card.logo}
-                  alt=""
+                  alt={`${card.name} logo`}
                   width={60}
                   height={60}
                   unoptimized
                   className={`h-full w-full ${
                     card.logoFit === "contain" ? "object-contain" : "object-cover"
                   }`}
-                  aria-hidden
                 />
               </span>
 

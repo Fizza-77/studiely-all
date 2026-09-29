@@ -42,13 +42,15 @@ const webAppSchema = {
   },
 };
 
-const homeTitle = "Studiely — AI Study Assistant, IGCSE Tutor & Exam Focus";
+const homeTitle = "AI Study Assistant, IGCSE Tutor & Exam Focus | Studiely";
 const homeDescription =
   "Studiely is your AI study assistant for real exams: AI learning, flashcards, quizzes, and exam focus support " +
-  "for IGCSE, IB, GCSE, A-Level, SAT & more. Student tools aligned to your board — start free.";
+  "for IGCSE, IB, GCSE, A-Level, SAT & more";
 
 export const metadata: Metadata = {
-  title: homeTitle,
+  title: {
+    absolute: homeTitle,
+  },
   description: homeDescription,
   openGraph: {
     title: homeTitle,
