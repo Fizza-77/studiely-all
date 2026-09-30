@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Head from "next/head";
 import { HomePageContent } from "@/components/HomePageContent";
 import { DEFAULT_OG_IMAGE_PATH, SITE_URL } from "@/lib/site";
 import { HeroSection } from "@/sections/HeroSection";
+import { StudySmarterSection } from "@/sections/StudySmarterSection";
 
 const webAppSchema = {
   "@context": "https://schema.org",
@@ -71,24 +71,23 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* Preload LCP hero image in <Head> for proper priority */}
-      <Head>
-        <link
-          rel="preload"
-          as="image"
-          href="/hero-img.webp"
-          type="image/webp"
-          fetchPriority="high"
-          crossOrigin="anonymous"
-        />
-      </Head>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(webAppSchema),
         }}
       />
-      <HomePageContent hero={<HeroSection />} />
+      <main role="main">
+        <div className="relative bg-bg-base">
+          <div
+            className="pointer-events-none absolute left-1/2 top-[42%] z-0 aspect-square w-[min(130vw,860px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#E8FF2F]/28 blur-[120px]"
+            aria-hidden
+          />
+          <HeroSection />
+          <StudySmarterSection />
+        </div>
+        <HomePageContent />
+      </main>
     </>
   );
 }

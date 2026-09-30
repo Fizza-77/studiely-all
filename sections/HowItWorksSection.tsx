@@ -50,7 +50,6 @@ interface HowItWorksSectionProps {
 
 export const HowItWorksSection = ({ sectionRef }: HowItWorksSectionProps) => (
   <section
-    id="how-it-works"
     ref={sectionRef}
     className="bg-bg-base pb-[clamp(1.75rem,4vw,3rem)] pt-0"
   >

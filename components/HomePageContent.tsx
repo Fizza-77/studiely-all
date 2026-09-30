@@ -1,17 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { LazySection, sectionLoader } from "@/components/LazySection";
-import { StudySmarterSection } from "@/sections/StudySmarterSection";
-import type { ReactNode } from "react";
 
-const HowItWorksSection = dynamic(
-  () =>
-    import("@/sections/HowItWorksSection").then((m) => m.HowItWorksSection),
-  { ssr: true },
+const loadHowItWorks = sectionLoader(() =>
+  import("@/sections/HowItWorksSection").then((m) => m.HowItWorksSection),
 );
-
 const loadNyla = sectionLoader(() =>
   import("@/sections/NylaSection").then((m) => m.NylaSection),
 );
@@ -32,8 +26,12 @@ const loadSister = sectionLoader(() =>
   import("@/sections/SisterSection").then((m) => m.SisterSection),
 );
 
-/** Hero is passed from the server page so LCP stays outside this client boundary. */
-export function HomePageContent({ hero }: { hero: ReactNode }) {
+/**
+ * Below-fold homepage sections only. Hero + study tools stay on the server
+ * so their JS is not part of the initial client bundle.
+ */
+export function HomePageContent() {
+  const howRef = useRef<HTMLElement>(null);
   const nylaRef = useRef<HTMLElement>(null);
   const curriculumRef = useRef<HTMLElement>(null);
   const rewardsRef = useRef<HTMLElement>(null);
@@ -41,16 +39,15 @@ export function HomePageContent({ hero }: { hero: ReactNode }) {
   const sisterRef = useRef<HTMLElement>(null);
 
   return (
-    <main role="main">
-      <div className="relative bg-bg-base">
-        <div
-          className="pointer-events-none absolute left-1/2 top-[42%] z-0 aspect-square w-[min(130vw,860px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#E8FF2F]/28 blur-[120px]"
-          aria-hidden
+    <>
+      <div id="how-it-works">
+        <LazySection
+          load={loadHowItWorks}
+          componentProps={{ sectionRef: howRef }}
+          minHeight="36rem"
+          rootMargin="600px 0px"
         />
-        {hero}
-        <StudySmarterSection />
       </div>
-      <HowItWorksSection />
       <LazySection
         load={loadNyla}
         componentProps={{ sectionRef: nylaRef }}
@@ -78,6 +75,6 @@ export function HomePageContent({ hero }: { hero: ReactNode }) {
         componentProps={{ sectionRef: sisterRef }}
         minHeight="24rem"
       />
-    </main>
+    </>
   );
 }

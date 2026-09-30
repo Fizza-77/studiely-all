@@ -2,12 +2,60 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { ClipboardCheck, Cookie, Sparkles } from "lucide-react";
 import { loadGoogleAnalytics } from "@/lib/gtag";
 
 const STORAGE_KEY = "studiely_policies_consent_v2";
 
 type Key = "aup" | "cookie" | "disclaimer";
+
+const CookieIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.4"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden
+  >
+    <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" />
+    <path d="M8.5 8.5v.01M16 15.5v.01M12 12v.01M11 17v.01M7 14v.01" />
+  </svg>
+);
+
+const ClipboardIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.4"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden
+  >
+    <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+    <path d="m9 14 2 2 4-4" />
+  </svg>
+);
+
+const SparklesIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.4"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden
+  >
+    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+    <path d="M20 3v4M22 5h-4M4 17v2M5 18H3" />
+  </svg>
+);
 
 const ITEMS: {
   id: Key;
@@ -16,7 +64,7 @@ const ITEMS: {
   blurb: string;
   color: string;
   iconColor: string;
-  Icon: typeof Cookie;
+  Icon: typeof CookieIcon;
 }[] = [
   {
     id: "aup",
@@ -25,7 +73,7 @@ const ITEMS: {
     blurb: "Learning space only — be kind, stay safe, no abuse or misuse.",
     color: "#E8FF2F",
     iconColor: "#4F35F2",
-    Icon: ClipboardCheck,
+    Icon: ClipboardIcon,
   },
   {
     id: "cookie",
@@ -34,7 +82,7 @@ const ITEMS: {
     blurb: "Session & essentials + anonymised analytics. No ads, no data sales.",
     color: "#FF36C6",
     iconColor: "#FFFFFF",
-    Icon: Cookie,
+    Icon: CookieIcon,
   },
   {
     id: "disclaimer",
@@ -43,7 +91,7 @@ const ITEMS: {
     blurb: "AI supports learning — not a substitute for school, teachers, or parents.",
     color: "#4F35F2",
     iconColor: "#E8FF2F",
-    Icon: Sparkles,
+    Icon: SparklesIcon,
   },
 ];
 
@@ -131,7 +179,7 @@ export function CookieConsentBanner() {
                 style={{ backgroundColor: "#4F35F2" }}
                 aria-hidden
               >
-                <Cookie className="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={2.4} />
+                <CookieIcon className="h-6 w-6 sm:h-7 sm:w-7" />
               </span>
               <div className="min-w-0">
                 <p
@@ -174,7 +222,7 @@ export function CookieConsentBanner() {
                       }}
                       aria-hidden
                     >
-                      <Icon className="h-[18px] w-[18px]" strokeWidth={2.4} />
+                      <Icon className="h-[18px] w-[18px]" />
                     </span>
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-baseline gap-x-1.5">

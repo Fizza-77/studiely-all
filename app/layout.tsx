@@ -3,10 +3,8 @@ import { Great_Vibes, Hanken_Grotesk, Inter, Manrope, Montserrat, Plus_Jakarta_S
 import "./globals.css";
 import { DEFAULT_OG_IMAGE_PATH, SITE_URL } from "@/lib/site";
 import { CookieConsentBannerClient } from "@/components/CookieConsentBannerClient";
+import { DeferredSiteChrome } from "@/components/DeferredSiteChrome";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
-import { OfflineScreen } from "@/components/offline/OfflineScreen";
-import { PwaRegister } from "@/components/PwaRegister";
-import { SiteInteractions } from "@/components/SiteInteractions";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -174,8 +172,7 @@ export default function RootLayout({
       </head>
       <body className="site-funky antialiased font-sans bg-bg-base text-body flex min-h-full flex-col">
         <GoogleAnalytics />
-        <SiteInteractions />
-        <PwaRegister />
+        <DeferredSiteChrome />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -183,7 +180,6 @@ export default function RootLayout({
           }}
         />
         {children}
-        <OfflineScreen />
         <CookieConsentBannerClient />
       </body>
     </html>

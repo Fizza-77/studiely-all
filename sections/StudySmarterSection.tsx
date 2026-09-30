@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { STUDIELY_APP } from "@/lib/appUrls";
 import { HOME_SHELL, HOME_TOOLS_CARD, HOME_TOOLS_GRID } from "@/lib/homeShell";
