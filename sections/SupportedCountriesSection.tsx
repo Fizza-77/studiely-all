@@ -403,7 +403,6 @@ export const SupportedCountriesSection = ({
 
             {/* Australia */}
             <motion.article
-              layout
               transition={expandTransition}
               className={`flex h-full flex-col overflow-hidden rounded-[28px] p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
               style={{ backgroundColor: LIME }}
@@ -479,7 +478,6 @@ export const SupportedCountriesSection = ({
 
             {/* Canada */}
             <motion.article
-              layout
               transition={expandTransition}
               className={`overflow-hidden rounded-[28px] bg-white p-5 sm:p-6 ${CARD_HOVER_BORDER}`}
             >

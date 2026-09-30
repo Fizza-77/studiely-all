@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const EMPTY_MODULE_POLYFILL = "./lib/empty-polyfill-module.js";
+
 const nextConfig: NextConfig = {
   reactCompiler: true,
   productionBrowserSourceMaps: false,
@@ -17,6 +19,24 @@ const nextConfig: NextConfig = {
     ],
   },
   compress: true,
+  /**
+   * Drop Next's unconditional `polyfill-module` (~14 KiB legacy JS).
+   * Safe with `.browserslistrc` targeting Chrome/Edge/Firefox 111+ and Safari 16.4+.
+   */
+  turbopack: {
+    resolveAlias: {
+      "../build/polyfills/polyfill-module": EMPTY_MODULE_POLYFILL,
+      "next/dist/build/polyfills/polyfill-module": EMPTY_MODULE_POLYFILL,
+    },
+  },
+  webpack(config) {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "../build/polyfills/polyfill-module": false,
+      "next/dist/build/polyfills/polyfill-module": false,
+    };
+    return config;
+  },
   async headers() {
     const csp = [
       "default-src 'self'",

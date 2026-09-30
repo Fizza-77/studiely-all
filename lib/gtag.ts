@@ -9,13 +9,13 @@ declare global {
   }
 }
 
-/**
- * Official Google tag (gtag.js) for G-MJE49N8QRH.
- * Safe to call more than once — the layout snippet already loads this on every page.
- */
-export function loadGoogleAnalytics(): void {
+function injectGtag(): void {
   if (typeof window === "undefined" || analyticsLoadStarted) return;
-  if (document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"]`)) {
+  if (
+    document.querySelector(
+      `script[src*="googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"]`,
+    )
+  ) {
     analyticsLoadStarted = true;
     return;
   }
@@ -26,10 +26,29 @@ export function loadGoogleAnalytics(): void {
     window.dataLayer?.push(args);
   };
   window.gtag("js", new Date());
-  window.gtag("config", GA_MEASUREMENT_ID);
+  window.gtag("config", GA_MEASUREMENT_ID, {
+    // Defer non-critical hits so mobile LCP isn't competing with analytics.
+    send_page_view: true,
+    transport_type: "beacon",
+  });
 
   const script = document.createElement("script");
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
   document.head.appendChild(script);
+}
+
+/**
+ * Load gtag.js after cookie consent, during browser idle time so it
+ * doesn't compete with LCP / first-party JS on mobile.
+ */
+export function loadGoogleAnalytics(): void {
+  if (typeof window === "undefined" || analyticsLoadStarted) return;
+
+  const schedule =
+    typeof window.requestIdleCallback === "function"
+      ? (cb: () => void) => window.requestIdleCallback(cb, { timeout: 4_000 })
+      : (cb: () => void) => window.setTimeout(cb, 2_000);
+
+  schedule(() => injectGtag());
 }

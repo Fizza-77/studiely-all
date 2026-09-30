@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { Great_Vibes, Hanken_Grotesk, Inter, Manrope, Montserrat, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { DEFAULT_OG_IMAGE_PATH, SITE_URL } from "@/lib/site";
@@ -8,7 +7,6 @@ import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { OfflineScreen } from "@/components/offline/OfflineScreen";
 import { PwaRegister } from "@/components/PwaRegister";
 import { SiteInteractions } from "@/components/SiteInteractions";
-import { GA_MEASUREMENT_ID } from "@/lib/gtag";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -172,19 +170,7 @@ export default function RootLayout({
           name="google-adsense-account"
           content="ca-pub-8561023104814029"
         />
-        {/* Google tag (gtag.js) */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-gtag" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_MEASUREMENT_ID}');
-          `}
-        </Script>
+        {/* gtag loads only after cookie consent — see GoogleAnalytics / CookieConsentBanner */}
       </head>
       <body className="site-funky antialiased font-sans bg-bg-base text-body flex min-h-full flex-col">
         <GoogleAnalytics />
