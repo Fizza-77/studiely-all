@@ -87,7 +87,7 @@ export async function createStripeProAccessCheckout(input: {
   planKey: PlanKey;
   successUrl: string;
   cancelUrl: string;
-}): Promise<{ checkoutUrl: string; sessionId: string }> {
+}): Promise<{ checkoutUrl: string; sessionId?: string }> {
   const result = await callFunction<
     {
       planKey: string;
@@ -98,6 +98,7 @@ export async function createStripeProAccessCheckout(input: {
     {
       checkoutUrl?: string;
       approvalUrl?: string;
+      url?: string;
       sessionId?: string;
       orderId?: string;
     }
@@ -107,11 +108,14 @@ export async function createStripeProAccessCheckout(input: {
     returnUrl: input.successUrl,
     cancelUrl: input.cancelUrl,
   });
-  const checkoutUrl = result.checkoutUrl || result.approvalUrl || "";
-  const sessionId = result.sessionId || result.orderId || "";
-  if (!checkoutUrl || !sessionId) {
+  // Redirect only needs a hosted Checkout URL. sessionId is optional here —
+  // Stripe returns it on success_url via {CHECKOUT_SESSION_ID}.
+  const checkoutUrl =
+    result.checkoutUrl || result.approvalUrl || result.url || "";
+  if (!checkoutUrl) {
     throw new Error("No Stripe checkout URL returned.");
   }
+  const sessionId = result.sessionId || result.orderId || undefined;
   return { checkoutUrl, sessionId };
 }
 
@@ -130,8 +134,9 @@ export function stripeCheckoutUrls(origin: string): {
   cancelUrl: string;
 } {
   const base = origin.replace(/\/+$/, "");
+  // Literal {CHECKOUT_SESSION_ID} — Stripe replaces it after payment.
   return {
-    successUrl: `${base}/pricing?stripe_sub_done=1`,
+    successUrl: `${base}/pricing?stripe_sub_done=1&session_id={CHECKOUT_SESSION_ID}`,
     cancelUrl: `${base}/pricing?stripe_cancel=1`,
   };
 }
