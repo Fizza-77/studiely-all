@@ -4,7 +4,7 @@ import { AnimNum } from "@/components/AnimNum";
 import { Reveal } from "@/components/Reveal";
 
 export const STATS_ITEMS = [
-  { n: "1", pre: "", suf: "K+", label: "Students Trust Studiely", col: "var(--color-navy)" },
+  { n: "30", pre: "", suf: "K+", label: "Students Trust Studiely", col: "var(--color-navy)" },
   { n: "75", pre: "", suf: "%", label: "Study Time Saved", col: "var(--color-teal)" },
   { n: "3", pre: "", suf: "x", label: "Faster Exam Prep", col: "var(--color-navy)" },
   { n: "4.8", pre: "★ ", suf: "", label: "Average Student Rating", col: "var(--color-amber)" },

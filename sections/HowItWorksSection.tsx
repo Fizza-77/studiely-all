@@ -8,7 +8,7 @@ const LIME = "#E8FF2F";
 const PURPLE = "#4F35F2";
 
 const STATS = [
-  { n: "5", suf: "K+", label: "STUDENTS" },
+  { n: "30", suf: "K+", label: "STUDENTS" },
   { n: "75", suf: "%", label: "BETTER GRADES" },
   { n: "3", suf: "x", label: "FASTER REVISION" },
   { n: "4.8", suf: "", label: "APP RATING" },
