@@ -200,7 +200,12 @@ export const HomePricingSection = ({
   const [info, setInfo] = useState<string | null>(null);
   const [freeExpanded, setFreeExpanded] = useState(false);
   const isPage = variant === "page";
-  const canCheckout = phase === "student" && Boolean(user) && !user?.isAnonymous;
+  // Allow verified and unverified signed-in students. Email verification
+  // should not block Stripe checkout (previously sent buyers in a login loop).
+  const canCheckout =
+    Boolean(user) &&
+    !user?.isAnonymous &&
+    (phase === "student" || phase === "studentUnverified");
 
   useEffect(() => {
     void getWebProPricingQuote().then(setQuote);

@@ -37,7 +37,17 @@ export function PricingCheckoutBridge() {
   useEffect(() => {
     const stripeDone = search.get("stripe_sub_done") === "1";
     const sessionId = search.get("session_id");
-    if (!stripeDone || !sessionId || !user || finalizeStarted.current) return;
+    if (!stripeDone || !user || finalizeStarted.current) return;
+
+    if (!sessionId) {
+      finalizeStarted.current = true;
+      setError(
+        "Payment may have succeeded, but we could not confirm your session. Contact support@studiely.com if Pro is not active.",
+      );
+      setInfo(null);
+      return;
+    }
+
     finalizeStarted.current = true;
     setInfo("Confirming your Pro access…");
     setError(null);
@@ -60,13 +70,11 @@ export function PricingCheckoutBridge() {
 
   useEffect(() => {
     const plan = search.get("plan");
-    if (
-      planAutoStarted.current ||
-      phase !== "student" ||
-      !user ||
-      user.isAnonymous ||
-      !plan
-    ) {
+    const canCheckout =
+      Boolean(user) &&
+      !user?.isAnonymous &&
+      (phase === "student" || phase === "studentUnverified");
+    if (planAutoStarted.current || !canCheckout || !plan) {
       return;
     }
     if (!PLAN_KEYS.includes(plan as PlanKey)) return;
