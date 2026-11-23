@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="How to delete your Studiely account and associated personal data. Operated by Skyen Systems Pty Ltd.">
+<title>Studiely — Account &amp; Data Deletion</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #181926;
+    --teal: #00B09B;
+    --indigo: #5448C8;
+    --amber: #D97B2A;
+    --rose: #C94A72;
+    --navy-soft: #1e2035;
+    --text-primary: #181926;
+    --text-secondary: #4a4d6a;
+    --text-muted: #8b8fa8;
+    --border: #e4e5ef;
+    --bg: #f8f8fc;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    background: var(--navy);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 120%, rgba(201,74,114,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .wordmark-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+    border: 0.5px solid rgba(255,255,255,0.18);
+    padding: 6px 16px;
+    border-radius: 40px;
+  }
+  header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    position: relative;
+  }
+  .meta-pill {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .meta-pill span {
+    color: var(--teal);
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  .intro-block {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-left: 3px solid var(--rose);
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 2.5rem;
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+  }
+  .intro-block p + p { margin-top: 0.75rem; }
+
+  .section {
+    margin-bottom: 2rem;
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1.25rem 1.75rem;
+    border-bottom: 0.5px solid var(--border);
+    background: #fafafa;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--white);
+    background: var(--navy);
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.01em;
+  }
+
+  .section-body {
+    padding: 1.5rem 1.75rem;
+  }
+  .section-body > p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: 14.5px;
+  }
+  .section-body > p:last-child {
+    margin-bottom: 0;
+  }
+
+  ul.policy-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0.75rem 0;
+  }
+  ul.policy-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  ul.policy-list li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  .service-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+    font-size: 13.5px;
+  }
+  .service-table th {
+    background: #fafbff;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .service-table td {
+    padding: 10px 14px;
+    border-bottom: 0.5px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .service-table tr:last-child td {
+    border-bottom: none;
+  }
+  .service-table td:first-child {
+    font-weight: 500;
+    color: var(--text-primary);
+    width: 32%;
+  }
+
+  a.email-link, a.url-link {
+    color: var(--indigo);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 12.5px;
+  }
+  a.email-link:hover, a.url-link:hover {
+    text-decoration: underline;
+  }
+
+  footer {
+    background: var(--navy);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+  }
+  .footer-wordmark {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0.75rem;
+  }
+  footer p {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .service-table { font-size: 12.5px; }
+    .service-table td,
+    .service-table th { padding: 8px 10px; }
+    .section-body { padding: 1.25rem; }
+    .section-header { padding: 1rem 1.25rem; }
+    .container { padding: 2rem 1rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wordmark">
+    <span class="wordmark-badge">S T U D I E L Y</span>
+  </div>
+  <h1>Account &amp; Data Deletion</h1>
+  <div class="header-meta">
+    <span class="meta-pill">Operated by: <span>Skyen Systems Pty Ltd</span></span>
+    <span class="meta-pill">Effective: <span>10 September 2026</span></span>
+    <span class="meta-pill">Last Updated: <span>10 September 2026</span></span>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="intro-block">
+    <p>This page explains how to delete your Studiely account and the personal information associated with it. Studiely's website is operated by Skyen Systems Pty Ltd (ACN 701 564 730).</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">How to delete your account</div>
+    </div>
+    <div class="section-body">
+      <p>You can request deletion of your Studiely account and the personal information associated with it at any time, in either of these ways:</p>
+      <ul class="policy-list">
+        <li>In the app or website — go to Account Settings → Delete Account, and confirm</li>
+        <li>By email — send a request from the email address on your account to <a href="mailto:support@studiely.com" class="email-link">support@studiely.com</a> with the subject line "Delete my account"</li>
+      </ul>
+      <p>We may ask you to verify your identity before processing an email request, to protect against someone else deleting your account without your permission.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">What is deleted</div>
+    </div>
+    <div class="section-body">
+      <p>When your account is deleted, the following are permanently removed within 30 days:</p>
+      <ul class="policy-list">
+        <li>Your name, email address and password</li>
+        <li>Your teaching profile and saved preferences</li>
+        <li>Your generation history, favourites and saved teaching packs</li>
+        <li>Your Ayla refinement history</li>
+        <li>Your credit balance and usage history</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">What is retained, and why</div>
+    </div>
+    <div class="section-body">
+      <p>We are required by Australian tax and corporate law to keep certain records even after account deletion. We retain only what the law requires:</p>
+      <table class="service-table">
+        <thead>
+          <tr>
+            <th>Retained</th>
+            <th>Reason</th>
+            <th>Period</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Billing and transaction records</td>
+            <td>Australian tax and accounting law</td>
+            <td>7 years</td>
+          </tr>
+          <tr>
+            <td>Consent records for a web subscription</td>
+            <td>Evidence in the event of a payment dispute</td>
+            <td>7 years</td>
+          </tr>
+          <tr>
+            <td>Records needed to investigate a reported breach of our Acceptable Use Policy</td>
+            <td>Security and legal protection</td>
+            <td>Until the matter is resolved, then deleted</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>These retained records are kept securely, used only for the stated purpose, and are not used to re-identify you for any other purpose.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Subscriptions are not automatically cancelled</div>
+    </div>
+    <div class="section-body">
+      <p>Deleting your account does not cancel an active subscription. Cancel separately, before or after deleting your account:</p>
+      <ul class="policy-list">
+        <li>Web subscription — cancel from your account page, or email <a href="mailto:support@studiely.com" class="email-link">support@studiely.com</a></li>
+        <li>App Store subscription — cancel in your Apple ID account settings under Subscriptions</li>
+        <li>Google Play subscription — cancel in the Google Play app under Payments &amp; subscriptions</li>
+      </ul>
+      <p>If you delete your account with an active subscription still running, we will not be able to provide you the service you continue to be billed for. Cancel the subscription first, or at the same time as your deletion request.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">Institutional and school accounts</div>
+    </div>
+    <div class="section-body">
+      <p>If your account was created as part of a school or department plan, your school or department administrator may also be able to remove your seat. Deleting your personal account does not delete records the institution is separately required to keep under its own agreement with us.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">Confirmation</div>
+    </div>
+    <div class="section-body">
+      <p>We will email you to confirm once your account and associated personal information have been deleted.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">Questions</div>
+    </div>
+    <div class="section-body">
+      <p>Skyen Systems Pty Ltd · ACN 701 564 730</p>
+      <p>Unit 18, 285–287 Derrimut Rd, Hoppers Crossing VIC 3029, Australia</p>
+      <p><a href="mailto:support@studiely.com" class="email-link">support@studiely.com</a></p>
+      <p>See also our <a href="/privacy-policy" class="url-link">Privacy Policy</a> and <a href="/acceptable-use-policy" class="url-link">Acceptable Use Policy</a>.</p>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <div class="footer-wordmark">S T U D I E L Y</div>
+  <p>© Skyen Systems Pty Ltd. All rights reserved.<br>
+  We are dedicated to providing a safe, compliant, and privacy-respecting educational environment.</p>
+</footer>
+
+</body>
+</html>

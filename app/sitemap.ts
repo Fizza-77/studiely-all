@@ -1241,6 +1241,11 @@ const STATIC_PAGES: StaticEntry[] = [
     changeFrequency: "monthly",
     priority: 0.5,
   },
+  {
+    path: "/delete-account-and-data",
+    changeFrequency: "monthly",
+    priority: 0.5,
+  },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

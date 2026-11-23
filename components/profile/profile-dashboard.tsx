@@ -42,6 +42,7 @@ export type ProfileDashboardProps = {
   onShare: () => void;
   onAvatar: () => void;
   onLogoutRequest: () => void;
+  onDeleteAccount?: () => void;
   onNotifications?: () => void;
   onComingSoon?: (message: string) => void;
 };
@@ -68,6 +69,7 @@ export function ProfileDashboard({
   onShare,
   onAvatar,
   onLogoutRequest,
+  onDeleteAccount,
   onNotifications,
   onComingSoon,
 }: ProfileDashboardProps) {
@@ -189,6 +191,7 @@ export function ProfileDashboard({
 
             <OptionsCard
               onLogoutRequest={onLogoutRequest}
+              onDeleteAccount={onDeleteAccount}
               onNotifications={onNotifications}
               onComingSoon={onComingSoon}
             />
@@ -773,10 +776,12 @@ function BookIconSmall() {
 
 function OptionsCard({
   onLogoutRequest,
+  onDeleteAccount,
   onNotifications,
   onComingSoon,
 }: {
   onLogoutRequest: () => void;
+  onDeleteAccount?: () => void;
   onNotifications?: () => void;
   onComingSoon?: (message: string) => void;
 }) {
@@ -823,6 +828,17 @@ function OptionsCard({
       tint: "#DBEAFE",
       href: LEGAL_URLS.terms,
       external: true,
+    },
+    {
+      key: "delete",
+      label: "Delete Account",
+      icon: <TrashIcon />,
+      tint: "#FFE4EC",
+      danger: true,
+      onClick: () => {
+        if (onDeleteAccount) onDeleteAccount();
+        else onComingSoon?.("Coming soon");
+      },
     },
     {
       key: "logout",
@@ -1212,6 +1228,15 @@ function DocIcon() {
     <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
       <path d="M14 2H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8z" />
       <path d="M14 2v6h6M9 13h6M9 17h4" />
+    </svg>
+  );
+}
+
+function TrashIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+      <path d="M10 11v6M14 11v6" />
     </svg>
   );
 }

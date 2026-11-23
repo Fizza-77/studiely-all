@@ -300,6 +300,11 @@ export default function ProfilePage() {
             onShare={() => void onShare()}
             onAvatar={() => setAvatarOpen(true)}
             onLogoutRequest={() => setLogoutOpen(true)}
+            onDeleteAccount={() => {
+              setPassword("");
+              setDeleteError(null);
+              setDeleteOpen(true);
+            }}
             onNotifications={() => setNotificationsOpen(true)}
             onComingSoon={flash}
           />

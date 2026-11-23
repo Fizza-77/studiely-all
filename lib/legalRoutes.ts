@@ -13,6 +13,7 @@ export const LEGAL_ROUTES = {
   acceptableUsePolicy: "/acceptable-use-policy",
   disclaimer: "/disclaimer",
   refundPaymentsPolicy: "/refund-payments-policy",
+  deleteAccountAndData: "/delete-account-and-data",
 } as const;
 
 export const complianceLinkClass =

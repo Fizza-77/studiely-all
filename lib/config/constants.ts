@@ -43,6 +43,7 @@ export const LEGAL_URLS = {
   acceptableUse: "/acceptable-use",
   disclaimer: "/disclaimer",
   refund: "/refund-payments-policy",
+  deleteAccount: "/delete-account-and-data",
 } as const;
 
 export const SUPPORT_SUBJECTS = [

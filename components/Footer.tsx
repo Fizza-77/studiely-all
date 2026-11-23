@@ -34,6 +34,10 @@ const LEGAL_LINKS = [
   { label: "Cookie Policy", href: LEGAL_ROUTES.cookiePolicy },
   { label: "Disclaimer", href: LEGAL_ROUTES.disclaimer },
   { label: "Refund & Payments Policy", href: LEGAL_ROUTES.refundPaymentsPolicy },
+  {
+    label: "Account & Data Deletion",
+    href: LEGAL_ROUTES.deleteAccountAndData,
+  },
 ] as const;
 
 const accentLinkClass =

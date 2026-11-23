@@ -167,7 +167,7 @@ const nextConfig: NextConfig = {
       // Skyen Solutions / Qismat Ventures). Do not redirect it to the website policy.
       {
         source: "/legal/delete-account-and-data",
-        destination: "/privacy-policy",
+        destination: "/delete-account-and-data",
         permanent: true,
       },
       {
@@ -183,11 +183,6 @@ const nextConfig: NextConfig = {
       {
         source: "/legal/web/refund-policy",
         destination: "/refund-payments-policy",
-        permanent: true,
-      },
-      {
-        source: "/delete-account-and-data",
-        destination: "/privacy-policy",
         permanent: true,
       },
       {

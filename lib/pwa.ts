@@ -150,7 +150,8 @@ export function isPwaBrowserOnlyPath(pathname: string): boolean {
     matchesPrefix(path, "/cookie-policy") ||
     matchesPrefix(path, "/disclaimer") ||
     matchesPrefix(path, "/acceptable-use") ||
-    matchesPrefix(path, "/refund-payments-policy")
+    matchesPrefix(path, "/refund-payments-policy") ||
+    matchesPrefix(path, "/delete-account-and-data")
   );
 }
 
